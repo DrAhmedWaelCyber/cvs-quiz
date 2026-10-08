@@ -15,6 +15,7 @@
       --surface-card-hover: #1c2b45;
       --border: #223450;
       --accent: #38bdf8;
+      --accent-physio: #fb7185;
       --text: #f8fafc;
       --text-muted: #94a3b8;
       --radius-lg: 24px;
@@ -32,9 +33,9 @@
     body {
       background-color: var(--bg);
       background-image: 
-        radial-gradient(at 0% 0%, rgba(2, 132, 199, 0.18) 0px, transparent 50%),
+        radial-gradient(at 0% 0%, rgba(225, 29, 72, 0.16) 0px, transparent 50%),
         radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.14) 0px, transparent 50%),
-        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.9) 0px, transparent 100%);
+        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.92) 0px, transparent 100%);
       color: var(--text);
       min-height: 100vh;
       display: flex;
@@ -46,19 +47,19 @@
 
     .hub-container {
       width: 100%;
-      max-width: 920px;
+      max-width: 940px;
       display: flex;
       flex-direction: column;
-      gap: 26px;
+      gap: 24px;
     }
 
     /* Hero Header */
     .hero-card {
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.82);
       backdrop-filter: blur(16px);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 36px 30px;
+      padding: 34px 28px;
       text-align: center;
       box-shadow: var(--shadow);
       position: relative;
@@ -72,40 +73,160 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: linear-gradient(90deg, #38bdf8, #8b5cf6, #10b981);
+      background: linear-gradient(90deg, #e11d48, #38bdf8, #8b5cf6, #10b981);
     }
 
     .badge-signature {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      background: rgba(225, 29, 72, 0.14);
+      border: 1px solid rgba(225, 29, 72, 0.35);
       padding: 6px 16px;
       border-radius: 9999px;
-      color: #7dd3fc;
+      color: #fda4af;
       font-size: 0.92rem;
       font-weight: 700;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .hero-title {
-      font-size: 2.2rem;
+      font-size: 2.15rem;
       font-weight: 900;
       letter-spacing: -0.5px;
       color: #f8fafc;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .hero-subtitle {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       color: var(--text-muted);
-      max-width: 660px;
+      max-width: 700px;
       margin: 0 auto;
       line-height: 1.6;
     }
 
-    /* General Modules Grid */
+    .total-counter-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+      background: #0b1220;
+      border: 1px solid #1f2f47;
+      padding: 5px 14px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      color: #38bdf8;
+      font-weight: 700;
+    }
+
+    /* Flagship / Featured Physiology Card */
+    .featured-physio-card {
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.12), rgba(15, 23, 42, 0.85));
+      border: 1.5px solid rgba(244, 63, 94, 0.4);
+      border-radius: var(--radius-lg);
+      padding: 30px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 20px 45px -15px rgba(225, 29, 72, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-physio-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #e11d48, #fb7185, #f43f5e);
+    }
+
+    .featured-physio-card:hover {
+      border-color: #fb7185;
+      transform: translateY(-4px);
+      box-shadow: 0 25px 50px -10px rgba(225, 29, 72, 0.45);
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.18), rgba(21, 32, 51, 0.95));
+    }
+
+    .featured-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .flagship-badge {
+      background: rgba(225, 29, 72, 0.2);
+      border: 1px solid rgba(244, 63, 94, 0.45);
+      color: #fda4af;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .featured-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #e11d48, #881337);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 4px 16px rgba(225, 29, 72, 0.35);
+    }
+
+    .featured-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .featured-desc {
+      font-size: 0.98rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    .featured-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: #fda4af;
+    }
+
+    .featured-start-btn {
+      background: linear-gradient(135deg, #e11d48, #be123c);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* General Section Styling */
     .section-title {
       font-size: 1.25rem;
       font-weight: 800;
@@ -116,6 +237,7 @@
       margin-bottom: 12px;
     }
 
+    /* Modules Grid */
     .modules-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -126,10 +248,10 @@
       background: var(--surface-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 26px 22px;
+      padding: 24px 20px;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 14px;
       text-decoration: none;
       color: inherit;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -146,13 +268,13 @@
     }
 
     .card-icon {
-      width: 54px;
-      height: 54px;
+      width: 52px;
+      height: 52px;
       border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.7rem;
+      font-size: 1.65rem;
     }
 
     .card-icon.anatomy {
@@ -176,25 +298,25 @@
     }
 
     .card-title {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 800;
       color: #f8fafc;
     }
 
     .card-desc {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       line-height: 1.5;
     }
 
     .card-footer {
       margin-top: auto;
-      padding-top: 14px;
+      padding-top: 12px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       font-weight: 700;
       color: #38bdf8;
     }
@@ -211,10 +333,10 @@
       backdrop-filter: blur(16px);
       border: 1px solid rgba(139, 92, 246, 0.28);
       border-radius: var(--radius-lg);
-      padding: 28px 24px;
+      padding: 26px 22px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
       position: relative;
       overflow: hidden;
       box-shadow: var(--shadow);
@@ -233,7 +355,7 @@
     .micro-section-header {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
     }
 
     .micro-tag {
@@ -245,26 +367,26 @@
       padding: 4px 12px;
       border-radius: 9999px;
       color: #c084fc;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       font-weight: 700;
       width: fit-content;
     }
 
     .micro-heading {
-      font-size: 1.55rem;
+      font-size: 1.45rem;
       font-weight: 800;
       color: #f8fafc;
     }
 
     .micro-subheading {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: var(--text-muted);
     }
 
     .micro-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
+      gap: 16px;
     }
 
     .card-top-row {
@@ -316,10 +438,12 @@
 
     @media (max-width: 640px) {
       .hero-title { font-size: 1.6rem; }
-      .hero-card { padding: 26px 20px; }
+      .hero-card { padding: 24px 18px; }
       .modules-grid { grid-template-columns: 1fr; }
       .micro-grid { grid-template-columns: 1fr; }
       .micro-section { padding: 20px 16px; }
+      .featured-title { font-size: 1.35rem; }
+      .featured-physio-card { padding: 22px 18px; }
     }
   </style>
 </head>
@@ -336,7 +460,37 @@
       <p class="hero-subtitle">
         اختبارات تفاعلية سؤال بسؤال مع التصحيح الفوري والشرح الأكاديمي الشامل وفلاتر المواضيع
       </p>
+      <div class="total-counter-badge">
+        ✨ إجمالي الأسئلة في المنصة: <strong>518 سؤال MCQ محلول ومعلل بدقة</strong>
+      </div>
     </header>
+
+    <!-- FLAGSHIP: Physiology Master Module -->
+    <section>
+      <a href="physiology_cvs_interactive_quiz.html" class="featured-physio-card">
+        <div class="featured-top-row">
+          <div class="flagship-badge">
+            ⚡ المادة الأكبر والأهم في الموديول • بنك القسم الكامل
+          </div>
+          <span style="font-size: 0.88rem; color: #fda4af; font-weight: 700;">Parts I to V • جميع الأجزاء</span>
+        </div>
+
+        <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+          <div class="featured-icon">🫀</div>
+          <div style="flex: 1;">
+            <h2 class="featured-title">Physiology CVS Master Bank</h2>
+            <p class="featured-desc">
+              بنك فسيولوجيا القلب والأوعية الدموية الشامل: يشمل كهربية القلب، جهد الفعل، الدورة القلبية، أصوات القلب، النتاج القلبي وقانون فرانك-ستارلينغ، تنظيم ضغط الدم الشرياني ومستقبلات الضغط، ديناميكا الشعيرات واللمف، والدورات الخاصة (التاجية، الدماغية، والجنينية).
+            </p>
+          </div>
+        </div>
+
+        <div class="featured-footer">
+          <span>📊 254 سؤالاً • 9 فصول إكلينيكية • 5 أجزاء للقسم</span>
+          <span class="featured-start-btn">ابدأ التحدي الأكبر الآن 🠜</span>
+        </div>
+      </a>
+    </section>
 
     <!-- Microbiology Dedicated Section -->
     <section class="micro-section">
