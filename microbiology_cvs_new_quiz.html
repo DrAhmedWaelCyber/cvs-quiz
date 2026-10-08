@@ -1,0 +1,2317 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CVS Microbiology (New 2026 Edition) | إعداد: Ahmed Wael</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b14;
+      --surface: #0f172a;
+      --surface-card: #152033;
+      --surface-card-hover: #1c2b45;
+      --border: #223450;
+      --border-focus: #38bdf8;
+      --primary: #8b5cf6;
+      --primary-glow: rgba(139, 92, 246, 0.35);
+      --accent: #a78bfa;
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.25);
+      --danger: #ef4444;
+      --danger-glow: rgba(239, 68, 68, 0.25);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+      --shadow-luxury: 0 20px 40px -15px rgba(0, 0, 0, 0.65), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', 'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.16) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.88) 0px, transparent 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Switcher Banner */
+    .edition-banner {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.9rem;
+    }
+
+    .edition-banner strong {
+      color: #c084fc;
+    }
+
+    .switch-link {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .switch-link:hover {
+      color: #7dd3fc;
+      text-decoration: underline;
+    }
+
+    /* Top Branding Bar */
+    .branding-bar {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-luxury);
+      flex-wrap: wrap;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .branding-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #a78bfa, #38bdf8, transparent);
+    }
+
+    .author-badge-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #7c3aed, #0f172a);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+    }
+
+    .title-area h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .title-area p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .author-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(139, 92, 246, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #c084fc;
+    }
+
+    .audio-btn {
+      background: #111a2b;
+      border: 1px solid #223450;
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .audio-btn:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    /* Topic Selection Filter Bar */
+    .filter-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .filter-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #cbd5e1;
+    }
+
+    .topic-select {
+      background: #090e17;
+      border: 1px solid #23354d;
+      color: #f1f5f9;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      outline: none;
+      cursor: pointer;
+      min-width: 320px;
+      transition: all 0.2s;
+      direction: rtl;
+    }
+
+    .topic-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+    }
+
+    .topic-select option {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 8px;
+    }
+
+    /* Live Progress Bar */
+    .progress-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .score-indicators {
+      display: flex;
+      gap: 8px;
+    }
+
+    .badge-stat {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-stat.correct {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-stat.wrong {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      height: 8px;
+      background: #090d16;
+      border-radius: 9999px;
+      overflow: hidden;
+      border: 1px solid #1e2e47;
+    }
+
+    .progress-bar-thumb {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #7c3aed, #a78bfa, #38bdf8);
+      border-radius: 9999px;
+      transition: width 0.35s ease;
+    }
+
+    /* Question Main Card */
+    .question-viewport {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-luxury);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+    }
+
+    .question-headline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      padding-bottom: 14px;
+    }
+
+    .question-pill {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: #c084fc;
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 5px 12px;
+      border-radius: 9999px;
+    }
+
+    .category-tag {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .question-body {
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.65;
+      color: #f8fafc;
+      letter-spacing: -0.2px;
+      direction: ltr;
+      text-align: left;
+    }
+
+    /* Options Stack */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      direction: ltr;
+    }
+
+    .option-row {
+      background: #0e1626;
+      border: 1px solid #20314a;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: left;
+      font-size: 1.02rem;
+      color: #e2e8f0;
+      position: relative;
+      user-select: none;
+    }
+
+    .option-row:hover:not(:disabled) {
+      background: #16233a;
+      border-color: #a78bfa;
+      transform: translateX(4px);
+    }
+
+    .option-letter {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #142033;
+      border: 1px solid #283e5e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .option-text {
+      flex: 1;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .option-marker {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    /* State Styles */
+    .option-row.is-correct {
+      background: rgba(16, 185, 129, 0.14) !important;
+      border-color: var(--success) !important;
+      color: #6ee7b7 !important;
+      box-shadow: 0 0 15px var(--success-glow);
+    }
+
+    .option-row.is-correct .option-letter {
+      background: var(--success);
+      color: #064e3b;
+      border-color: var(--success);
+    }
+
+    .option-row.is-wrong {
+      background: rgba(239, 68, 68, 0.14) !important;
+      border-color: var(--danger) !important;
+      color: #fca5a5 !important;
+      box-shadow: 0 0 15px var(--danger-glow);
+    }
+
+    .option-row.is-wrong .option-letter {
+      background: var(--danger);
+      color: #7f1d1d;
+      border-color: var(--danger);
+    }
+
+    .option-row:disabled {
+      cursor: default;
+    }
+
+    /* High-Yield Clinical Pearl Box */
+    .pearl-box {
+      border-radius: var(--radius-md);
+      padding: 20px 22px;
+      margin-top: 8px;
+      display: none;
+      animation: fadeIn 0.3s ease-out;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pearl-box.is-correct {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #d1fae5;
+    }
+
+    .pearl-box.is-wrong {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fee2e2;
+    }
+
+    .pearl-box-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .pearl-content {
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+
+    .pearl-content strong {
+      color: #c084fc;
+    }
+
+    /* Bottom Control Bar */
+    .controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      padding: 13px 24px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .nav-btn-next {
+      background: linear-gradient(135deg, #7c3aed, #6d28d9);
+      color: white;
+      box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);
+    }
+
+    .nav-btn-next:hover:not(:disabled) {
+      background: linear-gradient(135deg, #6d28d9, #5b21b6);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn-prev {
+      background: #111a2b;
+      color: var(--text-muted);
+      border: 1px solid #203048;
+    }
+
+    .nav-btn-prev:hover:not(:disabled) {
+      background: #19273f;
+      color: white;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .nav-btn-map {
+      background: #0b1220;
+      color: #94a3b8;
+      border: 1px solid #203048;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-btn-map:hover {
+      border-color: #a78bfa;
+      color: #f8fafc;
+    }
+
+    /* Quick Jump Grid Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .modal-backdrop.is-open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #0f172a;
+      border: 1px solid #273852;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 720px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-luxury);
+      animation: modalZoom 0.25s ease;
+    }
+
+    @keyframes modalZoom {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-top {
+      padding: 20px 24px;
+      border-bottom: 1px solid #1e2c40;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-top h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #f8fafc;
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    .modal-grid-body {
+      padding: 20px 24px;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(46px, 1fr));
+      gap: 8px;
+    }
+
+    .grid-cell {
+      aspect-ratio: 1;
+      border-radius: 10px;
+      background: #141f33;
+      border: 1px solid #23344d;
+      color: #94a3b8;
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .grid-cell:hover {
+      border-color: #a78bfa;
+      color: white;
+    }
+
+    .grid-cell.answered-ok {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--success);
+      color: #34d399;
+    }
+
+    .grid-cell.answered-err {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: var(--danger);
+      color: #f87171;
+    }
+
+    .grid-cell.is-active {
+      border: 2px solid #a78bfa;
+      box-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+    }
+
+    /* Results Summary Card */
+    .summary-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: var(--shadow-luxury);
+      display: none;
+    }
+
+    .score-meter {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent) var(--perc, 0%), #141f33 0%);
+      margin: 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .score-meter-inner {
+      width: 136px;
+      height: 136px;
+      border-radius: 50%;
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-meter-inner .val {
+      font-size: 2.2rem;
+      color: #f8fafc;
+      font-weight: 900;
+    }
+
+    .score-details-row {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin: 26px 0;
+      flex-wrap: wrap;
+    }
+
+    .score-box {
+      background: #0b1220;
+      border: 1px solid #203048;
+      border-radius: 14px;
+      padding: 16px 26px;
+      min-width: 150px;
+    }
+
+    .score-box .num {
+      font-size: 1.8rem;
+      font-weight: 900;
+    }
+
+    .score-box .label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      padding: 12px 0 24px 0;
+      margin-top: auto;
+    }
+
+    footer span {
+      color: #c084fc;
+      font-weight: 700;
+    }
+
+    /* Responsive */
+    @media (max-width: 680px) {
+      body { padding: 12px 10px; }
+      .question-viewport { padding: 22px 16px; }
+      .question-body { font-size: 1.1rem; }
+      .option-row { padding: 14px 16px; font-size: 0.96rem; }
+      .branding-bar { padding: 16px; }
+      .topic-select { min-width: 100%; }
+      .title-area h1 { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Switcher Banner -->
+    <div class="edition-banner">
+      <div>📌 أنت الآن في: <strong>النسخة الحديثة (New 2026 Edition - 37 سؤالاً)</strong></div>
+      <div style="display: flex; gap: 14px; align-items: center;">
+        <a href="microbiology_cvs_old_quiz.html" class="switch-link">التبديل إلى بنك القسم المعتمد (Old Archive - 38 سؤالاً) 🠜</a>
+        <span>•</span>
+        <a href="index.html" class="switch-link">🏠 العودة للرئيسية</a>
+      </div>
+    </div>
+
+    <!-- Branding & Author Header -->
+    <header class="branding-bar">
+      <div class="author-badge-group">
+        <div class="avatar-icon">🦠</div>
+        <div class="title-area">
+          <h1>
+            <span>Microbiology CVS</span>
+            <span class="author-tag">New 2026 Edition • د. Ahmed Wael</span>
+          </h1>
+          <p>بنك أسئلة الكائنات الدقيقة لجهاز الدوران • إعداد: د. Ahmed Wael</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <button class="audio-btn" id="audioToggleBtn">
+          🔊 المؤثرات: تفعيل
+        </button>
+      </div>
+    </header>
+
+    <!-- Topic / Chapter Selector Bar -->
+    <section class="filter-card">
+      <div class="filter-label">
+        <span>📖 الفلترة حسب موضوع المنهج:</span>
+      </div>
+      <select class="topic-select" id="topicSelect">
+<option value="all">📚 جميع الموضوعات (الامتحان كاملاً - 37 سؤالاً)</option>
+          <option value="1">• Infective Endocarditis & Biofilms (12 أسئلة)</option>
+          <option value="2">• Rheumatic Heart Disease & Streptococci (4 أسئلة)</option>
+          <option value="3">• Sepsis & Septic Shock (5 أسئلة)</option>
+          <option value="4">• Toxic Shock Syndrome (1 أسئلة)</option>
+          <option value="5">• Zoonoses & Vector-Borne Diseases (8 أسئلة)</option>
+          <option value="6">• Cardiotropic Viruses (1 أسئلة)</option>
+          <option value="7">• Viral Hemorrhagic Fevers (6 أسئلة)</option>
+      </select>
+    </section>
+
+    <!-- Live Progress Bar & Counter -->
+    <section class="progress-card">
+      <div class="progress-meta">
+        <span id="topicProgressLabel">التقدم: سؤال 1 من 37</span>
+        <div class="score-indicators">
+          <span class="badge-stat correct" id="badgeCorrectCount">✅ 0 صح</span>
+          <span class="badge-stat wrong" id="badgeWrongCount">❌ 0 خطأ</span>
+        </div>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-thumb" id="progressThumb"></div>
+      </div>
+    </section>
+
+    <!-- Main Question Viewport -->
+    <main class="question-viewport" id="questionBox">
+      <div class="question-headline">
+        <span class="question-pill" id="questionPill">سؤال 1 من 37</span>
+        <span class="category-tag" id="categoryTag">الموضوع: عام</span>
+      </div>
+
+      <div class="question-body" id="questionText">
+        جارٍ تحميل السؤال...
+      </div>
+
+      <div class="options-grid" id="optionsContainer">
+        <!-- Options injected here -->
+      </div>
+
+      <!-- High Yield Explanation -->
+      <div class="pearl-box" id="pearlBox">
+        <div class="pearl-box-header" id="pearlHeader"></div>
+        <div class="pearl-content" id="pearlText"></div>
+      </div>
+
+      <!-- Navigation & Quick Map -->
+      <div class="controls-bar">
+        <button class="nav-btn nav-btn-prev" id="prevBtn" disabled>
+          🠞 السابق
+        </button>
+
+        <button class="nav-btn-map" id="openMapBtn">
+          📋 خريطة أسئلة هذا القسم
+        </button>
+
+        <button class="nav-btn nav-btn-next" id="nextBtn">
+          التالي 🠜
+        </button>
+      </div>
+    </main>
+
+    <!-- Summary / Results Screen -->
+    <div class="summary-card" id="summaryCard">
+      <h2 style="font-size: 1.8rem; margin-bottom: 6px; color: #a78bfa;">🏆 عاش يا دكتور! أنهيت الأسئلة بنجاح</h2>
+      <p style="color: var(--text-muted); margin-bottom: 24px;" id="summarySubtitle">ملخص أدائك في قسم: جميع الموضوعات</p>
+
+      <div class="score-meter" id="scoreMeter">
+        <div class="score-meter-inner">
+          <span class="val" id="scorePercentText">0%</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">الدرجة الكلية</span>
+        </div>
+      </div>
+
+      <div class="score-details-row">
+        <div class="score-box">
+          <div class="num" style="color: #34d399;" id="summaryCorrect">0</div>
+          <div class="label">إجابات صحيحة</div>
+        </div>
+        <div class="score-box">
+          <div class="num" style="color: #f87171;" id="summaryWrong">0</div>
+          <div class="label">إجابات خاطئة</div>
+        </div>
+        <div class="score-box">
+          <div class="num" style="color: #a78bfa;" id="summaryTotal">0 / 37</div>
+          <div class="label">مجموع الأسئلة</div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 14px; margin-top: 26px; flex-wrap: wrap;">
+        <button class="nav-btn nav-btn-next" id="restartFilteredBtn">
+          🔁 إعادة حل هذا القسم
+        </button>
+        <button class="nav-btn nav-btn-prev" id="reviewAllBtn">
+          🔍 مراجعة الأسئلة
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Jump Modal -->
+    <div class="modal-backdrop" id="mapModal">
+      <div class="modal-box">
+        <div class="modal-top">
+          <h3 id="modalTitle">خريطة أسئلة القسم الحالي</h3>
+          <button class="modal-close-btn" id="closeMapBtn">&times;</button>
+        </div>
+        <div class="modal-grid-body" id="modalGrid">
+          <!-- Cells -->
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      محتوى وأسئلة من إعداد وتنسيق <span>Ahmed Wael</span> • لدفعة الطب البشري 🩺
+    </footer>
+
+  </div>
+
+  <script>
+    // Audio synthesizer using Web Audio API
+    let audioEnabled = true;
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSound(type) {
+      if (!audioEnabled || !audioCtx) return;
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+        if (type === 'correct') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        } else if (type === 'wrong') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.exponentialRampToValueAtTime(146.83, now + 0.2);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        }
+      } catch (e) { }
+    }
+
+    // Questions Data
+    const fullQuestions = [
+  {
+    "id": 1,
+    "topicId": "1",
+    "topicName": "Infective Endocarditis & Biofilms",
+    "question": "1. A middle-aged woman presents with low-grade fever and general malaise. Physical exam reveals Janeway lesions, and splinter hemorrhages under her fingernails. In the doctor’s office, she recounts a dentist appointment a few weeks ago. Which of the following is the most likely cause?",
+    "options": [
+      {
+        "key": "a",
+        "text": "Streptococcus pyogenes"
+      },
+      {
+        "key": "b",
+        "text": "Streptococcus agalactiae"
+      },
+      {
+        "key": "c",
+        "text": "Enterococcus faecalis"
+      },
+      {
+        "key": "d",
+        "text": "Streptococcus Viridans"
+      },
+      {
+        "key": "e",
+        "text": "Streptococcus pneumoniae"
+      }
+    ],
+    "answer": "d",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> دي الحالة الكلاسيكية لـ <strong>Subacute Bacterial Endocarditis (SBE)</strong>! بعد إجراءات الأسنان (Dental procedure)، بتدخل بكتيريا <strong>Streptococcus viridans</strong> لمجرى الدم، وتنتج Dextran يخليها تمسك في الصمامات المتضررة مسبقاً، وتعمل حمى منخفضة مع Peripheral stigmata زي Janeway lesions و Splinter hemorrhages."
+  },
+  {
+    "id": 2,
+    "topicId": "1",
+    "topicName": "Infective Endocarditis & Biofilms",
+    "question": "2. Patient at risk for Subacute Bacterial Endocarditis (SBE) from Viridas Streptococci should be given amoxicillin prior to which type of medical procedure?",
+    "options": [
+      {
+        "key": "a",
+        "text": "Pacemaker implant"
+      },
+      {
+        "key": "b",
+        "text": "Renal stenting"
+      },
+      {
+        "key": "c",
+        "text": "Dental procedures"
+      },
+      {
+        "key": "d",
+        "text": "Joint surgery"
+      },
+      {
+        "key": "e",
+        "text": "Skin abscess lancing"
+      }
+    ],
+    "answer": "c",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> المضاد الحيوي الوقائي (Antibiotic prophylaxis بـ Amoxicillin) بنديه قبل <strong>Dental procedures</strong> للمرضى الأكثر عرضة لخطر التهاب شغاف القلب (زي اللي عندهم صمامات صناعية أو تاريخ سابق لـ IE)."
+  },
+  {
+    "id": 3,
+    "topicId": "1",
+    "topicName": "Infective Endocarditis & Biofilms",
+    "question": "3. A 48-year-old man has been hospitalized in intensive care for 3 weeks following an automobile accident. He develops a fever due to colonization of an intravenous line with Gram-positive cocci that are catalase-positive and coagulase-negative. What is the most likely cause of this man’s fever?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Enterococcus faecalis"
+      },
+      {
+        "key": "B",
+        "text": "Staphylococcus aureus"
+      },
+      {
+        "key": "C",
+        "text": "Staphylococcus epidermidis"
+      },
+      {
+        "key": "D",
+        "text": "Streptococcus mutans"
+      },
+      {
+        "key": "E",
+        "text": "Streptococcus pyogenes"
+      }
+    ],
+    "answer": "C",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> البكتيريا الأشهر في عدوى القساطر والخطوط الوريدية (IV lines) في العناية المركزة هي <strong>Staphylococcus epidermidis</strong>: بتكون Gram-positive cocci، Catalase-positive، و Coagulase-negative، وبتعمل Biofilm قوي."
+  },
+  {
+    "id": 4,
+    "topicId": "1",
+    "topicName": "Infective Endocarditis & Biofilms",
+    "question": "4. A 57-year-old man arrives at the emergency room complaining of weakness, fatigue, and intermittent fever that has recurred for several weeks. The patient had a cardiac valvular prosthesis implanted 5 years earlier. Physical examination reveals petechiae on the chest and stomach. Blood cultures grew catalase-positive, coagulasenegative, cocci. The gram-positive organisms failed to ferment mannitol, and their growth was inhibited by novobiocin. What is the most likely infectious agent?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Staphylococcus aureus"
+      },
+      {
+        "key": "B",
+        "text": "Staphylococcus epidermidis"
+      },
+      {
+        "key": "C",
+        "text": "Staphylococcus saprophyticus"
+      },
+      {
+        "key": "D",
+        "text": "Streptococcus pneumoniae"
+      },
+      {
+        "key": "E",
+        "text": "Streptococcus agalactiae"
+      }
+    ],
+    "answer": "B",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> صمام صناعي (Prosthetic valve) + كائن Coagulase-negative + لا يخمر المانيتول + <strong>حساس للـ Novobiocin (inhibited by novobiocin)</strong> = فوراً <strong>Staphylococcus epidermidis</strong> (بينما S. saprophyticus بتكون مقاومة للـ novobiocin وتسبب UTI)."
+  },
+  {
+    "id": 5,
+    "topicId": "1",
+    "topicName": "Infective Endocarditis & Biofilms",
+    "question": "5. A patient who had surgery to put in a pacemaker and now presents 3 months postoperatively with complaints of malaise, a low-grade fever, and heart murmurs. Which of the following is the causative organism?",
+    "options": [
+      {
+        "key": "a",
+        "text": "Staphylococcus aureus"
+      },
+      {
+        "key": "b",
+        "text": "Staphylococcus epidermidis"
+      },
+      {
+        "key": "c",
+        "text": "Enterococci"
+      },
+      {
+        "key": "d",
+        "text": "Staphylococcus saprophyticus"
+      },
+      {
+        "key": "e",
+        "text": "Candida albicans"
+      }
+    ],
+    "answer": "b",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> زرع منظم ضربات القلب (Pacemaker) أو أي جهاز طبي داخل الجسم وتطوير أعراض تحت حادة بعد 3 أشهر هو الميدان الكلاسيكي لـ <strong>Staphylococcus epidermidis</strong> لقدرتها الفائقة على تكوين غشاء حيوي (Slime layer / Biofilm)."
+  },
+  {
+    "id": 6,
+    "topicId": "1",
+    "topicName": "Infective Endocarditis & Biofilms",
+    "question": "6. After extensive oral surgery, a 68-year-old patient who had rheumatic fever as a child and who did not take the prescribed perioperative prophylactic antibiotics subsequently developed subacute infective endocarditis. Which of the following is the most likely causative agent?",
+    "options": [
+      {
+        "key": "a",
+        "text": "Enterococcus faecalis"
+      },
+      {
+        "key": "b",
+        "text": "Staphylococcus aureus"
+      },
+      {
+        "key": "c",
+        "text": "Viridans streptococci"
+      },
+      {
+        "key": "d",
+        "text": "Streptococcus agalactiae"
+      },
+      {
+        "key": "e",
+        "text": "Streptococcus pneumoniae"
+      }
+    ],
+    "answer": "c",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> جراحة فم واسعة (Oral surgery) بدون وقاية لمريض عنده تاريخ حمى روماتيزمية وتلف صمامي سابق = السبب الأول لـ Subacute infective endocarditis هو <strong>Viridans streptococci</strong> المقيمة طبيعياً في تجويف الفم."
+  },
+  {
+    "id": 7,
+    "topicId": "1",
+    "topicName": "Infective Endocarditis & Biofilms",
+    "question": "7. A 29-year-old woman developed an erythema at the insertion site of her intravenous line. Culture of the catheter tip indicates that a biofilm is present on the catheter. What is the most likely causative agent?",
+    "options": [
+      {
+        "key": "a",
+        "text": "Enterococcus faecalis"
+      },
+      {
+        "key": "b",
+        "text": "Staphylococcus aureus"
+      },
+      {
+        "key": "c",
+        "text": "Staphylococcus epidermidis"
+      },
+      {
+        "key": "d",
+        "text": "Streptococcus agalactiae"
+      },
+      {
+        "key": "e",
+        "text": "Streptococcus pneumoniae"
+      }
+    ],
+    "answer": "c",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> كلمة السر هنا هي وجود <strong>Biofilm</strong> على طرف القسطرة الوريدية (Catheter tip)، وده التوقيع الباثولوجي المميز لبكتيريا الجلد الطبيعية <strong>Staphylococcus epidermidis</strong>."
+  },
+  {
+    "id": 8,
+    "topicId": "1",
+    "topicName": "Infective Endocarditis & Biofilms",
+    "question": "8. A 24-year-old man hospitalized in a coma for 2 weeks now has developed erythema around his catheter. You order the catheter to be pulled, the tip cultured. The report comes back that it is G+ve cocci ,catalase +ve &coagulase -ve, What is the most likely isolated organism?",
+    "options": [
+      {
+        "key": "a",
+        "text": "S.viridans"
+      },
+      {
+        "key": "b",
+        "text": "S.pyogenes"
+      },
+      {
+        "key": "c",
+        "text": "S.epidermidis"
+      },
+      {
+        "key": "d",
+        "text": "S.aureus"
+      },
+      {
+        "key": "e",
+        "text": "S.saprophyticus"
+      }
+    ],
+    "answer": "c",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> عينة من طرف قسطرة مزروعة في المستشفى أظهرت: G+ve cocci + Catalase +ve + Coagulase -ve = <strong>Staphylococcus epidermidis</strong>."
+  },
+  {
+    "id": 9,
+    "topicId": "2",
+    "topicName": "Rheumatic Heart Disease & Streptococci",
+    "question": "9. The pathogenesis of rheumatic heart disease may be due to:",
+    "options": [
+      {
+        "key": "a",
+        "text": "release of toxins"
+      },
+      {
+        "key": "b",
+        "text": "direct damage by the organism"
+      },
+      {
+        "key": "c",
+        "text": "antigenic cross reaction"
+      },
+      {
+        "key": "d",
+        "text": "bacteremia"
+      },
+      {
+        "key": "e",
+        "text": "lipopolysaccharide"
+      }
+    ],
+    "answer": "c",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> الباثوجينيسيس للحمى الروماتيزمية وتأثر القلب ناتج عن تشابه جزيئي ومناعي (Molecular mimicry / <strong>Antigenic cross reaction</strong>) بين بروتين M الخاص بالمكورات العقدية وأنسجة الصمامات وعضلة القلب البشرية."
+  },
+  {
+    "id": 10,
+    "topicId": "2",
+    "topicName": "Rheumatic Heart Disease & Streptococci",
+    "question": "10. The measurement of antibodies against streptolysin O (the ASO test) is useful for confirming which of the following poststreptococcal infection, 3 to 4 weeks or more after the initial exposure to the organism?",
+    "options": [
+      {
+        "key": "a",
+        "text": "Dental caries and brain abscesses"
+      },
+      {
+        "key": "b",
+        "text": "Subacute Bacterial Endocarditis (SBE)"
+      },
+      {
+        "key": "c",
+        "text": "Toxic Shock Syndrome (TSS) and Scarlet fever"
+      },
+      {
+        "key": "d",
+        "text": "Rheumatic fever"
+      },
+      {
+        "key": "e",
+        "text": "Impetigo"
+      }
+    ],
+    "answer": "d",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> اختبار <strong>ASO titer</strong> يقيس الأجسام المضادة لـ Streptolysin O ويثبت حدوث عدوى بلعومية سابقة بالمكورات العقدية كدليل داعم لتشخيص <strong>Rheumatic fever</strong> (ملحوظة: عدوى الجلد كالقوباء لا ترفع ASO بل ترفع Anti-DNase B)."
+  },
+  {
+    "id": 11,
+    "topicId": "2",
+    "topicName": "Rheumatic Heart Disease & Streptococci",
+    "question": "11. One of the followings is true regarding rheumatic fever:",
+    "options": [
+      {
+        "key": "a",
+        "text": "Carditis is one of the minor criteria"
+      },
+      {
+        "key": "b",
+        "text": "migratory arthritis not diagnostic of rheumatic fever"
+      },
+      {
+        "key": "c",
+        "text": "Erythema marginatum is a minor criterion"
+      },
+      {
+        "key": "d",
+        "text": "Chorea manifestations are predominant in males"
+      },
+      {
+        "key": "e",
+        "text": "Recovery from acute rheumatic fever occurs without residual injury to the joints"
+      }
+    ],
+    "answer": "e",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> القاعدة الذهبية للحمى الروماتيزمية: 'It licks the joints but bites the heart'؛ التهاب المفاصل المتنقل (Migratory polyarthritis) يشفى تماماً دون أي تشوه أو تلف متبقٍ في المفاصل (<strong>Recovery occurs without residual injury to the joints</strong>)."
+  },
+  {
+    "id": 12,
+    "topicId": "2",
+    "topicName": "Rheumatic Heart Disease & Streptococci",
+    "question": "12. Which of the following is associated with glomerulonephritis and rheumatic fever?",
+    "options": [
+      {
+        "key": "a",
+        "text": "Streptococcus pyogenes"
+      },
+      {
+        "key": "b",
+        "text": "Streptococcus agalactiae"
+      },
+      {
+        "key": "c",
+        "text": "Enterococcus faecalis"
+      },
+      {
+        "key": "d",
+        "text": "Streptococcus bovis"
+      },
+      {
+        "key": "e",
+        "text": "S. pneumoniae"
+      }
+    ],
+    "answer": "a",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> البكتيريا المسؤولة عن المضاعفات المناعية بعد العدوى (Post-streptococcal sequelae) سواء روماتيزم القلب أو التهاب كبيبات الكلى هي <strong>Streptococcus pyogenes (Group A Streptococci - GAS)</strong>."
+  },
+  {
+    "id": 13,
+    "topicId": "1",
+    "topicName": "Infective Endocarditis & Biofilms",
+    "question": "13. One of the followings is true regarding acute infective endocarditis:",
+    "options": [
+      {
+        "key": "a",
+        "text": "Staph.epidermidis"
+      },
+      {
+        "key": "b",
+        "text": "normal microbiota are included"
+      },
+      {
+        "key": "c",
+        "text": "> 2 weeks."
+      },
+      {
+        "key": "d",
+        "text": "slow progression"
+      },
+      {
+        "key": "e",
+        "text": "high virulence organisms"
+      }
+    ],
+    "answer": "e",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> التهاب شغاف القلب الحاد (Acute IE) يتميز بأنه سريع التطور ويهجم على صمامات سليمة طبيعية وتسببه كائنات عالية الفوعة والضراوة (<strong>High virulence organisms</strong> مثل Staphylococcus aureus)."
+  },
+  {
+    "id": 14,
+    "topicId": "1",
+    "topicName": "Infective Endocarditis & Biofilms",
+    "question": "14. Which of the following organisms is not commonly implicated in infective endocarditis?",
+    "options": [
+      {
+        "key": "a",
+        "text": "Staph.aureus"
+      },
+      {
+        "key": "b",
+        "text": "Strept.pyogenes"
+      },
+      {
+        "key": "c",
+        "text": "Mycobact.TB"
+      },
+      {
+        "key": "d",
+        "text": "Coxsackie virus"
+      },
+      {
+        "key": "e",
+        "text": "Candida"
+      }
+    ],
+    "answer": "d",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> فيروس <strong>Coxsackie virus</strong> هو المسبب الفيروسي الأشهر لالتهاب عضلة القلب وغشاء التأمور (Myocarditis & Pericarditis)، ولا يسبب على الإطلاق تآكل الصمامات أو تكوّن الحبيبات في شغاف القلب (Infective endocarditis التي تسببها البكتيريا والفطريات)."
+  },
+  {
+    "id": 15,
+    "topicId": "1",
+    "topicName": "Infective Endocarditis & Biofilms",
+    "question": "15. Which of the following assessments is crucial for diagnosis of infective endocarditis?",
+    "options": [
+      {
+        "key": "a",
+        "text": "vital signs"
+      },
+      {
+        "key": "b",
+        "text": "hematology tests"
+      },
+      {
+        "key": "c",
+        "text": "serology tests"
+      },
+      {
+        "key": "d",
+        "text": "ESR"
+      },
+      {
+        "key": "g",
+        "text": "blood culture"
+      }
+    ],
+    "answer": "g",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> الفحص الحاسم والأهم في معايير ديوك (Duke criteria) لتأكيد التهاب شغاف القلب وتحديد البكتيريا المسببة وحساسيتها للمضادات هو <strong>مزرعة الدم (Blood culture)</strong> بسحب 3 عينات من أماكن وريدية منفصلة."
+  },
+  {
+    "id": 16,
+    "topicId": "1",
+    "topicName": "Infective Endocarditis & Biofilms",
+    "question": "16. A 16-year-old bone marrow transplant patient has a central venous line that has been in place for 2 weeks. He also has a urinary tract catheter, which has been in place for 2 weeks as well. He develops fever while his white blood cell count is very low and before the transplant has engrafted. Three blood cultures are done, and all grow Staphylococcus epidermidis. Which one of the following statements is correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The S epidermidis organisms are likely to be susceptible to penicillin G."
+      },
+      {
+        "key": "B",
+        "text": "The S epidermidis organisms are likely to be from the surface of the urinary tract catheter."
+      },
+      {
+        "key": "C",
+        "text": "The S epidermidis organisms are likely to be resistant to vancomycin."
+      },
+      {
+        "key": "D",
+        "text": "The S epidermidis organisms are likely to be from a skin source."
+      },
+      {
+        "key": "E",
+        "text": "The S epidermidis organisms are likely to be in a biofilm on the central venous catheter surface."
+      }
+    ],
+    "answer": "E",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> وجود 3 مزارع دم إيجابية متكررة لـ S. epidermidis في وجود خط وريدي مركزي (Central venous line) يثبت تكوّن مستعمرة داخل غشاء حيوي ميكروبي (<strong>Biofilm on the central venous catheter surface</strong>)، مما يضخ البكتيريا باستمرار في مجرى الدم."
+  },
+  {
+    "id": 17,
+    "topicId": "3",
+    "topicName": "Sepsis & Septic Shock",
+    "question": "17. Sepsis and septicaemia are usually caused by severe infection with",
+    "options": [
+      {
+        "key": "a",
+        "text": "Bacteria"
+      },
+      {
+        "key": "b",
+        "text": "Fungi"
+      },
+      {
+        "key": "c",
+        "text": "Protozoa"
+      },
+      {
+        "key": "d",
+        "text": "Helminths"
+      },
+      {
+        "key": "e",
+        "text": "viruses"
+      }
+    ],
+    "answer": "a",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> السبب الأكثر شيوعاً لحالات تعفن الدم وتسمم الدم (Sepsis & Septicemia) هو العدوى الحادة بالبكتيريا (<strong>Bacteria</strong>)، بنوعيها سالبة وموجبة الجرام."
+  },
+  {
+    "id": 18,
+    "topicId": "4",
+    "topicName": "Toxic Shock Syndrome",
+    "question": "18. A 32-year-old woman became ill 4 days after the onset of her menstrual period. She presented in the emergency room with fever (39°C), elevated white blood cell count (16,000/mm3), and an erythematous, sunburnlike rash on her trunk and extremities. She complained of fatigue, vomiting, and diarrhea. She had recently eaten at a fast-food restaurant, but otherwise had prepared all her meals at home. The patient described most likely has:",
+    "options": [
+      {
+        "key": "A",
+        "text": "staphylococcal food poisoning."
+      },
+      {
+        "key": "B",
+        "text": "scalded skin syndrome."
+      },
+      {
+        "key": "C",
+        "text": "infection with a Staphylococcus saprophyticus."
+      },
+      {
+        "key": "D",
+        "text": "chickenpox."
+      },
+      {
+        "key": "E",
+        "text": "toxic shock syndrome."
+      }
+    ],
+    "answer": "E",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> أعراض حرارة عالية، طفح جلدي شبيه بحروق الشمس يتقشر لاحقاً، إسهال وقيء، تزامناً مع الدورة الشهرية واستخدام السدادات القطنية = <strong>Toxic Shock Syndrome (TSS)</strong> بواسطة سم TSST-1 السوبر أنتيجين من Staphylococcus aureus."
+  },
+  {
+    "id": 19,
+    "topicId": "3",
+    "topicName": "Sepsis & Septic Shock",
+    "question": "19. Which cytokines play a central role in the development of systemic inflammation",
+    "options": [
+      {
+        "key": "a",
+        "text": "IL-2 and IL-15"
+      },
+      {
+        "key": "b",
+        "text": "IL-10 and TGFa"
+      },
+      {
+        "key": "c",
+        "text": "TNF and IL-1"
+      },
+      {
+        "key": "d",
+        "text": "IL-12 and IL-13"
+      },
+      {
+        "key": "e",
+        "text": "IL-2 and IL-4"
+      }
+    ],
+    "answer": "c",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> السيتوكينات الرئيسية المحركة للالتهاب الجهازي وهبوط الضغط في الصدمة الإنتانية هما <strong>TNF-alpha و IL-1</strong> اللذان يفرزان بكميات هائلة من الماكروفاج عند التعرض للإندوتوكسين."
+  },
+  {
+    "id": 20,
+    "topicId": "3",
+    "topicName": "Sepsis & Septic Shock",
+    "question": "20. A surgery patient at risk for Gram-negative sepsis is part of a research project to prevent endotoxic shock using monoclonal antibodies to inhibit the endotoxin molecule. What is the active component of the endotoxin molecule against which the monoclonal antibody would most likely be directed?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Core polysaccharide"
+      },
+      {
+        "key": "B",
+        "text": "Lipid A"
+      },
+      {
+        "key": "C",
+        "text": "N-acetylmuranic acid"
+      },
+      {
+        "key": "D",
+        "text": "O side chain"
+      },
+      {
+        "key": "E",
+        "text": "Teichoic acid"
+      }
+    ],
+    "answer": "B",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> الجزء السام والمسؤول بيولوجياً عن إحداث الصدمة الإنتانية والحمى في جزيء عديد السكاريد الشحمي (LPS) هو <strong>Lipid A</strong>، ولذلك هو الهدف المباشر للأجسام المضادة العلاجية."
+  },
+  {
+    "id": 21,
+    "topicId": "3",
+    "topicName": "Sepsis & Septic Shock",
+    "question": "21. What is the characteristic sign of septic shock :",
+    "options": [
+      {
+        "key": "A",
+        "text": "High blood pressure"
+      },
+      {
+        "key": "B",
+        "text": "Normal heart rate"
+      },
+      {
+        "key": "C",
+        "text": "Low blood pressure despite intravenous fluid administration"
+      },
+      {
+        "key": "D",
+        "text": "Elevated blood sugar levels"
+      },
+      {
+        "key": "E",
+        "text": "Decreased respiratory rate"
+      }
+    ],
+    "answer": "C",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> التعريف السريري المميز للصدمة الإنتانية (Septic shock) هو هبوط حاد مستمر في ضغط الدم لا يستجيب للمحاليل الوريدية المكثفة (<strong>Low blood pressure despite intravenous fluid administration</strong>) ويتطلب رافعات الضغط (Vasopressors)."
+  },
+  {
+    "id": 22,
+    "topicId": "3",
+    "topicName": "Sepsis & Septic Shock",
+    "question": "22. Which of the following is not a culprit leading to septic shock",
+    "options": [
+      {
+        "key": "A",
+        "text": "Pneumoniae"
+      },
+      {
+        "key": "B",
+        "text": "Appendicitis"
+      },
+      {
+        "key": "C",
+        "text": "Diabetes"
+      },
+      {
+        "key": "D",
+        "text": "Meningitis"
+      },
+      {
+        "key": "E",
+        "text": "Necrotizing fasciitis"
+      }
+    ],
+    "answer": "C",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> ذات الرئة والتهاب الزائدة والتهاب السحايا والتهاب اللفافة الناخر كلها بؤر عدوى حادة تسبب تسمم الدم، بينما <strong>مرض السكري (Diabetes)</strong> هو عامل خطورة استقلابي مزمن يضعف المناعة وليس سبباً إنتانياً مباشراً بحد ذاته."
+  },
+  {
+    "id": 23,
+    "topicId": "5",
+    "topicName": "Zoonoses & Vector-Borne Diseases",
+    "question": "23. The causative agent of Lyme disease is:",
+    "options": [
+      {
+        "key": "a",
+        "text": "Treponema pallidum"
+      },
+      {
+        "key": "b",
+        "text": "Borrelia burgdorferi"
+      },
+      {
+        "key": "c",
+        "text": "Borrelia recurrents"
+      },
+      {
+        "key": "d",
+        "text": "Borrelia hermsii"
+      },
+      {
+        "key": "e",
+        "text": "Leptospira interrogans"
+      }
+    ],
+    "answer": "b",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> داء لايم (Lyme disease) الذي يسبب الطفح الجلدي المميز (Erythema migrans) ومشاكل القلب (Heart block) تسببه بكتيريا ملتفة هي <strong>Borrelia burgdorferi</strong> المنقولة بحشرة القراد Ixodes."
+  },
+  {
+    "id": 24,
+    "topicId": "5",
+    "topicName": "Zoonoses & Vector-Borne Diseases",
+    "question": "24. Which of the following statements about relapsing fever is correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Each relapse is associated with an antigenically distinct variant."
+      },
+      {
+        "key": "B",
+        "text": "Blood smears should be made when the patient is afebrile."
+      },
+      {
+        "key": "C",
+        "text": "Borreliae do not pass transovarially from one generation to the next in ticks."
+      },
+      {
+        "key": "D",
+        "text": "The main reservoir for the Borrelia is deer."
+      },
+      {
+        "key": "E",
+        "text": "Borrelia is resistant to penicillin and tetracycline."
+      }
+    ],
+    "answer": "A",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> في الحمى الراجعة (Relapsing fever) التي تسببها Borrelia، تحدث الانتكاسات المتكررة بسبب التغير المستمر في المستضدات السطحية (Programmed antigenic variation)، وبالتالي <strong>كل انتكاسة ترتبط بمتغير مستضدي جديد ومختلف تماماً</strong> عن سابقه."
+  },
+  {
+    "id": 25,
+    "topicId": "6",
+    "topicName": "Cardiotropic Viruses",
+    "question": "25. Coxsackieviruses are characterized by:",
+    "options": [
+      {
+        "key": "a",
+        "text": "Coxsackieviruses were divided into three groups, A, B and C."
+      },
+      {
+        "key": "b",
+        "text": "Coxsackie A viruses are the most causative agents of viral heart disease."
+      },
+      {
+        "key": "c",
+        "text": "Virus isolation in suckling mice is the mainstay of diagnosis."
+      },
+      {
+        "key": "d",
+        "text": "Nucleic acid detection provides rapid and sensitive assays useful for clinical samples."
+      },
+      {
+        "key": "e",
+        "text": "Tissue culture is the preferred method for diagnosis."
+      }
+    ],
+    "answer": "d",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> فيروسات كوكساكي تقسم إلى مجموعتين A و B فقط (B هي مسببة التهاب القلب). والتشخيص الحديث المفضل والسريع في العينات الإكلينيكية يعتمد على الكشف عن الحمض النووي بالـ RT-PCR (<strong>Nucleic acid detection</strong>)."
+  },
+  {
+    "id": 26,
+    "topicId": "5",
+    "topicName": "Zoonoses & Vector-Borne Diseases",
+    "question": "26. What is the most common symptom of Brucella infection in humans?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Fever"
+      },
+      {
+        "key": "B",
+        "text": "Nausea"
+      },
+      {
+        "key": "C",
+        "text": "Headache"
+      },
+      {
+        "key": "D",
+        "text": "Joint pain"
+      }
+    ],
+    "answer": "A",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> العَرَض الأكثر ثباتاً وشيوعاً لداء البروسيلات (Undulant fever / Malta fever) هو <strong>الحمى المتموجة (Fever)</strong> التي تصيب أكثر من 90% من المرضى وتزداد ليلاً مع تعرق غزير."
+  },
+  {
+    "id": 27,
+    "topicId": "5",
+    "topicName": "Zoonoses & Vector-Borne Diseases",
+    "question": "27. Methods of transmission of Brucellosis include:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Drinking fresh goat milk"
+      },
+      {
+        "key": "B",
+        "text": "Drinking mothers’ milk"
+      },
+      {
+        "key": "C",
+        "text": "Drinking pasteurized milk"
+      },
+      {
+        "key": "D",
+        "text": "Eating uncooked Mozzarella cheese"
+      }
+    ],
+    "answer": "A",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> الطريقة الكلاسيكية لانتقال البروسيلا هي شرب الحليب الطازج غير المبستر من الماعز أو الأبقار المصابة (<strong>Drinking fresh goat milk</strong>)."
+  },
+  {
+    "id": 28,
+    "topicId": "5",
+    "topicName": "Zoonoses & Vector-Borne Diseases",
+    "question": "28. What is the most common way Brucella is transmitted to humans?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Ingestion of contaminated food or water"
+      },
+      {
+        "key": "B",
+        "text": "Inhalation of contaminated air"
+      },
+      {
+        "key": "C",
+        "text": "Direct contact with infected animals"
+      },
+      {
+        "key": "D",
+        "text": "All of the above"
+      }
+    ],
+    "answer": "A",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> على الرغم من إمكانية انتقالها بالتنفس في المسالخ والملامسة المباشرة للأطباء البيطريين، فإن الطريقة الأكثر شيوعاً بنسبة ساحقة بين عامة الناس هي <strong>تناول منتجات الألبان والأغذية الملوثة غير المبسترة (Ingestion of contaminated food)</strong>."
+  },
+  {
+    "id": 29,
+    "topicId": "5",
+    "topicName": "Zoonoses & Vector-Borne Diseases",
+    "question": "29. Which of the following is NOT a way to prevent Brucella infection in animals?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Vaccination"
+      },
+      {
+        "key": "B",
+        "text": "Quarantine of infected animals"
+      },
+      {
+        "key": "C",
+        "text": "Use of antibiotics in infected animals"
+      },
+      {
+        "key": "D",
+        "text": "Good hygiene and sanitation practices"
+      }
+    ],
+    "answer": "C",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> في الحيوانات، لا يتم علاج الماشية المصابة بالمضادات الحيوية (<strong>Use of antibiotics</strong>) لعدم فعاليتها في منع نقل العدوى وتكلفتها؛ بل يتم إعدام الحيوانات المصابة أو عزلها وتطعيم القطعان للوقاية."
+  },
+  {
+    "id": 30,
+    "topicId": "5",
+    "topicName": "Zoonoses & Vector-Borne Diseases",
+    "question": "30. Which of the following is a common test used to diagnose Brucella infection in humans?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Blood culture"
+      },
+      {
+        "key": "B",
+        "text": "Urine culture"
+      },
+      {
+        "key": "C",
+        "text": "Stool culture"
+      },
+      {
+        "key": "D",
+        "text": "Saliva culture"
+      }
+    ],
+    "answer": "A",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> المعيار الذهبي لتأكيد تشخيص البروسيلا هو <strong>مزرعة الدم (Blood culture)</strong> باستخدام أوساط ثنائية الطور (Castaneda bottle) مع حضانة العينة لعدة أسابيع لأن نموها بطيء."
+  },
+  {
+    "id": 31,
+    "topicId": "7",
+    "topicName": "Viral Hemorrhagic Fevers",
+    "question": "31. An outbreak of disease caused by a virus occurred in Uganda , Africa . Clinical manifestations included hemoptysis and bleeding from the eyes , skin, and gastroi intestinal (GI) tract. The mortality rate exceeded 70%. The virus appeared to be transmitted by contact with the blood and bodily secretions of affected individuals . Which viral disease occurred in this outbreak?",
+    "options": [
+      {
+        "key": "p",
+        "text": "CMV"
+      },
+      {
+        "key": "b",
+        "text": "Ebola hemorrhagic fever"
+      },
+      {
+        "key": "c",
+        "text": "Hanta virus pulmonary syndrome"
+      },
+      {
+        "key": "d",
+        "text": "West Nile encephalitis"
+      }
+    ],
+    "answer": "b",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> تفشي حمى نزفية في إفريقيا مع نزيف من العين والجلد والجهاز الهضمي ونسبة وفيات تتجاوز 70% وتنتقل بسوائل الجسم = <strong>Ebola hemorrhagic fever (Filovirus)</strong>."
+  },
+  {
+    "id": 32,
+    "topicId": "7",
+    "topicName": "Viral Hemorrhagic Fevers",
+    "question": "32. Severe dengue, which can lead to hemorrhagic symptoms, is also known as:",
+    "options": [
+      {
+        "key": "a",
+        "text": "Dengue Fever"
+      },
+      {
+        "key": "b",
+        "text": "Dengue Hemorrhagic Fever"
+      },
+      {
+        "key": "c",
+        "text": "Dengue Malaria"
+      },
+      {
+        "key": "d",
+        "text": "Dengue Shock Syndrome"
+      }
+    ],
+    "answer": "b",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> الصورة الشديدة لحمى الضنك المصحوبة بنزيف وتسرب بلازمي وتخثر تسمى <strong>Dengue Hemorrhagic Fever (DHF)</strong>."
+  },
+  {
+    "id": 33,
+    "topicId": "7",
+    "topicName": "Viral Hemorrhagic Fevers",
+    "question": "33. The first filovirus hemorrhagic fever outbreaks occurred among laboratory workers in Germany, the infection developed after handling imported African green monkeys. Name the virus isolated from the animal that caused the outbreak of hemorrhagic fever?",
+    "options": [
+      {
+        "key": "a",
+        "text": "Lassa virus"
+      },
+      {
+        "key": "b",
+        "text": "Ebola virus"
+      },
+      {
+        "key": "c",
+        "text": "Marburg virus"
+      },
+      {
+        "key": "d",
+        "text": "Zika virus"
+      }
+    ],
+    "answer": "c",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> أول تفشٍ لفيروسات الفيلوفيروس حدث عام 1967 في ألمانيا بين عمال المختبرات المتعاملين مع القرود الخضراء الإفريقية وسُمي الفيروس باسم المدينة: <strong>Marburg virus</strong>."
+  },
+  {
+    "id": 34,
+    "topicId": "7",
+    "topicName": "Viral Hemorrhagic Fevers",
+    "question": "34. Which laboratory finding is commonly seen in patients with hemorrhagic fevers?",
+    "options": [
+      {
+        "key": "a",
+        "text": "Elevated hemoglobin levels"
+      },
+      {
+        "key": "b",
+        "text": "Low liver enzyme levels"
+      },
+      {
+        "key": "c",
+        "text": "Prolonged prothrombin time and activated partial thromboplastin time."
+      },
+      {
+        "key": "d",
+        "text": "Normal platelet counts"
+      }
+    ],
+    "answer": "c",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> في الحميات النزفية يحدث استهلاك لعوامل التخثر وتلف في الكبد وتخثر منتشر داخل الأوعية (DIC)، مما يؤدي إلى استطالة أزمنة التخثر: <strong>Prolonged PT and aPTT</strong> مع نقص حاد في الصفائح الدموية."
+  },
+  {
+    "id": 35,
+    "topicId": "7",
+    "topicName": "Viral Hemorrhagic Fevers",
+    "question": "35. Which of the following clinical findings is NOT typically associated with hemorrhagic fevers?",
+    "options": [
+      {
+        "key": "a",
+        "text": "Clear sensorium and alertness"
+      },
+      {
+        "key": "b",
+        "text": "High fever"
+      },
+      {
+        "key": "c",
+        "text": "Joint and muscle pain"
+      },
+      {
+        "key": "d",
+        "text": "Petschiae and ecchymoses"
+      }
+    ],
+    "answer": "a",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> مرضى الحمى النزفية يعانون من اعتلال دماغي وتدهور الوعي والارتباك والغيبوبة السامة، وبالتالي <strong>اليقظة وصفاء الذهن التام (Clear sensorium and alertness)</strong> ليس من سمات هذه الحالات المتقدمة."
+  },
+  {
+    "id": 36,
+    "topicId": "7",
+    "topicName": "Viral Hemorrhagic Fevers",
+    "question": "36. Which of the following viruses, known to be associated with viral hemorrhagic fevers, can induce an immune response, which may result in a more severe disease if the patient is subsequently infected with a heterologous strain of the same virus?",
+    "options": [
+      {
+        "key": "a",
+        "text": "Yellow fever virus"
+      },
+      {
+        "key": "b",
+        "text": "Ebola virus"
+      },
+      {
+        "key": "c",
+        "text": "Dengue virus"
+      },
+      {
+        "key": "d",
+        "text": "Marburg virus"
+      }
+    ],
+    "answer": "c",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> الظاهرة المناعية الشهيرة (Antibody-Dependent Enhancement - ADE) تحدث عند الإصابة بسلالة ثانية مغايرة من <strong>Dengue virus</strong>، حيث تساعد الأجسام المضادة السابقة غير المعادلة الفيروس الجديد على غزو الخلايا وتفجير عاصفة سيتوكينات حادة."
+  },
+  {
+    "id": 37,
+    "topicId": "5",
+    "topicName": "Zoonoses & Vector-Borne Diseases",
+    "question": "37. Which of the following statements about epidemic typhus is correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The disease occurs primarily in sub-Saharan Africa."
+      },
+      {
+        "key": "B",
+        "text": "It is transmitted by ticks."
+      },
+      {
+        "key": "C",
+        "text": "Mice are the reservoir."
+      },
+      {
+        "key": "D",
+        "text": "Historically, the disease occurs in times of prosperity."
+      },
+      {
+        "key": "E",
+        "text": "Recrudescence can occur many years after the initial infection."
+      }
+    ],
+    "answer": "E",
+    "pearl": "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> التيفوس الوبائي (Rickettsia prowazekii) الذي ينقله قمل الجسم يمكن أن تكمن بكتيرياه في الجسم لسنوات طويلة ثم تنشط مجدداً كعدوى انتكاسية متأخرة تعرف بـ <strong>Brill-Zinsser disease (Recrudescence can occur many years after initial infection)</strong>."
+  }
+];
+
+    // State Variables
+    let currentTopicFilter = "all";
+    let activeQuestionList = [...fullQuestions];
+    let currentIndex = 0;
+    const answerStore = {}; // id -> chosenKey
+
+    // DOM Elements
+    const questionBox = document.getElementById('questionBox');
+    const questionPill = document.getElementById('questionPill');
+    const categoryTag = document.getElementById('categoryTag');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const pearlBox = document.getElementById('pearlBox');
+    const pearlHeader = document.getElementById('pearlHeader');
+    const pearlText = document.getElementById('pearlText');
+
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const openMapBtn = document.getElementById('openMapBtn');
+    const closeMapBtn = document.getElementById('closeMapBtn');
+    const mapModal = document.getElementById('mapModal');
+    const modalGrid = document.getElementById('modalGrid');
+    const modalTitle = document.getElementById('modalTitle');
+
+    const topicSelect = document.getElementById('topicSelect');
+    const topicProgressLabel = document.getElementById('topicProgressLabel');
+    const progressThumb = document.getElementById('progressThumb');
+    const badgeCorrectCount = document.getElementById('badgeCorrectCount');
+    const badgeWrongCount = document.getElementById('badgeWrongCount');
+    const audioToggleBtn = document.getElementById('audioToggleBtn');
+
+    const summaryCard = document.getElementById('summaryCard');
+    const summarySubtitle = document.getElementById('summarySubtitle');
+    const scoreMeter = document.getElementById('scoreMeter');
+    const scorePercentText = document.getElementById('scorePercentText');
+    const summaryCorrect = document.getElementById('summaryCorrect');
+    const summaryWrong = document.getElementById('summaryWrong');
+    const summaryTotal = document.getElementById('summaryTotal');
+    const restartFilteredBtn = document.getElementById('restartFilteredBtn');
+    const reviewAllBtn = document.getElementById('reviewAllBtn');
+
+    // Filter Logic
+    function applyTopicFilter(topicVal) {
+      currentTopicFilter = topicVal;
+      if (topicVal === "all") {
+        activeQuestionList = [...fullQuestions];
+      } else {
+        activeQuestionList = fullQuestions.filter(q => q.topicId === topicVal);
+      }
+      currentIndex = 0;
+      questionBox.style.display = 'flex';
+      summaryCard.style.display = 'none';
+      renderQuestion();
+    }
+
+    // Audio Toggle
+    audioToggleBtn.addEventListener('click', () => {
+      audioEnabled = !audioEnabled;
+      audioToggleBtn.textContent = audioEnabled ? '🔊 المؤثرات: تفعيل' : '🔇 المؤثرات: كتم';
+    });
+
+    // Update Live Stats
+    function updateProgressStats() {
+      let correct = 0;
+      let wrong = 0;
+
+      activeQuestionList.forEach(q => {
+        const userChoice = answerStore[q.id];
+        if (userChoice !== undefined) {
+          if (userChoice.toLowerCase() === q.answer.toLowerCase()) correct++;
+          else wrong++;
+        }
+      });
+
+      badgeCorrectCount.textContent = `✅ ${correct} صح`;
+      badgeWrongCount.textContent = `❌ ${wrong} خطأ`;
+
+      const totalActive = activeQuestionList.length;
+      const currentNumber = currentIndex + 1;
+      const progressPercent = Math.round((currentNumber / totalActive) * 100);
+
+      progressThumb.style.width = `${progressPercent}%`;
+      topicProgressLabel.textContent = `التقدم: سؤال ${currentNumber} من ${totalActive} (${progressPercent}%)`;
+    }
+
+    // Render Active Question
+    function renderQuestion() {
+      if (activeQuestionList.length === 0) return;
+
+      const q = activeQuestionList[currentIndex];
+      questionPill.textContent = `سؤال ${currentIndex + 1} من ${activeQuestionList.length} (رقم ${q.id} بالامتحان)`;
+      categoryTag.textContent = `الموضوع: ${q.topicName}`;
+      questionText.textContent = q.question;
+
+      optionsContainer.innerHTML = '';
+      pearlBox.style.display = 'none';
+
+      const savedAnswer = answerStore[q.id];
+
+      q.options.forEach(opt => {
+        const row = document.createElement('button');
+        row.className = 'option-row';
+        row.innerHTML = `
+          <span class="option-letter">${opt.key.toUpperCase()}</span>
+          <span class="option-text">${opt.text}</span>
+          <span class="option-marker"></span>
+        `;
+
+        if (savedAnswer !== undefined) {
+          row.disabled = true;
+          if (opt.key.toLowerCase() === q.answer.toLowerCase()) {
+            row.classList.add('is-correct');
+            row.querySelector('.option-marker').textContent = '✔';
+          } else if (opt.key.toLowerCase() === savedAnswer.toLowerCase()) {
+            row.classList.add('is-wrong');
+            row.querySelector('.option-marker').textContent = '✖';
+          }
+        } else {
+          row.addEventListener('click', () => chooseAnswer(opt.key));
+        }
+
+        optionsContainer.appendChild(row);
+      });
+
+      if (savedAnswer !== undefined) {
+        showPearl(savedAnswer.toLowerCase() === q.answer.toLowerCase(), q);
+      }
+
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.textContent = currentIndex === activeQuestionList.length - 1 ? 'عرض النتيجة 🏆' : 'التالي 🠜';
+
+      updateProgressStats();
+    }
+
+    // Choose Answer (Instant Validation)
+    function chooseAnswer(selectedKey) {
+      const q = activeQuestionList[currentIndex];
+      answerStore[q.id] = selectedKey;
+
+      const isCorrect = selectedKey.toLowerCase() === q.answer.toLowerCase();
+
+      if (isCorrect) playSound('correct');
+      else playSound('wrong');
+
+      const buttons = optionsContainer.querySelectorAll('.option-row');
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        const letter = btn.querySelector('.option-letter').textContent.toLowerCase();
+        if (letter === q.answer.toLowerCase()) {
+          btn.classList.add('is-correct');
+          btn.querySelector('.option-marker').textContent = '✔';
+        } else if (letter === selectedKey.toLowerCase() && !isCorrect) {
+          btn.classList.add('is-wrong');
+          btn.querySelector('.option-marker').textContent = '✖';
+        }
+      });
+
+      showPearl(isCorrect, q);
+      updateProgressStats();
+    }
+
+    // Show High Yield Explanation
+    function showPearl(isCorrect, q) {
+      pearlBox.className = `pearl-box ${isCorrect ? 'is-correct' : 'is-wrong'}`;
+      pearlBox.style.display = 'block';
+
+      if (isCorrect) {
+        pearlHeader.innerHTML = '✨ إجابة صحيحة يا دكتور! عاش.';
+      } else {
+        pearlHeader.innerHTML = `⚠️ إجابة خاطئة! الإجابة الصحيحة هي: (${q.answer.toUpperCase()})`;
+      }
+
+      pearlText.innerHTML = q.pearl;
+    }
+
+    // Navigation
+    function handleNext() {
+      if (currentIndex < activeQuestionList.length - 1) {
+        currentIndex++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function handlePrev() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    }
+
+    // Show Results Card
+    function showResults() {
+      questionBox.style.display = 'none';
+      summaryCard.style.display = 'block';
+
+      const topicText = topicSelect.options[topicSelect.selectedIndex].text;
+      summarySubtitle.textContent = `ملخص نتيجتك في قسم: ${topicText}`;
+
+      let correct = 0;
+      let wrong = 0;
+      activeQuestionList.forEach(q => {
+        const ans = answerStore[q.id];
+        if (ans !== undefined) {
+          if (ans.toLowerCase() === q.answer.toLowerCase()) correct++;
+          else wrong++;
+        }
+      });
+
+      const total = activeQuestionList.length;
+      const percent = Math.round((correct / total) * 100);
+
+      scorePercentText.textContent = `${percent}%`;
+      scoreMeter.style.setProperty('--perc', `${percent}%`);
+      summaryCorrect.textContent = correct;
+      summaryWrong.textContent = wrong;
+      summaryTotal.textContent = `${correct} / ${total}`;
+    }
+
+    // Populate Modal Grid
+    function renderModalGrid() {
+      modalGrid.innerHTML = '';
+      const topicText = topicSelect.options[topicSelect.selectedIndex].text;
+      modalTitle.textContent = `خريطة أسئلة القسم (${activeQuestionList.length} سؤال)`;
+
+      activeQuestionList.forEach((q, idx) => {
+        const cell = document.createElement('button');
+        cell.className = 'grid-cell';
+        cell.textContent = q.id;
+
+        if (idx === currentIndex) cell.classList.add('is-active');
+
+        const ans = answerStore[q.id];
+        if (ans !== undefined) {
+          if (ans.toLowerCase() === q.answer.toLowerCase()) {
+            cell.classList.add('answered-ok');
+          } else {
+            cell.classList.add('answered-err');
+          }
+        }
+
+        cell.addEventListener('click', () => {
+          currentIndex = idx;
+          mapModal.classList.remove('is-open');
+          questionBox.style.display = 'flex';
+          summaryCard.style.display = 'none';
+          renderQuestion();
+        });
+
+        modalGrid.appendChild(cell);
+      });
+    }
+
+    // Event Listeners
+    nextBtn.addEventListener('click', handleNext);
+    prevBtn.addEventListener('click', handlePrev);
+
+    topicSelect.addEventListener('change', (e) => {
+      applyTopicFilter(e.target.value);
+    });
+
+    openMapBtn.addEventListener('click', () => {
+      renderModalGrid();
+      mapModal.classList.add('is-open');
+    });
+
+    closeMapBtn.addEventListener('click', () => {
+      mapModal.classList.remove('is-open');
+    });
+
+    mapModal.addEventListener('click', (e) => {
+      if (e.target === mapModal) mapModal.classList.remove('is-open');
+    });
+
+    restartFilteredBtn.addEventListener('click', () => {
+      activeQuestionList.forEach(q => delete answerStore[q.id]);
+      currentIndex = 0;
+      summaryCard.style.display = 'none';
+      questionBox.style.display = 'flex';
+      renderQuestion();
+    });
+
+    reviewAllBtn.addEventListener('click', () => {
+      currentIndex = 0;
+      summaryCard.style.display = 'none';
+      questionBox.style.display = 'flex';
+      renderQuestion();
+    });
+
+    // Arrow Key Navigation
+    document.addEventListener('keydown', (e) => {
+      if (mapModal.classList.contains('is-open')) return;
+      if (e.key === 'ArrowLeft') handleNext();
+      else if (e.key === 'ArrowRight') handlePrev();
+    });
+
+    // Start App
+    applyTopicFilter("all");
+  </script>
+</body>
+</html>

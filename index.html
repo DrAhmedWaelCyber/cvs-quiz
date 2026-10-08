@@ -33,7 +33,7 @@
       background-color: var(--bg);
       background-image: 
         radial-gradient(at 0% 0%, rgba(2, 132, 199, 0.18) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.14) 0px, transparent 50%),
         radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.9) 0px, transparent 100%);
       color: var(--text);
       min-height: 100vh;
@@ -46,10 +46,10 @@
 
     .hub-container {
       width: 100%;
-      max-width: 860px;
+      max-width: 920px;
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 26px;
     }
 
     /* Hero Header */
@@ -72,7 +72,7 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: linear-gradient(90deg, #38bdf8, #10b981, #6366f1);
+      background: linear-gradient(90deg, #38bdf8, #8b5cf6, #10b981);
     }
 
     .badge-signature {
@@ -100,26 +100,36 @@
     .hero-subtitle {
       font-size: 1.05rem;
       color: var(--text-muted);
-      max-width: 620px;
+      max-width: 660px;
       margin: 0 auto;
       line-height: 1.6;
     }
 
-    /* Modules Grid */
+    /* General Modules Grid */
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
     .modules-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
     }
 
     .module-card {
       background: var(--surface-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 28px 24px;
+      padding: 26px 22px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 15px;
       text-decoration: none;
       color: inherit;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -136,13 +146,13 @@
     }
 
     .card-icon {
-      width: 58px;
-      height: 58px;
+      width: 54px;
+      height: 54px;
       border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
+      font-size: 1.7rem;
     }
 
     .card-icon.anatomy {
@@ -158,6 +168,11 @@
     .card-icon.histology {
       background: rgba(56, 189, 248, 0.15);
       border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .card-icon.micro {
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.3);
     }
 
     .card-title {
@@ -190,6 +205,103 @@
       gap: 4px;
     }
 
+    /* Microbiology Dedicated Section */
+    .micro-section {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(139, 92, 246, 0.28);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .micro-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #8b5cf6, #c084fc, #38bdf8);
+    }
+
+    .micro-section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .micro-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(139, 92, 246, 0.14);
+      border: 1px solid rgba(139, 92, 246, 0.35);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      color: #c084fc;
+      font-size: 0.84rem;
+      font-weight: 700;
+      width: fit-content;
+    }
+
+    .micro-heading {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #f8fafc;
+    }
+
+    .micro-subheading {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .micro-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .edition-pill {
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 9999px;
+    }
+
+    .edition-pill.new {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #38bdf8;
+    }
+
+    .edition-pill.old {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fbbf24;
+    }
+
+    .micro-card-new:hover {
+      border-color: #a78bfa;
+      box-shadow: 0 20px 35px -10px rgba(139, 92, 246, 0.3);
+    }
+
+    .micro-card-old:hover {
+      border-color: #f59e0b;
+      box-shadow: 0 20px 35px -10px rgba(245, 158, 11, 0.25);
+    }
+
     footer {
       text-align: center;
       font-size: 0.9rem;
@@ -206,6 +318,8 @@
       .hero-title { font-size: 1.6rem; }
       .hero-card { padding: 26px 20px; }
       .modules-grid { grid-template-columns: 1fr; }
+      .micro-grid { grid-template-columns: 1fr; }
+      .micro-section { padding: 20px 16px; }
     }
   </style>
 </head>
@@ -224,49 +338,97 @@
       </p>
     </header>
 
-    <!-- Modules Grid -->
-    <main class="modules-grid">
+    <!-- Microbiology Dedicated Section -->
+    <section class="micro-section">
+      <div class="micro-section-header">
+        <div class="micro-tag">🦠 موديول الكائنات الدقيقة المعتمد</div>
+        <h2 class="micro-heading">Microbiology CVS Question Bank</h2>
+        <p class="micro-subheading">قسم المايكرو مقسم إلى بنكين منفصلين (النسخة الحديثة 2026 وبنك أسئلة القسم المعتمد):</p>
+      </div>
 
-      <!-- Anatomy Card -->
-      <a href="anatomy_cvs_interactive_quiz.html" class="module-card">
-        <div class="card-icon anatomy">🫀</div>
-        <div>
-          <h2 class="card-title">Anatomy CVS</h2>
-          <p class="card-desc">تشريح القلب وغشاء التأمور والأوعية الدموية وأجنة جهاز الدوران كاملة.</p>
-        </div>
-        <div class="card-footer">
-          <span>92 سؤالاً • 10 موضوعات</span>
-          <span class="enter-btn">ابدأ الآن 🠜</span>
-        </div>
-      </a>
+      <div class="micro-grid">
+        <!-- New 2026 Card -->
+        <a href="microbiology_cvs_new_quiz.html" class="module-card micro-card-new">
+          <div class="card-top-row">
+            <div class="card-icon micro">✨</div>
+            <span class="edition-pill new">إصدار 2026 الجديد</span>
+          </div>
+          <div>
+            <h2 class="card-title">Microbiology (New 2026)</h2>
+            <p class="card-desc">الأسئلة الحديثة المضافة للقسم: تشمل حميات النزف الفيروسية (Ebola, Marburg, Dengue)، البروسيلا، والتيفوس الوبائي.</p>
+          </div>
+          <div class="card-footer" style="color: #a78bfa;">
+            <span>37 سؤالاً • 7 موضوعات</span>
+            <span class="enter-btn">ابدأ الآن 🠜</span>
+          </div>
+        </a>
 
-      <!-- Pathology Card -->
-      <a href="pathology_cvs_interactive_quiz.html" class="module-card">
-        <div class="card-icon pathology">🔬</div>
-        <div>
-          <h2 class="card-title">Pathology CVS</h2>
-          <p class="card-desc">أمراض صمامات القلب، الروماتيزم، الجلطات الحادة، التصلب، وأم الدم.</p>
-        </div>
-        <div class="card-footer">
-          <span>49 سؤالاً • 7 موضوعات</span>
-          <span class="enter-btn">ابدأ الآن 🠜</span>
-        </div>
-      </a>
+        <!-- Old Archive Card -->
+        <a href="microbiology_cvs_old_quiz.html" class="module-card micro-card-old">
+          <div class="card-top-row">
+            <div class="card-icon micro">📜</div>
+            <span class="edition-pill old">بنك القسم المعتمد</span>
+          </div>
+          <div>
+            <h2 class="card-title">Microbiology (Old Archive)</h2>
+            <p class="card-desc">بنك القسم الكلاسيكي المعتمد: يشمل تفاصيل فيروسات EBV و CMV والدفتيريا وروماتيزم القلب والـ SBE والـ Biofilms.</p>
+          </div>
+          <div class="card-footer" style="color: #fbbf24;">
+            <span>38 سؤالاً • 8 موضوعات</span>
+            <span class="enter-btn">ابدأ الآن 🠜</span>
+          </div>
+        </a>
+      </div>
+    </section>
 
-      <!-- Histology Card -->
-      <a href="histology_cvs_interactive_quiz.html" class="module-card">
-        <div class="card-icon histology">🧫</div>
-        <div>
-          <h2 class="card-title">Histology CVS</h2>
-          <p class="card-desc">علم الأنسجة للشرايين والأوردة والشعيرات وطبقات جدار القلب وألياف بوركنجي.</p>
-        </div>
-        <div class="card-footer">
-          <span>48 سؤالاً • 6 موضوعات</span>
-          <span class="enter-btn">ابدأ الآن 🠜</span>
-        </div>
-      </a>
+    <!-- Other Modules Section -->
+    <section>
+      <div class="section-title">
+        <span>📚 باقي فروع الموديول:</span>
+      </div>
+      <div class="modules-grid">
 
-    </main>
+        <!-- Anatomy Card -->
+        <a href="anatomy_cvs_interactive_quiz.html" class="module-card">
+          <div class="card-icon anatomy">🫀</div>
+          <div>
+            <h2 class="card-title">Anatomy CVS</h2>
+            <p class="card-desc">تشريح القلب وغشاء التأمور والأوعية الدموية وأجنة جهاز الدوران كاملة.</p>
+          </div>
+          <div class="card-footer">
+            <span>92 سؤالاً • 10 موضوعات</span>
+            <span class="enter-btn">ابدأ الآن 🠜</span>
+          </div>
+        </a>
+
+        <!-- Pathology Card -->
+        <a href="pathology_cvs_interactive_quiz.html" class="module-card">
+          <div class="card-icon pathology">🔬</div>
+          <div>
+            <h2 class="card-title">Pathology CVS</h2>
+            <p class="card-desc">أمراض صمامات القلب، الروماتيزم، الجلطات الحادة، التصلب، وأم الدم.</p>
+          </div>
+          <div class="card-footer">
+            <span>49 سؤالاً • 7 موضوعات</span>
+            <span class="enter-btn">ابدأ الآن 🠜</span>
+          </div>
+        </a>
+
+        <!-- Histology Card -->
+        <a href="histology_cvs_interactive_quiz.html" class="module-card">
+          <div class="card-icon histology">🧫</div>
+          <div>
+            <h2 class="card-title">Histology CVS</h2>
+            <p class="card-desc">علم الأنسجة للشرايين والأوردة والشعيرات وطبقات جدار القلب وألياف بوركنجي.</p>
+          </div>
+          <div class="card-footer">
+            <span>48 سؤالاً • 6 موضوعات</span>
+            <span class="enter-btn">ابدأ الآن 🠜</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
 
     <footer>
       تم إعداد وتطوير المنصة بواسطة <span>Ahmed Wael</span> • لدفعة الطب البشري 🩺
