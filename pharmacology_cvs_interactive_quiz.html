@@ -915,7 +915,7 @@
 
                 // Status filter
                 const isAnswered = userState.answers[q.id] !== undefined;
-                const isCorrect = isAnswered && userState.answers[q.id] === q.answer;
+                const isCorrect = isAnswered && isCorrectAnswer(q, userState.answers[q.id]);
                 const isStarred = userState.starred.includes(q.id);
 
                 if (currentStatusFilter === 'mistakes-only' && (!isAnswered || isCorrect)) return false;
@@ -983,7 +983,7 @@
                                 if (isAnswered) {
                                     optClass += ' disabled';
                                     if (isCorrectAnswer(q, idx)) optClass += ' correct';
-                                    else if (idx === userAns) optClass += ' incorrect';
+                                    else if (isUserChoice(idx, userAns)) optClass += ' incorrect';
                                 }
                                 const letter = getOptionLetter(idx);
                                 const cleanOptText = cleanOptionText(opt);
@@ -1039,6 +1039,14 @@
             return (choiceIdx !== -1 && choiceIdx === ansIdx) || (choiceLetter !== '' && choiceLetter === ansLetter);
         }
 
+        function isUserChoice(choiceIdx, userAns) {
+            if (userAns === undefined || userAns === null) return false;
+            if (choiceIdx === userAns) return true;
+            const letters = ['a', 'b', 'c', 'd', 'e'];
+            if (typeof userAns === 'string' && letters.indexOf(userAns.trim().toLowerCase()) === choiceIdx) return true;
+            return false;
+        }
+
         function getOptionLetter(idx) {
             return ['A', 'B', 'C', 'D', 'E'][idx] || '';
         }
@@ -1071,7 +1079,25 @@
                 }
             }
 
-            renderQuiz();
+            const cardEl = document.getElementById(`q-card-${questionId}`);
+            if (cardEl && q) {
+                const optItems = cardEl.querySelectorAll('.option-item');
+                optItems.forEach((btn, idx) => {
+                    btn.classList.add('disabled');
+                    if (isCorrectAnswer(q, idx)) {
+                        btn.classList.add('correct');
+                    } else if (idx === selectedIdx) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+
+                const pearlEl = cardEl.querySelector('.pearl-card');
+                if (pearlEl) pearlEl.style.display = 'block';
+            } else {
+                renderQuiz();
+            }
+
+            updateStats();
         }
 
         function toggleStar(questionId) {
