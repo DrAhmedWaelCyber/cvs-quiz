@@ -128,16 +128,25 @@
     }
 
     .avatar-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #7c3aed, #0f172a);
-      border: 1px solid rgba(167, 139, 250, 0.3);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #e5b842;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.6rem;
-      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+      padding: 2px;
+      box-shadow: 0 4px 15px rgba(229, 184, 66, 0.3);
+      flex-shrink: 0;
+    }
+
+    .avatar-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+      display: block;
     }
 
     .title-area h1 {
@@ -767,13 +776,13 @@
     <!-- Branding & Author Header -->
     <header class="branding-bar">
       <div class="author-badge-group">
-        <div class="avatar-icon">🦠</div>
+        <div class="avatar-icon"><img src="assets/al_azhar_logo.png" alt="شعار كلية الطب جامعة الأزهر"></div>
         <div class="title-area">
           <h1>
             <span>Microbiology CVS</span>
-            <span class="author-tag">Department Archive • د. Ahmed Wael</span>
+            <span class="author-tag">Department Archive • Ahmed Wael</span>
           </h1>
-          <p>بنك أسئلة الكائنات الدقيقة لجهاز الدوران • إعداد: د. Ahmed Wael</p>
+          <p>بنك أسئلة الكائنات الدقيقة لجهاز الدوران • إعداد وتطوير: Ahmed Wael (طالب بكلية الطب - جامعة الأزهر)</p>
         </div>
       </div>
 

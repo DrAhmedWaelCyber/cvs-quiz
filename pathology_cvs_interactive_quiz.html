@@ -94,16 +94,25 @@
     }
 
     .avatar-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #0284c7, #0f172a);
-      border: 1.5px solid rgba(56, 189, 248, 0.4);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #e5b842;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.6rem;
-      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+      padding: 2px;
+      box-shadow: 0 4px 15px rgba(229, 184, 66, 0.3);
+      flex-shrink: 0;
+    }
+
+    .avatar-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+      display: block;
     }
 
     .title-area h1 {
@@ -754,16 +763,17 @@
     <!-- Top Branding Bar -->
     <header class="branding-bar">
       <div class="author-badge-group">
-        <div class="avatar-icon">🔬</div>
+        <div class="avatar-icon"><img src="assets/al_azhar_logo.png" alt="شعار كلية الطب جامعة الأزهر"></div>
         <div class="title-area">
           <h1>CVS Pathology Master Bank</h1>
           <div class="author-signature">
-            <span>إعداد وتجميع: Ahmed Wael</span>
+            <span>إعداد وتطوير: Ahmed Wael (طالب بكلية الطب - جامعة الأزهر)</span>
             <span class="tag">Pathology CVS Module 2026</span>
           </div>
         </div>
       </div>
       <div class="top-actions">
+        <a href="index.html" class="audio-toggle-btn" style="text-decoration: none;">🏠 بوابة الموديول</a>
         <button class="audio-toggle-btn" id="audioToggleBtn">
           🔊 المؤثرات: تفعيل
         </button>

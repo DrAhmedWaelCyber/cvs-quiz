@@ -9,25 +9,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0a1020;
-            --bg-secondary: #101932;
-            --bg-card: #152244;
-            --bg-card-hover: #1c2e5a;
-            --border-color: #223668;
+            --bg-primary: #091220;
+            --bg-secondary: #0e1b2e;
+            --bg-card: #14243b;
+            --bg-card-hover: #1b2f4c;
+            --border-color: #263d60;
+            --border-gold: rgba(229, 184, 66, 0.4);
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
             --azhar-green: #059669;
             --azhar-green-light: #10b981;
-            --gold: #d97706;
-            --gold-light: #f59e0b;
+            --gold: #e5b842;
+            --gold-light: #f7d377;
+            --gold-dark: #b8831b;
+            --gold-gradient: linear-gradient(135deg, #f7d377 0%, #e5b842 50%, #b8831b 100%);
             --crimson: #ef4444;
             --crimson-bg: rgba(239, 68, 68, 0.12);
             --correct-bg: rgba(16, 185, 129, 0.12);
             --font-ar: 'Cairo', system-ui, sans-serif;
             --font-en: 'Plus Jakarta Sans', system-ui, sans-serif;
-            --shadow-md: 0 4px 14px rgba(0,0,0,0.35);
-            --shadow-lg: 0 10px 30px rgba(0,0,0,0.5);
+            --shadow-md: 0 4px 14px rgba(0,0,0,0.45);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.65);
+            --shadow-gold: 0 4px 20px rgba(229, 184, 66, 0.25);
         }
 
         * {
@@ -77,17 +81,26 @@
             gap: 14px;
         }
 
-        .emblem-box {
-            width: 48px;
-            height: 48px;
-            background: radial-gradient(circle, var(--azhar-green) 0%, #064e3b 100%);
-            border: 1.5px solid var(--gold);
-            border-radius: 12px;
+        .faculty-logo-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ffffff;
+            padding: 2px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 14px rgba(229, 184, 66, 0.3);
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 0 12px rgba(217, 119, 6, 0.25);
+        }
+
+        .faculty-logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+            display: block;
         }
 
         .faculty-titles h2 {
@@ -103,7 +116,7 @@
         }
 
         .author-badge {
-            background: rgba(217, 119, 6, 0.1);
+            background: rgba(229, 184, 66, 0.1);
             border: 1px solid var(--gold);
             border-radius: 30px;
             padding: 6px 16px;
@@ -112,7 +125,7 @@
             gap: 8px;
             font-size: 0.9rem;
             font-weight: 700;
-            color: #fde68a;
+            color: var(--gold-light);
         }
 
         .author-badge span.name {
@@ -173,13 +186,16 @@
         }
 
         .btn-gold {
-            background: linear-gradient(135deg, var(--gold) 0%, #b45309 100%);
-            color: #ffffff;
+            background: var(--gold-gradient);
+            color: #091220;
+            font-weight: 700;
             border: none;
+            box-shadow: 0 2px 10px rgba(229, 184, 66, 0.3);
         }
 
         .btn-gold:hover {
-            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+            box-shadow: 0 4px 15px rgba(229, 184, 66, 0.5);
+            transform: translateY(-1px);
         }
 
         /* Stats Bar */
@@ -686,7 +702,9 @@
         <div class="header-container">
             <div class="faculty-brand">
                 <div class="faculty-meta">
-                    <div class="emblem-box">🫀</div>
+                    <div class="faculty-logo-circle">
+                        <img src="assets/al_azhar_logo.png" alt="شعار جامعة الأزهر">
+                    </div>
                     <div class="faculty-titles">
                         <h2>جامعة الأزهر - كلية الطب (بنين) بالقاهرة</h2>
                         <p>قسم الفسيولوجيا الطبية (Medical Physiology Department) • CVS Module</p>

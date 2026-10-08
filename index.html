@@ -9,26 +9,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Amiri:wght@700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090e1c;
-      --surface: #10182b;
-      --surface-card: #15223c;
-      --surface-card-hover: #1c2e52;
-      --border: #233558;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
+      /* Granite & Gold Palette derived from the Faculty Entrance */
+      --bg-granite-deep: #091220;
+      --bg-granite: #0e1b2e;
+      --bg-granite-tile: #14243b;
+      --bg-granite-hover: #1b2f4c;
+      --border-tile: #263d60;
+      --border-gold: rgba(229, 184, 66, 0.4);
+      --gold-primary: #e5b842;
+      --gold-light: #f7d377;
+      --gold-dark: #b8831b;
+      --gold-gradient: linear-gradient(135deg, #f7d377 0%, #e5b842 50%, #b8831b 100%);
+      --gold-text-gradient: linear-gradient(180deg, #fff2cc 0%, #f5cb5c 50%, #b8831b 100%);
+      --text-main: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
       --azhar-green: #059669;
       --azhar-green-light: #10b981;
-      --gold: #d97706;
-      --gold-light: #f59e0b;
-      --accent-physio: #f43f5e;
-      --accent-pharma: #0ea5e9;
-      --accent-anat: #8b5cf6;
-      --accent-path: #ec4899;
-      --accent-histo: #10b981;
-      --accent-micro: #f59e0b;
       --radius-lg: 20px;
       --radius-md: 14px;
-      --shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6);
+      --shadow-tile: 0 15px 35px -8px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.04);
+      --shadow-gold: 0 4px 20px rgba(229, 184, 66, 0.25);
     }
 
     * {
@@ -40,156 +41,204 @@
     }
 
     body {
-      background-color: var(--bg);
+      background-color: var(--bg-granite-deep);
       background-image: 
-        radial-gradient(at 10% 10%, rgba(5, 150, 105, 0.12) 0px, transparent 45%),
-        radial-gradient(at 90% 15%, rgba(14, 165, 233, 0.12) 0px, transparent 45%),
-        radial-gradient(at 50% 90%, rgba(244, 63, 94, 0.10) 0px, transparent 55%);
-      color: var(--text);
+        radial-gradient(circle at 50% 0%, rgba(20, 36, 59, 0.9) 0%, transparent 75%),
+        linear-gradient(180deg, #091220 0%, #0d1726 100%);
+      color: var(--text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 34px 20px 50px;
+      padding: 26px 20px 60px;
       line-height: 1.6;
     }
 
     .hub-container {
       width: 100%;
-      max-width: 1050px;
+      max-width: 1100px;
       display: flex;
       flex-direction: column;
       gap: 26px;
     }
 
-    /* Faculty Header */
-    .faculty-header {
-      background: linear-gradient(180deg, #0d1527 0%, var(--surface) 100%);
-      border: 1px solid var(--border);
+    /* Faculty Gate Hero Card */
+    .hero-gate-card {
+      background: var(--bg-granite);
+      border: 1.5px solid var(--border-tile);
       border-radius: var(--radius-lg);
-      padding: 28px 26px;
-      box-shadow: var(--shadow);
-      position: relative;
+      box-shadow: var(--shadow-tile);
       overflow: hidden;
+      position: relative;
     }
 
-    .faculty-header::before {
+    .hero-gate-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--azhar-green), var(--gold-light), var(--accent-pharma), var(--accent-physio));
+      background: var(--gold-gradient);
+      z-index: 2;
     }
 
-    .top-meta {
+    .gate-banner-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      align-items: stretch;
+    }
+
+    .gate-photo-wrapper {
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+      background: #000;
+    }
+
+    .gate-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .gate-photo-wrapper:hover .gate-photo {
+      transform: scale(1.03);
+    }
+
+    .gate-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to left, var(--bg-granite) 0%, transparent 60%),
+                  linear-gradient(to top, rgba(9, 18, 32, 0.8) 0%, transparent 50%);
+    }
+
+    .gate-content {
+      padding: 30px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .gate-brand-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 14px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-tile);
+      padding-bottom: 14px;
     }
 
-    .faculty-seal {
+    .logo-seal-group {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
-    .emblem-box {
-      width: 50px;
-      height: 50px;
-      background: radial-gradient(circle, var(--azhar-green) 0%, #064e3b 100%);
-      border: 1.5px solid var(--gold);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
+    .faculty-logo-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #ffffff;
+      padding: 2px;
+      border: 2px solid var(--gold-primary);
+      box-shadow: var(--shadow-gold);
+      flex-shrink: 0;
     }
 
-    .faculty-name-ar {
+    .faculty-logo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .faculty-title-text h2 {
       font-size: 1.15rem;
       font-weight: 800;
       color: #ffffff;
     }
 
-    .faculty-name-sub {
-      font-size: 0.85rem;
+    .faculty-title-text p {
+      font-size: 0.84rem;
       color: var(--gold-light);
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .author-badge {
-      background: rgba(217, 119, 6, 0.12);
-      border: 1px solid var(--gold);
+      background: rgba(229, 184, 66, 0.12);
+      border: 1px solid var(--gold-primary);
       border-radius: 30px;
-      padding: 6px 16px;
+      padding: 5px 16px;
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #fef08a;
+      color: var(--gold-light);
     }
 
     .author-badge .author-name {
       color: #ffffff;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      letter-spacing: 0.3px;
     }
 
-    .hero-center {
-      text-align: center;
-      max-width: 820px;
-      margin: 0 auto;
+    .monumental-heading {
+      margin-top: 4px;
     }
 
-    .hero-title {
-      font-size: 2.15rem;
+    .monumental-heading h1 {
+      font-size: 2.1rem;
       font-weight: 900;
-      color: #ffffff;
-      margin-bottom: 8px;
-      letter-spacing: -0.5px;
+      color: var(--gold-light);
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+      letter-spacing: -0.3px;
+      line-height: 1.25;
     }
 
-    .hero-subtitle {
-      font-size: 1.02rem;
-      color: var(--text-muted);
-      line-height: 1.65;
+    .monumental-heading p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      line-height: 1.6;
     }
 
-    .stats-strip {
+    .gate-stats-strip {
       display: flex;
-      align-items: center;
-      justify-content: center;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
+      gap: 10px;
+      margin-top: 6px;
     }
 
     .stat-pill {
-      background: #0b1222;
-      border: 1px solid #1f2f4e;
-      padding: 6px 16px;
-      border-radius: 30px;
-      font-size: 0.88rem;
+      background: var(--bg-granite-tile);
+      border: 1px solid var(--border-tile);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
       font-weight: 700;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .stat-pill.total { color: var(--gold-light); border-color: rgba(217, 119, 6, 0.4); }
-    .stat-pill.subjects { color: var(--azhar-green-light); border-color: rgba(16, 185, 129, 0.3); }
-    .stat-pill.format { color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
+    .stat-pill.total {
+      color: var(--gold-light);
+      border-color: var(--border-gold);
+    }
 
-    /* Section Headers */
+    .stat-pill.verified {
+      color: var(--azhar-green-light);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    /* Section Headings */
     .section-title {
       font-size: 1.25rem;
       font-weight: 800;
@@ -202,15 +251,15 @@
 
     .section-title span.tag {
       font-size: 0.78rem;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--border);
+      background: var(--bg-granite-tile);
+      border: 1px solid var(--border-tile);
       padding: 2px 10px;
       border-radius: 20px;
-      color: var(--text-muted);
-      font-weight: 600;
+      color: var(--gold-light);
+      font-weight: 700;
     }
 
-    /* Flagships Grid (Physiology & Pharmacology) */
+    /* Flagship Cards Grid */
     .flagships-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -218,6 +267,8 @@
     }
 
     .flagship-card {
+      background: var(--bg-granite-tile);
+      border: 1.5px solid var(--border-tile);
       border-radius: var(--radius-lg);
       padding: 26px;
       text-decoration: none;
@@ -228,17 +279,7 @@
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .flagship-card.physio {
-      background: linear-gradient(135deg, rgba(244, 63, 94, 0.12) 0%, rgba(16, 24, 43, 0.95) 100%);
-      border: 1.5px solid rgba(244, 63, 94, 0.4);
-    }
-
-    .flagship-card.pharma {
-      background: linear-gradient(135deg, rgba(14, 165, 233, 0.12) 0%, rgba(16, 24, 43, 0.95) 100%);
-      border: 1.5px solid rgba(14, 165, 233, 0.4);
+      box-shadow: var(--shadow-tile);
     }
 
     .flagship-card::before {
@@ -250,16 +291,20 @@
       height: 3px;
     }
 
-    .flagship-card.physio::before { background: linear-gradient(90deg, #e11d48, #fb7185); }
-    .flagship-card.pharma::before { background: linear-gradient(90deg, #0284c7, #38bdf8); }
-
-    .flagship-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.7);
+    .flagship-card.physio::before {
+      background: linear-gradient(90deg, #e11d48, #fb7185, var(--gold-primary));
     }
 
-    .flagship-card.physio:hover { border-color: rgba(244, 63, 94, 0.8); }
-    .flagship-card.pharma:hover { border-color: rgba(14, 165, 233, 0.8); }
+    .flagship-card.pharma::before {
+      background: linear-gradient(90deg, #0284c7, #38bdf8, var(--gold-primary));
+    }
+
+    .flagship-card:hover {
+      background: var(--bg-granite-hover);
+      border-color: var(--gold-primary);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.7), var(--shadow-gold);
+    }
 
     .flagship-header {
       display: flex;
@@ -273,28 +318,27 @@
       font-weight: 800;
       padding: 4px 12px;
       border-radius: 20px;
+      border: 1px solid var(--border-tile);
     }
 
     .flagship-card.physio .flagship-pill {
-      background: rgba(244, 63, 94, 0.2);
+      background: rgba(225, 29, 72, 0.15);
       color: #fda4af;
-      border: 1px solid rgba(244, 63, 94, 0.4);
+      border-color: rgba(225, 29, 72, 0.4);
     }
 
     .flagship-card.pharma .flagship-pill {
-      background: rgba(14, 165, 233, 0.2);
+      background: rgba(2, 132, 199, 0.15);
       color: #7dd3fc;
-      border: 1px solid rgba(14, 165, 233, 0.4);
+      border-color: rgba(2, 132, 199, 0.4);
     }
 
     .flagship-count {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 800;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+      color: var(--gold-light);
     }
-
-    .flagship-card.physio .flagship-count { color: #f43f5e; }
-    .flagship-card.pharma .flagship-count { color: #38bdf8; }
 
     .flagship-title-box h3 {
       font-size: 1.45rem;
@@ -305,7 +349,7 @@
 
     .flagship-title-box p {
       font-size: 0.92rem;
-      color: var(--text-muted);
+      color: var(--text-secondary);
       line-height: 1.55;
     }
 
@@ -316,8 +360,8 @@
     }
 
     .sub-tag {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-tile);
       font-size: 0.75rem;
       padding: 3px 8px;
       border-radius: 6px;
@@ -327,16 +371,14 @@
     .flagship-cta {
       margin-top: auto;
       padding-top: 14px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid var(--border-tile);
       display: flex;
       align-items: center;
       justify-content: space-between;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
+      color: var(--gold-light);
     }
-
-    .flagship-card.physio .flagship-cta { color: #fb7185; }
-    .flagship-card.pharma .flagship-cta { color: #38bdf8; }
 
     /* Other Subjects Grid */
     .subjects-grid {
@@ -346,8 +388,8 @@
     }
 
     .subject-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: var(--bg-granite-tile);
+      border: 1px solid var(--border-tile);
       border-radius: var(--radius-md);
       padding: 20px;
       text-decoration: none;
@@ -356,12 +398,12 @@
       flex-direction: column;
       gap: 12px;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
     .subject-card:hover {
-      background: var(--surface-card-hover);
-      border-color: #3b507d;
+      background: var(--bg-granite-hover);
+      border-color: var(--gold-primary);
       transform: translateY(-2px);
     }
 
@@ -381,8 +423,8 @@
       width: 38px;
       height: 38px;
       border-radius: 10px;
-      background: #0d1527;
-      border: 1px solid var(--border);
+      background: var(--bg-granite);
+      border: 1px solid var(--border-tile);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -402,13 +444,13 @@
       padding: 3px 10px;
       border-radius: 20px;
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      color: #94a3b8;
+      border: 1px solid var(--border-tile);
+      color: var(--gold-light);
     }
 
     .subject-desc {
       font-size: 0.85rem;
-      color: var(--text-muted);
+      color: var(--text-secondary);
       line-height: 1.5;
     }
 
@@ -421,14 +463,14 @@
       font-weight: 700;
       color: var(--gold-light);
       padding-top: 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid var(--border-tile);
     }
 
     /* Footer */
     .hub-footer {
       text-align: center;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      border-top: 1px solid var(--border-tile);
       color: var(--text-muted);
       font-size: 0.88rem;
     }
@@ -437,11 +479,23 @@
       color: #ffffff;
     }
 
-    /* Responsive */
-    @media (max-width: 820px) {
-      .flagships-grid { grid-template-columns: 1fr; }
-      .hero-title { font-size: 1.65rem; }
-      .top-meta { flex-direction: column; align-items: flex-start; }
+    @media (max-width: 900px) {
+      .gate-banner-grid {
+        grid-template-columns: 1fr;
+      }
+      .gate-photo-wrapper {
+        min-height: 220px;
+        max-height: 260px;
+      }
+      .flagships-grid {
+        grid-template-columns: 1fr;
+      }
+      .monumental-heading h1 {
+        font-size: 1.7rem;
+      }
+      .gate-content {
+        padding: 24px 20px;
+      }
     }
   </style>
 </head>
@@ -449,40 +503,54 @@
 
   <div class="hub-container">
 
-    <!-- Faculty & University Header -->
-    <header class="faculty-header">
-      <div class="top-meta">
-        <div class="faculty-seal">
-          <div class="emblem-box">🫀</div>
-          <div>
-            <div class="faculty-name-ar">جامعة الأزهر - كلية الطب (بنين) بالقاهرة</div>
-            <div class="faculty-name-sub">قسم التعليم الطبي المستمر • موديول القلب والأوعية الدموية (CVS)</div>
-          </div>
+    <!-- Faculty Gate & University Hero Card -->
+    <header class="hero-gate-card">
+      <div class="gate-banner-grid">
+        <!-- Faculty Gate Real Photograph -->
+        <div class="gate-photo-wrapper">
+          <img src="assets/al_azhar_faculty_gate.jpg" alt="بوابة كلية الطب بنين بالقاهرة - جامعة الأزهر" class="gate-photo">
+          <div class="gate-photo-overlay"></div>
         </div>
-        <div class="author-badge">
-          <span>إعداد وتطوير:</span>
-          <span class="author-name">Ahmed Wael</span>
-          <span>(طالب بطب الأزهر)</span>
-        </div>
-      </div>
 
-      <div class="hero-center">
-        <h1 class="hero-title">المنصة الطبية التفاعلية لبنك أسئلة الـ CVS 🫀</h1>
-        <p class="hero-subtitle">
-          بنك أسئلة متكامل وموثق يضم كافة أسئلة الأقسام وامتحانات المنهج الجديد والأرشيف، مدعماً بالحلول النموذجية المعتمدة ولآلئ الشرح الإكلينيكي التفاعلي بدون أي اختصار.
-        </p>
-        <div class="stats-strip">
-          <span class="stat-pill total">⚡️ 808 أسئلة تفاعلية متكاملة</span>
-          <span class="stat-pill subjects">📚 6 مواد طبية أساسية</span>
-          <span class="stat-pill format">💎 لآلئ الشرح السريري الفوري</span>
+        <!-- Content & Branding -->
+        <div class="gate-content">
+          <div class="gate-brand-top">
+            <div class="logo-seal-group">
+              <div class="faculty-logo-circle">
+                <img src="assets/al_azhar_logo.png" alt="شعار جامعة الأزهر">
+              </div>
+              <div class="faculty-title-text">
+                <h2>جامعة الأزهر - كلية الطب (بنين) بالقاهرة</h2>
+                <p>كلية معتمدة • Al-Azhar Faculty of Medicine</p>
+              </div>
+            </div>
+            <div class="author-badge">
+              <span>إعداد وتطوير:</span>
+              <span class="author-name">Ahmed Wael</span>
+              <span>(طالب بطب الأزهر)</span>
+            </div>
+          </div>
+
+          <div class="monumental-heading">
+            <h1>بنك الأسئلة التفاعلي المعتمد لموديول الـ CVS 🫀</h1>
+            <p>
+              المنصة الطبية الشاملة المخصصة لطلاب كلية الطب، تجمع كافة أسئلة الموديول (808 أسئلة تفاعلية) مع الحلول النموذجية المعتمدة والتفسير العلمي الفوري لكل سؤال.
+            </p>
+          </div>
+
+          <div class="gate-stats-strip">
+            <span class="stat-pill total">⚡️ 808 أسئلة تفاعلية</span>
+            <span class="stat-pill verified">✅ حلول وتفسيرات علمية كاملة</span>
+            <span class="stat-pill">📚 6 مواد طبية أساسية</span>
+          </div>
         </div>
       </div>
     </header>
 
-    <!-- Top Flagships: Physiology & Pharmacology -->
+    <!-- Flagship Modules: Physiology & Pharmacology -->
     <section>
       <div class="section-title">
-        <span>⭐ المواد الأكبر والأهم في الموديول (Flagship Core Modules)</span>
+        <span>⭐ المواد الأكبر والأهم في الموديول (Core Flagship Modules)</span>
         <span class="tag">544 سؤالاً معاً</span>
       </div>
 
@@ -519,7 +587,7 @@
           </div>
           <div class="flagship-title-box">
             <h3>Pharmacology CVS (الفارماكولوجيا)</h3>
-            <p>أضخم بنك فارماكولوجي يجمع امتحان 2026 بأجزائه الأربعة (190 سؤالاً) وأرشيف القسم القديم (100 سؤال) مع لآلئ الفارما الأزهرية وآليات العمل.</p>
+            <p>أضخم بنك فارماكولوجي يجمع امتحان 2026 بأجزائه الأربعة (190 سؤالاً) وأرشيف القسم القديم (100 سؤال) مع لآلئ الفارما وآليات العمل.</p>
           </div>
           <div class="flagship-tags">
             <span class="sub-tag">💊 Antihypertensives</span>
@@ -540,7 +608,7 @@
     <!-- Foundational Preclinical Modules -->
     <section>
       <div class="section-title">
-        <span>📖 باقي مواد الموديول (Foundational Preclinical Modules)</span>
+        <span>📖 باقي مواد الموديول (Preclinical Modules)</span>
         <span class="tag">264 سؤالاً</span>
       </div>
 
