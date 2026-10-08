@@ -9,25 +9,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090d16;
-      --surface: #111827;
-      --surface-card: #162032;
-      --surface-card-hover: #1c2940;
-      --border: #22324d;
-      --border-focus: #38bdf8;
-      --primary: #0284c7;
-      --primary-glow: rgba(2, 132, 199, 0.35);
-      --accent: #38bdf8;
+      /* Authentic Faculty Facade & Signboard Palette (Extracted from acharmed.jpg) */
+      --bg: #132132;
+      --surface: #1a2c40;
+      --surface-card: #22374e;
+      --surface-card-hover: #2c4460;
+      --border: #36506f;
+      --border-focus: #efd57f;
+      --border-gold: rgba(239, 213, 127, 0.45);
+      --gold: #efd57f;
+      --gold-light: #fce494;
+      --primary: #efd57f;
+      --primary-glow: rgba(239, 213, 127, 0.35);
+      --accent: #fce494;
       --success: #10b981;
       --success-glow: rgba(16, 185, 129, 0.25);
       --danger: #ef4444;
       --danger-glow: rgba(239, 68, 68, 0.25);
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
+      --text: #ffffff;
+      --text-muted: #97b0c8;
       --radius-lg: 20px;
       --radius-md: 14px;
       --radius-sm: 8px;
-      --shadow-luxury: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+      --shadow-luxury: 0 16px 36px -12px rgba(10, 18, 28, 0.6), 0 0 1px 1px rgba(255, 255, 255, 0.06);
     }
 
     * {
@@ -40,9 +44,8 @@
     body {
       background-color: var(--bg);
       background-image: 
-        radial-gradient(at 0% 0%, rgba(2, 132, 199, 0.12) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
-        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.8) 0px, transparent 100%);
+        radial-gradient(at 50% 0%, rgba(35, 55, 78, 0.95) 0px, transparent 75%),
+        linear-gradient(180deg, #132132 0%, #1a2c40 100%);
       color: var(--text);
       min-height: 100vh;
       display: flex;
@@ -61,10 +64,8 @@
 
     /* Top Branding Bar */
     .branding-bar {
-      background: rgba(17, 24, 39, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
+      background: var(--surface);
+      border: 1.5px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 22px 28px;
       display: flex;

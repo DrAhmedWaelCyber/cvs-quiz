@@ -9,27 +9,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Amiri:wght@700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Granite & Gold Palette derived from the Faculty Entrance */
-      --bg-granite-deep: #091220;
-      --bg-granite: #0e1b2e;
-      --bg-granite-tile: #14243b;
-      --bg-granite-hover: #1b2f4c;
-      --border-tile: #263d60;
-      --border-gold: rgba(229, 184, 66, 0.4);
-      --gold-primary: #e5b842;
-      --gold-light: #f7d377;
-      --gold-dark: #b8831b;
-      --gold-gradient: linear-gradient(135deg, #f7d377 0%, #e5b842 50%, #b8831b 100%);
-      --gold-text-gradient: linear-gradient(180deg, #fff2cc 0%, #f5cb5c 50%, #b8831b 100%);
-      --text-main: #f8fafc;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
+      /* Authentic Faculty Facade & Signboard Palette (Extracted from acharmed.jpg) */
+      --bg-granite-deep: #132132;        /* Authentic ambient slate navy */
+      --bg-granite: #1a2c40;             /* Faculty signboard base slate */
+      --bg-granite-tile: #22374e;        /* Signboard tile surface */
+      --bg-granite-hover: #2c4460;       /* Signboard highlight slate */
+      --border-tile: #36506f;            /* Sign tile seams & frames */
+      --border-gold: rgba(239, 213, 127, 0.45);
+      --gold-primary: #efd57f;           /* Sampled calligraphy gold */
+      --gold-light: #fce494;             /* Highlight gold */
+      --gold-dark: #c59b27;              /* Deep brass gold */
+      --gold-gradient: linear-gradient(135deg, #fce494 0%, #efd57f 50%, #c59b27 100%);
+      --gold-text-gradient: linear-gradient(180deg, #fff7dc 0%, #efd57f 50%, #c59b27 100%);
+      --text-main: #ffffff;
+      --text-secondary: #d5e3f0;         /* Soft ice-slate blue */
+      --text-muted: #97b0c8;             /* Architectural muted grey-blue */
       --azhar-green: #059669;
       --azhar-green-light: #10b981;
       --radius-lg: 20px;
       --radius-md: 14px;
-      --shadow-tile: 0 15px 35px -8px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.04);
-      --shadow-gold: 0 4px 20px rgba(229, 184, 66, 0.25);
+      --shadow-tile: 0 14px 35px -8px rgba(10, 18, 28, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+      --shadow-gold: 0 4px 20px rgba(239, 213, 127, 0.3);
     }
 
     * {
@@ -43,8 +43,8 @@
     body {
       background-color: var(--bg-granite-deep);
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(20, 36, 59, 0.9) 0%, transparent 75%),
-        linear-gradient(180deg, #091220 0%, #0d1726 100%);
+        radial-gradient(circle at 50% 0%, rgba(35, 55, 78, 0.95) 0%, transparent 80%),
+        linear-gradient(180deg, #132132 0%, #1a2c40 100%);
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
@@ -113,7 +113,7 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(to left, var(--bg-granite) 0%, transparent 60%),
-                  linear-gradient(to top, rgba(9, 18, 32, 0.8) 0%, transparent 50%);
+                  linear-gradient(to top, rgba(19, 33, 50, 0.85) 0%, transparent 50%);
     }
 
     .gate-content {
