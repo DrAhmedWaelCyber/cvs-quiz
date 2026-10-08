@@ -1,0 +1,2439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CVS Anatomy Question Bank | إعداد: Ahmed Wael</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --surface: #111827;
+      --surface-card: #162032;
+      --surface-card-hover: #1c2940;
+      --border: #22324d;
+      --border-focus: #38bdf8;
+      --primary: #0284c7;
+      --primary-glow: rgba(2, 132, 199, 0.35);
+      --accent: #38bdf8;
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.25);
+      --danger: #ef4444;
+      --danger-glow: rgba(239, 68, 68, 0.25);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+      --shadow-luxury: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', 'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(2, 132, 199, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.8) 0px, transparent 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Top Branding Bar */
+    .branding-bar {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-luxury);
+      flex-wrap: wrap;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .branding-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #38bdf8, #10b981, transparent);
+    }
+
+    .author-badge-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0284c7, #0f172a);
+      border: 1.5px solid rgba(56, 189, 248, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+    }
+
+    .title-area h1 {
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .title-area .author-signature {
+      font-size: 0.9rem;
+      color: #38bdf8;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .author-signature .tag {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: #7dd3fc;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .audio-toggle-btn {
+      background: #162032;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .audio-toggle-btn:hover {
+      border-color: var(--accent);
+      color: #f8fafc;
+    }
+
+    /* Topic Filter Bar (Custom Dropdown + Selector) */
+    .filter-wrapper {
+      background: rgba(22, 32, 50, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: var(--shadow-luxury);
+    }
+
+    .filter-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topic-select {
+      background: #0d1524;
+      border: 1.5px solid #2a3c5a;
+      color: #f1f5f9;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      outline: none;
+      cursor: pointer;
+      min-width: 280px;
+      transition: all 0.2s;
+      direction: rtl;
+    }
+
+    .topic-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .topic-select option {
+      background: #111827;
+      color: #f8fafc;
+      padding: 8px;
+    }
+
+    /* Live Progress Bar */
+    .progress-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .score-indicators {
+      display: flex;
+      gap: 8px;
+    }
+
+    .badge-stat {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-stat.correct {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-stat.wrong {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      height: 8px;
+      background: #090d16;
+      border-radius: 9999px;
+      overflow: hidden;
+      border: 1px solid #1e2d44;
+    }
+
+    .progress-bar-thumb {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0284c7, #38bdf8, #10b981);
+      border-radius: 9999px;
+      transition: width 0.35s ease;
+    }
+
+    /* Question Main Card */
+    .question-viewport {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-luxury);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+    }
+
+    .question-headline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      padding-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .q-number-pill {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 5px 14px;
+      border-radius: 8px;
+    }
+
+    .q-category-tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .question-body {
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.6;
+      color: #f8fafc;
+      direction: ltr;
+      text-align: left;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Options Stack */
+    .options-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .option-row {
+      background: #0d1524;
+      border: 1.5px solid #1e2c42;
+      color: #e2e8f0;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 1.02rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 100%;
+      outline: none;
+      user-select: none;
+    }
+
+    .option-row:hover:not(:disabled) {
+      background: #141f33;
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.15);
+    }
+
+    .option-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: #162238;
+      border: 1px solid #273956;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #94a3b8;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .option-text {
+      flex: 1;
+      line-height: 1.45;
+    }
+
+    .option-marker {
+      margin-left: auto;
+      font-size: 1.25rem;
+      display: none;
+      flex-shrink: 0;
+    }
+
+    /* Option States */
+    .option-row.is-correct {
+      background: rgba(16, 185, 129, 0.18) !important;
+      border-color: #10b981 !important;
+      color: #a7f3d0 !important;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    }
+
+    .option-row.is-correct .option-letter {
+      background: #10b981;
+      color: #064e3b;
+      border-color: #10b981;
+    }
+
+    .option-row.is-correct .option-marker {
+      display: inline-block;
+      color: #34d399;
+    }
+
+    .option-row.is-wrong {
+      background: rgba(239, 68, 68, 0.18) !important;
+      border-color: #ef4444 !important;
+      color: #fca5a5 !important;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+    }
+
+    .option-row.is-wrong .option-letter {
+      background: #ef4444;
+      color: #450a0a;
+      border-color: #ef4444;
+    }
+
+    .option-row.is-wrong .option-marker {
+      display: inline-block;
+      color: #f87171;
+    }
+
+    .option-row:disabled {
+      cursor: default;
+    }
+
+    /* Explanation & Pearl Box */
+    .pearl-box {
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      display: none;
+      animation: slideUp 0.3s ease;
+      direction: rtl;
+      text-align: right;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pearl-box.is-correct {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #a7f3d0;
+    }
+
+    .pearl-box.is-wrong {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #fca5a5;
+    }
+
+    .pearl-header {
+      font-weight: 800;
+      font-size: 1.12rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .pearl-text {
+      font-size: 0.98rem;
+      color: #e2e8f0;
+      line-height: 1.7;
+    }
+
+    .pearl-text strong {
+      color: #38bdf8;
+    }
+
+    /* Bottom Nav Bar */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .nav-btn {
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.96rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .nav-btn-next {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: white;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+    }
+
+    .nav-btn-next:hover:not(:disabled) {
+      background: linear-gradient(135deg, #0369a1, #075985);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn-prev {
+      background: #111a2b;
+      color: var(--text-muted);
+      border: 1px solid #203048;
+    }
+
+    .nav-btn-prev:hover:not(:disabled) {
+      background: #19273f;
+      color: white;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .nav-btn-map {
+      background: #0d1524;
+      color: #94a3b8;
+      border: 1px solid #203048;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-btn-map:hover {
+      border-color: #38bdf8;
+      color: #f8fafc;
+    }
+
+    /* Quick Jump Grid Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .modal-backdrop.is-open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #111827;
+      border: 1px solid #273852;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 720px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-luxury);
+      animation: modalZoom 0.25s ease;
+    }
+
+    @keyframes modalZoom {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-top {
+      padding: 20px 26px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-top h3 {
+      font-size: 1.2rem;
+      color: #38bdf8;
+      font-weight: 800;
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .modal-grid-body {
+      padding: 24px;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+      gap: 10px;
+      direction: ltr;
+    }
+
+    .grid-cell {
+      height: 50px;
+      border-radius: 10px;
+      background: #0d1524;
+      border: 1px solid #203048;
+      color: var(--text);
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .grid-cell:hover {
+      border-color: #38bdf8;
+      transform: scale(1.06);
+    }
+
+    .grid-cell.answered-ok {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: #10b981;
+      color: #34d399;
+    }
+
+    .grid-cell.answered-err {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: #ef4444;
+      color: #f87171;
+    }
+
+    .grid-cell.is-active {
+      outline: 2px solid #38bdf8;
+      outline-offset: 2px;
+    }
+
+    /* Results Screen */
+    .summary-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 44px 30px;
+      text-align: center;
+      display: none;
+      box-shadow: var(--shadow-luxury);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .score-meter {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: conic-gradient(#10b981 var(--perc, 0%), #1e2c42 var(--perc, 0%));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px auto;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+    }
+
+    .score-meter-inner {
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      background: #111827;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+
+    .score-meter-inner .val {
+      font-size: 2.2rem;
+      color: #f8fafc;
+      font-weight: 900;
+    }
+
+    .score-details-row {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin: 26px 0;
+      flex-wrap: wrap;
+    }
+
+    .score-box {
+      background: #0d1524;
+      border: 1px solid #203048;
+      border-radius: 14px;
+      padding: 16px 26px;
+      min-width: 150px;
+    }
+
+    .score-box .num {
+      font-size: 1.8rem;
+      font-weight: 900;
+    }
+
+    .score-box .label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      padding: 12px 0 24px 0;
+      margin-top: auto;
+    }
+
+    footer span {
+      color: #38bdf8;
+      font-weight: 700;
+    }
+
+    /* Responsive */
+    @media (max-width: 680px) {
+      body { padding: 12px 10px; }
+      .question-viewport { padding: 22px 16px; }
+      .question-body { font-size: 1.1rem; }
+      .option-row { padding: 14px 16px; font-size: 0.96rem; }
+      .branding-bar { padding: 16px; }
+      .topic-select { min-width: 100%; }
+      .title-area h1 { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Top Signature / Branding Bar -->
+    <header class="branding-bar">
+      <div class="author-badge-group">
+        <div class="avatar-icon">🫀</div>
+        <div class="title-area">
+          <h1>CVS Anatomy Master Bank</h1>
+          <div class="author-signature">
+            <span>إعداد وتجميع: Ahmed Wael</span>
+            <span class="tag">CVS Module 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="audio-toggle-btn" id="audioToggleBtn">
+          🔊 المؤثرات: تفعيل
+        </button>
+      </div>
+    </header>
+
+    <!-- Topic Selector & Custom Index Filter -->
+    <section class="filter-wrapper">
+      <div class="filter-top">
+        <div class="filter-label">
+          📚 اختـر المـوضـوع للـمـذاكـرة:
+        </div>
+        <select class="topic-select" id="topicSelect">
+          <option value="all">🌟 جميع الموضوعات (92 سؤال بالكامل)</option>
+          <option value="1">1. Pericardium (7 أسئلة)</option>
+          <option value="2">2. External features of the heart (9 أسئلة)</option>
+          <option value="3">3. Internal features of the heart (8 أسئلة)</option>
+          <option value="4">4. Blood and nerve supply of the heart (9 أسئلة)</option>
+          <option value="5">5. Development of the heart (7 أسئلة)</option>
+          <option value="6">6. Blood vessels of the thorax (18 سؤال)</option>
+          <option value="7">7. Blood vessels of the head and neck (10 أسئلة)</option>
+          <option value="8">8. Blood vessels of the abdomen & limbs (15 سؤال)</option>
+          <option value="9">9. Vascular development (6 أسئلة)</option>
+          <option value="10">10. Foetal circulation (3 أسئلة)</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Progress Card -->
+    <section class="progress-card">
+      <div class="progress-meta">
+        <span id="topicProgressLabel">التقدم: 1 من 92</span>
+        <div class="score-indicators">
+          <span class="badge-stat correct" id="badgeCorrectCount">✅ 0 صح</span>
+          <span class="badge-stat wrong" id="badgeWrongCount">❌ 0 خطأ</span>
+        </div>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-thumb" id="progressThumb"></div>
+      </div>
+    </section>
+
+    <!-- Active Question Viewport -->
+    <main class="question-viewport" id="questionBox">
+      <div class="question-headline">
+        <span class="q-number-pill" id="questionPill">سؤال 1</span>
+        <span class="q-category-tag" id="categoryTag">الموضوع: Pericardium</span>
+      </div>
+
+      <div class="question-body" id="questionText">Loading question...</div>
+
+      <div class="options-stack" id="optionsContainer">
+        <!-- Rendered options -->
+      </div>
+
+      <!-- Human-Crafted High-Yield Pearl -->
+      <div class="pearl-box" id="pearlBox">
+        <div class="pearl-header" id="pearlHeader"></div>
+        <div class="pearl-text" id="pearlText"></div>
+      </div>
+
+      <!-- Navigation & Controls -->
+      <div class="nav-bar">
+        <button class="nav-btn nav-btn-prev" id="prevBtn" disabled>
+          ➔ السابق
+        </button>
+
+        <button class="nav-btn-map" id="openMapBtn">
+          📋 خريطة أسئلة هذا القسم
+        </button>
+
+        <button class="nav-btn nav-btn-next" id="nextBtn">
+          التالي 🠜
+        </button>
+      </div>
+    </main>
+
+    <!-- Summary / Results Screen -->
+    <div class="summary-card" id="summaryCard">
+      <h2 style="font-size: 1.8rem; margin-bottom: 6px; color: #38bdf8;">🏆 عاش يا بطل! أنهيت الأسئلة بنجاح</h2>
+      <p style="color: var(--text-muted); margin-bottom: 24px;" id="summarySubtitle">ملخص أدائك في قسم: جميع الموضوعات</p>
+
+      <div class="score-meter" id="scoreMeter">
+        <div class="score-meter-inner">
+          <span class="val" id="scorePercentText">0%</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">الدرجة الكلية</span>
+        </div>
+      </div>
+
+      <div class="score-details-row">
+        <div class="score-box">
+          <div class="num" style="color: #34d399;" id="summaryCorrect">0</div>
+          <div class="label">إجابات صحيحة</div>
+        </div>
+        <div class="score-box">
+          <div class="num" style="color: #f87171;" id="summaryWrong">0</div>
+          <div class="label">إجابات خاطئة</div>
+        </div>
+        <div class="score-box">
+          <div class="num" style="color: #38bdf8;" id="summaryTotal">0 / 92</div>
+          <div class="label">مجموع الأسئلة</div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 14px; margin-top: 26px; flex-wrap: wrap;">
+        <button class="nav-btn nav-btn-next" id="restartFilteredBtn">
+          🔁 إعادة حل هذا القسم
+        </button>
+        <button class="nav-btn nav-btn-prev" id="reviewAllBtn">
+          🔍 مراجعة الأسئلة
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Jump Modal -->
+    <div class="modal-backdrop" id="mapModal">
+      <div class="modal-box">
+        <div class="modal-top">
+          <h3 id="modalTitle">قائمة أسئلة القسم الحالي</h3>
+          <button class="modal-close-btn" id="closeMapBtn">&times;</button>
+        </div>
+        <div class="modal-grid-body" id="modalGrid">
+          <!-- Cells -->
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      محتوى وأسئلة من إعداد وتنسيق <span>Ahmed Wael</span> • لدفعة الطب البشري 🩺
+    </footer>
+
+  </div>
+
+  <script>
+    // Audio synthesizer using Web Audio API (smooth sound effects)
+    let audioEnabled = true;
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSound(type) {
+      if (!audioEnabled || !audioCtx) return;
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+        if (type === 'correct') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, now); // D5
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.15); // A5
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        } else if (type === 'wrong') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(220, now); // A3
+          osc.frequency.exponentialRampToValueAtTime(146.83, now + 0.2); // D3
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        }
+      } catch (e) {
+        // Audio fallback
+      }
+    }
+
+    // 92 Questions Categorized Across the 10 Topics
+    const fullQuestions = [
+      {
+        id: 1, topicId: "1", topicName: "Pericardium",
+        question: "1. Regarding to the pericardium which of the following is wrong:",
+        options: [
+          { key: "a", text: "Enclose the heart and root of great vessels" },
+          { key: "b", text: "Is pierced by inferior vena cava" },
+          { key: "c", text: "Does not extend down to touch the diaphragm" },
+          { key: "d", text: "Occupies the middle mediastinum" },
+          { key: "e", text: "Is attached to the sternum" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Ahmed Wael's Note:</strong> الغشاء الليفي (Fibrous pericardium) مدمج ومثبت بإحكام في الوتر المركزي للحجاب الحاجز (Central tendon of diaphragm) برباط قوي، فجملة إنه مبيلمسوش دي غلط تماماً."
+      },
+      {
+        id: 2, topicId: "1", topicName: "Pericardium",
+        question: "2. Regarding to the innervation of the fibrous pericardium which of the following is true:",
+        options: [
+          { key: "a", text: "Vagus nerve" },
+          { key: "b", text: "Sympathetic nerve" },
+          { key: "c", text: "Phrenic nerve" },
+          { key: "d", text: "Sub costal nerve" },
+          { key: "e", text: "Supra clavicular nerve" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>High-Yield Pearl:</strong> العصب الحجابي (Phrenic nerve - C3,4,5) هو اللي بينقل الإحساس الجسدي للألم من الـ Fibrous & Parietal pericardium، وعشان كدا ألم التهاب التأمور بيسمع في الكتف (Referred pain to shoulder)."
+      },
+      {
+        id: 3, topicId: "1", topicName: "Pericardium",
+        question: "3. Regarding to the blood supply of the pericardium which of the following is true:",
+        options: [
+          { key: "a", text: "Aorta" },
+          { key: "b", text: "Pulmonary trunk" },
+          { key: "c", text: "Superior vena cava" },
+          { key: "d", text: "Internal mammary" },
+          { key: "e", text: "Inferior vena cava" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Key Point:</strong> التغذية الشريانية الأساسية للتأمور الليفي والجداري جاية من الـ Internal mammary (Internal thoracic) artery عن طريق فرع الـ Pericardiacophrenic artery."
+      },
+      {
+        id: 4, topicId: "1", topicName: "Pericardium",
+        question: "4. Regarding to the apex of the fibrous pericardium, which of the following is wrong:",
+        options: [
+          { key: "a", text: "it pierced by aorta" },
+          { key: "b", text: "it pierced by pulmonary trunk" },
+          { key: "c", text: "it pierced by phrenic nerve" },
+          { key: "d", text: "it pierced by superior vena cava" },
+          { key: "e", text: "it continued with pre-tracheal fascia" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Check carefully:</strong> قمة التأمور بتلتحم مع الأوعية الكبرى ومستمرة مع الـ Pretracheal fascia، بينما الـ Phrenic nerve ماشي على جوانب التأمور ومش بيخترق القمة بتاعته."
+      },
+      {
+        id: 5, topicId: "1", topicName: "Pericardium",
+        question: "5. The only part of surface of the heart uncovered with serous pericardium:",
+        options: [
+          { key: "a", text: "Superior margin of both atria" },
+          { key: "b", text: "Superior margin of left atrium" },
+          { key: "c", text: "Superior margin of right atrium" },
+          { key: "d", text: "Right auricle" },
+          { key: "e", text: "Left auricle" }
+        ],
+        answer: "b",
+        pearl: "📌 <strong>Exam Classic:</strong> الحافة العلوية للأذين الأيسر (Superior margin of left atrium) هي المنطقة الفاصلة بين الـ Transverse sinus فوق والـ Oblique sinus تحت، وهي المكان الوحيد المكشوف من غير غطاء مصلي."
+      },
+      {
+        id: 6, topicId: "1", topicName: "Pericardium",
+        question: "6. The transverse sinus is separated from the oblique sinus of pericardium by:",
+        options: [
+          { key: "a", text: "Left pulmonary artery" },
+          { key: "b", text: "Right pulmonary artery" },
+          { key: "c", text: "Left bronchus" },
+          { key: "d", text: "Upper margin of left atrium" },
+          { key: "e", text: "Upper margin of right atrium" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Anatomy Fact:</strong> الجيب المستعرض (Transverse sinus) مفصول عن الجيب المائل (Oblique sinus) بانعكاس التأمور المصلي عند الحافة العلوية للأذين الأيسر."
+      },
+      {
+        id: 7, topicId: "1", topicName: "Pericardium",
+        question: "7. The posterior relation of oblique sinus of pericardium:",
+        options: [
+          { key: "a", text: "Parietal pericardium" },
+          { key: "b", text: "Fibrous pericardium" },
+          { key: "c", text: "Descending aorta and esophagus" },
+          { key: "d", text: "Middle 4 thoracic vertebrae" },
+          { key: "e", text: "All of the above" }
+        ],
+        answer: "e",
+        pearl: "📌 <strong>All of the above:</strong> خلف تجويف الجيب المائل يوجد التأمور الجداري والليفي، وخلفهم المريء والأبهر النازل والفقرات من T5 إلى T8."
+      },
+      {
+        id: 8, topicId: "2", topicName: "External features of the heart",
+        question: "8. The right border of the heart represented by line from:",
+        options: [
+          { key: "a", text: "3rd to 6th right costal cartilage" },
+          { key: "b", text: "2nd to 6th right costal cartilage" },
+          { key: "c", text: "3rd to 7th right costal cartilage" },
+          { key: "d", text: "1st to 6th right costal cartilage" },
+          { key: "e", text: "1st to 5th right costal cartilage" }
+        ],
+        answer: "a",
+        pearl: "📌 <strong>Surface Anatomy:</strong> الحد الأيمن للقلب (Right border) مكون بالأذين الأيمن وبيمتد من الغضروف الضلعي الثالث الأيمن للغضروف الضلعي السادس الأيمن."
+      },
+      {
+        id: 9, topicId: "2", topicName: "External features of the heart",
+        question: "9. The mitral valve represented by point at:",
+        options: [
+          { key: "a", text: "left 3rd sternocostal junction" },
+          { key: "b", text: "left sternal border at left 3rd intercostal space" },
+          { key: "c", text: "left 4th sternocostal junction" },
+          { key: "d", text: "the median plain at level of 4th intercostal space" },
+          { key: "e", text: "the right 3rd costal cartilage" },
+          { key: "f", text: "behind the right 6th costal cartilage" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Heart Valves Landmarks:</strong> الصمام الميترالي مكانه التشريحي خلف عظم القص مقابل المفصل الضلعي القصي الرابع الأيسر (Left 4th sternocostal junction)."
+      },
+      {
+        id: 10, topicId: "2", topicName: "External features of the heart",
+        question: "10. The right border of the heart represented by line from:",
+        options: [
+          { key: "a", text: "3rd left costal cartilage to 6th right costal cartilage" },
+          { key: "b", text: "2nd left costal cartilage to 5th right costal cartilage" },
+          { key: "c", text: "3rd left costal cartilage to 7th right costal cartilage" },
+          { key: "d", text: "3th left costal cartilage to 4th right costal cartilage" },
+          { key: "e", text: "4th left costal cartilage to 6th right costal cartilage" }
+        ],
+        answer: "a",
+        pearl: "📌 <strong>Question Bank Key:</strong> ده سؤال مكرر بصياغة خاصة في نماذج الكلية، الخيار المعتمد هو (a) لاحتوائه على الأرقام المميزة (3rd to 6th)."
+      },
+      {
+        id: 11, topicId: "2", topicName: "External features of the heart",
+        question: "11. The apex of the heart represented by point at:",
+        options: [
+          { key: "a", text: "left 3rd sternocostal junction" },
+          { key: "b", text: "left sternal border at left 3rd intercostal space" },
+          { key: "c", text: "9 cm from median plain at 5th left intercostal space" },
+          { key: "d", text: "the median plain at level of 4th intercostal space" },
+          { key: "e", text: "behind the right 6th costal cartilage" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Apex Beat:</strong> قمة القلب في الفراغ الوربي الخامس الأيسر على بعد 9 سم من منتصف عظم القص (just medial to midclavicular line)."
+      },
+      {
+        id: 12, topicId: "2", topicName: "External features of the heart",
+        question: "12. Which of the following structures does NOT form the anterior surface of the heart?",
+        options: [
+          { key: "a", text: "Right ventricle" },
+          { key: "b", text: "Right atrium" },
+          { key: "c", text: "Left ventricle" },
+          { key: "d", text: "Left atrium" },
+          { key: "e", text: "Right auricle" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Golden Rule:</strong> الأذين الأيسر (Left atrium) بيشكل أغلب قاعدة القلب الخلفية (Base/Posterior surface) وملوش أي وجود في السطح الأمامي."
+      },
+      {
+        id: 13, topicId: "2", topicName: "External features of the heart",
+        question: "13. The sulcus of the heart:",
+        options: [
+          { key: "a", text: "Separate the left atrium from right atrium" },
+          { key: "b", text: "Lodges the right coronary artery" },
+          { key: "c", text: "Separates the right and left ventricles" },
+          { key: "d", text: "All of these" },
+          { key: "e", text: "None of these" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Sulci of the Heart:</strong> كل العبارات تصف الأخاديد القلبية (التلم التاجي يحتوي الـ RCA، والتلم بين البطينين يفصل البطينين، وبين الأذينين يفصل الأذينين)."
+      },
+      {
+        id: 14, topicId: "2", topicName: "External features of the heart",
+        question: "14. Surface of the right lung is related to:",
+        options: [
+          { key: "a", text: "Arch of aorta" },
+          { key: "b", text: "Left ventricle" },
+          { key: "c", text: "Left common carotid artery" },
+          { key: "d", text: "Right atrium" },
+          { key: "e", text: "Descending aorta" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Cardiac Impression:</strong> الرئة اليمنى بتعمل انطباع مباشر على الأذين الأيمن (Right atrium)، بينما قوس الأبهر والبطين الأيسر مرتبطين بالرئة الشمال."
+      },
+      {
+        id: 19, topicId: "2", topicName: "External features of the heart",
+        question: "19. The coronary sulcus is a line joining these points:",
+        options: [
+          { key: "a", text: "3rd left right 5th costal cartilages" },
+          { key: "b", text: "2nd left to right 6th costal cartilages" },
+          { key: "c", text: "3rd left to right 6th costal cartilages" },
+          { key: "d", text: "4th left to right 7th costal cartilages" },
+          { key: "e", text: "None of the above" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Coronary Sulcus Line:</strong> خط مائل بيمتد من الغضروف الضلعي الثالث الأيسر حتى الغضروف الضلعي السادس الأيمن."
+      },
+      {
+        id: 47, topicId: "2", topicName: "External features of the heart",
+        question: "47. Base of the heart is not related to which of the following structures?",
+        options: [
+          { key: "a", text: "Left vagus" },
+          { key: "b", text: "Oblique sinus" },
+          { key: "c", text: "Esophagus" },
+          { key: "d", text: "Right bronchus" },
+          { key: "e", text: "Thoracic aorta" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Relations:</strong> الشعبة الهوائية اليمنى (Right bronchus) تقع أعلى وإلى اليمين وبعيدة تماماً عن قاعدة القلب الخلفية."
+      },
+      {
+        id: 22, topicId: "3", topicName: "Internal features of the heart",
+        question: "22. The septomarginal trabecula carries:",
+        options: [
+          { key: "a", text: "Right branch of atrioventricular bundle" },
+          { key: "b", text: "Left branch of atrioventricular bundle" },
+          { key: "c", text: "Atrioventricular bundle" },
+          { key: "d", text: "Atrioventricular node" },
+          { key: "e", text: "none of the above" }
+        ],
+        answer: "a",
+        pearl: "📌 <strong>Moderator Band:</strong> الحزمة الحاجزية الهامشية في البطين الأيمن بتنقل الـ Right bundle branch للعضلة الحليمية الأمامية عشان يوصل النبض بسرعة متزامنة."
+      },
+      {
+        id: 32, topicId: "3", topicName: "Internal features of the heart",
+        question: "32. Regarding to the right atrium which of the following is wrong:",
+        options: [
+          { key: "a", text: "Extends from 3rd to 6th right costal cartilages" },
+          { key: "b", text: "It receives oblique vein" },
+          { key: "c", text: "Is related to right phrenic nerve" },
+          { key: "d", text: "It receives superior vena cava" },
+          { key: "e", text: "It receives inferior vena cava" }
+        ],
+        answer: "b",
+        pearl: "📌 <strong>Venous Drainage:</strong> الوريد المائل للأذين الأيسر (Oblique vein of Marshall) بيصب في الـ Coronary sinus ومش في الأذين الأيمن مباشرة."
+      },
+      {
+        id: 33, topicId: "3", topicName: "Internal features of the heart",
+        question: "33. Regarding to the Left ventricle which of the following is wrong:",
+        options: [
+          { key: "a", text: "Form the apex of the heart" },
+          { key: "b", text: "It has a thick wall" },
+          { key: "c", text: "It has 2 papillary muscle" },
+          { key: "d", text: "Form 1/3 of the sternocostal surface" },
+          { key: "e", text: "Form base of the heart" }
+        ],
+        answer: "e",
+        pearl: "📌 <strong>Base of Heart:</strong> قاعدة القلب بتتكون أساساً من الأذين الأيسر، والبطين الأيسر ملوش أي علاقة بتكوين القاعدة."
+      },
+      {
+        id: 37, topicId: "3", topicName: "Internal features of the heart",
+        question: "37. A blood clot (embolus) found in the left pulmonary artery probably came from which of the following?",
+        options: [
+          { key: "a", text: "Pulmonary veins" },
+          { key: "b", text: "left atrium" },
+          { key: "c", text: "Right ventricle" },
+          { key: "d", text: "Left brachiocephalic vein" },
+          { key: "e", text: "left ventricle" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Hemodynamics:</strong> الشريان الرئوي واخد الدم مباشرة من البطين الأيمن (Right ventricle)، فأي جلطة بتوصل للشريان الرئوي لازم تعدي من خلاله."
+      },
+      {
+        id: 38, topicId: "3", topicName: "Internal features of the heart",
+        question: "38. Which group of structures empties directly into the right atrium?",
+        options: [
+          { key: "a", text: "Superior vena cava, coronary sinus and hemiazygos vein" },
+          { key: "b", text: "Coronary sinus and pulmonary vein" },
+          { key: "c", text: "Pulmonary and bronchial veins the following" },
+          { key: "d", text: "Superior and inferior venae cavae and coronary sinus" },
+          { key: "e", text: "Coronary sinus and azygos vein" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>RA Openings:</strong> المصبات الرئيسية المباشرة في الأذين الأيمن هي: SVC, IVC, and Coronary sinus."
+      },
+      {
+        id: 51, topicId: "3", topicName: "Internal features of the heart",
+        question: "51. The bicuspid valve is one of the following?",
+        options: [
+          { key: "a", text: "Tricuspid valve" },
+          { key: "b", text: "Pulmonary valve" },
+          { key: "c", text: "Aortic valve" },
+          { key: "d", text: "Mitral valve" },
+          { key: "e", text: "Coronary valve" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Definition:</strong> الصمام ثنائي الشرفات (Bicuspid valve) هو الصمام الميترالي (Mitral valve)."
+      },
+      {
+        id: 52, topicId: "3", topicName: "Internal features of the heart",
+        question: "52. Which of the following statements correctly applies to the tricuspid valve?",
+        options: [
+          { key: "A", text: "It guards the left atrioventricular orifice." },
+          { key: "B", text: "It guards the conus arteriosus." },
+          { key: "C", text: "It is also known as the mitral valve." },
+          { key: "D", text: "Chordae tendineae attach to the free edges of the cusps." },
+          { key: "E", text: "The apex of each cusp attaches to the fibrous ring around the orifice." }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Tricuspid Anatomy:</strong> الحبال الوترية (Chordae tendineae) بتمسك في الحواف الحرة والأسطح البطينية لشرفات الصمام عشان تمنع ارتجاعه."
+      },
+      {
+        id: 53, topicId: "3", topicName: "Internal features of the heart",
+        question: "53. Regard to the opening of left atrium which of the following is correct:",
+        options: [
+          { key: "a", text: "Four pulmonary veins" },
+          { key: "b", text: "Left pulmonary artery" },
+          { key: "c", text: "Right pulmonary artery" },
+          { key: "d", text: "Superior vena cava" },
+          { key: "e", text: "Inferior vena cava" }
+        ],
+        answer: "a",
+        pearl: "📌 <strong>LA Openings:</strong> الأذين الأيسر بيستقبل الأوردة الرئوية الأربعة (Four pulmonary veins)."
+      },
+      {
+        id: 15, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "15. Which of the following vessels not found in the coronary sinus:",
+        options: [
+          { key: "A", text: "Great cardiac vein" },
+          { key: "B", text: "Small cardiac vein" },
+          { key: "C", text: "Azygos vein" },
+          { key: "D", text: "Middle cardiac vein" },
+          { key: "E", text: "Oblique vein" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Coronary Sinus Tributaries:</strong> الوريد الفرد (Azygos vein) بيصب في الوريد الأجوف العلوي في الصدر ومش في الجيب التاجي للقلب."
+      },
+      {
+        id: 16, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "16. Regarding to the coronary arteries which of the following is wrong:",
+        options: [
+          { key: "a", text: "The coronary arteries have poorly anastomosis" },
+          { key: "b", text: "Coronary sulcus contains both coronary arteries" },
+          { key: "c", text: "Right coronary artery arises from anterior aortic sinus" },
+          { key: "d", text: "Right coronary gives marginal branch" },
+          { key: "e", text: "Right coronary artery arises from posterior aortic sinus" }
+        ],
+        answer: "e",
+        pearl: "📌 <strong>Coronary Origins:</strong> الشريان التاجي الأيمن (RCA) بيطلع من الـ Anterior (Right) aortic sinus، بينما الأيسر بيطلع من الـ Posterior (Left) aortic sinus."
+      },
+      {
+        id: 20, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "20. The posterior third of interventricular septum is supplied by:",
+        options: [
+          { key: "a", text: "Anterior interventricular branch" },
+          { key: "b", text: "Circumflex branch" },
+          { key: "c", text: "Posterior interventricular branch" },
+          { key: "d", text: "Marginal branch" },
+          { key: "e", text: "Left coronary artery" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Septal Supply:</strong> الثلث الخلفي للحاجز بين البطينين بيتغذى بالـ Posterior interventricular branch (PDA)، بينما الثلثين الأماميين بالـ LAD."
+      },
+      {
+        id: 24, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "24. The anterior 2/3 of interventricular septum is supplied by:",
+        options: [
+          { key: "a", text: "Marginal artery" },
+          { key: "b", text: "Posterior interventricular branch" },
+          { key: "c", text: "Anterior interventricular branch" },
+          { key: "d", text: "Circumflex branch" },
+          { key: "e", text: "Right coronary" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Anterior 2/3:</strong> الثلثان الأماميان للحاجز بين البطينين بيتغذوا بالـ Anterior interventricular branch (LAD) المتفرع من الشريان التاجي الأيسر."
+      },
+      {
+        id: 34, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "34. Deep cardiac plexus is formed of:",
+        options: [
+          { key: "a", text: "Both vagi" },
+          { key: "b", text: "Both sympathetic trunk" },
+          { key: "c", text: "Both recurrent laryngeal nerve" },
+          { key: "d", text: "All of the above" },
+          { key: "e", text: "None of the above" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Cardiac Plexus:</strong> الضفيرة القلبية العميقة بتتكون من ألياف كلا العصبين المبهمين والجذعين السمبثاويين والأعصاب الحنجرية الراجعة (All of the above)."
+      },
+      {
+        id: 45, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "45. Anastomosis between right coronary and circumflex arteries occurs at:",
+        options: [
+          { key: "a", text: "Acute margin" },
+          { key: "b", text: "Anterior interventricular sulcus" },
+          { key: "c", text: "Apex of heart" },
+          { key: "d", text: "Base of heart" },
+          { key: "e", text: "Cardiac crux" }
+        ],
+        answer: "e",
+        pearl: "📌 <strong>Crux Cordis:</strong> التفاغر بين الشريان التاجي الأيمن والشريان المنعطف بيحصل عند ملتقى الأخاديد الخلفي (Cardiac crux)."
+      },
+      {
+        id: 46, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "46. Left coronary artery is arising from:",
+        options: [
+          { key: "a", text: "Transvers sinus" },
+          { key: "b", text: "Anterior aortic sinus" },
+          { key: "c", text: "Posterior aortic sinus" },
+          { key: "d", text: "Right aortic sinus" },
+          { key: "e", text: "Pulmonary trunk" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>LCA Origin:</strong> الشريان التاجي الأيسر ينشأ من الجيب الأبهري الخلفي (Left posterior aortic sinus)."
+      },
+      {
+        id: 48, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "48. Posterior interventricular artery supplies:",
+        options: [
+          { key: "a", text: "Anterior wall of right ventricle" },
+          { key: "b", text: "Anterior wall of right atrium" },
+          { key: "c", text: "Posterior one third of interventricular septum" },
+          { key: "d", text: "Left atrium" },
+          { key: "e", text: "Sinoatrial node" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>PDA Distribution:</strong> يغذي الشريان بين البطينين الخلفي الثلث الخلفي للحاجز بين البطينين والسطح الحجابي للبطينين."
+      },
+      {
+        id: 49, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "49. Which one of the following arteries accompany the middle cardiac vein?",
+        options: [
+          { key: "a", text: "Anterior interventricular" },
+          { key: "b", text: "Posterior interventricular" },
+          { key: "c", text: "Left coronary" },
+          { key: "d", text: "Left marginal" },
+          { key: "e", text: "Right coronary" }
+        ],
+        answer: "b",
+        pearl: "📌 <strong>Vein-Artery Pair:</strong> الوريد القلبي الأوسط (Middle cardiac vein) ماشي جنب الـ Posterior interventricular artery في التلم الخلفي بين البطينين."
+      },
+      {
+        id: 77, topicId: "5", topicName: "Development of the heart",
+        question: "77. The most critical period of heart development is:",
+        options: [
+          { key: "A", text: "weeks 1-3" },
+          { key: "B", text: "weeks 3-6" },
+          { key: "C", text: "weeks 9-12" },
+          { key: "D", text: "weeks 12-15" },
+          { key: "E", text: "none of the above (A-D)" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Embryology Period:</strong> أدق وأخطر فترة في تكوين القلب وانقسامه لغرف وحواجز هي بين الأسبوع 3 و 6 جنينياً (Weeks 3-6)."
+      },
+      {
+        id: 78, topicId: "5", topicName: "Development of the heart",
+        question: "78. Which statement concerning the sinus venosus is in correct:",
+        options: [
+          { key: "A", text: "the sinus venosus lies caudal to the primitive atrium" },
+          { key: "B", text: "the left horn form left horn of the coronary sinus" },
+          { key: "C", text: "the right horn incorporated into the right atrium" },
+          { key: "D", text: "the left horn incorporated into the left atrium" },
+          { key: "E", text: "the right valve of the sinus venosus forms the valve of the coronary sinus" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Sinus Venosus:</strong> القرن الأيسر مش بيندمج في الأذين الأيسر خالص؛ بل بيتحول للـ Coronary sinus والوريد المائل، بينما الأذين الأيسر الأملس جاي من اندماج الأوردة الرئوية."
+      },
+      {
+        id: 80, topicId: "5", topicName: "Development of the heart",
+        question: "80. Regarding to the foramen ovale which of the following is true:",
+        options: [
+          { key: "A", text: "is formed by perforation in septum II" },
+          { key: "B", text: "permits a right to left shunt of blood until the time of birth" },
+          { key: "C", text: "its floor formed by septum II" },
+          { key: "D", text: "it is patent in approximately 20% of the population" },
+          { key: "E", text: "it is dependent upon the proper formation of septum for closure" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Foramen Ovale Shunt:</strong> الثقبة البيضوية وظيفتها تحويل الدم المؤكسج من الأذين الأيمن للأذين الأيسر (Right-to-left shunt) قبل الولادة لتجاوز الرئتين."
+      },
+      {
+        id: 81, topicId: "5", topicName: "Development of the heart",
+        question: "81. Regarding to the interventricular septum which of the following is true:",
+        options: [
+          { key: "A", text: "is primarily membranous" },
+          { key: "B", text: "receives its membranous contribution from the right valve of the sinus venosus" },
+          { key: "C", text: "has most of its developmental defects restricted to the membranous component" },
+          { key: "D", text: "has a patency for right to left shunting of blood throughout development" },
+          { key: "E", text: "receives its major contribution from the fused endocardial cushions" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>VSD Defects:</strong> معظم عيوب الحاجز بين البطينين (VSD) بتحصل في الجزء الغشائي (Membranous part) بنسبة 70-80% تقريباً."
+      },
+      {
+        id: 86, topicId: "5", topicName: "Development of the heart",
+        question: "86. Which of the following is the most common type of congenital heart malformation:",
+        options: [
+          { key: "A", text: "dextrocardia" },
+          { key: "B", text: "atrial septal defect" },
+          { key: "C", text: "ectopic cardis" },
+          { key: "D", text: "ventricular septal defect" },
+          { key: "E", text: "transposition of the great vessels" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Most Common CHD:</strong> الـ Ventricular Septal Defect (VSD) هو أشهر عيب خلقي في القلب إجمالاً."
+      },
+      {
+        id: 87, topicId: "5", topicName: "Development of the heart",
+        question: "87. The adult left atrium is derived embryologically from the:",
+        options: [
+          { key: "A", text: "right horn of the sinus venosus" },
+          { key: "B", text: "primitive pulmonary vein" },
+          { key: "C", text: "sinus venarum" },
+          { key: "D", text: "bulbus cordis" },
+          { key: "E", text: "left horn of the sinus venosus" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Smooth LA Origin:</strong> الجزء الأملس الكبير من الأذين الأيسر مشتق من استيعاب واندماج الوريد الرئوي البدائي (Primitive pulmonary vein)."
+      },
+      {
+        id: 88, topicId: "5", topicName: "Development of the heart",
+        question: "88. In tetralogy of Fallot, abnormalities include:",
+        options: [
+          { key: "A", text: "ventricular septal defect" },
+          { key: "B", text: "overriding aorta" },
+          { key: "C", text: "pulmonary stenosis" },
+          { key: "D", text: "right ventricular hypertrophy" },
+          { key: "E", text: "all of the above (A-D)" }
+        ],
+        answer: "E",
+        pearl: "📌 <strong>Tetralogy of Fallot:</strong> رباعية فالو بتشمل الأربع عيوب معاً: تضيق الصمام الرئوي، VSD، ركوب الأبهر، وتضخم البطين الأيمن."
+      },
+      {
+        id: 17, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "17. The tributaries of vena azygos are, except:",
+        options: [
+          { key: "a", text: "Hemiazygos vein" },
+          { key: "b", text: "Accessory hemiazygos vein" },
+          { key: "c", text: "Esophageal vein" },
+          { key: "d", text: "Right bronchial vein" },
+          { key: "e", text: "Right posterior inter costal veins" }
+        ],
+        answer: "e",
+        pearl: "📌 <strong>Azygos Tributaries:</strong> الوريد الوربي الخلفي الأول بيصب مباشرة في الـ Brachiocephalic، والـ 2-4 بيعملوا Superior intercostal، فمش كل الـ Right posterior intercostals بتصب فيه مباشرة."
+      },
+      {
+        id: 18, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "18. The arch of azygos vein lies in:",
+        options: [
+          { key: "a", text: "Anterior mediastinum" },
+          { key: "b", text: "Middle mediastinum" },
+          { key: "c", text: "Superior mediastinum" },
+          { key: "d", text: "Posterior mediastinum" },
+          { key: "e", text: "None of these" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Arch of Azygos:</strong> بيلتف للأمام فوق جذر الرئة اليمنى عند مستوى T4 في المنصف العلوي (Superior mediastinum) ليصب في الـ SVC."
+      },
+      {
+        id: 21, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "21. Which of the following structures is not related to the inferior surface of arch of aorta:",
+        options: [
+          { key: "a", text: "Bifurcation of pulmonary trunk" },
+          { key: "b", text: "Right bronchus" },
+          { key: "c", text: "Left recurrent laryngeal nerve" },
+          { key: "d", text: "Ligamentum arteriosus" },
+          { key: "e", text: "Left pulmonary artery" }
+        ],
+        answer: "b",
+        pearl: "📌 <strong>Aortic Arch Relations:</strong> الشعبة الهوائية اليمنى (Right bronchus) تقع بعيداً في الجانب الأيمن ومش ملاصقة لقوس الأبهر."
+      },
+      {
+        id: 23, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "23. The tributaries of brachiocephalic vein are:",
+        options: [
+          { key: "a", text: "Inferior thyroid vein" },
+          { key: "b", text: "Internal thoracic vein" },
+          { key: "c", text: "Vertebral vein" },
+          { key: "d", text: "Superior intercostal vein" },
+          { key: "e", text: "All of the above" }
+        ],
+        answer: "e",
+        pearl: "📌 <strong>All of the Above:</strong> الوريد العضدي الرأسي بيستقبل الوريد الدرقي السفلي والصدري الداخلي والفقري والوربي العلوي."
+      },
+      {
+        id: 25, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "25. The ligamentum arteriosus connect the arch of aorta with:",
+        options: [
+          { key: "a", text: "Right pulmonary artery" },
+          { key: "b", text: "Left pulmonary artery" },
+          { key: "c", text: "Pulmonary trunk" },
+          { key: "d", text: "Right bronchial artery" },
+          { key: "e", text: "None of the above" }
+        ],
+        answer: "b",
+        pearl: "📌 <strong>Ligamentum Arteriosum:</strong> بيوصل بين تقعر قوس الأبهر وبداية الشريان الرئوي الأيسر (Left pulmonary artery)."
+      },
+      {
+        id: 26, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "26. The arch of aorta lies in:",
+        options: [
+          { key: "a", text: "Superior mediastinum" },
+          { key: "b", text: "Anterior mediastinum" },
+          { key: "c", text: "Middle mediastinum" },
+          { key: "d", text: "Posterior mediastinum" },
+          { key: "e", text: "None of the above" }
+        ],
+        answer: "a",
+        pearl: "📌 <strong>Mediastinum:</strong> قوس الأبهر يقع بالكامل داخل المنصف العلوي (Superior mediastinum)."
+      },
+      {
+        id: 27, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "27. The left recurrent laryngeal nerve hook around aortic arch:",
+        options: [
+          { key: "a", text: "Posterior to ligamentum arteriosus" },
+          { key: "b", text: "Anterior to ligamentum arteriosus" },
+          { key: "c", text: "Superficial to ligamentum arteriosus" },
+          { key: "d", text: "Deep to ligamentum arteriosus" },
+          { key: "e", text: "None of the above" }
+        ],
+        answer: "a",
+        pearl: "📌 <strong>Recurrent Nerve:</strong> بيلف حول أسفل قوس الأبهر خلف الرباط الشرياني (Posterior to ligamentum arteriosus)."
+      },
+      {
+        id: 28, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "28. The left vagus nerve lies on the left side of:",
+        options: [
+          { key: "a", text: "esophagus" },
+          { key: "b", text: "trachea" },
+          { key: "c", text: "Left brachiocephalic vein" },
+          { key: "d", text: "Arch of aorta" },
+          { key: "e", text: "Left subclavian artery" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Left Vagus Course:</strong> في المنصف العلوي، بيعبر العصب المبهم الأيسر على الجانب الأيسر لقوس الأبهر."
+      },
+      {
+        id: 29, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "29. The following are the branches of descending thoracic aorta, except:",
+        options: [
+          { key: "a", text: "Left bronchial arteries" },
+          { key: "b", text: "Esophageal arteries" },
+          { key: "c", text: "All posterior intercostal arteries" },
+          { key: "d", text: "Subcostal arteries" },
+          { key: "e", text: "Pericardial arteries" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Aorta Branches:</strong> الأبهر الصدري النازل بيدي الشرايين الوربية الخلفية من 3 لـ 11 فقط، بينما الأول والثاني جايين من الـ Superior intercostal artery."
+      },
+      {
+        id: 30, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "30. The descending thoracic aorta begins at the level of:",
+        options: [
+          { key: "a", text: "2nd thoracic vertebra" },
+          { key: "b", text: "3rd thoracic vertebra" },
+          { key: "c", text: "4th thoracic vertebra" },
+          { key: "d", text: "5th thoracic vertebra" },
+          { key: "e", text: "6th thoracic vertebra" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Vertebral Level:</strong> يبدأ الأبهر النازل عند الحافة السفلية للفقرة T4 (مستوى الزاوية القصية Sternal angle)."
+      },
+      {
+        id: 31, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "31. Regarded to posterior relation of descending aorta which of the following is wrong:",
+        options: [
+          { key: "a", text: "Vertebral column" },
+          { key: "b", text: "Hemiazygos vein" },
+          { key: "c", text: "Posterior intercostal arteries" },
+          { key: "d", text: "Esophagus" },
+          { key: "e", text: "Subcostal arteries" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Esophagus Relation:</strong> المريء (Esophagus) بيقع أمام الأبهر النازل مش وراه (Anterior relation)."
+      },
+      {
+        id: 35, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "35. The brachiocephalic artery divides into two arteries:",
+        options: [
+          { key: "a", text: "Right and left common carotid artery" },
+          { key: "b", text: "Right common carotid and right subclavian artery" },
+          { key: "c", text: "Left common carotid and left subclavian arteries" },
+          { key: "d", text: "Right and left coronaries" },
+          { key: "e", text: "Right internal carotid and right subclavian artery" }
+        ],
+        answer: "b",
+        pearl: "📌 <strong>Bifurcation:</strong> الشريان العضدي الرأسي بينقسم للسباتي الأصلي الأيمن وتحت الترقوة الأيمن خلف المفصل القصي الترقوي الأيمن."
+      },
+      {
+        id: 36, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "36. The immediate posterior relation of the upper half of manubrium sterni is:",
+        options: [
+          { key: "a", text: "Brachiocephalic artery" },
+          { key: "b", text: "Left common carotid artery" },
+          { key: "c", text: "Left subclavian artery" },
+          { key: "d", text: "Left brachiocephalic vein" },
+          { key: "e", text: "None of the above" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Manubrium:</strong> خلف النصف العلوي لقبضة القص يوجد الوريد العضدي الرأسي الأيسر (Left brachiocephalic vein) وغدة الثيموس."
+      },
+      {
+        id: 57, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "57. Which of the following is a branch of the axillary artery?",
+        options: [
+          { key: "A", text: "subscapular artery" },
+          { key: "B", text: "inter costal artery" },
+          { key: "C", text: "ulnar artery" },
+          { key: "D", text: "radial artery" },
+          { key: "E", text: "internal thoracic artery" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Axillary Branches:</strong> الشريان تحت الكتفي (Subscapular artery) هو أكبر فروع الشريان الإبطي (من الجزء الثالث)."
+      },
+      {
+        id: 58, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "58. Which of the following is a branch of the brachial artery?",
+        options: [
+          { key: "A", text: "subscapular artery" },
+          { key: "B", text: "inter costal artery" },
+          { key: "C", text: "lateral thoracic artery" },
+          { key: "D", text: "radial artery" },
+          { key: "E", text: "internal thoracic artery" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Terminal Branches:</strong> الشريان العضدي ينقسم للشريان الكعبري (Radial) والشريان الزندي (Ulnar)."
+      },
+      {
+        id: 59, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "59. The subscapular artery arises from:",
+        options: [
+          { key: "A", text: "The third part of the axillary artery" },
+          { key: "B", text: "The second part of the axillary artery" },
+          { key: "C", text: "The first part of the axillary artery" },
+          { key: "D", text: "The thoracoacromial artery" },
+          { key: "E", text: "The lateral thoracic artery" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>3rd Part of Axillary:</strong> ينشأ الشريان تحت الكتفي من الجزء الثالث للشريان الإبطي."
+      },
+      {
+        id: 60, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "60. The tributaries of the first part of the axillary vein is:",
+        options: [
+          { key: "a", text: "thoracoacrosial vein" },
+          { key: "b", text: "lateral thoracic vein" },
+          { key: "c", text: "subscapular vein" },
+          { key: "d", text: "anterior circumflex humeral vein" },
+          { key: "e", text: "cephalic vein" }
+        ],
+        answer: "e",
+        pearl: "📌 <strong>Cephalic Vein:</strong> الوريد الرأسي بيخترق الـ Clavipectoral fascia ويصب في الجزء الأول للوريد الإبطي."
+      },
+      {
+        id: 61, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "61. Which of the following arteries is not share in the Anastomosis around scapula?",
+        options: [
+          { key: "a", text: "Thyrocervical" },
+          { key: "b", text: "Suprascapular" },
+          { key: "c", text: "Subscapular" },
+          { key: "d", text: "Lateral thoracic" },
+          { key: "e", text: "Thoracodorsal" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Scapular Anastomosis:</strong> الشريان الصدري الوحشي (Lateral thoracic) ماشي على جدار الصدر وملوش علاقة بشبكة التفاغر حول لوح الكتف."
+      },
+      {
+        id: 39, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "39. The only tributary of subclavian vein is:",
+        options: [
+          { key: "a", text: "Anterior jugular vein" },
+          { key: "b", text: "External jugular vein" },
+          { key: "c", text: "Internal jugular vein" },
+          { key: "d", text: "Posterior jugular vein" },
+          { key: "e", text: "Transverse cervical vein" }
+        ],
+        answer: "b",
+        pearl: "📌 <strong>Subclavian Tributary:</strong> الرافد الوحيد الثابت للوريد تحت الترقوة هو الوريد الوداجي الخارجي (External jugular vein)."
+      },
+      {
+        id: 40, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "40. The following branch arises from medial aspect of external carotid artery:",
+        options: [
+          { key: "a", text: "Ascending pharyngeal" },
+          { key: "b", text: "Facial" },
+          { key: "c", text: "Posterior auricular" },
+          { key: "d", text: "Superficial temporal" },
+          { key: "e", text: "Superior thyroid" }
+        ],
+        answer: "a",
+        pearl: "📌 <strong>ECA Medial Branch:</strong> الشريان البلعومي الصاعد (Ascending pharyngeal) هو الفرع الوحيد اللي بيطلع من السطح الإنسي الداخلي للسباتي الظاهر."
+      },
+      {
+        id: 41, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "41. Internal carotid artery supplies:",
+        options: [
+          { key: "a", text: "Anterior two-thirds of the brain and eye." },
+          { key: "b", text: "Glands of the neck." },
+          { key: "c", text: "Muscles of the face." },
+          { key: "d", text: "Tubes of the neck." },
+          { key: "e", text: "Upper and lower jaws" }
+        ],
+        answer: "a",
+        pearl: "📌 <strong>ICA Supply:</strong> لا يعطي فروعاً في الرقبة، وبيغذي الثلثين الأماميين للمخ والعين عبر الشريان العيني."
+      },
+      {
+        id: 42, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "42. Internal jugular vein begins as a continuation of which of the following dural venous sinuses?",
+        options: [
+          { key: "a", text: "Cavernous." },
+          { key: "b", text: "Inferior sagittal." },
+          { key: "c", text: "Superior sagittal." },
+          { key: "d", text: "Sigmoid." },
+          { key: "e", text: "Transverse." }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>IJV Origin:</strong> يبدأ الوريد الوداجي الباطن عند الثقبة الوداجية كامتداد مباشر للجيب السيني (Sigmoid sinus)."
+      },
+      {
+        id: 55, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "55. Which of the following is derived from the radial artery?",
+        options: [
+          { key: "A", text: "dorsal and palmar carpal arteries" },
+          { key: "B", text: "common interosseous artery" },
+          { key: "C", text: "anterior interosseous artery" },
+          { key: "D", text: "posterior interosseous artery" },
+          { key: "E", text: "ulnar recurrent artery" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Radial Artery Branches:</strong> يعطي فروعاً رسغية ظهرية وراحية (Dorsal and palmar carpal arteries)، بينما فروع الـ Interosseous طالعة من الشريان الزندي."
+      },
+      {
+        id: 56, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "56. The radial artery lies just lateral to the tendon of which muscle?",
+        options: [
+          { key: "A", text: "pronator teres" },
+          { key: "B", text: "flexor carpi radialis" },
+          { key: "C", text: "palmaris longus" },
+          { key: "D", text: "flexor carpi ulnaris" },
+          { key: "E", text: "flexor digitorum superficialis" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Radial Pulse Landmark:</strong> عند الرسغ، يقع الشريان الكعبري وحشياً لوتر عضلة الـ Flexor carpi radialis (FCR)."
+      },
+      {
+        id: 73, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "73. The right common carotid artery arises from:",
+        options: [
+          { key: "a", text: "innominate artery" },
+          { key: "b", text: "aortic arch" },
+          { key: "c", text: "subclavian artery" },
+          { key: "d", text: "thyrocervical trunk" },
+          { key: "e", text: "internal carotid artery" }
+        ],
+        answer: "a",
+        pearl: "📌 <strong>Right Common Carotid:</strong> ينشأ من الشريان العضدي الرأسي / الشريان اللا مسمى (Innominate artery)."
+      },
+      {
+        id: 74, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "74. The common carotid artery terminates at which of the following level?",
+        options: [
+          { key: "a", text: "Disc between C1 and C2" },
+          { key: "b", text: "Disc between C2 and C3" },
+          { key: "c", text: "Disc between C3 and C4" },
+          { key: "d", text: "Disc between C4 and C5" },
+          { key: "e", text: "Disc between C5 and C6" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Carotid Bifurcation:</strong> ينقسم السباتي الأصلي عند الحافة العلوية لغضروف الدرقية، بمستوى القرص بين الفقرتين C3 و C4."
+      },
+      {
+        id: 75, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "75. Which of the following arteries is branch of the 1st part subclavian artery?",
+        options: [
+          { key: "a", text: "Vertebral artery." },
+          { key: "b", text: "Inferior thyroid artery." },
+          { key: "c", text: "Supra scapular artery." },
+          { key: "d", text: "Transverse cervical artery." },
+          { key: "e", text: "Superior thyroid artery." }
+        ],
+        answer: "a",
+        pearl: "📌 <strong>1st Part Subclavian:</strong> يعطي مباشرة الشريان الفقري (Vertebral artery)، بينما باقي الخيارات تخرج من الجذع الدرقي الرقبي."
+      },
+      {
+        id: 76, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "76. Which of the following arteries is branch of the external carotid artery?",
+        options: [
+          { key: "a", text: "Vertebral artery." },
+          { key: "b", text: "Inferior thyroid artery." },
+          { key: "c", text: "Supra scapular artery." },
+          { key: "d", text: "Transverse cervical artery." },
+          { key: "e", text: "Superior thyroid artery." }
+        ],
+        answer: "e",
+        pearl: "📌 <strong>ECA Branch:</strong> الشريان الدرقي العلوي (Superior thyroid artery) هو أول فرع أمامي ينشأ من السباتي الظاهر."
+      },
+      {
+        id: 43, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "43. Abdominal aorta bifurcates at which of the following vertebral levels?",
+        options: [
+          { key: "a", text: "Lower border of L3." },
+          { key: "b", text: "Lower border of L4." },
+          { key: "c", text: "Lower border of L5." },
+          { key: "d", text: "Upper border of L4." },
+          { key: "e", text: "Upper border of L5." }
+        ],
+        answer: "b",
+        pearl: "📌 <strong>Aorta Bifurcation:</strong> يتفرع الأبهر البطني لشريانين حرقفيين أصليين عند الحافة السفلية للفقرة L4."
+      },
+      {
+        id: 44, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "44. Inferior mesenteric artery arises from the abdominal aorta at which of the following vertebral levels?",
+        options: [
+          { key: "a", text: "L4." },
+          { key: "b", text: "L5." },
+          { key: "c", text: "L3." },
+          { key: "d", text: "L4." },
+          { key: "e", text: "L5." }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>IMA Level:</strong> ينشأ الشريان المساريقي السفلي عند مستوى الفقرة القطنية الثالثة (L3)، حوالي 3-4 سم فوق تفرع الأبهر."
+      },
+      {
+        id: 50, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "50. Inferior vena cava begins at which of the following vertebral levels?",
+        options: [
+          { key: "a", text: "L2." },
+          { key: "b", text: "L3." },
+          { key: "c", text: "L4." },
+          { key: "d", text: "L5." },
+          { key: "e", text: "S1." }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>IVC Origin:</strong> يبدأ الوريد الأجوف السفلي عند مستوى الفقرة L5 باتحاد الوريدين الحرقفيين الأصليين."
+      },
+      {
+        id: 54, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "54. The portal veins drain the following Except?",
+        options: [
+          { key: "a", text: "Intestine" },
+          { key: "b", text: "Stomach" },
+          { key: "c", text: "Spleen" },
+          { key: "d", text: "Kidney" },
+          { key: "e", text: "Pancreas" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Portal System:</strong> الكلى (Kidney) تصرف دمها مباشرة عبر الوريدين الكلويين في الـ IVC ولا تمر بالوريد البابي."
+      },
+      {
+        id: 62, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "62. The superior mesenteric and splenic veins unite to form the portal vein posterior to which of the following structures?",
+        options: [
+          { key: "a", text: "right kidney" },
+          { key: "b", text: "neck of the pancreas" },
+          { key: "c", text: "pylorus of stomach" },
+          { key: "d", text: "2nd portion of the duodenum" },
+          { key: "e", text: "spleen" }
+        ],
+        answer: "b",
+        pearl: "📌 <strong>Portal Vein Formation:</strong> يتحد الوريد المساريقي العلوي مع الوريد الطحالي خلف عنق البنكرياس (Neck of the pancreas)."
+      },
+      {
+        id: 63, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "63. The splenic artery arises from which of the following arteries?",
+        options: [
+          { key: "a", text: "celiac trunk" },
+          { key: "b", text: "right gastric" },
+          { key: "c", text: "gastroduodenal" },
+          { key: "d", text: "aorta" },
+          { key: "e", text: "hepatic" }
+        ],
+        answer: "a",
+        pearl: "📌 <strong>Splenic Artery:</strong> الشريان الطحالي هو أكبر الفروع الثلاثة للجذع الزلاقي (Celiac trunk)."
+      },
+      {
+        id: 64, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "64. Which of the following arteries arises from celiac trunk?",
+        options: [
+          { key: "A", text: "cystic" },
+          { key: "B", text: "gastoduodenal" },
+          { key: "C", text: "left gastric" },
+          { key: "D", text: "short gastric" },
+          { key: "E", text: "left gastroepiploic" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Celiac Trunk Branches:</strong> الفروع الثلاثة المباشرة: Left gastric, Splenic, and Common hepatic arteries."
+      },
+      {
+        id: 65, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "65. Which of the following structures crosses over the third part of the duodenum?",
+        options: [
+          { key: "a", text: "celiac trunk" },
+          { key: "b", text: "hepatic artery" },
+          { key: "c", text: "portal vein" },
+          { key: "d", text: "superior mesenteric artery" },
+          { key: "e", text: "inferior mesenteric artery" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Duodenum Cross:</strong> الشريان والوريد المساريقي العلوي (SMA & SMV) بيعبروا مباشرة أمام الجزء الثالث من الاثني عشر."
+      },
+      {
+        id: 66, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "66. The head of the pancreas rests posteriorly on which of the following structures?",
+        options: [
+          { key: "A", text: "left renal vein" },
+          { key: "B", text: "superior vena cava" },
+          { key: "C", text: "splenic artery" },
+          { key: "D", text: "duodenum" },
+          { key: "E", text: "superior mesenteric artery" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Pancreatic Bed:</strong> يستند رأس البنكرياس في الخلف على الـ IVC ومصب الوريد الكلوي الأيسر (Left renal vein)."
+      },
+      {
+        id: 67, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "67. The portion of the hepatic artery extending between the celiac trunk and the gastroduodenal artery is known as:",
+        options: [
+          { key: "A", text: "proper hepatic" },
+          { key: "B", text: "common hepatic" },
+          { key: "C", text: "right hepatic" },
+          { key: "D", text: "left hepatic" },
+          { key: "E", text: "middle hepatic" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Hepatic Artery Division:</strong> يسمى هذا الجزء Common hepatic artery، وبعد ما يدي الشريان المعدي الاثني عشري بيكمل باسم Proper hepatic."
+      },
+      {
+        id: 68, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "68. The hepatic veins drain into which of the following structures?",
+        options: [
+          { key: "A", text: "liver" },
+          { key: "B", text: "inferior vena cava" },
+          { key: "C", text: "spleen" },
+          { key: "D", text: "portal vein" },
+          { key: "E", text: "superior vena cava" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Hepatic Veins:</strong> تصب الأوردة الكبدية مباشرة في الوريد الأجوف السفلي (IVC)."
+      },
+      {
+        id: 69, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "69. Which of the following arteries is considered to be the artery of the pelvis?",
+        options: [
+          { key: "A", text: "obturator" },
+          { key: "B", text: "pudendal" },
+          { key: "C", text: "uterine" },
+          { key: "D", text: "internal iliac" },
+          { key: "E", text: "sacral" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Pelvic Main Artery:</strong> الشريان الحرقفي الباطن (Internal iliac / Hypogastric artery) هو شريان الحوض الرئيسي."
+      },
+      {
+        id: 70, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "70. Which of the following structures passes through the saphenous opening?",
+        options: [
+          { key: "A", text: "femoral artery" },
+          { key: "B", text: "femoral vein" },
+          { key: "C", text: "femoral nerve" },
+          { key: "D", text: "short saphenous vein" },
+          { key: "E", text: "great saphenous vein" }
+        ],
+        answer: "E",
+        pearl: "📌 <strong>Saphenous Opening:</strong> الوريد الصافن الكبير (Great saphenous vein) يخترق فتحة الصافن في الفخذ ليصب في الوريد الفخذي."
+      },
+      {
+        id: 71, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "71. Which of the following statements concerning the deep artery of the thigh is correct?",
+        options: [
+          { key: "A", text: "It is the largest branch of the femoral artery." },
+          { key: "B", text: "It passes through the adductor canal." },
+          { key: "C", text: "It gives rise to the deep circumflex iliac branch." },
+          { key: "D", text: "It exits the adductor canal through the adductor hiatus." },
+          { key: "E", text: "It passes through the obturator foramen." }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Profunda Femoris:</strong> الشريان الفخذي العميق هو أكبر فروع الشريان الفخذي ويغذي عضلات الفخذ."
+      },
+      {
+        id: 72, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "72. Which of the following arteries is usually evaluated during a physical examination of the peripheral vascular system?",
+        options: [
+          { key: "A", text: "lateral plantar" },
+          { key: "B", text: "dorsalis pedis" },
+          { key: "C", text: "popliteal" },
+          { key: "D", text: "fibular" },
+          { key: "E", text: "posterior tibial" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Peripheral Pulse:</strong> شريان ظهر القدم (Dorsalis pedis artery) هو الشريان الكلاسيكي المعتمد لتقييم التروية الطرفية للقدم إكلينيكياً."
+      },
+      {
+        id: 79, topicId: "9", topicName: "Vascular development",
+        question: "79. The subcardinal - supracardinal venous anastomosis:",
+        options: [
+          { key: "A", text: "is a patent vessel in the adult" },
+          { key: "B", text: "is a ligamentous cord in the adult" },
+          { key: "C", text: "contributes both a patent vessel and ligamentous cord in the adult" },
+          { key: "D", text: "no known remnant exists in the adult" },
+          { key: "E", text: "all of the above (A-D)" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Renal Segment of IVC:</strong> التفاغر ده بيشارك في تكوين القطعة الكلوية للوريد الأجوف السفلي، وهو وعاء دموي سالك وفعال في الشخص البالغ (Patent vessel)."
+      },
+      {
+        id: 82, topicId: "9", topicName: "Vascular development",
+        question: "82. Which of the following vessels in the adult is derived from the subcardinal veins:",
+        options: [
+          { key: "A", text: "the azygos veins" },
+          { key: "B", text: "the gonadal veins" },
+          { key: "C", text: "the suprarenal veins" },
+          { key: "D", text: "stem of the left renal vein" },
+          { key: "E", text: "all of the above (A-D)" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Subcardinal Derivative:</strong> التفاغر بين الوريدين تحت الأساسيين (Intersubcardinal anastomosis) بيشكل جذع الوريد الكلوي الأيسر (Stem of left renal vein)."
+      },
+      {
+        id: 89, topicId: "9", topicName: "Vascular development",
+        question: "89. Internal jugular veins are derived from the:",
+        options: [
+          { key: "A", text: "anterior cardinal veins" },
+          { key: "B", text: "posterior cardinal veins" },
+          { key: "C", text: "subcardinal veins" },
+          { key: "D", text: "supracardinal veins" },
+          { key: "E", text: "none of the above (A-D)" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>IJV Embryology:</strong> الأوردة الوداجية الباطنة مشتقة جنينياً من الأوردة الأساسية الأمامية (Anterior cardinal veins)."
+      },
+      {
+        id: 90, topicId: "9", topicName: "Vascular development",
+        question: "90. Azygos vein is derived from the:",
+        options: [
+          { key: "A", text: "right vitelline vein" },
+          { key: "B", text: "right subcardinal vein" },
+          { key: "C", text: "right anterior cardinal" },
+          { key: "D", text: "right supracardinal vein" },
+          { key: "E", text: "all of the above (A-D)" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Azygos Origin:</strong> يشتق الوريد الفرد أساساً من الوريد فوق الأساسي الأيمن (Right supracardinal vein)."
+      },
+      {
+        id: 91, topicId: "9", topicName: "Vascular development",
+        question: "91. Superior vena cava is derived from the:",
+        options: [
+          { key: "A", text: "right vitelline vein" },
+          { key: "B", text: "right subcardinal vein" },
+          { key: "C", text: "right anterior cardinal" },
+          { key: "D", text: "right supracardinal vein" },
+          { key: "E", text: "all of the above (A-D)" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>SVC Origin:</strong> مشتق من الوريد الأساسي الأمامي الأيمن (Right anterior cardinal vein) والوريد الأساسي المشترك الأيمن."
+      },
+      {
+        id: 92, topicId: "9", topicName: "Vascular development",
+        question: "92. Portal vein is derived from the:",
+        options: [
+          { key: "A", text: "right vitelline vein" },
+          { key: "B", text: "right subcardinal vein" },
+          { key: "C", text: "right anterior cardinal" },
+          { key: "D", text: "right supracardinal vein" },
+          { key: "E", text: "all of the above (A-D)" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Portal Vein Origin:</strong> مشتق من شبكة التفاغر حول الاثني عشر المتكونة من الأوردة المحية (Right vitelline vein)."
+      },
+      {
+        id: 83, topicId: "10", topicName: "Foetal circulation",
+        question: "83. Regarding to the ligamentum arteriosum Which of the following is true:",
+        options: [
+          { key: "A", text: "is the fibrous remnant of the ductus arteriosus" },
+          { key: "B", text: "is the fibrous remnant of the ductus venosus" },
+          { key: "C", text: "is the fibrous remnant of the umbilical vein" },
+          { key: "D", text: "is the fibrous remnant of the umbilical artery" },
+          { key: "E", text: "is the fibrous remnant of the urachus" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Ductus Remnant:</strong> الرباط الشرياني هو البقايا الليفية للقناة الشريانية الجنينية (Ductus arteriosus)."
+      },
+      {
+        id: 84, topicId: "10", topicName: "Foetal circulation",
+        question: "84. The two medial umbilical folds represent remnants of which of the following structures?",
+        options: [
+          { key: "A", text: "urachus" },
+          { key: "B", text: "umbilical arteries" },
+          { key: "C", text: "umbilical veins" },
+          { key: "D", text: "ductus venosus" },
+          { key: "E", text: "ductus arteriosus" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Medial Folds:</strong> الثنيتان السريتان الإنسيتان تمثلان بقايا الشرايين السرية المسدودة (Obliterated umbilical arteries)، بينما الـ Median fold تمثل بقايا الـ Urachus."
+      },
+      {
+        id: 85, topicId: "10", topicName: "Foetal circulation",
+        question: "85. The round ligament of the liver is the fibrous remnant of which of the following structures?",
+        options: [
+          { key: "A", text: "umbilical vein" },
+          { key: "B", text: "ductus venosus" },
+          { key: "C", text: "ductus arteriosus" },
+          { key: "D", text: "umbilical artery" },
+          { key: "E", text: "urachus" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Ligamentum Teres Hepatis:</strong> الرباط المدور للكبد هو البقايا الليفية للوريد السري الأيسر المنسد (Left umbilical vein)."
+      }
+    ];
+
+    // State Variables
+    let currentTopicFilter = "all";
+    let activeQuestionList = [...fullQuestions];
+    let currentIndex = 0;
+    // Map to store answers by global question ID
+    const answerStore = {};
+
+    // DOM Elements
+    const topicSelect = document.getElementById('topicSelect');
+    const questionPill = document.getElementById('questionPill');
+    const categoryTag = document.getElementById('categoryTag');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const pearlBox = document.getElementById('pearlBox');
+    const pearlHeader = document.getElementById('pearlHeader');
+    const pearlText = document.getElementById('pearlText');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const openMapBtn = document.getElementById('openMapBtn');
+    const closeMapBtn = document.getElementById('closeMapBtn');
+    const mapModal = document.getElementById('mapModal');
+    const modalGrid = document.getElementById('modalGrid');
+    const modalTitle = document.getElementById('modalTitle');
+
+    const progressThumb = document.getElementById('progressThumb');
+    const topicProgressLabel = document.getElementById('topicProgressLabel');
+    const badgeCorrectCount = document.getElementById('badgeCorrectCount');
+    const badgeWrongCount = document.getElementById('badgeWrongCount');
+    const audioToggleBtn = document.getElementById('audioToggleBtn');
+
+    const questionBox = document.getElementById('questionBox');
+    const summaryCard = document.getElementById('summaryCard');
+    const summarySubtitle = document.getElementById('summarySubtitle');
+    const scoreMeter = document.getElementById('scoreMeter');
+    const scorePercentText = document.getElementById('scorePercentText');
+    const summaryCorrect = document.getElementById('summaryCorrect');
+    const summaryWrong = document.getElementById('summaryWrong');
+    const summaryTotal = document.getElementById('summaryTotal');
+    const restartFilteredBtn = document.getElementById('restartFilteredBtn');
+    const reviewAllBtn = document.getElementById('reviewAllBtn');
+
+    // Filter Logic
+    function applyTopicFilter(topicVal) {
+      currentTopicFilter = topicVal;
+      if (topicVal === "all") {
+        activeQuestionList = [...fullQuestions];
+      } else {
+        activeQuestionList = fullQuestions.filter(q => q.topicId === topicVal);
+      }
+      currentIndex = 0;
+      questionBox.style.display = 'flex';
+      summaryCard.style.display = 'none';
+      renderQuestion();
+    }
+
+    // Audio Toggle
+    audioToggleBtn.addEventListener('click', () => {
+      audioEnabled = !audioEnabled;
+      audioToggleBtn.textContent = audioEnabled ? '🔊 المؤثرات: تفعيل' : '🔇 المؤثرات: كتم';
+    });
+
+    // Update Live Stats
+    function updateProgressStats() {
+      let correct = 0;
+      let wrong = 0;
+
+      activeQuestionList.forEach(q => {
+        const userChoice = answerStore[q.id];
+        if (userChoice !== undefined) {
+          if (userChoice.toLowerCase() === q.answer.toLowerCase()) correct++;
+          else wrong++;
+        }
+      });
+
+      badgeCorrectCount.textContent = `✅ ${correct} صح`;
+      badgeWrongCount.textContent = `❌ ${wrong} خطأ`;
+
+      const totalActive = activeQuestionList.length;
+      const currentNumber = currentIndex + 1;
+      const progressPercent = Math.round((currentNumber / totalActive) * 100);
+
+      progressThumb.style.width = `${progressPercent}%`;
+      topicProgressLabel.textContent = `التقدم: سؤال ${currentNumber} من ${totalActive} (${progressPercent}%)`;
+    }
+
+    // Render Question
+    function renderQuestion() {
+      if (activeQuestionList.length === 0) return;
+
+      const q = activeQuestionList[currentIndex];
+      questionPill.textContent = `سؤال ${currentIndex + 1} من ${activeQuestionList.length} (رقم ${q.id} بالإجمالي)`;
+      categoryTag.textContent = `الموضوع: ${q.topicName}`;
+      questionText.textContent = q.question;
+
+      optionsContainer.innerHTML = '';
+      pearlBox.style.display = 'none';
+
+      const savedAnswer = answerStore[q.id];
+
+      q.options.forEach(opt => {
+        const row = document.createElement('button');
+        row.className = 'option-row';
+        row.innerHTML = `
+          <span class="option-letter">${opt.key.toUpperCase()}</span>
+          <span class="option-text">${opt.text}</span>
+          <span class="option-marker"></span>
+        `;
+
+        if (savedAnswer !== undefined) {
+          row.disabled = true;
+          if (opt.key.toLowerCase() === q.answer.toLowerCase()) {
+            row.classList.add('is-correct');
+            row.querySelector('.option-marker').textContent = '✔';
+          } else if (opt.key.toLowerCase() === savedAnswer.toLowerCase()) {
+            row.classList.add('is-wrong');
+            row.querySelector('.option-marker').textContent = '✖';
+          }
+        } else {
+          row.addEventListener('click', () => chooseAnswer(opt.key));
+        }
+
+        optionsContainer.appendChild(row);
+      });
+
+      if (savedAnswer !== undefined) {
+        showPearl(savedAnswer.toLowerCase() === q.answer.toLowerCase(), q);
+      }
+
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.textContent = currentIndex === activeQuestionList.length - 1 ? 'عرض النتيجة 🏆' : 'التالي 🠜';
+
+      updateProgressStats();
+    }
+
+    // Choose Answer (Instant Validation)
+    function chooseAnswer(selectedKey) {
+      const q = activeQuestionList[currentIndex];
+      answerStore[q.id] = selectedKey;
+
+      const isCorrect = selectedKey.toLowerCase() === q.answer.toLowerCase();
+
+      if (isCorrect) playSound('correct');
+      else playSound('wrong');
+
+      const buttons = optionsContainer.querySelectorAll('.option-row');
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        const letter = btn.querySelector('.option-letter').textContent.toLowerCase();
+        if (letter === q.answer.toLowerCase()) {
+          btn.classList.add('is-correct');
+          btn.querySelector('.option-marker').textContent = '✔';
+        } else if (letter === selectedKey.toLowerCase() && !isCorrect) {
+          btn.classList.add('is-wrong');
+          btn.querySelector('.option-marker').textContent = '✖';
+        }
+      });
+
+      showPearl(isCorrect, q);
+      updateProgressStats();
+    }
+
+    // Show High Yield Explanation
+    function showPearl(isCorrect, q) {
+      pearlBox.className = `pearl-box ${isCorrect ? 'is-correct' : 'is-wrong'}`;
+      pearlBox.style.display = 'block';
+
+      if (isCorrect) {
+        pearlHeader.innerHTML = '✨ إجابة صحيحة يا دكتور! عاش.';
+      } else {
+        pearlHeader.innerHTML = `⚠️ إجابة خاطئة! الإجابة الصحيحة هي: (${q.answer.toUpperCase()})`;
+      }
+
+      pearlText.innerHTML = q.pearl;
+    }
+
+    // Navigation
+    function handleNext() {
+      if (currentIndex < activeQuestionList.length - 1) {
+        currentIndex++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function handlePrev() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    }
+
+    // Show Results Card
+    function showResults() {
+      questionBox.style.display = 'none';
+      summaryCard.style.display = 'block';
+
+      const topicText = topicSelect.options[topicSelect.selectedIndex].text;
+      summarySubtitle.textContent = `ملخص نتيجتك في قسم: ${topicText}`;
+
+      let correct = 0;
+      let wrong = 0;
+      activeQuestionList.forEach(q => {
+        const ans = answerStore[q.id];
+        if (ans !== undefined) {
+          if (ans.toLowerCase() === q.answer.toLowerCase()) correct++;
+          else wrong++;
+        }
+      });
+
+      const total = activeQuestionList.length;
+      const percent = Math.round((correct / total) * 100);
+
+      scorePercentText.textContent = `${percent}%`;
+      scoreMeter.style.setProperty('--perc', `${percent}%`);
+      summaryCorrect.textContent = correct;
+      summaryWrong.textContent = wrong;
+      summaryTotal.textContent = `${correct} / ${total}`;
+    }
+
+    // Populate Modal Grid
+    function renderModalGrid() {
+      modalGrid.innerHTML = '';
+      const topicText = topicSelect.options[topicSelect.selectedIndex].text;
+      modalTitle.textContent = `خريطة الأسئلة (${activeQuestionList.length} سؤال)`;
+
+      activeQuestionList.forEach((q, idx) => {
+        const cell = document.createElement('button');
+        cell.className = 'grid-cell';
+        cell.textContent = idx + 1;
+
+        if (idx === currentIndex) cell.classList.add('is-active');
+
+        const ans = answerStore[q.id];
+        if (ans !== undefined) {
+          if (ans.toLowerCase() === q.answer.toLowerCase()) {
+            cell.classList.add('answered-ok');
+          } else {
+            cell.classList.add('answered-err');
+          }
+        }
+
+        cell.addEventListener('click', () => {
+          currentIndex = idx;
+          mapModal.classList.remove('is-open');
+          questionBox.style.display = 'flex';
+          summaryCard.style.display = 'none';
+          renderQuestion();
+        });
+
+        modalGrid.appendChild(cell);
+      });
+    }
+
+    // Event Listeners
+    nextBtn.addEventListener('click', handleNext);
+    prevBtn.addEventListener('click', handlePrev);
+
+    topicSelect.addEventListener('change', (e) => {
+      applyTopicFilter(e.target.value);
+    });
+
+    openMapBtn.addEventListener('click', () => {
+      renderModalGrid();
+      mapModal.classList.add('is-open');
+    });
+
+    closeMapBtn.addEventListener('click', () => {
+      mapModal.classList.remove('is-open');
+    });
+
+    mapModal.addEventListener('click', (e) => {
+      if (e.target === mapModal) mapModal.classList.remove('is-open');
+    });
+
+    restartFilteredBtn.addEventListener('click', () => {
+      activeQuestionList.forEach(q => delete answerStore[q.id]);
+      currentIndex = 0;
+      summaryCard.style.display = 'none';
+      questionBox.style.display = 'flex';
+      renderQuestion();
+    });
+
+    reviewAllBtn.addEventListener('click', () => {
+      currentIndex = 0;
+      summaryCard.style.display = 'none';
+      questionBox.style.display = 'flex';
+      renderQuestion();
+    });
+
+    // Arrow Key Navigation
+    document.addEventListener('keydown', (e) => {
+      if (mapModal.classList.contains('is-open')) return;
+      if (e.key === 'ArrowLeft') handleNext();
+      else if (e.key === 'ArrowRight') handlePrev();
+    });
+
+    // Start App
+    applyTopicFilter("all");
+  </script>
+</body>
+</html>

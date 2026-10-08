@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CVS Histology Question Bank | إعداد: Ahmed Wael</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b14;
+      --surface: #0f172a;
+      --surface-card: #152033;
+      --surface-card-hover: #1c2b45;
+      --border: #223450;
+      --border-focus: #38bdf8;
+      --primary: #0284c7;
+      --primary-glow: rgba(2, 132, 199, 0.35);
+      --accent: #38bdf8;
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.25);
+      --danger: #ef4444;
+      --danger-glow: rgba(239, 68, 68, 0.25);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+      --shadow-luxury: 0 20px 40px -15px rgba(0, 0, 0, 0.65), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', 'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(2, 132, 199, 0.14) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.85) 0px, transparent 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Top Branding Bar */
+    .branding-bar {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-luxury);
+      flex-wrap: wrap;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .branding-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #38bdf8, #10b981, transparent);
+    }
+
+    .author-badge-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0284c7, #0f172a);
+      border: 1.5px solid rgba(56, 189, 248, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+    }
+
+    .title-area h1 {
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .title-area .author-signature {
+      font-size: 0.9rem;
+      color: #38bdf8;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .author-signature .tag {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: #7dd3fc;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .audio-toggle-btn {
+      background: #152033;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .audio-toggle-btn:hover {
+      border-color: var(--accent);
+      color: #f8fafc;
+    }
+
+    /* Topic Filter Bar */
+    .filter-wrapper {
+      background: rgba(21, 32, 51, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: var(--shadow-luxury);
+    }
+
+    .filter-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topic-select {
+      background: #0b1220;
+      border: 1.5px solid #2a3d5e;
+      color: #f1f5f9;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      outline: none;
+      cursor: pointer;
+      min-width: 320px;
+      transition: all 0.2s;
+      direction: rtl;
+    }
+
+    .topic-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .topic-select option {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 8px;
+    }
+
+    /* Live Progress Bar */
+    .progress-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .score-indicators {
+      display: flex;
+      gap: 8px;
+    }
+
+    .badge-stat {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-stat.correct {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-stat.wrong {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      height: 8px;
+      background: #090d16;
+      border-radius: 9999px;
+      overflow: hidden;
+      border: 1px solid #1e2e47;
+    }
+
+    .progress-bar-thumb {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0284c7, #38bdf8, #10b981);
+      border-radius: 9999px;
+      transition: width 0.35s ease;
+    }
+
+    /* Question Main Card */
+    .question-viewport {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-luxury);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+    }
+
+    .question-headline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      padding-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .q-number-pill {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 5px 14px;
+      border-radius: 8px;
+    }
+
+    .q-category-tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .question-body {
+      font-size: 1.22rem;
+      font-weight: 700;
+      line-height: 1.6;
+      color: #f8fafc;
+      direction: ltr;
+      text-align: left;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Options Stack */
+    .options-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .option-row {
+      background: #0b1220;
+      border: 1.5px solid #1c2c47;
+      color: #e2e8f0;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 1.02rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 100%;
+      outline: none;
+      user-select: none;
+    }
+
+    .option-row:hover:not(:disabled) {
+      background: #141f35;
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.15);
+    }
+
+    .option-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: #152238;
+      border: 1px solid #283d60;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #94a3b8;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .option-text {
+      flex: 1;
+      line-height: 1.45;
+    }
+
+    .option-marker {
+      margin-left: auto;
+      font-size: 1.25rem;
+      display: none;
+      flex-shrink: 0;
+    }
+
+    /* Option States */
+    .option-row.is-correct {
+      background: rgba(16, 185, 129, 0.18) !important;
+      border-color: #10b981 !important;
+      color: #a7f3d0 !important;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    }
+
+    .option-row.is-correct .option-letter {
+      background: #10b981;
+      color: #064e3b;
+      border-color: #10b981;
+    }
+
+    .option-row.is-correct .option-marker {
+      display: inline-block;
+      color: #34d399;
+    }
+
+    .option-row.is-wrong {
+      background: rgba(239, 68, 68, 0.18) !important;
+      border-color: #ef4444 !important;
+      color: #fca5a5 !important;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+    }
+
+    .option-row.is-wrong .option-letter {
+      background: #ef4444;
+      color: #450a0a;
+      border-color: #ef4444;
+    }
+
+    .option-row.is-wrong .option-marker {
+      display: inline-block;
+      color: #f87171;
+    }
+
+    .option-row:disabled {
+      cursor: default;
+    }
+
+    /* High-Yield Histology Pearl Box */
+    .pearl-box {
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      display: none;
+      animation: slideUp 0.3s ease;
+      direction: rtl;
+      text-align: right;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pearl-box.is-correct {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #a7f3d0;
+    }
+
+    .pearl-box.is-wrong {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #fca5a5;
+    }
+
+    .pearl-header {
+      font-weight: 800;
+      font-size: 1.12rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .pearl-text {
+      font-size: 0.98rem;
+      color: #e2e8f0;
+      line-height: 1.7;
+    }
+
+    .pearl-text strong {
+      color: #38bdf8;
+    }
+
+    /* Bottom Nav Bar */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .nav-btn {
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.96rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .nav-btn-next {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: white;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+    }
+
+    .nav-btn-next:hover:not(:disabled) {
+      background: linear-gradient(135deg, #0369a1, #075985);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn-prev {
+      background: #111a2b;
+      color: var(--text-muted);
+      border: 1px solid #203048;
+    }
+
+    .nav-btn-prev:hover:not(:disabled) {
+      background: #19273f;
+      color: white;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .nav-btn-map {
+      background: #0b1220;
+      color: #94a3b8;
+      border: 1px solid #203048;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-btn-map:hover {
+      border-color: #38bdf8;
+      color: #f8fafc;
+    }
+
+    /* Quick Jump Grid Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .modal-backdrop.is-open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #0f172a;
+      border: 1px solid #273852;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 720px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-luxury);
+      animation: modalZoom 0.25s ease;
+    }
+
+    @keyframes modalZoom {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-top {
+      padding: 20px 26px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-top h3 {
+      font-size: 1.2rem;
+      color: #38bdf8;
+      font-weight: 800;
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .modal-grid-body {
+      padding: 24px;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+      gap: 10px;
+      direction: ltr;
+    }
+
+    .grid-cell {
+      height: 50px;
+      border-radius: 10px;
+      background: #0b1220;
+      border: 1px solid #203048;
+      color: var(--text);
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .grid-cell:hover {
+      border-color: #38bdf8;
+      transform: scale(1.06);
+    }
+
+    .grid-cell.answered-ok {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: #10b981;
+      color: #34d399;
+    }
+
+    .grid-cell.answered-err {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: #ef4444;
+      color: #f87171;
+    }
+
+    .grid-cell.is-active {
+      outline: 2px solid #38bdf8;
+      outline-offset: 2px;
+    }
+
+    /* Results Screen */
+    .summary-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 44px 30px;
+      text-align: center;
+      display: none;
+      box-shadow: var(--shadow-luxury);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .score-meter {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: conic-gradient(#10b981 var(--perc, 0%), #1e2c42 var(--perc, 0%));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px auto;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+    }
+
+    .score-meter-inner {
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+
+    .score-meter-inner .val {
+      font-size: 2.2rem;
+      color: #f8fafc;
+      font-weight: 900;
+    }
+
+    .score-details-row {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin: 26px 0;
+      flex-wrap: wrap;
+    }
+
+    .score-box {
+      background: #0b1220;
+      border: 1px solid #203048;
+      border-radius: 14px;
+      padding: 16px 26px;
+      min-width: 150px;
+    }
+
+    .score-box .num {
+      font-size: 1.8rem;
+      font-weight: 900;
+    }
+
+    .score-box .label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      padding: 12px 0 24px 0;
+      margin-top: auto;
+    }
+
+    footer span {
+      color: #38bdf8;
+      font-weight: 700;
+    }
+
+    /* Responsive */
+    @media (max-width: 680px) {
+      body { padding: 12px 10px; }
+      .question-viewport { padding: 22px 16px; }
+      .question-body { font-size: 1.1rem; }
+      .option-row { padding: 14px 16px; font-size: 0.96rem; }
+      .branding-bar { padding: 16px; }
+      .topic-select { min-width: 100%; }
+      .title-area h1 { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Top Branding Bar -->
+    <header class="branding-bar">
+      <div class="author-badge-group">
+        <div class="avatar-icon">🔬</div>
+        <div class="title-area">
+          <h1>CVS Histology Master Bank</h1>
+          <div class="author-signature">
+            <span>إعداد وتجميع: Ahmed Wael</span>
+            <span class="tag">Histology CVS Module 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="audio-toggle-btn" id="audioToggleBtn">
+          🔊 المؤثرات: تفعيل
+        </button>
+      </div>
+    </header>
+
+    <!-- Topic Selector & Custom Index Filter -->
+    <section class="filter-wrapper">
+      <div class="filter-top">
+        <div class="filter-label">
+          📚 اختـر المـوضـوع للـمـذاكـرة:
+        </div>
+        <select class="topic-select" id="topicSelect">
+          <option value="all">🌟 جميع أسئلة الهستولوجي (48 سؤالاً بالكامل)</option>
+          <option value="1">1. Structure of Arteries (Elastic, Muscular & Arterioles) (9 أسئلة)</option>
+          <option value="2">2. Microcirculation & Capillaries (9 أسئلة)</option>
+          <option value="3">3. Structure of Veins & Lymphatics (10 أسئلة)</option>
+          <option value="4">4. Vascular Wall Histology & Embryogenesis (4 أسئلة)</option>
+          <option value="5">5. Heart Wall Layers (Endo, Myo, Epicardium & Valves) (12 سؤالاً)</option>
+          <option value="6">6. Impulse Conducting System & Purkinje (4 أسئلة)</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Progress Card -->
+    <section class="progress-card">
+      <div class="progress-meta">
+        <span id="topicProgressLabel">التقدم: 1 من 48</span>
+        <div class="score-indicators">
+          <span class="badge-stat correct" id="badgeCorrectCount">✅ 0 صح</span>
+          <span class="badge-stat wrong" id="badgeWrongCount">❌ 0 خطأ</span>
+        </div>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-thumb" id="progressThumb"></div>
+      </div>
+    </section>
+
+    <!-- Active Question Viewport -->
+    <main class="question-viewport" id="questionBox">
+      <div class="question-headline">
+        <span class="q-number-pill" id="questionPill">سؤال 1</span>
+        <span class="q-category-tag" id="categoryTag">الموضوع: Structure of Arteries</span>
+      </div>
+
+      <div class="question-body" id="questionText">Loading question...</div>
+
+      <div class="options-stack" id="optionsContainer">
+        <!-- Rendered options -->
+      </div>
+
+      <!-- Human-Crafted High-Yield Pearl -->
+      <div class="pearl-box" id="pearlBox">
+        <div class="pearl-header" id="pearlHeader"></div>
+        <div class="pearl-text" id="pearlText"></div>
+      </div>
+
+      <!-- Navigation & Controls -->
+      <div class="nav-bar">
+        <button class="nav-btn nav-btn-prev" id="prevBtn" disabled>
+          ➔ السابق
+        </button>
+
+        <button class="nav-btn-map" id="openMapBtn">
+          📋 خريطة أسئلة هذا القسم
+        </button>
+
+        <button class="nav-btn-next" id="nextBtn">
+          التالي 🠜
+        </button>
+      </div>
+    </main>
+
+    <!-- Summary / Results Screen -->
+    <div class="summary-card" id="summaryCard">
+      <h2 style="font-size: 1.8rem; margin-bottom: 6px; color: #38bdf8;">🏆 عاش يا دكتور! أنهيت الأسئلة بنجاح</h2>
+      <p style="color: var(--text-muted); margin-bottom: 24px;" id="summarySubtitle">ملخص أدائك في قسم: جميع الموضوعات</p>
+
+      <div class="score-meter" id="scoreMeter">
+        <div class="score-meter-inner">
+          <span class="val" id="scorePercentText">0%</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">الدرجة الكلية</span>
+        </div>
+      </div>
+
+      <div class="score-details-row">
+        <div class="score-box">
+          <div class="num" style="color: #34d399;" id="summaryCorrect">0</div>
+          <div class="label">إجابات صحيحة</div>
+        </div>
+        <div class="score-box">
+          <div class="num" style="color: #f87171;" id="summaryWrong">0</div>
+          <div class="label">إجابات خاطئة</div>
+        </div>
+        <div class="score-box">
+          <div class="num" style="color: #38bdf8;" id="summaryTotal">0 / 48</div>
+          <div class="label">مجموع الأسئلة</div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 14px; margin-top: 26px; flex-wrap: wrap;">
+        <button class="nav-btn nav-btn-next" id="restartFilteredBtn">
+          🔁 إعادة حل هذا القسم
+        </button>
+        <button class="nav-btn nav-btn-prev" id="reviewAllBtn">
+          🔍 مراجعة الأسئلة
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Jump Modal -->
+    <div class="modal-backdrop" id="mapModal">
+      <div class="modal-box">
+        <div class="modal-top">
+          <h3 id="modalTitle">خريطة أسئلة القسم الحالي</h3>
+          <button class="modal-close-btn" id="closeMapBtn">&times;</button>
+        </div>
+        <div class="modal-grid-body" id="modalGrid">
+          <!-- Cells -->
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      محتوى وأسئلة من إعداد وتنسيق <span>Ahmed Wael</span> • لدفعة الطب البشري 🔬
+    </footer>
+
+  </div>
+
+  <script>
+    // Audio synthesizer
+    let audioEnabled = true;
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSound(type) {
+      if (!audioEnabled || !audioCtx) return;
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+        if (type === 'correct') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        } else if (type === 'wrong') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.exponentialRampToValueAtTime(146.83, now + 0.2);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        }
+      } catch (e) { }
+    }
+
+    // 48 Histology Questions Categorized into 6 Chapters
+    const fullQuestions = [
+      {
+        id: 1, topicId: "1", topicName: "Structure of Arteries",
+        question: "1. Each of the following statements concerning the elastic type arteries is true, EXCEPT:",
+        options: [
+          { key: "A", text: "Their tunica intima is relatively thick, contains smooth muscle cells and elastic fibers;" },
+          { key: "B", text: "They are the largest-diameter arteries;" },
+          { key: "C", text: "Blood pressure in these arteries is the least;" },
+          { key: "D", text: "Their internal and external membranes are not conspicuous;" },
+          { key: "E", text: "Elastic fenestrated membranes are predominate in their tunica media." }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Ahmed Wael's Microscopic Pearl:</strong> الشرايين المرنة (زي الأبهر والجذع الرئوي) بتستقبل الدم مباشرة من البطينين، فضغط الدم جواها هو <strong>الأعلى على الإطلاق (Highest BP ~120/80)</strong> مش الأقل خالص! الأقل بيكون في الشعيرات والأوردة."
+      },
+      {
+        id: 2, topicId: "1", topicName: "Structure of Arteries",
+        question: "2. Each of the following statements concerning the arterioles is true, EXCEPT:",
+        options: [
+          { key: "A", text: "The internal elastic membrane may or may not be present in their tunica intima;" },
+          { key: "B", text: "Blood pressure in them is the highest in the arterial bed;" },
+          { key: "C", text: "Their tunica media has one or two smooth muscle layers;" },
+          { key: "D", text: "their smooth muscles form precapillary sphincters;" },
+          { key: "E", text: "they control blood flow to the capillary bed." }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Hemodynamics:</strong> الشريينات (Arterioles) هي أوعية المقاومة الرئيسية (Resistance vessels)، فالضغط جواها بينخفض بشكل حاد ومش الأعلى خالص! أعلى ضغط بيكون في الشرايين الكبيرة والأبهر."
+      },
+      {
+        id: 18, topicId: "1", topicName: "Structure of Arteries",
+        question: "18. The following statements regarding the artery structure are true:\n(1) the tunica media is its thickest layer\n(2) possesses the internal and external elastic membranes (except elastic type arteries)\n(3) its tunica media abounds in elastic elements (fibres or membranes)\n(4) blood vessels supply only its outer portion, the inner portion is supplied by diffusion",
+        options: [
+          { key: "A", text: "(1) only" },
+          { key: "B", text: "(1) and (2)" },
+          { key: "C", text: "(1), (2), (3)" },
+          { key: "D", text: "All of the above" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Artery Wall Features:</strong> كل العبارات صحيحة تماماً: الميديا هي الأسمك دائماً في الشرايين، والـ Vasa vasorum بتغذي الثلث الخارجي فقط بينما الثلثين الداخليين بيتغذوا بالانتشار (Diffusion) من دم التجويف."
+      },
+      {
+        id: 19, topicId: "1", topicName: "Structure of Arteries",
+        question: "19. The arteries are classified into the following types:\n(1) Muscular\n(2) Muscular-elastic\n(3) Elastic\n(4) Muscle-free",
+        options: [
+          { key: "A", text: "All of the above" },
+          { key: "B", text: "All except 4" },
+          { key: "C", text: "(1) and (3) only" },
+          { key: "D", text: "(1) only" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Classification:</strong> الشرايين مفيهاش حاجة اسمها Muscle-free إطلاقاً! الأوردة هي اللي ممكن تكون خالية من العضلات (Non-muscular veins زي أوردة السحايا والمخ والعظام)."
+      },
+      {
+        id: 20, topicId: "1", topicName: "Structure of Arteries",
+        question: "20. The following statements regarding the Muscular-elastic arteries is true:\n(1) Branches of elastic arteries\n(2) BP in these arteries > aorta\n(3) their tunica media contains approximately an equal amount of smooth muscle cells and elastic elements\n(4) blood vessels supply three layers of their wall",
+        options: [
+          { key: "A", text: "(1) and (3) are true" },
+          { key: "B", text: "(2) and (4) are true" },
+          { key: "C", text: "All of the above" },
+          { key: "D", text: "(3) only" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Transitional Arteries:</strong> الشرايين العضلية-المرنة (زي السباتي الأصلي وتحت الترقوة) هي فروع للشرايين المرنة، وطبقة الميديا فيها بتحتوي على كميات متساوية تقريباً من الألياف العضلية والعناصر المرنة."
+      },
+      {
+        id: 21, topicId: "1", topicName: "Structure of Arteries",
+        question: "21. The following statements regarding the Muscular arteries is true:\n(1) blood pressure is the highest in these arteries\n(2) they are small-calibre arteries\n(3) they lack the internal and external elastic membranes\n(4) smooth muscle cells are predominant in their tunica media",
+        options: [
+          { key: "A", text: "(1) only" },
+          { key: "B", text: "(2) only" },
+          { key: "C", text: "(3) only" },
+          { key: "D", text: "(4) smooth muscle cells are predominant in their tunica media" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Muscular Arteries (Distributing):</strong> طبقة الـ Tunica media فيها بتتكون أساساً وبشكل سائد من خلايا عضلية ملساء دائرية (حتى 40 طبقة) للتحكم في كمية الدم الواصلة للأعضاء."
+      },
+      {
+        id: 39, topicId: "1", topicName: "Structure of Arteries",
+        question: "39. Internal elastic lamina is most clearly seen in:",
+        options: [
+          { key: "a", text: "Medium sized veins" },
+          { key: "b", text: "Muscular arteries" },
+          { key: "c", text: "Arterioles" },
+          { key: "d", text: "Inferior vena cava" },
+          { key: "e", text: "Aorta" }
+        ],
+        answer: "b",
+        pearl: "📌 <strong>Key Landmark:</strong> الصفيحة المرنة الداخلية (IEL) بتكون أوضح ومتموجة ومميزة جداً (Scalloped & Wavy) في <strong>الشرايين العضلية متوسطة الحجم (Muscular arteries)</strong>، بينما في الأبهر بتندمج مع صفائح الميديا ومبتكونش واضحة منفرداً."
+      },
+      {
+        id: 40, topicId: "1", topicName: "Structure of Arteries",
+        question: "40. The following vessel contains the largest number of elastic fibers in its media:",
+        options: [
+          { key: "a", text: "Inferior vena cava" },
+          { key: "b", text: "Jugular vein" },
+          { key: "c", text: "Medium sized artery" },
+          { key: "d", text: "Aorta" },
+          { key: "e", text: "Coronary artery" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Elastic Laminae:</strong> الأبهر (Aorta) بيحتوي في الميديا بتاعته على 40 لـ 70 صفيحة مرنة مثقبة متحدة المركز (Fenestrated elastic membranes) عشان يقدر يتمدد مع ضخ القلب."
+      },
+      {
+        id: 41, topicId: "1", topicName: "Structure of Arteries",
+        question: "41. All the following are true about large elastic arteries EXCEPT:",
+        options: [
+          { key: "a", text: "They have simple endothelial lining" },
+          { key: "b", text: "Tunica media is larger than tunica adventitia" },
+          { key: "c", text: "The media is rich in elastic fibers" },
+          { key: "d", text: "The internal elastic lamina is visible" },
+          { key: "e", text: "Tunica adventitia contains vasa vasorum" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Exam Classic:</strong> في الشرايين المرنة الكبيرة، الصفيحة المرنة الداخلية (Internal elastic lamina) <strong>غير واضحة وغير مميزة (Not distinct/visible)</strong> لأن الميديا مليانة صفائح مرنة مماثلة ليها."
+      },
+      {
+        id: 3, topicId: "2", topicName: "Microcirculation & Capillaries",
+        question: "3. The microcirculatory bed includes the following vessels, EXCEPT:",
+        options: [
+          { key: "A", text: "arterioles;" },
+          { key: "B", text: "venules;" },
+          { key: "C", text: "capillaries;" },
+          { key: "D", text: "arteriovenous anastomoses (shunts);" },
+          { key: "E", text: "lymphatic ducts." }
+        ],
+        answer: "E",
+        pearl: "📌 <strong>Microcirculation:</strong> سرير الدورة الدموية الدقيقة بيشمل: Arterioles, Metarterioles, Capillaries, Postcapillary venules, و AV shunts. القنوات اللمفاوية الكبيرة (Lymphatic ducts) دي أوعية توصيل كبرى ومش تبع الـ Microcirculation."
+      },
+      {
+        id: 4, topicId: "2", topicName: "Microcirculation & Capillaries",
+        question: "4. Each of the following statements concerning the capillaries is true, EXCEPT:",
+        options: [
+          { key: "A", text: "Contain smooth muscle cells;" },
+          { key: "B", text: "consist of endothelial cells on the basal lamina;" },
+          { key: "C", text: "Their diameter is often smaller than that of erythrocytes;" },
+          { key: "D", text: "Possess selective permeability;" },
+          { key: "E", text: "Histamine increases capillary permeability" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>No Muscle in Capillaries:</strong> جدار الشعيرات الدموية <strong>مفهوش أي خلايا عضلية ملساء إطلاقاً (Devoid of smooth muscle)</strong>! بيتكون فقط من خلايا إندوثيليوم وغشاء قاعدي و Pericytes."
+      },
+      {
+        id: 5, topicId: "2", topicName: "Microcirculation & Capillaries",
+        question: "5. Each of the following statements concerning the continuous capillaries is true, EXCEPT:",
+        options: [
+          { key: "A", text: "Are endothelial tubules" },
+          { key: "B", text: "Typically found in endocrine glands;" },
+          { key: "C", text: "Their endothelial cells are joined by tight junctions;" },
+          { key: "D", text: "Their endothelial cells abound in pinocytotic vesicles;" },
+          { key: "E", text: "pericytes enclosed by the endothelial basal membrane may be found." }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Location Rule:</strong> الغدد الصماء (Endocrine glands) والكلى والأمعاء بتحتوي على شعيرات مثقبة (Fenestrated capillaries) لسهولة مرور الهرمونات والمواد. الشعيرات المستمرة (Continuous) موجودة في العضلات والمخ والجلد والرئة."
+      },
+      {
+        id: 23, topicId: "2", topicName: "Microcirculation & Capillaries",
+        question: "23. Capillary are divided into the following types:\n(1) Continuous\n(2) Fenestrated\n(3) Discontinuous\n(4) Mixed",
+        options: [
+          { key: "A", text: "All of the above" },
+          { key: "B", text: "All except 4" },
+          { key: "C", text: "(1) and (2) only" },
+          { key: "D", text: "(3) only" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Types of Capillaries:</strong> بتنقسم الشعيرات لثلاثة أنواع نسيجية معتمدة: Continuous (مستمرة)، Fenestrated (مثقبة)، و Discontinuous/Sinusoidal (جيبية متقطعة)."
+      },
+      {
+        id: 24, topicId: "2", topicName: "Microcirculation & Capillaries",
+        question: "24. Fenestrated capillaries:\n(1) Have fenestrations\n(2) their fenestrations provide channels in the capillary wall\n(3) have Pinocytotic vesicles\n(4) typically found in muscles",
+        options: [
+          { key: "A", text: "All of the above" },
+          { key: "B", text: "All except 4" },
+          { key: "C", text: "(1) and (2) only" },
+          { key: "D", text: "(4) only" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Fenestrated Capillaries:</strong> موجودة في الكلى والغدد الصماء والأمعاء، بينما العضلات (Muscles) بتحتوي على Continuous capillaries مش Fenestrated."
+      },
+      {
+        id: 25, topicId: "2", topicName: "Microcirculation & Capillaries",
+        question: "25. Discontinuous capillaries:\n(1) Typically Found in liver/spleen/bone marrow\n(2) Are characterized by Pores in endothelial cells and between them\n(3) Are characterized by absence of the basal lamina under pores\n(4) pericytes may be found in their wall",
+        options: [
+          { key: "A", text: "All of the above" },
+          { key: "B", text: "All except 4" },
+          { key: "C", text: "(1) and (2) only" },
+          { key: "D", text: "(1) only" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Sinusoids:</strong> الشعيرات المتقطعة (Sinusoids) في الكبد والطحال ونخاع العظم بتتميز بفجوات واسعة وغشاء قاعدي غير مكتمل ومفيهاش خلايا Pericytes."
+      },
+      {
+        id: 31, topicId: "2", topicName: "Microcirculation & Capillaries",
+        question: "31. The following statements regarding the Arteriovenous anastomoses are true:\n(1) may be Simple/complex\n(2) convey blood to venules bypassing the capillary bed\n(3) Regulate organ blood filling\n(4) serve in thermoregulation at body surface",
+        options: [
+          { key: "A", text: "(1) and (2) only" },
+          { key: "B", text: "(2) and (4) only" },
+          { key: "C", text: "All of the above" },
+          { key: "D", text: "(4) only" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>AV Shunts:</strong> التفاغر الشرياني الوريدي بيسمح بمرور الدم مباشرة للوريدات متجاوزاً الشعيرات، وله دور محوري في تنظيم حرارة الجسم وضغط الدم وتغذية الأعضاء."
+      },
+      {
+        id: 42, topicId: "2", topicName: "Microcirculation & Capillaries",
+        question: "42. Sinusoidal capillaries are found in:",
+        options: [
+          { key: "a", text: "Endocrine glands" },
+          { key: "b", text: "Muscular tissues" },
+          { key: "c", text: "Intestines" },
+          { key: "d", text: "Spleen" },
+          { key: "e", text: "Spinal cord" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Sinusoid Organs:</strong> الشعيرات الجيبية المتقطعة (Sinusoidal capillaries) موجودة في <strong>الطحال (Spleen)</strong> والكبد ونخاع العظم للسماح بمرور خلايا الدم والبروتينات الكبيرة."
+      },
+      {
+        id: 45, topicId: "2", topicName: "Microcirculation & Capillaries",
+        question: "45. Fenestrated capillaries are found in:",
+        options: [
+          { key: "a", text: "Spleen" },
+          { key: "b", text: "Liver" },
+          { key: "c", text: "Endocrine glands" },
+          { key: "d", text: "Brain" },
+          { key: "e", text: "Muscular & nervous tissues" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Fenestrated Sites:</strong> الشعيرات المثقبة بفتحات مغطاة بحجاب رقيق موجودة في <strong>الغدد الصماء (Endocrine glands)</strong> لسرعة امتصاص الهرمونات في مجرى الدم."
+      },
+      {
+        id: 6, topicId: "3", topicName: "Structure of Veins & Lymphatics",
+        question: "6. Each of the following statements concerning the postcapillary venules is true, EXCEPT:",
+        options: [
+          { key: "A", text: "consist of endothelium on the basal lamina" },
+          { key: "B", text: "contain pericytes" },
+          { key: "C", text: "contain smooth muscle cells" },
+          { key: "D", text: "are the sites of histamine action" },
+          { key: "E", text: "leukocytes emigrate through their wall into tissues (especially in inflammation and allergic reactions)." }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Postcapillary Venules:</strong> الوريدات بعد الشعيرية بتشبه الشعيرات ومحاطة بخلايا Pericytes فقط، و<strong>مفيهاش خلايا عضلية ملساء (Devoid of smooth muscle cells)</strong>. العضلات بتظهر فقط في الـ Muscular venules الأكبر."
+      },
+      {
+        id: 7, topicId: "3", topicName: "Structure of Veins & Lymphatics",
+        question: "7. Each of the following statements concerning the vein structure is true, EXCEPT:",
+        options: [
+          { key: "A", text: "Is devoid of the internal and external elastic membranes;" },
+          { key: "B", text: "contains few elastic elements" },
+          { key: "C", text: "blood vessels supply all its layers" },
+          { key: "D", text: "Its tunica media is thicker than the tunica adventitia;" },
+          { key: "E", text: "Its tunica intima may possess valves." }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Vein vs Artery Rule:</strong> في الأوردة، طبقة الـ <strong>Tunica adventitia هي الأسمك دائماً</strong> بينما الـ Tunica media بتكون رقيقة نسبياً، بعكس الشرايين تماماً!"
+      },
+      {
+        id: 13, topicId: "3", topicName: "Structure of Veins & Lymphatics",
+        question: "13. Each of the following statements concerning the lymphatic capillaries is true, EXCEPT:",
+        options: [
+          { key: "A", text: "have a continuous basal lamina;" },
+          { key: "B", text: "are formed by endothelial cells;" },
+          { key: "C", text: "drain most tissues;" },
+          { key: "D", text: "are “blind-ending tubules”;" },
+          { key: "E", text: "anchoring filaments extend between the lymphatic endothelium and the perivascular collagen." }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Lymphatic Basal Lamina:</strong> الشعيرات اللمفاوية بتبدأ كأنابيب مغلقة النهاية (Blind-ended) والغشاء القاعدي بتاعها <strong>غير مكتمل أو غائب (Discontinuous/absent basal lamina)</strong> عشان يسمح بدخول السوائل والبروتينات الكبيرة بسهولة."
+      },
+      {
+        id: 14, topicId: "3", topicName: "Structure of Veins & Lymphatics",
+        question: "14. Large lymphatic vessels: All are true EXCEPT:",
+        options: [
+          { key: "A", text: "Similar to venules but with larger lumen" },
+          { key: "B", text: "Lack valves" },
+          { key: "C", text: "Return lymph to venous system" },
+          { key: "D", text: "Thin walls obscure tunics" },
+          { key: "E", text: "Lymph moves via skeletal muscle compression" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Lymphatic Valves:</strong> الأوعية اللمفاوية بتحتوي على <strong>أعداد كبيرة جداً من الصمامات (Rich in valves)</strong> لمنع ارتداد اللمف، فجملة Lack valves دي خاطئة تماماً."
+      },
+      {
+        id: 26, topicId: "3", topicName: "Structure of Veins & Lymphatics",
+        question: "26. Veins are classified into the following types:\n(1) Elastic\n(2) Muscular\n(3) Muscular-elastic\n(4) Muscle-free (fiber type)",
+        options: [
+          { key: "A", text: "Muscular and Muscle-free (2 and 4)" },
+          { key: "B", text: "Elastic and Muscular (1 and 2)" },
+          { key: "C", text: "All of the above" },
+          { key: "D", text: "(1) only" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Vein Classification:</strong> نسيجياً، الأوردة بتنقسم لنوعين رئيسيين: أوردة عضلية (Muscular veins) وأوردة عديمة العضلات ليفية (Muscle-free / Fibrous type)."
+      },
+      {
+        id: 27, topicId: "3", topicName: "Structure of Veins & Lymphatics",
+        question: "27. Muscular veins are subdivided into the following groups:\n(1) small muscle content\n(2) Moderate muscle content\n(3) large muscle content\n(4) Muscular-elastic",
+        options: [
+          { key: "A", text: "All of the above" },
+          { key: "B", text: "All except 4" },
+          { key: "C", text: "(1) and (2) only" },
+          { key: "D", text: "(3) only" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Muscular Vein Subtypes:</strong> الأوردة العضلية بتتصنف حسب كمية العضلات الملساء لثلاث فئات: ضعيفة المحتوى، متوسطة، وكبيرة المحتوى العضلي (All except 4)."
+      },
+      {
+        id: 28, topicId: "3", topicName: "Structure of Veins & Lymphatics",
+        question: "28. The following statements regarding the Fiber-type veins are true:\n(1) they usually convey blood towards gravity\n(2) Wall consist of the tunica intima + tunica adventitia\n(3) their wall is devoid of the tunica media\n(4) contain Muscles in tunica adventitia",
+        options: [
+          { key: "A", text: "All of the above" },
+          { key: "B", text: "All except 4" },
+          { key: "C", text: "(1) and (3) only" },
+          { key: "D", text: "(2) only" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Fiber-Type Veins:</strong> الأوردة الليفية (زي الجيوب الوريدية السحائية وأوردة المشيمة وشبكية العين) جدارها خالي تماماً من خلايا العضلات الملساء في كل طبقاتها (All except 4)."
+      },
+      {
+        id: 29, topicId: "3", topicName: "Structure of Veins & Lymphatics",
+        question: "29. The smooth muscle cells are located in the veins with a large muscle content:\n(1) Circularly in the tunica media\n(2) Longitudinally in the tunica intima (separate cells)\n(3) Longitudinally in the tunica adventitia (bundles of cells)\n(4) Longitudinally in the tunica media",
+        options: [
+          { key: "A", text: "All of the above" },
+          { key: "B", text: "All except 4" },
+          { key: "C", text: "(1) and (3) only" },
+          { key: "D", text: "(2) only" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Large Veins (IVC & Saphenous):</strong> العضلات بتكون دائرية في الميديا، وطولية في حزم قوية في الـ Adventitia، وخلايا طولية متفرقة في الـ Intima (All except 4)."
+      },
+      {
+        id: 43, topicId: "3", topicName: "Structure of Veins & Lymphatics",
+        question: "43. Which of the following contain valves?",
+        options: [
+          { key: "a", text: "Radial artery" },
+          { key: "b", text: "Basilar artery" },
+          { key: "c", text: "Veins of the lower limbs" },
+          { key: "e", text: "Coronary arteries" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Venous Valves:</strong> الصمامات (Valves) هي ثنيات من الـ Tunica intima خاصة بـ <strong>الأوردة (خصوصاً أوردة الأطراف السفلية)</strong> لمنع ارتجاع الدم بفعل الجاذبية، ومبتوجدش في الشرايين أبداً."
+      },
+      {
+        id: 44, topicId: "3", topicName: "Structure of Veins & Lymphatics",
+        question: "44. Vasa vasorum are usually seen in:",
+        options: [
+          { key: "a", text: "Intima of large veins" },
+          { key: "b", text: "Adventitia of large veins" },
+          { key: "c", text: "Media of large arteries" },
+          { key: "d", text: "Media of large veins" },
+          { key: "e", text: "Media of muscular arteries" }
+        ],
+        answer: "b",
+        pearl: "📌 <strong>Vasa Vasorum:</strong> أوعية الأوعية الدموية بتتواجد في الطبقة الخارجية <strong>Tunica adventitia للأوعية الكبيرة</strong> لتغذية جدار الوعاء السميك."
+      },
+      {
+        id: 15, topicId: "4", topicName: "Vascular Wall Histology & Embryogenesis",
+        question: "15. The vascular tunica intima consists of:\n(1) Endothelium on the basal lamina\n(2) Subendothelial connective tissue layer\n(3) Internal elastic membrane (mainly in arteries)\n(4) Circular smooth muscle layer",
+        options: [
+          { key: "A", text: "All of the above" },
+          { key: "B", text: "All except 4" },
+          { key: "C", text: "(1) and (2) only" },
+          { key: "D", text: "(1) only" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Tunica Intima:</strong> الطبقة الباطنة بتتكون من إندوثيليوم وغشاء قاعدي وطبقة تحت إندوثيلية وصفيحة مرنة داخلية. طبقة العضلات الدائرية تبع الـ Tunica Media (All except 4)."
+      },
+      {
+        id: 16, topicId: "4", topicName: "Vascular Wall Histology & Embryogenesis",
+        question: "16. The following statements regarding the vascular tunica media are true:\n(1) consists of circular layers of smooth muscle cells\n(2) contains a variable amount of elastin (mainly in arteries)\n(3) contains reticular fibres and proteoglycans secreted by smooth muscle cells\n(4) is relatively thick in arteries and relatively thin in veins",
+        options: [
+          { key: "A", text: "(1) only" },
+          { key: "B", text: "(1) and (2)" },
+          { key: "C", text: "(1), (2), (3)" },
+          { key: "D", text: "ALL of the above" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Tunica Media:</strong> جميع العبارات صحيحة؛ الميديا بتتكون من خلايا عضلية ملساء دائرية وإيلاستين وألياف شبكية وبروتيوغليكان وتكون سميكة في الشرايين ورقيقة في الأوردة."
+      },
+      {
+        id: 17, topicId: "4", topicName: "Vascular Wall Histology & Embryogenesis",
+        question: "17. The following statements regarding the vascular tunica adventitia are true:\n(1) consists of loose connective tissue\n(2) contains blood vessels and nerves\n(3) is separated from the tunica media by the external elastic membrane (mainly in arteries)\n(4) is relatively thin in arteries and relatively thick in veins",
+        options: [
+          { key: "A", text: "(1) only" },
+          { key: "B", text: "(1) and (2)" },
+          { key: "C", text: "(1), (2), (3)" },
+          { key: "D", text: "All of the above" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Tunica Adventitia:</strong> جميع العبارات صحيحة؛ الـ Adventitia نسيج ضام مفكك غني بالـ Vasa vasorum والأعصاب وتفصلها الـ EEL عن الميديا وتكون سميكة جداً في الأوردة."
+      },
+      {
+        id: 22, topicId: "4", topicName: "Vascular Wall Histology & Embryogenesis",
+        question: "22. In embryogenesis the Blood vessel are derived from :",
+        options: [
+          { key: "A", text: "(1) Endoderm" },
+          { key: "B", text: "(2) Ectoderm" },
+          { key: "C", text: "(3) Mesoderm and (4) Mesenchyme" },
+          { key: "D", text: "All germ layers" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Angiogenesis:</strong> الأوعية الدموية وخلايا الدم بتنشأ جنينياً من <strong>الميزوديرم والنسيج المتوسط (Mesenchyme / Mesoderm)</strong> عبر الجزر الدموية (Blood islands)."
+      },
+      {
+        id: 8, topicId: "5", topicName: "Heart Wall Layers",
+        question: "8. Each of the following statements concerning the endocardium is true, EXCEPT:",
+        options: [
+          { key: "A", text: "includes endothelium and subendothelial layer;" },
+          { key: "B", text: "contains middle layer of elastic fibres and smooth muscle cells;" },
+          { key: "C", text: "is supplied by diffusion;" },
+          { key: "D", text: "possesses blood vessels;" },
+          { key: "E", text: "has a deeper layer of connective tissue." }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Endocardium Nutrition:</strong> شغاف القلب (Endocardium) نسيجياً يعتبر وعاء خالي من الأوعية الدموية (Avascular) وبيتغذى مباشرة بالانتشار (Diffusion) من الدم الجاري في تجاويف القلب."
+      },
+      {
+        id: 9, topicId: "5", topicName: "Heart Wall Layers",
+        question: "9. The myocardium consists of the following structures, EXCEPT:",
+        options: [
+          { key: "A", text: "typical cardiac muscle cells;" },
+          { key: "B", text: "atypical cardiac muscle cells of the impulse-conducting system;" },
+          { key: "C", text: "abundance of adipose tissue;" },
+          { key: "D", text: "blood vessels" },
+          { key: "E", text: "connective tissue." }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Adipose Site:</strong> النسيج الدهني الوفير (Abundant adipose tissue) موجود في الـ Epicardium (تحت التامور الحشوي)، ومش موجود إطلاقاً في نسيج عضلة القلب الطبيعي (Myocardium)."
+      },
+      {
+        id: 10, topicId: "5", topicName: "Heart Wall Layers",
+        question: "10. Each of the following statements concerning the epicardium is true, EXCEPT:",
+        options: [
+          { key: "A", text: "it is the internal sheet of the pericardium;" },
+          { key: "B", text: "consists of mesothelial cells and underlying connective tissue;" },
+          { key: "C", text: "contains blood vessels and nerves;" },
+          { key: "D", text: "is supplied by diffusion;" },
+          { key: "E", text: "contains adipose tissue." }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Epicardium Vessels:</strong> النخاب (Epicardium) بيمشي فيه الشرايين التاجية وفروعها وأوعية دموية وأعصاب غنية، فبيتغذى بأوعيته ومش بالانتشار (Not supplied by diffusion)."
+      },
+      {
+        id: 11, topicId: "5", topicName: "Heart Wall Layers",
+        question: "11. Each of the following statements concerning the heart valves is true, EXCEPT:",
+        options: [
+          { key: "A", text: "have the central core of fibrous tissue;" },
+          { key: "B", text: "their surfaces are covered with endothelium;" },
+          { key: "C", text: "fibrous cords extend from the valve free edge to papillary muscles;" },
+          { key: "D", text: "prevent blood backflow;" },
+          { key: "E", text: "possess their own blood vessels." }
+        ],
+        answer: "E",
+        pearl: "📌 <strong>Avascular Heart Valves:</strong> صمامات القلب الطبيعية <strong>خالية من الأوعية الدموية (Avascular)</strong> ومغطاة بإندوثيليوم وتتغذى بالانتشار من الدم المحيط بها."
+      },
+      {
+        id: 30, topicId: "5", topicName: "Heart Wall Layers",
+        question: "30. Heart embryologic origin:\n(1) Endoderm\n(2) Mesoderm\n(3) Ectoderm\n(4) Mesenchyme",
+        options: [
+          { key: "A", text: "(2) Mesoderm and (4) Mesenchyme" },
+          { key: "B", text: "(1) Endoderm" },
+          { key: "C", text: "(3) Ectoderm" },
+          { key: "D", text: "All germ layers" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Cardiac Embryogenesis:</strong> القلب مشتق من الـ Splanchnic Mesoderm والـ Mesenchyme في منطقة الصفيحة القلبية."
+      },
+      {
+        id: 33, topicId: "5", topicName: "Heart Wall Layers",
+        question: "33. Which layer of the heart is composed of cardiac muscle?",
+        options: [
+          { key: "a", text: "Epicardium" },
+          { key: "b", text: "Pericardium" },
+          { key: "c", text: "Myocardium" },
+          { key: "d", text: "Endocardium" },
+          { key: "e", text: "Endomysium" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Heart Muscle Layer:</strong> طبقة عضلة القلب هي الـ <strong>Myocardium</strong>."
+      },
+      {
+        id: 34, topicId: "5", topicName: "Heart Wall Layers",
+        question: "34. What is the connective tissue called which surrounds an individual cardiac muscle fiber?",
+        options: [
+          { key: "a", text: "Epicardium" },
+          { key: "b", text: "Pericardium" },
+          { key: "c", text: "Myocardium" },
+          { key: "d", text: "Endocardium" },
+          { key: "e", text: "Endomysium" }
+        ],
+        answer: "e",
+        pearl: "📌 <strong>Muscle Sheaths:</strong> الغلاف الضام الرقيق المحيط بكل ليف عضلي قلبي منفرد هو الـ <strong>Endomysium</strong> وهو غني بالشعيرات الدموية."
+      },
+      {
+        id: 36, topicId: "5", topicName: "Heart Wall Layers",
+        question: "36. Which of the following is not true regarding the endocardium?",
+        options: [
+          { key: "a", text: "The endocardium contains abundant adipose tissue" },
+          { key: "b", text: "The endocardium is layered" },
+          { key: "c", text: "The endocardium contains blood vessels" },
+          { key: "d", text: "The endocardium contains smooth muscle" },
+          { key: "e", text: "The endocardium is lined by endothelium" }
+        ],
+        answer: "a",
+        pearl: "📌 <strong>No Fat in Endocardium:</strong> النسيج الدهني الوفير موجود في الـ Epicardium فقط، والـ Endocardium لا يحتوي على دهون."
+      },
+      {
+        id: 37, topicId: "5", topicName: "Heart Wall Layers",
+        question: "37. Where is endothelium located?",
+        options: [
+          { key: "a", text: "Epicardium" },
+          { key: "b", text: "Pericardium" },
+          { key: "c", text: "Myocardium" },
+          { key: "d", text: "Endocardium" },
+          { key: "e", text: "Endomysium" }
+        ],
+        answer: "d",
+        pearl: "📌 <strong>Endothelial Lining:</strong> الإندوثيليوم (Simple squamous epithelium) بيبطن السطح الداخلي للـ <strong>Endocardium</strong> الملامس للدم، بينما الـ Epicardium مبطن بـ Mesothelium."
+      },
+      {
+        id: 46, topicId: "5", topicName: "Heart Wall Layers",
+        question: "46. Striated cells reside in the:",
+        options: [
+          { key: "a", text: "Epicardium" },
+          { key: "b", text: "Endocardium" },
+          { key: "c", text: "Myocardium" },
+          { key: "d", text: "All of the above" },
+          { key: "e", text: "None of the above" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Cardiac Myocytes:</strong> الخلايا العضلية المخططة المتفرعة ذات الأقراص البينية تتواجد حصرياً في طبقة الـ <strong>Myocardium</strong>."
+      },
+      {
+        id: 47, topicId: "5", topicName: "Heart Wall Layers",
+        question: "47. The thickest layer of the heart wall is:",
+        options: [
+          { key: "a", text: "Myocardium" },
+          { key: "b", text: "Endocardium" },
+          { key: "c", text: "Epicardium" },
+          { key: "d", text: "Sub epicardium" },
+          { key: "e", text: "A and C" }
+        ],
+        answer: "a",
+        pearl: "📌 <strong>Thickest Layer:</strong> الـ <strong>Myocardium</strong> هي الطبقة الأكثر سمكاً في جدار القلب بلا منازع (خصوصاً في البطين الأيسر)."
+      },
+      {
+        id: 48, topicId: "5", topicName: "Heart Wall Layers",
+        question: "48. Which of the following lines the chambers of the heart?",
+        options: [
+          { key: "a", text: "Striated cells" },
+          { key: "b", text: "Subepicardial tissue" },
+          { key: "c", text: "Endocardium" },
+          { key: "d", text: "Purkinje fibers" },
+          { key: "e", text: "Nodal cells" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Chamber Lining:</strong> شغاف القلب (<strong>Endocardium</strong>) هو الغلاف المبطن لجميع حجرات وتجاويف القلب من الداخل."
+      },
+      {
+        id: 12, topicId: "6", topicName: "Impulse Conducting System",
+        question: "12. Each of the following statements concerning the impulse-conducting system is true, EXCEPT:",
+        options: [
+          { key: "A", text: "consists of atypical cardiac muscle cells;" },
+          { key: "B", text: "contains neurons;" },
+          { key: "C", text: "includes the sinoatrial and atrioventricular nodes" },
+          { key: "D", text: "includes the bundle of His and Purkinje fibres;" },
+          { key: "E", text: "generates and conducts impulses for cardiac muscle." }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Conduction System Nature:</strong> جهاز التوصيل الكهربائي للقلب بيتكون نسيجياً من <strong>خلايا عضلية قلبية متحوّلة (Modified atypical cardiomyocytes)</strong>، ومش خلايا عصبية (Does NOT contain neurons)!"
+      },
+      {
+        id: 32, topicId: "6", topicName: "Impulse Conducting System",
+        question: "32. The following statements regarding the Purkinje fibers are true:\n(1) Contain Few myofibrils\n(2) rich in Glycogen\n(3) Are glycolytic (anaerobic) cells.\n(4) Transmit excitation to typical cardiomyocytes",
+        options: [
+          { key: "A", text: "(1) and (2) only" },
+          { key: "B", text: "(2) and (4) only" },
+          { key: "C", text: "All of the above" },
+          { key: "D", text: "(4) only" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Purkinje Fibers Features:</strong> جميع العبارات صحيحة؛ ألياف بوركنجي غنية بالجليكوجين وتحتوي على لييفات عضلية قليلة وتعتمد على التنفس اللاهوائي وتنقل النبض بسرعة فائقة لكارديومايوسايتس."
+      },
+      {
+        id: 35, topicId: "6", topicName: "Impulse Conducting System",
+        question: "35. What is the pacemaker of the heart?",
+        options: [
+          { key: "a", text: "Sinoatrial node" },
+          { key: "b", text: "Atrioventricular node" },
+          { key: "c", text: "Bundle of His" },
+          { key: "d", text: "Right bundle branch" },
+          { key: "e", text: "Purkinje fiber" }
+        ],
+        answer: "a",
+        pearl: "📌 <strong>Pacemaker:</strong> العقدة الجيبية الأذينية (<strong>Sinoatrial node - SA node</strong>) هي الناظمة الطبيعية لضربات القلب بإطلاقها 60-100 نبضة/دقيقة."
+      },
+      {
+        id: 38, topicId: "6", topicName: "Impulse Conducting System",
+        question: "38. Cardiac Purkinje fibers are characterized by:",
+        options: [
+          { key: "a", text: "Pigmented fibers" },
+          { key: "b", text: "Filtration of toxins" },
+          { key: "c", text: "Larger than cardiac myocytes" },
+          { key: "d", text: "Absent in the moderator band" },
+          { key: "e", text: "Contain many myofibrils" }
+        ],
+        answer: "c",
+        pearl: "📌 <strong>Purkinje Morphology:</strong> تحت الميكروسكوب، ألياف بوركنجي بتكون <strong>أكبر في القطر وأبهت في الصبغة (Larger & paler)</strong> من خلايا عضلة القلب العاملة العادية بسبب وفرة الجليكوجين وقلة اللييفات العضلية."
+      }
+    ];
+
+    // State Variables
+    let currentTopicFilter = "all";
+    let activeQuestionList = [...fullQuestions];
+    let currentIndex = 0;
+    const answerStore = {};
+
+    // DOM Elements
+    const topicSelect = document.getElementById('topicSelect');
+    const questionPill = document.getElementById('questionPill');
+    const categoryTag = document.getElementById('categoryTag');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const pearlBox = document.getElementById('pearlBox');
+    const pearlHeader = document.getElementById('pearlHeader');
+    const pearlText = document.getElementById('pearlText');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const openMapBtn = document.getElementById('openMapBtn');
+    const closeMapBtn = document.getElementById('closeMapBtn');
+    const mapModal = document.getElementById('mapModal');
+    const modalGrid = document.getElementById('modalGrid');
+    const modalTitle = document.getElementById('modalTitle');
+
+    const progressThumb = document.getElementById('progressThumb');
+    const topicProgressLabel = document.getElementById('topicProgressLabel');
+    const badgeCorrectCount = document.getElementById('badgeCorrectCount');
+    const badgeWrongCount = document.getElementById('badgeWrongCount');
+    const audioToggleBtn = document.getElementById('audioToggleBtn');
+
+    const questionBox = document.getElementById('questionBox');
+    const summaryCard = document.getElementById('summaryCard');
+    const summarySubtitle = document.getElementById('summarySubtitle');
+    const scoreMeter = document.getElementById('scoreMeter');
+    const scorePercentText = document.getElementById('scorePercentText');
+    const summaryCorrect = document.getElementById('summaryCorrect');
+    const summaryWrong = document.getElementById('summaryWrong');
+    const summaryTotal = document.getElementById('summaryTotal');
+    const restartFilteredBtn = document.getElementById('restartFilteredBtn');
+    const reviewAllBtn = document.getElementById('reviewAllBtn');
+
+    // Filter Logic
+    function applyTopicFilter(topicVal) {
+      currentTopicFilter = topicVal;
+      if (topicVal === "all") {
+        activeQuestionList = [...fullQuestions];
+      } else {
+        activeQuestionList = fullQuestions.filter(q => q.topicId === topicVal);
+      }
+      currentIndex = 0;
+      questionBox.style.display = 'flex';
+      summaryCard.style.display = 'none';
+      renderQuestion();
+    }
+
+    // Audio Toggle
+    audioToggleBtn.addEventListener('click', () => {
+      audioEnabled = !audioEnabled;
+      audioToggleBtn.textContent = audioEnabled ? '🔊 المؤثرات: تفعيل' : '🔇 المؤثرات: كتم';
+    });
+
+    // Update Live Stats
+    function updateProgressStats() {
+      let correct = 0;
+      let wrong = 0;
+
+      activeQuestionList.forEach(q => {
+        const userChoice = answerStore[q.id];
+        if (userChoice !== undefined) {
+          if (userChoice.toLowerCase() === q.answer.toLowerCase()) correct++;
+          else wrong++;
+        }
+      });
+
+      badgeCorrectCount.textContent = `✅ ${correct} صح`;
+      badgeWrongCount.textContent = `❌ ${wrong} خطأ`;
+
+      const totalActive = activeQuestionList.length;
+      const currentNumber = currentIndex + 1;
+      const progressPercent = Math.round((currentNumber / totalActive) * 100);
+
+      progressThumb.style.width = `${progressPercent}%`;
+      topicProgressLabel.textContent = `التقدم: سؤال ${currentNumber} من ${totalActive} (${progressPercent}%)`;
+    }
+
+    // Render Active Question
+    function renderQuestion() {
+      if (activeQuestionList.length === 0) return;
+
+      const q = activeQuestionList[currentIndex];
+      questionPill.textContent = `سؤال ${currentIndex + 1} من ${activeQuestionList.length} (رقم ${q.id} بالامتحان)`;
+      categoryTag.textContent = `الموضوع: ${q.topicName}`;
+      questionText.textContent = q.question;
+
+      optionsContainer.innerHTML = '';
+      pearlBox.style.display = 'none';
+
+      const savedAnswer = answerStore[q.id];
+
+      q.options.forEach(opt => {
+        const row = document.createElement('button');
+        row.className = 'option-row';
+        row.innerHTML = `
+          <span class="option-letter">${opt.key.toUpperCase()}</span>
+          <span class="option-text">${opt.text}</span>
+          <span class="option-marker"></span>
+        `;
+
+        if (savedAnswer !== undefined) {
+          row.disabled = true;
+          if (opt.key.toLowerCase() === q.answer.toLowerCase()) {
+            row.classList.add('is-correct');
+            row.querySelector('.option-marker').textContent = '✔';
+          } else if (opt.key.toLowerCase() === savedAnswer.toLowerCase()) {
+            row.classList.add('is-wrong');
+            row.querySelector('.option-marker').textContent = '✖';
+          }
+        } else {
+          row.addEventListener('click', () => chooseAnswer(opt.key));
+        }
+
+        optionsContainer.appendChild(row);
+      });
+
+      if (savedAnswer !== undefined) {
+        showPearl(savedAnswer.toLowerCase() === q.answer.toLowerCase(), q);
+      }
+
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.textContent = currentIndex === activeQuestionList.length - 1 ? 'عرض النتيجة 🏆' : 'التالي 🠜';
+
+      updateProgressStats();
+    }
+
+    // Choose Answer (Instant Validation)
+    function chooseAnswer(selectedKey) {
+      const q = activeQuestionList[currentIndex];
+      answerStore[q.id] = selectedKey;
+
+      const isCorrect = selectedKey.toLowerCase() === q.answer.toLowerCase();
+
+      if (isCorrect) playSound('correct');
+      else playSound('wrong');
+
+      const buttons = optionsContainer.querySelectorAll('.option-row');
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        const letter = btn.querySelector('.option-letter').textContent.toLowerCase();
+        if (letter === q.answer.toLowerCase()) {
+          btn.classList.add('is-correct');
+          btn.querySelector('.option-marker').textContent = '✔';
+        } else if (letter === selectedKey.toLowerCase() && !isCorrect) {
+          btn.classList.add('is-wrong');
+          btn.querySelector('.option-marker').textContent = '✖';
+        }
+      });
+
+      showPearl(isCorrect, q);
+      updateProgressStats();
+    }
+
+    // Show High Yield Explanation
+    function showPearl(isCorrect, q) {
+      pearlBox.className = `pearl-box ${isCorrect ? 'is-correct' : 'is-wrong'}`;
+      pearlBox.style.display = 'block';
+
+      if (isCorrect) {
+        pearlHeader.innerHTML = '✨ إجابة صحيحة يا دكتور! عاش.';
+      } else {
+        pearlHeader.innerHTML = `⚠️ إجابة خاطئة! الإجابة الصحيحة هي: (${q.answer.toUpperCase()})`;
+      }
+
+      pearlText.innerHTML = q.pearl;
+    }
+
+    // Navigation
+    function handleNext() {
+      if (currentIndex < activeQuestionList.length - 1) {
+        currentIndex++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function handlePrev() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    }
+
+    // Show Results Card
+    function showResults() {
+      questionBox.style.display = 'none';
+      summaryCard.style.display = 'block';
+
+      const topicText = topicSelect.options[topicSelect.selectedIndex].text;
+      summarySubtitle.textContent = `ملخص نتيجتك في قسم: ${topicText}`;
+
+      let correct = 0;
+      let wrong = 0;
+      activeQuestionList.forEach(q => {
+        const ans = answerStore[q.id];
+        if (ans !== undefined) {
+          if (ans.toLowerCase() === q.answer.toLowerCase()) correct++;
+          else wrong++;
+        }
+      });
+
+      const total = activeQuestionList.length;
+      const percent = Math.round((correct / total) * 100);
+
+      scorePercentText.textContent = `${percent}%`;
+      scoreMeter.style.setProperty('--perc', `${percent}%`);
+      summaryCorrect.textContent = correct;
+      summaryWrong.textContent = wrong;
+      summaryTotal.textContent = `${correct} / ${total}`;
+    }
+
+    // Populate Modal Grid
+    function renderModalGrid() {
+      modalGrid.innerHTML = '';
+      const topicText = topicSelect.options[topicSelect.selectedIndex].text;
+      modalTitle.textContent = `خريطة أسئلة القسم (${activeQuestionList.length} سؤال)`;
+
+      activeQuestionList.forEach((q, idx) => {
+        const cell = document.createElement('button');
+        cell.className = 'grid-cell';
+        cell.textContent = q.id;
+
+        if (idx === currentIndex) cell.classList.add('is-active');
+
+        const ans = answerStore[q.id];
+        if (ans !== undefined) {
+          if (ans.toLowerCase() === q.answer.toLowerCase()) {
+            cell.classList.add('answered-ok');
+          } else {
+            cell.classList.add('answered-err');
+          }
+        }
+
+        cell.addEventListener('click', () => {
+          currentIndex = idx;
+          mapModal.classList.remove('is-open');
+          questionBox.style.display = 'flex';
+          summaryCard.style.display = 'none';
+          renderQuestion();
+        });
+
+        modalGrid.appendChild(cell);
+      });
+    }
+
+    // Event Listeners
+    nextBtn.addEventListener('click', handleNext);
+    prevBtn.addEventListener('click', handlePrev);
+
+    topicSelect.addEventListener('change', (e) => {
+      applyTopicFilter(e.target.value);
+    });
+
+    openMapBtn.addEventListener('click', () => {
+      renderModalGrid();
+      mapModal.classList.add('is-open');
+    });
+
+    closeMapBtn.addEventListener('click', () => {
+      mapModal.classList.remove('is-open');
+    });
+
+    mapModal.addEventListener('click', (e) => {
+      if (e.target === mapModal) mapModal.classList.remove('is-open');
+    });
+
+    restartFilteredBtn.addEventListener('click', () => {
+      activeQuestionList.forEach(q => delete answerStore[q.id]);
+      currentIndex = 0;
+      summaryCard.style.display = 'none';
+      questionBox.style.display = 'flex';
+      renderQuestion();
+    });
+
+    reviewAllBtn.addEventListener('click', () => {
+      currentIndex = 0;
+      summaryCard.style.display = 'none';
+      questionBox.style.display = 'flex';
+      renderQuestion();
+    });
+
+    // Arrow Key Navigation
+    document.addEventListener('keydown', (e) => {
+      if (mapModal.classList.contains('is-open')) return;
+      if (e.key === 'ArrowLeft') handleNext();
+      else if (e.key === 'ArrowRight') handlePrev();
+    });
+
+    // Start App
+    applyTopicFilter("all");
+  </script>
+</body>
+</html>

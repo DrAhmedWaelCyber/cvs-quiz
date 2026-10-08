@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CVS Module Question Bank | د. Ahmed Wael</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b14;
+      --surface: #0f172a;
+      --surface-card: #152033;
+      --surface-card-hover: #1c2b45;
+      --border: #223450;
+      --accent: #38bdf8;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(2, 132, 199, 0.18) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.9) 0px, transparent 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+    }
+
+    .hub-container {
+      width: 100%;
+      max-width: 860px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* Hero Header */
+    .hero-card {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 30px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #38bdf8, #10b981, #6366f1);
+    }
+
+    .badge-signature {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      color: #7dd3fc;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: #f8fafc;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Modules Grid */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .module-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .module-card:hover {
+      background: var(--surface-card-hover);
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 35px -10px rgba(56, 189, 248, 0.25);
+    }
+
+    .card-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+    }
+
+    .card-icon.anatomy {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .card-icon.pathology {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .card-icon.histology {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #f8fafc;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+
+    .enter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    footer span {
+      color: #38bdf8;
+      font-weight: 700;
+    }
+
+    @media (max-width: 640px) {
+      .hero-title { font-size: 1.6rem; }
+      .hero-card { padding: 26px 20px; }
+      .modules-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hub-container">
+
+    <!-- Hero Card -->
+    <header class="hero-card">
+      <div class="badge-signature">
+        🩺 CVS Module • Official Question Bank 2026
+      </div>
+      <h1 class="hero-title">منصة بنك أسئلة جهاز الدوران (CVS)</h1>
+      <p class="hero-subtitle">
+        اختبارات تفاعلية سؤال بسؤال مع التصحيح الفوري والشرح الأكاديمي الشامل وفلاتر المواضيع
+      </p>
+    </header>
+
+    <!-- Modules Grid -->
+    <main class="modules-grid">
+
+      <!-- Anatomy Card -->
+      <a href="anatomy_cvs_interactive_quiz.html" class="module-card">
+        <div class="card-icon anatomy">🫀</div>
+        <div>
+          <h2 class="card-title">Anatomy CVS</h2>
+          <p class="card-desc">تشريح القلب وغشاء التأمور والأوعية الدموية وأجنة جهاز الدوران كاملة.</p>
+        </div>
+        <div class="card-footer">
+          <span>92 سؤالاً • 10 موضوعات</span>
+          <span class="enter-btn">ابدأ الآن 🠜</span>
+        </div>
+      </a>
+
+      <!-- Pathology Card -->
+      <a href="pathology_cvs_interactive_quiz.html" class="module-card">
+        <div class="card-icon pathology">🔬</div>
+        <div>
+          <h2 class="card-title">Pathology CVS</h2>
+          <p class="card-desc">أمراض صمامات القلب، الروماتيزم، الجلطات الحادة، التصلب، وأم الدم.</p>
+        </div>
+        <div class="card-footer">
+          <span>49 سؤالاً • 7 موضوعات</span>
+          <span class="enter-btn">ابدأ الآن 🠜</span>
+        </div>
+      </a>
+
+      <!-- Histology Card -->
+      <a href="histology_cvs_interactive_quiz.html" class="module-card">
+        <div class="card-icon histology">🧫</div>
+        <div>
+          <h2 class="card-title">Histology CVS</h2>
+          <p class="card-desc">علم الأنسجة للشرايين والأوردة والشعيرات وطبقات جدار القلب وألياف بوركنجي.</p>
+        </div>
+        <div class="card-footer">
+          <span>48 سؤالاً • 6 موضوعات</span>
+          <span class="enter-btn">ابدأ الآن 🠜</span>
+        </div>
+      </a>
+
+    </main>
+
+    <footer>
+      تم إعداد وتطوير المنصة بواسطة <span>Ahmed Wael</span> • لدفعة الطب البشري 🩺
+    </footer>
+
+  </div>
+
+</body>
+</html>

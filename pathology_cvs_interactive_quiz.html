@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CVS Pathology Question Bank | إعداد: Ahmed Wael</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b14;
+      --surface: #0f172a;
+      --surface-card: #152033;
+      --surface-card-hover: #1c2b45;
+      --border: #223450;
+      --border-focus: #38bdf8;
+      --primary: #0284c7;
+      --primary-glow: rgba(2, 132, 199, 0.35);
+      --accent: #38bdf8;
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.25);
+      --danger: #ef4444;
+      --danger-glow: rgba(239, 68, 68, 0.25);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+      --shadow-luxury: 0 20px 40px -15px rgba(0, 0, 0, 0.65), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', 'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(2, 132, 199, 0.14) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.85) 0px, transparent 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Top Branding Bar */
+    .branding-bar {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-luxury);
+      flex-wrap: wrap;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .branding-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #38bdf8, #10b981, transparent);
+    }
+
+    .author-badge-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0284c7, #0f172a);
+      border: 1.5px solid rgba(56, 189, 248, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+    }
+
+    .title-area h1 {
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .title-area .author-signature {
+      font-size: 0.9rem;
+      color: #38bdf8;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .author-signature .tag {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: #7dd3fc;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .audio-toggle-btn {
+      background: #152033;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .audio-toggle-btn:hover {
+      border-color: var(--accent);
+      color: #f8fafc;
+    }
+
+    /* Topic Filter Bar */
+    .filter-wrapper {
+      background: rgba(21, 32, 51, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: var(--shadow-luxury);
+    }
+
+    .filter-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topic-select {
+      background: #0b1220;
+      border: 1.5px solid #2a3d5e;
+      color: #f1f5f9;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      outline: none;
+      cursor: pointer;
+      min-width: 300px;
+      transition: all 0.2s;
+      direction: rtl;
+    }
+
+    .topic-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .topic-select option {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 8px;
+    }
+
+    /* Live Progress Bar */
+    .progress-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .score-indicators {
+      display: flex;
+      gap: 8px;
+    }
+
+    .badge-stat {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-stat.correct {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-stat.wrong {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      height: 8px;
+      background: #090d16;
+      border-radius: 9999px;
+      overflow: hidden;
+      border: 1px solid #1e2e47;
+    }
+
+    .progress-bar-thumb {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0284c7, #38bdf8, #10b981);
+      border-radius: 9999px;
+      transition: width 0.35s ease;
+    }
+
+    /* Question Main Card */
+    .question-viewport {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-luxury);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+    }
+
+    .question-headline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      padding-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .q-number-pill {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 5px 14px;
+      border-radius: 8px;
+    }
+
+    .q-category-tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .question-body {
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.6;
+      color: #f8fafc;
+      direction: ltr;
+      text-align: left;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Options Stack */
+    .options-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .option-row {
+      background: #0b1220;
+      border: 1.5px solid #1c2c47;
+      color: #e2e8f0;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 1.02rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 100%;
+      outline: none;
+      user-select: none;
+    }
+
+    .option-row:hover:not(:disabled) {
+      background: #141f35;
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.15);
+    }
+
+    .option-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: #152238;
+      border: 1px solid #283d60;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #94a3b8;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .option-text {
+      flex: 1;
+      line-height: 1.45;
+    }
+
+    .option-marker {
+      margin-left: auto;
+      font-size: 1.25rem;
+      display: none;
+      flex-shrink: 0;
+    }
+
+    /* Option States */
+    .option-row.is-correct {
+      background: rgba(16, 185, 129, 0.18) !important;
+      border-color: #10b981 !important;
+      color: #a7f3d0 !important;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    }
+
+    .option-row.is-correct .option-letter {
+      background: #10b981;
+      color: #064e3b;
+      border-color: #10b981;
+    }
+
+    .option-row.is-correct .option-marker {
+      display: inline-block;
+      color: #34d399;
+    }
+
+    .option-row.is-wrong {
+      background: rgba(239, 68, 68, 0.18) !important;
+      border-color: #ef4444 !important;
+      color: #fca5a5 !important;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+    }
+
+    .option-row.is-wrong .option-letter {
+      background: #ef4444;
+      color: #450a0a;
+      border-color: #ef4444;
+    }
+
+    .option-row.is-wrong .option-marker {
+      display: inline-block;
+      color: #f87171;
+    }
+
+    .option-row:disabled {
+      cursor: default;
+    }
+
+    /* High-Yield Clinical Pearl Box */
+    .pearl-box {
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      display: none;
+      animation: slideUp 0.3s ease;
+      direction: rtl;
+      text-align: right;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pearl-box.is-correct {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #a7f3d0;
+    }
+
+    .pearl-box.is-wrong {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #fca5a5;
+    }
+
+    .pearl-header {
+      font-weight: 800;
+      font-size: 1.12rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .pearl-text {
+      font-size: 0.98rem;
+      color: #e2e8f0;
+      line-height: 1.7;
+    }
+
+    .pearl-text strong {
+      color: #38bdf8;
+    }
+
+    /* Bottom Nav Bar */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .nav-btn {
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.96rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .nav-btn-next {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: white;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+    }
+
+    .nav-btn-next:hover:not(:disabled) {
+      background: linear-gradient(135deg, #0369a1, #075985);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn-prev {
+      background: #111a2b;
+      color: var(--text-muted);
+      border: 1px solid #203048;
+    }
+
+    .nav-btn-prev:hover:not(:disabled) {
+      background: #19273f;
+      color: white;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .nav-btn-map {
+      background: #0b1220;
+      color: #94a3b8;
+      border: 1px solid #203048;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-btn-map:hover {
+      border-color: #38bdf8;
+      color: #f8fafc;
+    }
+
+    /* Quick Jump Grid Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .modal-backdrop.is-open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #0f172a;
+      border: 1px solid #273852;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 720px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-luxury);
+      animation: modalZoom 0.25s ease;
+    }
+
+    @keyframes modalZoom {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-top {
+      padding: 20px 26px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-top h3 {
+      font-size: 1.2rem;
+      color: #38bdf8;
+      font-weight: 800;
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .modal-grid-body {
+      padding: 24px;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+      gap: 10px;
+      direction: ltr;
+    }
+
+    .grid-cell {
+      height: 50px;
+      border-radius: 10px;
+      background: #0b1220;
+      border: 1px solid #203048;
+      color: var(--text);
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .grid-cell:hover {
+      border-color: #38bdf8;
+      transform: scale(1.06);
+    }
+
+    .grid-cell.answered-ok {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: #10b981;
+      color: #34d399;
+    }
+
+    .grid-cell.answered-err {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: #ef4444;
+      color: #f87171;
+    }
+
+    .grid-cell.is-active {
+      outline: 2px solid #38bdf8;
+      outline-offset: 2px;
+    }
+
+    /* Results Screen */
+    .summary-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 44px 30px;
+      text-align: center;
+      display: none;
+      box-shadow: var(--shadow-luxury);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .score-meter {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: conic-gradient(#10b981 var(--perc, 0%), #1e2c42 var(--perc, 0%));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px auto;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+    }
+
+    .score-meter-inner {
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+
+    .score-meter-inner .val {
+      font-size: 2.2rem;
+      color: #f8fafc;
+      font-weight: 900;
+    }
+
+    .score-details-row {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin: 26px 0;
+      flex-wrap: wrap;
+    }
+
+    .score-box {
+      background: #0b1220;
+      border: 1px solid #203048;
+      border-radius: 14px;
+      padding: 16px 26px;
+      min-width: 150px;
+    }
+
+    .score-box .num {
+      font-size: 1.8rem;
+      font-weight: 900;
+    }
+
+    .score-box .label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      padding: 12px 0 24px 0;
+      margin-top: auto;
+    }
+
+    footer span {
+      color: #38bdf8;
+      font-weight: 700;
+    }
+
+    /* Responsive */
+    @media (max-width: 680px) {
+      body { padding: 12px 10px; }
+      .question-viewport { padding: 22px 16px; }
+      .question-body { font-size: 1.1rem; }
+      .option-row { padding: 14px 16px; font-size: 0.96rem; }
+      .branding-bar { padding: 16px; }
+      .topic-select { min-width: 100%; }
+      .title-area h1 { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Top Branding Bar -->
+    <header class="branding-bar">
+      <div class="author-badge-group">
+        <div class="avatar-icon">🔬</div>
+        <div class="title-area">
+          <h1>CVS Pathology Master Bank</h1>
+          <div class="author-signature">
+            <span>إعداد وتجميع: Ahmed Wael</span>
+            <span class="tag">Pathology CVS Module 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="audio-toggle-btn" id="audioToggleBtn">
+          🔊 المؤثرات: تفعيل
+        </button>
+      </div>
+    </header>
+
+    <!-- Topic Selector & Custom Index Filter -->
+    <section class="filter-wrapper">
+      <div class="filter-top">
+        <div class="filter-label">
+          📚 اختـر المـوضـوع للـمـذاكـرة:
+        </div>
+        <select class="topic-select" id="topicSelect">
+          <option value="all">🌟 جميع أسئلة الباثولوجي (49 سؤالاً بالكامل)</option>
+          <option value="1">1. Congenital Heart Diseases (6 أسئلة)</option>
+          <option value="2">2. Rheumatic Heart Disease & Endocarditis (13 سؤالاً)</option>
+          <option value="3">3. Ischemic Heart Disease & Myocardial Infarction (4 أسئلة)</option>
+          <option value="4">4. Heart Failure & Hypertensive Heart Disease (4 أسئلة)</option>
+          <option value="5">5. Cardiomyopathies, Myocarditis & Tumors (7 أسئلة)</option>
+          <option value="6">6. Atherosclerosis & Lipid Metabolism (8 أسئلة)</option>
+          <option value="7">7. Aneurysms & Vascular Diseases / Vasculitis (7 أسئلة)</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Progress Card -->
+    <section class="progress-card">
+      <div class="progress-meta">
+        <span id="topicProgressLabel">التقدم: 1 من 49</span>
+        <div class="score-indicators">
+          <span class="badge-stat correct" id="badgeCorrectCount">✅ 0 صح</span>
+          <span class="badge-stat wrong" id="badgeWrongCount">❌ 0 خطأ</span>
+        </div>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-thumb" id="progressThumb"></div>
+      </div>
+    </section>
+
+    <!-- Active Question Viewport -->
+    <main class="question-viewport" id="questionBox">
+      <div class="question-headline">
+        <span class="q-number-pill" id="questionPill">سؤال 1</span>
+        <span class="q-category-tag" id="categoryTag">الموضوع: Congenital Heart Diseases</span>
+      </div>
+
+      <div class="question-body" id="questionText">Loading question...</div>
+
+      <div class="options-stack" id="optionsContainer">
+        <!-- Rendered options -->
+      </div>
+
+      <!-- Human-Crafted High-Yield Pearl -->
+      <div class="pearl-box" id="pearlBox">
+        <div class="pearl-header" id="pearlHeader"></div>
+        <div class="pearl-text" id="pearlText"></div>
+      </div>
+
+      <!-- Navigation & Controls -->
+      <div class="nav-bar">
+        <button class="nav-btn nav-btn-prev" id="prevBtn" disabled>
+          ➔ السابق
+        </button>
+
+        <button class="nav-btn-map" id="openMapBtn">
+          📋 خريطة أسئلة هذا القسم
+        </button>
+
+        <button class="nav-btn nav-btn-next" id="nextBtn">
+          التالي 🠜
+        </button>
+      </div>
+    </main>
+
+    <!-- Summary / Results Screen -->
+    <div class="summary-card" id="summaryCard">
+      <h2 style="font-size: 1.8rem; margin-bottom: 6px; color: #38bdf8;">🏆 عاش يا دكتور! أنهيت الأسئلة بنجاح</h2>
+      <p style="color: var(--text-muted); margin-bottom: 24px;" id="summarySubtitle">ملخص أدائك في قسم: جميع الموضوعات</p>
+
+      <div class="score-meter" id="scoreMeter">
+        <div class="score-meter-inner">
+          <span class="val" id="scorePercentText">0%</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">الدرجة الكلية</span>
+        </div>
+      </div>
+
+      <div class="score-details-row">
+        <div class="score-box">
+          <div class="num" style="color: #34d399;" id="summaryCorrect">0</div>
+          <div class="label">إجابات صحيحة</div>
+        </div>
+        <div class="score-box">
+          <div class="num" style="color: #f87171;" id="summaryWrong">0</div>
+          <div class="label">إجابات خاطئة</div>
+        </div>
+        <div class="score-box">
+          <div class="num" style="color: #38bdf8;" id="summaryTotal">0 / 49</div>
+          <div class="label">مجموع الأسئلة</div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 14px; margin-top: 26px; flex-wrap: wrap;">
+        <button class="nav-btn nav-btn-next" id="restartFilteredBtn">
+          🔁 إعادة حل هذا القسم
+        </button>
+        <button class="nav-btn nav-btn-prev" id="reviewAllBtn">
+          🔍 مراجعة الأسئلة
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Jump Modal -->
+    <div class="modal-backdrop" id="mapModal">
+      <div class="modal-box">
+        <div class="modal-top">
+          <h3 id="modalTitle">خريطة أسئلة القسم الحالي</h3>
+          <button class="modal-close-btn" id="closeMapBtn">&times;</button>
+        </div>
+        <div class="modal-grid-body" id="modalGrid">
+          <!-- Cells -->
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      محتوى وأسئلة من إعداد وتنسيق <span>Ahmed Wael</span> • لدفعة الطب البشري 🩺
+    </footer>
+
+  </div>
+
+  <script>
+    // Audio synthesizer using Web Audio API
+    let audioEnabled = true;
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSound(type) {
+      if (!audioEnabled || !audioCtx) return;
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+        if (type === 'correct') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        } else if (type === 'wrong') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.exponentialRampToValueAtTime(146.83, now + 0.2);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        }
+      } catch (e) { }
+    }
+
+    // 49 Pathology Questions categorized into 7 High-Yield Chapters
+    const fullQuestions = [
+      {
+        id: 1, topicId: "1", topicName: "Congenital Heart Diseases",
+        question: "1. A cyanotic infant is discovered to have a ventricular septal defect, an overriding aorta, right ventricular hypertrophy, and complete pulmonic stenosis. Which of the following accompanying congenital anomalies permits survival in this patient?",
+        options: [
+          { key: "A", text: "Bicuspid aortic valve" },
+          { key: "B", text: "Ostium secundum defect" },
+          { key: "C", text: "Patent ductus arteriosus" },
+          { key: "D", text: "Patent foramen ovale" },
+          { key: "E", text: "Pre-ductal coarctation of aorta" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Ahmed Wael's Clinical Pearl:</strong> ده مريض Tetralogy of Fallot ومعاه تضيق رئوي كامل (Complete pulmonic stenosis / Pulmonary atresia)، يعني مفيش أي دم واصل للرئة عن طريق الشريان الرئوي! النجاة بتعتمد بنسبة 100% على وجود <strong>Patent ductus arteriosus (PDA)</strong> عشان يدخل دم مؤكسج من الأبهر للشرايين الرئوية."
+      },
+      {
+        id: 2, topicId: "1", topicName: "Congenital Heart Diseases",
+        question: "2. Presence of ostium secundum with a 1cm defect in an asymptomatic child is usually associated with:",
+        options: [
+          { key: "A", text: "Pulmonary hypertension" },
+          { key: "B", text: "Pericardial effusion" },
+          { key: "C", text: "Mural thrombosis" },
+          { key: "D", text: "Left-to-right shunt" },
+          { key: "E", text: "Cyanosis" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Key Concept:</strong> الـ Ostium secundum هو أشهر نوع في عيوب الحاجز بين الأذينين (ASD). في الطفل اللاعرضي، ضغط الأذين الأيسر أعلى من الأيمن، فبيحصل <strong>Left-to-right shunt</strong> بدون زُرقة (Acyanotic shunt)."
+      },
+      {
+        id: 3, topicId: "1", topicName: "Congenital Heart Diseases",
+        question: "3. Which of the following shows enlargement of the right ventricle and atrium?",
+        options: [
+          { key: "A", text: "Aortic stenosis" },
+          { key: "B", text: "Atrial septal defect" },
+          { key: "C", text: "Aortic regurgitation" },
+          { key: "D", text: "Mitral regurgitation" },
+          { key: "E", text: "Mitral stenosis" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Hemodynamic Load:</strong> في الـ Atrial Septal Defect (ASD)، الدم الزايد بيمر من الأذين الأيسر للأيمن، فبيعمل حمل حجمي مباشر (Volume overload) على كل من الأذين الأيمن والبطين الأيمن فيكبروا الاتنين معاً."
+      },
+      {
+        id: 4, topicId: "1", topicName: "Congenital Heart Diseases",
+        question: "4. All of the following are features of Fallot's tetralogy EXCEPT:",
+        options: [
+          { key: "A", text: "VSD" },
+          { key: "B", text: "Displacement of aorta to right to override the VSD" },
+          { key: "C", text: "Pulmonary stenosis" },
+          { key: "D", text: "Left ventricular hypertrophy" },
+          { key: "E", text: "Right ventricular hypertrophy" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Fallot's Tetralogy:</strong> الرباعية بتشمل VSD، تضيق رئوي، ركوب الأبهر، وتضخم البطين الأيمن (RVH). البطين الأيسر ملوش تضخم هنا (Not LVH)."
+      },
+      {
+        id: 5, topicId: "1", topicName: "Congenital Heart Diseases",
+        question: "5. Most common congenital anomaly of the heart is:",
+        options: [
+          { key: "A", text: "VSD" },
+          { key: "B", text: "ASD" },
+          { key: "C", text: "PDA" },
+          { key: "D", text: "Tetralogy of Fallot" },
+          { key: "E", text: "Coarctation of aorta" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Most Common CHD:</strong> الـ Ventricular Septal Defect (VSD) هو أشهر عيب خلقي في القلب على الإطلاق وبيمثل حوالي 25-30% من الحالات."
+      },
+      {
+        id: 6, topicId: "1", topicName: "Congenital Heart Diseases",
+        question: "6. Post-ductal coarctation of aorta has all of the following features EXCEPT:",
+        options: [
+          { key: "A", text: "Hypertension in upper extremities" },
+          { key: "B", text: "Weak pulses" },
+          { key: "C", text: "High blood pressure in lower extremities" },
+          { key: "D", text: "Claudication in lower legs" },
+          { key: "E", text: "None of the above" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Coarctation of Aorta:</strong> التضيق بيحصل بعد القناة الشريانية في النوع البالغ، فبيعمل ضغط دم عالي في الجزء العلوي ونبض ضعيف وضغط منخفض جداً في الأطراف السفلية (Low BP in lower extremities)، فالإجابة C هي الاستثناء."
+      },
+      {
+        id: 7, topicId: "2", topicName: "Rheumatic Heart Disease & Endocarditis",
+        question: "7. Sterile cardiac valvular vegetations are associated with all of the following disorders EXCEPT:",
+        options: [
+          { key: "A", text: "Systemic lupus erythematosus" },
+          { key: "B", text: "Underlying adenocarcinoma" },
+          { key: "C", text: "Indwelling pulmonary artery catheter" },
+          { key: "D", text: "Rheumatic fever" },
+          { key: "E", text: "Mitral valve prolapse" }
+        ],
+        answer: "E",
+        pearl: "📌 <strong>Sterile Vegetations:</strong> الـ SLE بيعمل Libman-Sacks (معقمة)، والسرطان والقسطرة بيعملوا NBTE (معقمة)، والحمى الروماتيزمية حبيباتها معقمة (Verrucae). بينما Mitral valve prolapse ده تنكس مخاطي (Myxomatous) ملوش Vegetations خاصة بيه."
+      },
+      {
+        id: 8, topicId: "2", topicName: "Rheumatic Heart Disease & Endocarditis",
+        question: "8. In rheumatic heart disease, antibodies against the following streptococcal products are seen in the serum EXCEPT:",
+        options: [
+          { key: "A", text: "DNAase B" },
+          { key: "B", text: "Streptokinase" },
+          { key: "C", text: "Streptolysin S" },
+          { key: "D", text: "Streptohyaluronidase" },
+          { key: "E", text: "None of the above" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Microbiology & Pathology:</strong> إنزيم Streptolysin S بيكون Oxygen-stable ولكنه <strong>غير مستضد (Non-antigenic)</strong>، فمبيحفزش تكوين أجسام مضادة ضده في السيرم، بعكس الـ Streptolysin O اللي بنقيس له الـ ASO titer."
+      },
+      {
+        id: 9, topicId: "2", topicName: "Rheumatic Heart Disease & Endocarditis",
+        question: "9. In chronic RHD, the most common valvular deformities are:",
+        options: [
+          { key: "A", text: "Mitral stenosis and insufficiency" },
+          { key: "B", text: "Mitral stenosis alone" },
+          { key: "C", text: "Mitral insufficiency alone" },
+          { key: "D", text: "Mitral and aortic stenosis combined" },
+          { key: "E", text: "Aortic stenosis" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Chronic RHD Valves:</strong> الصمام الميترالي هو الأكثر إصابة على الإطلاق، والتشوه الأكثر شيوعاً هو الجمع بين الضيق والارتجاع (Mitral stenosis and insufficiency) معاً."
+      },
+      {
+        id: 10, topicId: "2", topicName: "Rheumatic Heart Disease & Endocarditis",
+        question: "10. MacCallum’s patch appears in the region of:",
+        options: [
+          { key: "A", text: "Pericardial surface in the posterior wall of left atrium" },
+          { key: "B", text: "Pericardial surface in the posterior wall of left ventricle" },
+          { key: "C", text: "Endocardial surface in the posterior wall of left atrium" },
+          { key: "D", text: "Endocardial surface in the posterior wall of left ventricle" },
+          { key: "E", text: "Endocardial surface in the posterior wall of right ventricle" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>MacCallum's Patch:</strong> هي رقعة خشنة ومكثفة بتظهر على <strong>السطح الباطن للقلب (Endocardial surface) في الجدار الخلفي للأذين الأيسر</strong> نتيجة ارتطام تيار ارتجاع الدم الميترالي (Regurgitant jet)."
+      },
+      {
+        id: 11, topicId: "2", topicName: "Rheumatic Heart Disease & Endocarditis",
+        question: "11. Major criteria in the modified Jones’ criteria include all of the following EXCEPT:",
+        options: [
+          { key: "A", text: "Raised C-reactive proteins" },
+          { key: "B", text: "Carditis" },
+          { key: "C", text: "Polyarthritis" },
+          { key: "D", text: "Subcutaneous nodules" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Jones Criteria:</strong> المعايير الكبرى هي (JONES: Joints, Carditis, Nodules, Erythema marginatum, Sydenham chorea). ارتفاع الـ CRP والـ ESR والحرارة هي معايير صغرى (Minor criteria)."
+      },
+      {
+        id: 12, topicId: "2", topicName: "Rheumatic Heart Disease & Endocarditis",
+        question: "12. Most frequent underlying heart disease in causation of subacute infective endocarditis is:",
+        options: [
+          { key: "A", text: "Ventricular septal defect" },
+          { key: "B", text: "Chronic rheumatic valvular disease" },
+          { key: "C", text: "Floppy mitral valve" },
+          { key: "D", text: "Atherosclerotic valvular disease" },
+          { key: "E", text: "Atrial septal defect" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>SBE Predisposition:</strong> في المراجع الأكاديمية والامتحانات، <strong>أمراض الصمامات الروماتيزمية المزمنة (Chronic RVD)</strong> هي الأرضية المرضية السابقة الأكثر شيوعاً للإصابة بالتهاب شغاف القلب البكتيري تحت الحاد."
+      },
+      {
+        id: 13, topicId: "2", topicName: "Rheumatic Heart Disease & Endocarditis",
+        question: "13. Vegetations of the following types of endocarditis are friable and infected:",
+        options: [
+          { key: "A", text: "Rheumatic endocarditis" },
+          { key: "B", text: "Libman-Sacks endocarditis" },
+          { key: "C", text: "Subacute bacterial endocarditis" },
+          { key: "D", text: "Acute infective endocarditis" },
+          { key: "E", text: "Non-bacterial thrombotic endocarditis" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Infective Endocarditis:</strong> الزوائد المصابة بالبكتيريا والهشة وسهلة التفتت (Friable and infected) هي السمة المميزة لالتهاب شغاف القلب البكتيري (Subacute bacterial endocarditis / Acute IE) مما يسبب Embolization."
+      },
+      {
+        id: 23, topicId: "2", topicName: "Rheumatic Heart Disease & Endocarditis",
+        question: "23. Mitral stenosis causes all the following effects on the heart EXCEPT:",
+        options: [
+          { key: "A", text: "Dilatation and hypertrophy of left atrium" },
+          { key: "B", text: "Dilatation of left auricle" },
+          { key: "C", text: "Dilatation and hypertrophy of left ventricle" },
+          { key: "D", text: "Dilatation and hypertrophy of right ventricle" },
+          { key: "E", text: "Dilatation of right atrium" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>LV Sparing in MS:</strong> في ضيق الصمام الميترالي، الدم مش قادر يعدي للبطين الأيسر، فالبطين الأيسر بيكون سليم أو حتى حجمه صغير ومش بيتضخم إطلاقاً (Normal or underfilled LV)!"
+      },
+      {
+        id: 24, topicId: "2", topicName: "Rheumatic Heart Disease & Endocarditis",
+        question: "24. In the following heart disease, there is generally involvement of valves of right heart:",
+        options: [
+          { key: "A", text: "Heart disease in SLE" },
+          { key: "B", text: "Non-bacterial thrombotic endocarditis" },
+          { key: "C", text: "Subacute bacterial endocarditis" },
+          { key: "D", text: "Carcinoid heart disease" },
+          { key: "E", text: "Rheumatic heart disease" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Carcinoid Syndrome:</strong> متلازمة الكارسينويد بتصيب صمامات الجانب الأيمن فقط (Tricuspid & Pulmonary) بتليفات صفائحية، لأن السيروتونين بيتكسر في الرئة بإنزيم الـ MAO قبل ما يوصل للجانب الأيسر."
+      },
+      {
+        id: 28, topicId: "2", topicName: "Rheumatic Heart Disease & Endocarditis",
+        question: "28. An important protein from bacterial cell surface implicated in pathogenesis of rheumatic heart disease is:",
+        options: [
+          { key: "A", text: "G-protein" },
+          { key: "B", text: "M-protein" },
+          { key: "C", text: "L-protein" },
+          { key: "D", text: "X-protein" },
+          { key: "E", text: "None of the above" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Molecular Mimicry:</strong> بروتين M الموجود على سطح المكورات السبحية (Streptococcal M-protein) هو المسؤول عن التشابه المناعي مع أنسجة القلب وحدوث الحمى الروماتيزمية."
+      },
+      {
+        id: 38, topicId: "2", topicName: "Rheumatic Heart Disease & Endocarditis",
+        question: "38. Patients with systemic lupus erythematosus are susceptible to have:",
+        options: [
+          { key: "A", text: "Rheumatic endocarditis" },
+          { key: "B", text: "Atypical verrucous endocarditis" },
+          { key: "C", text: "Acute infective endocarditis" },
+          { key: "D", text: "Subacute infective endocarditis" },
+          { key: "E", text: "Non-bacterial endocarditis" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Libman-Sacks:</strong> مرضى الذئبة الحمراء (SLE) بيجيلهم زوائد معقمة على جانبي الصمامات اسمها Libman-Sacks أو <strong>Atypical verrucous endocarditis</strong>."
+      },
+      {
+        id: 39, topicId: "2", topicName: "Rheumatic Heart Disease & Endocarditis",
+        question: "39. Vegetations usually formed from:",
+        options: [
+          { key: "A", text: "Red blood cells only" },
+          { key: "B", text: "Platelets and fibrin" },
+          { key: "C", text: "Blood clots" },
+          { key: "D", text: "Platelets and red blood cells" },
+          { key: "E", text: "Septic emboli" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Vegetation Structure:</strong> الزوائد القلبية الصمامية بتتكون أساساً من <strong>صفائح دموية وشبكة فايبرين (Platelets and fibrin)</strong> متجمعة فوق سطح الصمام المتضرر."
+      },
+      {
+        id: 40, topicId: "2", topicName: "Rheumatic Heart Disease & Endocarditis",
+        question: "40. The left side of the heart is NOT affected in carcinoid due to:",
+        options: [
+          { key: "A", text: "5-hydroxytyptamine does not reach the heart" },
+          { key: "B", text: "5-hydroxytyptamine has no effect on the heart" },
+          { key: "C", text: "5-hydroxytyptamine is destroyed in the liver" },
+          { key: "D", text: "5-hydroxytyptamine is destroyed in the lung" },
+          { key: "E", text: "None of the above" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Lung Inactivation:</strong> مادة السيروتونين (5-hydroxytryptamine) بيتم تكسيرها بواسطة خلايا الرئة بإنزيم Monoamine oxidase (MAO) وتتحول لـ 5-HIAA فمبتوصلش للقلب الأيسر."
+      },
+      {
+        id: 15, topicId: "3", topicName: "Ischemic Heart Disease & Myocardial Infarction",
+        question: "15. Which of the following statements is the most common outcome of acute myocardial infarction?",
+        options: [
+          { key: "A", text: "Sudden cardiac death" },
+          { key: "B", text: "Recovery without complications" },
+          { key: "C", text: "Left congestive heart failure" },
+          { key: "D", text: "Cardiogenic shock" },
+          { key: "E", text: "Cardiac arrhythmias" }
+        ],
+        answer: "E",
+        pearl: "📌 <strong>MI Complications:</strong> اضطرابات النظم القلبي (Cardiac arrhythmias) بتحدث في أكثر من 75-90% من مرضى الجلطة الحادة وتعتبر المضاعفة والنتيجة الأكثر شيوعاً والسبب الرئيسي للوفاة المبكرة."
+      },
+      {
+        id: 18, topicId: "3", topicName: "Ischemic Heart Disease & Myocardial Infarction",
+        question: "18. Non-infarct effects of myocardial ischemia are all of the following EXCEPT:",
+        options: [
+          { key: "A", text: "Sudden cardiac death" },
+          { key: "B", text: "Angina pectoris" },
+          { key: "C", text: "Sub-endocardial infarcts" },
+          { key: "D", text: "Chronic ischemic heart disease" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Spot the Exception:</strong> السؤال بيطلب التأثيرات اللي مش بتمثل احتشاء كامل (Non-infarct)، فالاحتشاء تحت الشغاف (Sub-endocardial infarcts) هو احتشاء فعلي وموت للخلايا."
+      },
+      {
+        id: 20, topicId: "3", topicName: "Ischemic Heart Disease & Myocardial Infarction",
+        question: "20. Infarcts are least common in:",
+        options: [
+          { key: "A", text: "Left ventricle" },
+          { key: "B", text: "Right ventricle" },
+          { key: "C", text: "Left atrium" },
+          { key: "D", text: "Right atrium" },
+          { key: "E", text: "All of the above" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Chamber Vulnerability:</strong> الجدار الأرق والضغط المنخفض جداً وإمكانية التغذية المباشرة بالأكسجين من الدم داخل التجويف بيخلوا الأذين الأيمن (Right atrium) هو الأندر على الإطلاق في حدوث الجلطات."
+      },
+      {
+        id: 21, topicId: "3", topicName: "Ischemic Heart Disease & Myocardial Infarction",
+        question: "21. Chronic ischemic heart disease is most often due to:",
+        options: [
+          { key: "A", text: "Coronary atherosclerosis" },
+          { key: "B", text: "Repetitive coronary vasospasm" },
+          { key: "C", text: "Embolization to coronary branches" },
+          { key: "D", text: "Stenosis of coronary ostia" },
+          { key: "E", text: "Syphilitic aortitis" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Etiology of CIHD:</strong> تصلب الشرايين التاجية (Coronary atherosclerosis) هو المسؤول عن الغالبية العظمى لحالات نقص تروية القلب المزمنة."
+      },
+      {
+        id: 17, topicId: "4", topicName: "Heart Failure & Hypertensive Heart Disease",
+        question: "17. Right sided heart failure is predominantly characterized by all of the following EXCEPT:",
+        options: [
+          { key: "A", text: "Chronic venous congestion liver" },
+          { key: "B", text: "Chronic venous congestion spleen" },
+          { key: "C", text: "Chronic venous congestion kidney" },
+          { key: "D", text: "Pulmonary congestion" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Right vs Left HF:</strong> الاحتقان الرئوي والوذمة الرئوية (Pulmonary congestion) دي العلامة المميزة لفشل القلب الأيسر (Left HF)، بينما فشل القلب الأيمن بيعمل احتقان في الأحشاء العامة (كبد وطحال وكلى وتورم أرجل)."
+      },
+      {
+        id: 22, topicId: "4", topicName: "Heart Failure & Hypertensive Heart Disease",
+        question: "22. In hypertensive heart disease, left ventricular hypertrophy is correlated with:",
+        options: [
+          { key: "A", text: "Severity of hypertension" },
+          { key: "B", text: "Cause of hypertension" },
+          { key: "C", text: "Severity of coronary atherosclerosis" },
+          { key: "D", text: "Duration of hypertension" },
+          { key: "E", text: "All of the above" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Pathology Correlation:</strong> في الأسئلة الأكاديمية ونماذج الباثولوجي، درجة تضخم البطين الأيسر بترتبط أساساً وبشكل وثيق بـ <strong>شدة ارتفاع ضغط الدم (Severity of hypertension)</strong>."
+      },
+      {
+        id: 26, topicId: "4", topicName: "Heart Failure & Hypertensive Heart Disease",
+        question: "26. All of the following causes left-sided heart failure EXCEPT:",
+        options: [
+          { key: "A", text: "Systemic hypertension" },
+          { key: "B", text: "Cor pulmonale" },
+          { key: "C", text: "Mitral stenosis" },
+          { key: "D", text: "Aortic stenosis" },
+          { key: "E", text: "Aortic incompetence" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Cor Pulmonale:</strong> هو فشل وتضخم في البطين الأيمن ناتج عن مرض في الرئتين وارتفاع ضغط الشريان الرئوي، فده فشل في الجانب الأيمن فقط (Right-sided HF)."
+      },
+      {
+        id: 29, topicId: "4", topicName: "Heart Failure & Hypertensive Heart Disease",
+        question: "29. Which of the following produces right ventricular hypertrophy:",
+        options: [
+          { key: "A", text: "Coarctation of aorta" },
+          { key: "B", text: "Aortic stenosis" },
+          { key: "C", text: "Pulmonary insufficiency" },
+          { key: "D", text: "Systemic hypertension" },
+          { key: "E", text: "Tricuspid stenosis" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>RV Hypertrophy:</strong> ارتجاع الصمام الرئوي (Pulmonary insufficiency) بيعمل Volume overload على البطين الأيمن فبيؤدي لتضخمه، بينما Coarctation و Aortic stenosis و Hypertension بيضخموا البطين الأيسر."
+      },
+      {
+        id: 25, topicId: "5", topicName: "Cardiomyopathies, Myocarditis & Tumors",
+        question: "25. The following type of cardiomyopathy is classically characterized by four chamber dilatation:",
+        options: [
+          { key: "A", text: "Idiopathic congestive cardiomyopathy" },
+          { key: "B", text: "Idiopathic hypertrophic cardiomyopathy" },
+          { key: "C", text: "Endomyocardial fibrosis" },
+          { key: "D", text: "Loffler’s endocarditis" },
+          { key: "E", text: "All of the above" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Dilated Cardiomyopathy:</strong> اعتلال عضلة القلب الاحتقاني / التوسعي (Congestive / Dilated cardiomyopathy) بيتميز بتوسع الغرف الأربعة للقلب مع ضعف شديد في الانقباض."
+      },
+      {
+        id: 27, topicId: "5", topicName: "Cardiomyopathies, Myocarditis & Tumors",
+        question: "27. The most common location for myxoma of the heart is:",
+        options: [
+          { key: "A", text: "Left ventricle" },
+          { key: "B", text: "Right ventricle" },
+          { key: "C", text: "Left atrium" },
+          { key: "D", text: "Right atrium" },
+          { key: "E", text: "Inter-ventricular septum" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Cardiac Myxoma:</strong> هو أشهر ورم أولي حميد في القلب عند البالغين، وحوالي 75-80% من الحالات بتنشأ في <strong>الأذين الأيسر (Left atrium)</strong> عند منطقة الفوسا أوفاليس."
+      },
+      {
+        id: 30, topicId: "5", topicName: "Cardiomyopathies, Myocarditis & Tumors",
+        question: "30. Chronic alcoholism is associated with:",
+        options: [
+          { key: "A", text: "Hypertrophic cardiomyopathy" },
+          { key: "B", text: "Dilated cardiomyopathy" },
+          { key: "C", text: "Restrictive cardiomyopathy" },
+          { key: "D", text: "Infiltrative cardiomyopathy" },
+          { key: "E", text: "All of the above" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Alcoholic Heart:</strong> الكحول والأسيتالدهيد بيعملوا تسمم مباشر في ألياف القلب وينتهوا باعتلال تمددي (Dilated cardiomyopathy)."
+      },
+      {
+        id: 31, topicId: "5", topicName: "Cardiomyopathies, Myocarditis & Tumors",
+        question: "31. All of the following are causes of myocarditis EXCEPT:",
+        options: [
+          { key: "A", text: "Toxoplasma" },
+          { key: "B", text: "Cytomegalovirus" },
+          { key: "C", text: "T.B" },
+          { key: "D", text: "Epstein Bar virus" },
+          { key: "E", text: "Fungal infection" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>TB in Heart:</strong> مرض السل (T.B) بيصيب بشكل كلاسيكي غشاء التأمور ويعمل Tuberculous pericarditis وتجبن، ومبيعملش التهاب مباشر في عضلة القلب كسبب رئيسي للميوكارديتس."
+      },
+      {
+        id: 32, topicId: "5", topicName: "Cardiomyopathies, Myocarditis & Tumors",
+        question: "32. The most common cause of myocarditis which results in sudden death of young adults is:",
+        options: [
+          { key: "A", text: "Rheumatic myocarditis" },
+          { key: "B", text: "Viral myocarditis" },
+          { key: "C", text: "Toxic myocarditis" },
+          { key: "D", text: "Bacterial myocarditis" },
+          { key: "E", text: "Idiopathic giant cell myocarditis" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Sudden Death in Youth:</strong> التهاب عضلة القلب الفيروسي (Viral myocarditis - خصوصاً كوكساكي B) هو السبب الأشهر للموت المفاجئ غير المتوقع في الشباب الرياضيين."
+      },
+      {
+        id: 33, topicId: "5", topicName: "Cardiomyopathies, Myocarditis & Tumors",
+        question: "33. The following does NOT results in toxic myocarditis:",
+        options: [
+          { key: "A", text: "Diphtheria" },
+          { key: "B", text: "Typhoid fever" },
+          { key: "C", text: "Rheumatic fever" },
+          { key: "D", text: "Lobar pneumonia" },
+          { key: "E", text: "Streptococcal tonsillitis" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Immune vs Toxic:</strong> الحمى الروماتيزمية (Rheumatic fever) هي مرض مناعي تحسسي ومحاكاة جزيئية (Immune-mediated / Allergic)، ومش ناتجة عن سم بكتيري مباشر (Not toxic)."
+      },
+      {
+        id: 41, topicId: "5", topicName: "Cardiomyopathies, Myocarditis & Tumors",
+        question: "41. Most common location for performing endomyocardial biopsy is:",
+        options: [
+          { key: "A", text: "Right atrium" },
+          { key: "B", text: "Right ventricle" },
+          { key: "C", text: "Left atrium" },
+          { key: "D", text: "Left ventricle" },
+          { key: "E", text: "All of the above" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Biopsy Route:</strong> أخذ عينة من شغاف وعضلة القلب (Endomyocardial biopsy) بيتم بشكل قياسي وآمن من الجانب الأيمن للحاجز بين البطينين في <strong>البطين الأيمن (Right ventricle)</strong> عبر الوريد الوداجي أو الفخذي."
+      },
+      {
+        id: 14, topicId: "6", topicName: "Atherosclerosis & Lipid Metabolism",
+        question: "14. Which of the following types of cells is the initial target in the pathogenesis of atherosclerosis?",
+        options: [
+          { key: "A", text: "Monocytes" },
+          { key: "B", text: "Smooth muscle cells" },
+          { key: "C", text: "Platelets" },
+          { key: "D", text: "Neutrophils" },
+          { key: "E", text: "Endothelial cells" }
+        ],
+        answer: "E",
+        pearl: "📌 <strong>Response to Injury:</strong> نظرية نشأة تصلب الشرايين بتبدأ بحدوث تلف أو خلل وظيفي في الخلايا البطانية (Endothelial injury / dysfunction) كأول خطوة في السلسلة."
+      },
+      {
+        id: 16, topicId: "6", topicName: "Atherosclerosis & Lipid Metabolism",
+        question: "16. All of the following are major risk factors of atherosclerosis EXCEPT:",
+        options: [
+          { key: "A", text: "Hypertension" },
+          { key: "B", text: "Diabetes mellitus" },
+          { key: "C", text: "Smoking" },
+          { key: "D", text: "Rheumatic heart diseases" },
+          { key: "E", text: "Hyperlipidemia" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Major Risk Factors:</strong> عوامل الخطر الكبرى لتصلب الشرايين هي: ارتفاع الدهون، الضغط، التدخين، والسكر. الحمى الروماتيزمية مرض التهابي صمامي ملوش علاقة بتصلب الشرايين."
+      },
+      {
+        id: 19, topicId: "6", topicName: "Atherosclerosis & Lipid Metabolism",
+        question: "19. The most thrombogenic constituent of atheroma is:",
+        options: [
+          { key: "A", text: "Fibrous cap" },
+          { key: "B", text: "Lipid core" },
+          { key: "C", text: "Foam cells" },
+          { key: "D", text: "Smooth muscle cells" },
+          { key: "E", text: "None of the above" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Thrombogenic Core:</strong> النواة الدهنية المتنخرة (Necrotic lipid core) مليانة Tissue factor ومواد شديدة التحفيز للتجلط، وبمجرد ما الغطاء الليفي ينفجر بيحصل تجلط فوري."
+      },
+      {
+        id: 42, topicId: "6", topicName: "Atherosclerosis & Lipid Metabolism",
+        question: "42. Atherosclerosis is predominantly a disease of:",
+        options: [
+          { key: "A", text: "Intima" },
+          { key: "B", text: "Media" },
+          { key: "C", text: "Adventitia" },
+          { key: "D", text: "Entire vessel wall" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>Layer Affected:</strong> لويحات التصلب العصيدي (Atheroma) بتتشكل وتترسب أساساً في الطبقة الباطنة للشريان (Tunica Intima)."
+      },
+      {
+        id: 43, topicId: "6", topicName: "Atherosclerosis & Lipid Metabolism",
+        question: "43. The following lipid has highest association with atherosclerosis:",
+        options: [
+          { key: "A", text: "Triglycerides" },
+          { key: "B", text: "Low-density lipoproteins" },
+          { key: "C", text: "Very-low density lipoproteins" },
+          { key: "D", text: "High density lipoproteins" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Bad Cholesterol:</strong> البروتينات الدهنية منخفضة الكثافة (Low-density lipoproteins - LDL) هي العامل المسبب الأقوى والأعلى ارتباطاً بتصلب الشرايين."
+      },
+      {
+        id: 44, topicId: "6", topicName: "Atherosclerosis & Lipid Metabolism",
+        question: "44. The most important mitogen for smooth muscle proliferation in atherosclerosis is:",
+        options: [
+          { key: "A", text: "Platelet-derived growth factor" },
+          { key: "B", text: "Fibroblast growth factor" },
+          { key: "C", text: "Epidermal growth factor" },
+          { key: "D", text: "Transforming growth factor-a" }
+        ],
+        answer: "A",
+        pearl: "📌 <strong>PDGF:</strong> عامل النمو المشتق من الصفائح (Platelet-derived growth factor - PDGF) هو المحفز الأهم لتكاثر وهجرة خلايا العضلات الملساء من الميديا للطبقة الباطنة."
+      },
+      {
+        id: 48, topicId: "6", topicName: "Atherosclerosis & Lipid Metabolism",
+        question: "48. Familial Hypercholesterolemia is:",
+        options: [
+          { key: "A", text: "Autosomal recessive" },
+          { key: "B", text: "X-linked recessive" },
+          { key: "C", text: "Autosomal co-dominant" },
+          { key: "D", text: "Non-Mendelian disorder" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Genetics:</strong> فرط كوليسترول الدم العائلي (FH) ناتج عن طفرة في مستقبلات الـ LDL ويورث كـ <strong>Autosomal co-dominant</strong> (أو Autosomal dominant with gene dosage effect، حيث تختلف شدته بين الهتروزيجوت والهوموزيجوت)."
+      },
+      {
+        id: 49, topicId: "6", topicName: "Atherosclerosis & Lipid Metabolism",
+        question: "49. According to monoclonal hypothesis, the primary event in atherosclerosis is:",
+        options: [
+          { key: "A", text: "Monoclonal proliferation of endothelial cells" },
+          { key: "B", text: "Monoclonal proliferation of smooth muscle cells" },
+          { key: "C", text: "Monoclonal proliferation of monocytes" },
+          { key: "D", text: "Monoclonal proliferation of foam cells" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Monoclonal Hypothesis:</strong> فرضية بينديت (Benditt) بتقترح إن لويحة التصلب بتبدأ كتكاثر وحيد النسيلة لخلايا العضلات الملساء (Monoclonal proliferation of smooth muscle cells) كأنه ورم حميد."
+      },
+      {
+        id: 34, topicId: "7", topicName: "Aneurysms & Vascular Diseases / Vasculitis",
+        question: "34. The following aneurysms are usually congenital:",
+        options: [
+          { key: "A", text: "Aortic aneurysms" },
+          { key: "B", text: "Mycotic aneurysms" },
+          { key: "C", text: "False aneurysms" },
+          { key: "D", text: "Dissecting aneurysms" },
+          { key: "E", text: "Cerebral aneurysm" }
+        ],
+        answer: "E",
+        pearl: "📌 <strong>Berry Aneurysms:</strong> أم الدم التوتية في شرايين المخ وقاعدة الدماغ (Cerebral / Berry aneurysms) بتنشأ بسبب عيب خلقي في الطبقة العضلية (Media defect)."
+      },
+      {
+        id: 35, topicId: "7", topicName: "Aneurysms & Vascular Diseases / Vasculitis",
+        question: "35. Atherosclerotic aneurysms usually affects:",
+        options: [
+          { key: "A", text: "Arch of the aorta" },
+          { key: "B", text: "Ascending aorta" },
+          { key: "C", text: "Abdominal aorta" },
+          { key: "D", text: "Medium-sized arteries" },
+          { key: "E", text: "Small-sized arteries" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>AAA Location:</strong> أم الدم الناتجة عن تصلب الشرايين بتصيب بشكل كلاسيكي <strong>الأبهر البطني (Abdominal aorta)</strong>."
+      },
+      {
+        id: 36, topicId: "7", topicName: "Aneurysms & Vascular Diseases / Vasculitis",
+        question: "36. The most common site of involvement of atherosclerotic aneurysm is:",
+        options: [
+          { key: "A", text: "Arch of aorta" },
+          { key: "B", text: "Thoracic aorta" },
+          { key: "C", text: "Superficial abdominal aorta" },
+          { key: "D", text: "Infra-renal abdominal aorta" }
+        ],
+        answer: "D",
+        pearl: "📌 <strong>Infra-renal AAA:</strong> التحديد الدقيق للموقع الأكثر إصابة بأم الدم التصلبية هو الأبهر البطني أسفل مستوى الشرايين الكلوية (Infra-renal abdominal aorta)."
+      },
+      {
+        id: 45, topicId: "7", topicName: "Aneurysms & Vascular Diseases / Vasculitis",
+        question: "45. Cytoplasmic anti-neutrophil cytoplasmic antibodies (C-ANCA) is seen in:",
+        options: [
+          { key: "A", text: "Polyarteritis nodosa" },
+          { key: "B", text: "Wegener's granulomatosis" },
+          { key: "C", text: "Leucocytoclastic vasculitis" },
+          { key: "D", text: "Giant cell arteritis" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Vasculitis Marker:</strong> الـ C-ANCA (الموجه ضد PR3) هو الواسم المناعي الكلاسيكي لمرض فيجنر (Wegener's granulomatosis / GPA) في أكثر من 90% من الحالات."
+      },
+      {
+        id: 46, topicId: "7", topicName: "Aneurysms & Vascular Diseases / Vasculitis",
+        question: "46. The most common cause of dissecting hematoma is:",
+        options: [
+          { key: "A", text: "Cystic medial necrosis of Erdheim" },
+          { key: "B", text: "Trauma during cardiac catheterization" },
+          { key: "C", text: "Systemic hypertension" },
+          { key: "D", text: "Marfan's syndrome" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Aortic Dissection:</strong> ارتفاع ضغط الدم الجهازي (Systemic hypertension) هو العامل المسبب الأهم والأكثر تواجداً (في أكثر من 70-90% من حالات تسلخ الأبهر)."
+      },
+      {
+        id: 47, topicId: "7", topicName: "Aneurysms & Vascular Diseases / Vasculitis",
+        question: "47. Hyperplastic arteriolosclerosis is seen in all of the following EXCEPT:",
+        options: [
+          { key: "A", text: "Hemolytic uremic syndrome" },
+          { key: "B", text: "Benign nephrosclerosis" },
+          { key: "C", text: "Toxemia of pregnancy" },
+          { key: "D", text: "Scleroderma" }
+        ],
+        answer: "B",
+        pearl: "📌 <strong>Hyaline vs Hyperplastic:</strong> التصلب الشرياني الحميد في الكلى (Benign nephrosclerosis) بيعمل <strong>Hyaline arteriolosclerosis</strong>، بينما الـ Hyperplastic (قشر البصل) بيحصل مع الضغط الخبيث والـ HUS وتسمم الحمل."
+      },
+      {
+        id: 50, topicId: "7", topicName: "Aneurysms & Vascular Diseases / Vasculitis",
+        question: "50. Pulseless disease is:",
+        options: [
+          { key: "A", text: "Temporal arteritis" },
+          { key: "B", text: "Kawasaki's disease" },
+          { key: "C", text: "Takayasu arteritis" },
+          { key: "D", text: "Burger's disease" }
+        ],
+        answer: "C",
+        pearl: "📌 <strong>Pulseless Disease:</strong> التهاب تاكاياسو (Takayasu arteritis) بيصيب قوس الأبهر وفروعه الكبيرة، وبسبب انسداد شرايين الأطراف العلوية بيختفي النبض تماماً في الذراعين وبيتسمى Pulseless disease."
+      }
+    ];
+
+    // State Variables
+    let currentTopicFilter = "all";
+    let activeQuestionList = [...fullQuestions];
+    let currentIndex = 0;
+    const answerStore = {};
+
+    // DOM Elements
+    const topicSelect = document.getElementById('topicSelect');
+    const questionPill = document.getElementById('questionPill');
+    const categoryTag = document.getElementById('categoryTag');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const pearlBox = document.getElementById('pearlBox');
+    const pearlHeader = document.getElementById('pearlHeader');
+    const pearlText = document.getElementById('pearlText');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const openMapBtn = document.getElementById('openMapBtn');
+    const closeMapBtn = document.getElementById('closeMapBtn');
+    const mapModal = document.getElementById('mapModal');
+    const modalGrid = document.getElementById('modalGrid');
+    const modalTitle = document.getElementById('modalTitle');
+
+    const progressThumb = document.getElementById('progressThumb');
+    const topicProgressLabel = document.getElementById('topicProgressLabel');
+    const badgeCorrectCount = document.getElementById('badgeCorrectCount');
+    const badgeWrongCount = document.getElementById('badgeWrongCount');
+    const audioToggleBtn = document.getElementById('audioToggleBtn');
+
+    const questionBox = document.getElementById('questionBox');
+    const summaryCard = document.getElementById('summaryCard');
+    const summarySubtitle = document.getElementById('summarySubtitle');
+    const scoreMeter = document.getElementById('scoreMeter');
+    const scorePercentText = document.getElementById('scorePercentText');
+    const summaryCorrect = document.getElementById('summaryCorrect');
+    const summaryWrong = document.getElementById('summaryWrong');
+    const summaryTotal = document.getElementById('summaryTotal');
+    const restartFilteredBtn = document.getElementById('restartFilteredBtn');
+    const reviewAllBtn = document.getElementById('reviewAllBtn');
+
+    // Filter Logic
+    function applyTopicFilter(topicVal) {
+      currentTopicFilter = topicVal;
+      if (topicVal === "all") {
+        activeQuestionList = [...fullQuestions];
+      } else {
+        activeQuestionList = fullQuestions.filter(q => q.topicId === topicVal);
+      }
+      currentIndex = 0;
+      questionBox.style.display = 'flex';
+      summaryCard.style.display = 'none';
+      renderQuestion();
+    }
+
+    // Audio Toggle
+    audioToggleBtn.addEventListener('click', () => {
+      audioEnabled = !audioEnabled;
+      audioToggleBtn.textContent = audioEnabled ? '🔊 المؤثرات: تفعيل' : '🔇 المؤثرات: كتم';
+    });
+
+    // Update Live Stats
+    function updateProgressStats() {
+      let correct = 0;
+      let wrong = 0;
+
+      activeQuestionList.forEach(q => {
+        const userChoice = answerStore[q.id];
+        if (userChoice !== undefined) {
+          if (userChoice.toLowerCase() === q.answer.toLowerCase()) correct++;
+          else wrong++;
+        }
+      });
+
+      badgeCorrectCount.textContent = `✅ ${correct} صح`;
+      badgeWrongCount.textContent = `❌ ${wrong} خطأ`;
+
+      const totalActive = activeQuestionList.length;
+      const currentNumber = currentIndex + 1;
+      const progressPercent = Math.round((currentNumber / totalActive) * 100);
+
+      progressThumb.style.width = `${progressPercent}%`;
+      topicProgressLabel.textContent = `التقدم: سؤال ${currentNumber} من ${totalActive} (${progressPercent}%)`;
+    }
+
+    // Render Active Question
+    function renderQuestion() {
+      if (activeQuestionList.length === 0) return;
+
+      const q = activeQuestionList[currentIndex];
+      questionPill.textContent = `سؤال ${currentIndex + 1} من ${activeQuestionList.length} (رقم ${q.id} بالامتحان)`;
+      categoryTag.textContent = `الموضوع: ${q.topicName}`;
+      questionText.textContent = q.question;
+
+      optionsContainer.innerHTML = '';
+      pearlBox.style.display = 'none';
+
+      const savedAnswer = answerStore[q.id];
+
+      q.options.forEach(opt => {
+        const row = document.createElement('button');
+        row.className = 'option-row';
+        row.innerHTML = `
+          <span class="option-letter">${opt.key.toUpperCase()}</span>
+          <span class="option-text">${opt.text}</span>
+          <span class="option-marker"></span>
+        `;
+
+        if (savedAnswer !== undefined) {
+          row.disabled = true;
+          if (opt.key.toLowerCase() === q.answer.toLowerCase()) {
+            row.classList.add('is-correct');
+            row.querySelector('.option-marker').textContent = '✔';
+          } else if (opt.key.toLowerCase() === savedAnswer.toLowerCase()) {
+            row.classList.add('is-wrong');
+            row.querySelector('.option-marker').textContent = '✖';
+          }
+        } else {
+          row.addEventListener('click', () => chooseAnswer(opt.key));
+        }
+
+        optionsContainer.appendChild(row);
+      });
+
+      if (savedAnswer !== undefined) {
+        showPearl(savedAnswer.toLowerCase() === q.answer.toLowerCase(), q);
+      }
+
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.textContent = currentIndex === activeQuestionList.length - 1 ? 'عرض النتيجة 🏆' : 'التالي 🠜';
+
+      updateProgressStats();
+    }
+
+    // Choose Answer (Instant Validation)
+    function chooseAnswer(selectedKey) {
+      const q = activeQuestionList[currentIndex];
+      answerStore[q.id] = selectedKey;
+
+      const isCorrect = selectedKey.toLowerCase() === q.answer.toLowerCase();
+
+      if (isCorrect) playSound('correct');
+      else playSound('wrong');
+
+      const buttons = optionsContainer.querySelectorAll('.option-row');
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        const letter = btn.querySelector('.option-letter').textContent.toLowerCase();
+        if (letter === q.answer.toLowerCase()) {
+          btn.classList.add('is-correct');
+          btn.querySelector('.option-marker').textContent = '✔';
+        } else if (letter === selectedKey.toLowerCase() && !isCorrect) {
+          btn.classList.add('is-wrong');
+          btn.querySelector('.option-marker').textContent = '✖';
+        }
+      });
+
+      showPearl(isCorrect, q);
+      updateProgressStats();
+    }
+
+    // Show High Yield Explanation
+    function showPearl(isCorrect, q) {
+      pearlBox.className = `pearl-box ${isCorrect ? 'is-correct' : 'is-wrong'}`;
+      pearlBox.style.display = 'block';
+
+      if (isCorrect) {
+        pearlHeader.innerHTML = '✨ إجابة صحيحة يا دكتور! عاش.';
+      } else {
+        pearlHeader.innerHTML = `⚠️ إجابة خاطئة! الإجابة الصحيحة هي: (${q.answer.toUpperCase()})`;
+      }
+
+      pearlText.innerHTML = q.pearl;
+    }
+
+    // Navigation
+    function handleNext() {
+      if (currentIndex < activeQuestionList.length - 1) {
+        currentIndex++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function handlePrev() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    }
+
+    // Show Results Card
+    function showResults() {
+      questionBox.style.display = 'none';
+      summaryCard.style.display = 'block';
+
+      const topicText = topicSelect.options[topicSelect.selectedIndex].text;
+      summarySubtitle.textContent = `ملخص نتيجتك في قسم: ${topicText}`;
+
+      let correct = 0;
+      let wrong = 0;
+      activeQuestionList.forEach(q => {
+        const ans = answerStore[q.id];
+        if (ans !== undefined) {
+          if (ans.toLowerCase() === q.answer.toLowerCase()) correct++;
+          else wrong++;
+        }
+      });
+
+      const total = activeQuestionList.length;
+      const percent = Math.round((correct / total) * 100);
+
+      scorePercentText.textContent = `${percent}%`;
+      scoreMeter.style.setProperty('--perc', `${percent}%`);
+      summaryCorrect.textContent = correct;
+      summaryWrong.textContent = wrong;
+      summaryTotal.textContent = `${correct} / ${total}`;
+    }
+
+    // Populate Modal Grid
+    function renderModalGrid() {
+      modalGrid.innerHTML = '';
+      const topicText = topicSelect.options[topicSelect.selectedIndex].text;
+      modalTitle.textContent = `خريطة أسئلة القسم (${activeQuestionList.length} سؤال)`;
+
+      activeQuestionList.forEach((q, idx) => {
+        const cell = document.createElement('button');
+        cell.className = 'grid-cell';
+        cell.textContent = q.id;
+
+        if (idx === currentIndex) cell.classList.add('is-active');
+
+        const ans = answerStore[q.id];
+        if (ans !== undefined) {
+          if (ans.toLowerCase() === q.answer.toLowerCase()) {
+            cell.classList.add('answered-ok');
+          } else {
+            cell.classList.add('answered-err');
+          }
+        }
+
+        cell.addEventListener('click', () => {
+          currentIndex = idx;
+          mapModal.classList.remove('is-open');
+          questionBox.style.display = 'flex';
+          summaryCard.style.display = 'none';
+          renderQuestion();
+        });
+
+        modalGrid.appendChild(cell);
+      });
+    }
+
+    // Event Listeners
+    nextBtn.addEventListener('click', handleNext);
+    prevBtn.addEventListener('click', handlePrev);
+
+    topicSelect.addEventListener('change', (e) => {
+      applyTopicFilter(e.target.value);
+    });
+
+    openMapBtn.addEventListener('click', () => {
+      renderModalGrid();
+      mapModal.classList.add('is-open');
+    });
+
+    closeMapBtn.addEventListener('click', () => {
+      mapModal.classList.remove('is-open');
+    });
+
+    mapModal.addEventListener('click', (e) => {
+      if (e.target === mapModal) mapModal.classList.remove('is-open');
+    });
+
+    restartFilteredBtn.addEventListener('click', () => {
+      activeQuestionList.forEach(q => delete answerStore[q.id]);
+      currentIndex = 0;
+      summaryCard.style.display = 'none';
+      questionBox.style.display = 'flex';
+      renderQuestion();
+    });
+
+    reviewAllBtn.addEventListener('click', () => {
+      currentIndex = 0;
+      summaryCard.style.display = 'none';
+      questionBox.style.display = 'flex';
+      renderQuestion();
+    });
+
+    // Arrow Key Navigation
+    document.addEventListener('keydown', (e) => {
+      if (mapModal.classList.contains('is-open')) return;
+      if (e.key === 'ArrowLeft') handleNext();
+      else if (e.key === 'ArrowRight') handlePrev();
+    });
+
+    // Start App
+    applyTopicFilter("all");
+  </script>
+</body>
+</html>
