@@ -984,7 +984,7 @@
                                 let optClass = 'option-item';
                                 if (isAnswered) {
                                     optClass += ' disabled';
-                                    if (idx === q.answer) optClass += ' correct';
+                                    if (isCorrectAnswer(q, idx)) optClass += ' correct';
                                     else if (idx === userAns) optClass += ' incorrect';
                                 }
                                 const letter = getOptionLetter(idx);
@@ -1015,6 +1015,33 @@
             updateStats();
         }
 
+        function isCorrectAnswer(q, choice) {
+            if (choice === undefined || choice === null) return false;
+            const letters = ['a', 'b', 'c', 'd', 'e'];
+            const ansRaw = q.answer;
+            let ansIdx = -1;
+            let ansLetter = '';
+            if (typeof ansRaw === 'number') {
+                ansIdx = ansRaw;
+                ansLetter = letters[ansRaw] || '';
+            } else {
+                ansLetter = String(ansRaw).trim().toLowerCase();
+                ansIdx = letters.indexOf(ansLetter);
+            }
+
+            let choiceIdx = -1;
+            let choiceLetter = '';
+            if (typeof choice === 'number') {
+                choiceIdx = choice;
+                choiceLetter = letters[choice] || '';
+            } else {
+                choiceLetter = String(choice).trim().toLowerCase();
+                choiceIdx = letters.indexOf(choiceLetter);
+            }
+
+            return (choiceIdx !== -1 && choiceIdx === ansIdx) || (choiceLetter !== '' && choiceLetter === ansLetter);
+        }
+
         function getOptionLetter(idx) {
             return ['A', 'B', 'C', 'D', 'E'][idx] || '';
         }
@@ -1040,7 +1067,7 @@
 
             const q = questionsData.find(item => item.id === questionId);
             if (q) {
-                if (selectedIdx === q.answer) {
+                if (isCorrectAnswer(q, selectedIdx)) {
                     playSound('correct');
                 } else {
                     playSound('incorrect');
@@ -1069,7 +1096,7 @@
 
             answeredKeys.forEach(k => {
                 const q = questionsData.find(item => item.id === parseInt(k));
-                if (q && userState.answers[k] === q.answer) correctCount++;
+                if (q && isCorrectAnswer(q, userState.answers[k])) correctCount++;
             });
 
             const incorrectCount = answeredCount - correctCount;
@@ -1126,7 +1153,7 @@
                 const userAns = userState.answers[q.id];
                 let itemClass = 'palette-item';
                 if (userAns !== undefined) {
-                    itemClass += (userAns === q.answer) ? ' correct' : ' incorrect';
+                    itemClass += isCorrectAnswer(q, userAns) ? ' correct' : ' incorrect';
                 }
                 return `<div class="${itemClass}" onclick="jumpToQuestion(${q.id})">${q.id}</div>`;
             }).join('');

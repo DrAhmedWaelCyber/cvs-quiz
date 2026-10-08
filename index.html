@@ -262,7 +262,7 @@
     /* Flagship Cards Grid */
     .flagships-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 20px;
     }
 
@@ -299,6 +299,10 @@
       background: linear-gradient(90deg, #0284c7, #38bdf8, var(--gold-primary));
     }
 
+    .flagship-card.anatomy::before {
+      background: linear-gradient(90deg, #8b5cf6, #c084fc, var(--gold-primary));
+    }
+
     .flagship-card:hover {
       background: var(--bg-granite-hover);
       border-color: var(--gold-primary);
@@ -331,6 +335,12 @@
       background: rgba(2, 132, 199, 0.15);
       color: #7dd3fc;
       border-color: rgba(2, 132, 199, 0.4);
+    }
+
+    .flagship-card.anatomy .flagship-pill {
+      background: rgba(139, 92, 246, 0.15);
+      color: #c4b5fd;
+      border-color: rgba(139, 92, 246, 0.4);
     }
 
     .flagship-count {
@@ -547,11 +557,11 @@
       </div>
     </header>
 
-    <!-- Flagship Modules: Physiology & Pharmacology -->
+    <!-- Flagship Modules: Physiology, Pharmacology & Anatomy -->
     <section>
       <div class="section-title">
         <span>⭐ المواد الأكبر والأهم في الموديول (Core Flagship Modules)</span>
-        <span class="tag">544 سؤالاً معاً</span>
+        <span class="tag">636 سؤالاً معاً (الفسيولوجي • الفارماكولوجي • الأناتومي)</span>
       </div>
 
       <div class="flagships-grid">
@@ -559,11 +569,11 @@
         <!-- Physiology Flagship -->
         <a href="physiology_cvs_interactive_quiz.html" class="flagship-card physio">
           <div class="flagship-header">
-            <span class="flagship-pill">المادة الأولى والأضخم 🫀</span>
+            <span class="flagship-pill">المادة الأولى والأضخم ⚡️</span>
             <span class="flagship-count">254 MCQs</span>
           </div>
           <div class="flagship-title-box">
-            <h3>Physiology CVS (الفسيولوجي)</h3>
+            <h3>Physiology CVS (الفسيولوجيا)</h3>
             <p>بنك أسئلة الفسيولوجي المعتمد مقسماً وفقاً لفصول المنهج الدراسي التسعة عشر (19 Chapters) مع التفسير العلمي والمسائل الحسابية المعتمدة.</p>
           </div>
           <div class="flagship-tags">
@@ -602,6 +612,29 @@
           </div>
         </a>
 
+        <!-- Anatomy Flagship -->
+        <a href="anatomy_cvs_interactive_quiz.html" class="flagship-card anatomy">
+          <div class="flagship-header">
+            <span class="flagship-pill">المادة الثالثة الأساسية 🫀</span>
+            <span class="flagship-count">92 MCQs</span>
+          </div>
+          <div class="flagship-title-box">
+            <h3>Anatomy CVS (التشريح الطبي)</h3>
+            <p>بنك أسئلة تشريح جهاز الدوران الشامل: غشاء التأمور وحجرات القلب والصمامات، تطور القلب والدورة الجنينية، وشرايين وأوردة الصدر والرأس والبطن.</p>
+          </div>
+          <div class="flagship-tags">
+            <span class="sub-tag">🫀 Heart & Pericardium</span>
+            <span class="sub-tag">🌱 Embryology & Development</span>
+            <span class="sub-tag">🩸 Great Vessels & Arch</span>
+            <span class="sub-tag">🧠 Head & Neck Vessels</span>
+            <span class="sub-tag">🫁 Thorax & Abdomen</span>
+          </div>
+          <div class="flagship-cta">
+            <span>ابدأ اختبار الأناتومي الآن</span>
+            <span>←</span>
+          </div>
+        </a>
+
       </div>
     </section>
 
@@ -609,26 +642,10 @@
     <section>
       <div class="section-title">
         <span>📖 باقي مواد الموديول (Preclinical Modules)</span>
-        <span class="tag">264 سؤالاً</span>
+        <span class="tag">172 سؤالاً (الباثولوجي • الهستولوجي • المايكروبيولوجي)</span>
       </div>
 
       <div class="subjects-grid">
-
-        <!-- Anatomy -->
-        <a href="anatomy_cvs_interactive_quiz.html" class="subject-card">
-          <div class="subject-head">
-            <div class="subject-icon-box">
-              <div class="icon-symbol" style="border-color: rgba(139, 92, 246, 0.4);">🫀</div>
-              <div class="subject-name">Anatomy CVS</div>
-            </div>
-            <span class="count-badge">92 MCQs</span>
-          </div>
-          <p class="subject-desc">تشريح القلب وغشاء التأمور والأوعية الدموية للصدر والرأس والبطن وتطور القلب والدورة الجنينية (10 موضوعات).</p>
-          <div class="subject-cta">
-            <span>فتح الاختبار التفاعلي</span>
-            <span>←</span>
-          </div>
-        </a>
 
         <!-- Pathology -->
         <a href="pathology_cvs_interactive_quiz.html" class="subject-card">
