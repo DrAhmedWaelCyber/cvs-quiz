@@ -2,7 +2,7 @@
 
 المنصة الطبية التفاعلية لبنك أسئلة موديول القلب والأوعية الدموية (CVS Module).
 كلية الطب (بنين) بالقاهرة - جامعة الأزهر.
-إعداد وتطوير: **Ahmed Wael** (طالب بكلية الطب - جامعة الأزهر).
+إعداد وتطوير: **Ahmed Wael** (طالب بكلية الطب - جامعة الأزهر) • بالتعاون مع كورس **«مشروع ضاكتور»** (نؤصل للطب من جديد).
 
 ## Modules Included (808 Interactive MCQs):
 - 🫀 **Physiology CVS (Flagship Edition)**: 254 Questions classified across all 19 Curriculum Chapters

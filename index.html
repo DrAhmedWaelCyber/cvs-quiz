@@ -171,6 +171,108 @@
       font-weight: 700;
     }
 
+    .side-brands-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Mashroua Dactoor - Luxury Side Brand Card */
+    .dactoor-brand-card {
+      background: linear-gradient(135deg, rgba(34, 55, 78, 0.95) 0%, rgba(19, 33, 50, 0.98) 100%);
+      border: 1.5px solid var(--border-gold);
+      border-radius: var(--radius-md);
+      padding: 6px 14px 6px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      box-shadow: 0 4px 18px rgba(10, 18, 28, 0.5), 0 0 12px rgba(239, 213, 127, 0.18);
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .dactoor-brand-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gold-gradient);
+      opacity: 0.9;
+    }
+
+    .dactoor-brand-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold-primary);
+      box-shadow: 0 6px 24px rgba(239, 213, 127, 0.35);
+    }
+
+    .dactoor-logo-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: #000000;
+      padding: 1.5px;
+      border: 1.5px solid var(--gold-primary);
+      box-shadow: 0 0 12px rgba(239, 213, 127, 0.35);
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dactoor-logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 9px;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .dactoor-brand-card:hover .dactoor-logo-box img {
+      transform: scale(1.06);
+    }
+
+    .dactoor-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      text-align: right;
+    }
+
+    .dactoor-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 0.2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dactoor-name {
+      font-size: 1.12rem;
+      font-weight: 900;
+      background: var(--gold-text-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.25;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    .dactoor-slogan {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
     .author-badge {
       background: rgba(229, 184, 66, 0.12);
       border: 1px solid var(--gold-primary);
@@ -534,10 +636,25 @@
                 <p>كلية معتمدة • Al-Azhar Faculty of Medicine</p>
               </div>
             </div>
-            <div class="author-badge">
-              <span>إعداد وتطوير:</span>
-              <span class="author-name">Ahmed Wael</span>
-              <span>(طالب بطب الأزهر)</span>
+            <div class="side-brands-group">
+              <!-- مشروع ضاكتور - مؤسس كورس الـ CVS -->
+              <div class="dactoor-brand-card">
+                <div class="dactoor-logo-box">
+                  <img src="assets/mashroua.jpeg" alt="لوجو مشروع ضاكتور">
+                </div>
+                <div class="dactoor-meta">
+                  <span class="dactoor-tag">مؤسس كورس الـ CVS 🩺</span>
+                  <div class="dactoor-name">مشروع ضاكتور</div>
+                  <span class="dactoor-slogan">«نؤصل للطب من جديد»</span>
+                </div>
+              </div>
+
+              <!-- بطاقة إعداد وتطوير المنصة -->
+              <div class="author-badge">
+                <span>إعداد وتطوير:</span>
+                <span class="author-name">Ahmed Wael</span>
+                <span>(طالب بطب الأزهر)</span>
+              </div>
             </div>
           </div>
 
@@ -716,8 +833,8 @@
 
     <!-- Footer -->
     <footer class="hub-footer">
-      <p>تم إعداد وتطوير المنصة بواسطة <strong>Ahmed Wael</strong> • طالب بكلية الطب (بنين) بالقاهرة - جامعة الأزهر</p>
-      <p style="font-size: 0.8rem; margin-top: 4px; color: var(--gold-light);">موديول القلب والأوعية الدموية (CVS Module) • بنك أسئلة معتمد وشامل</p>
+      <p>تم إعداد وتطوير المنصة بواسطة <strong>Ahmed Wael</strong> (طالب بطب الأزهر) • بالتعاون مع كورس <strong>«مشروع ضاكتور»</strong> 🩺</p>
+      <p style="font-size: 0.8rem; margin-top: 4px; color: var(--gold-light);">موديول القلب والأوعية الدموية (CVS Module) • بنك أسئلة معتمد وشامل • «نؤصل للطب من جديد»</p>
     </footer>
 
   </div>
