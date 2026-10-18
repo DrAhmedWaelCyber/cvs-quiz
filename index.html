@@ -171,106 +171,61 @@
       font-weight: 700;
     }
 
-    .side-brands-group {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    /* Mashroua Dactoor - Luxury Side Brand Card */
-    .dactoor-brand-card {
-      background: linear-gradient(135deg, rgba(34, 55, 78, 0.95) 0%, rgba(19, 33, 50, 0.98) 100%);
-      border: 1.5px solid var(--border-gold);
-      border-radius: var(--radius-md);
-      padding: 6px 14px 6px 10px;
+    /* Standalone Mashroua Dactoor Brand (Left Side of Header) */
+    .dactoor-standalone-brand {
       display: inline-flex;
       align-items: center;
-      gap: 11px;
-      box-shadow: 0 4px 18px rgba(10, 18, 28, 0.5), 0 0 12px rgba(239, 213, 127, 0.18);
+      gap: 12px;
+      padding: 6px 16px 6px 8px;
+      background: rgba(19, 33, 50, 0.7);
+      border: 1.5px solid var(--border-gold);
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 18px rgba(10, 18, 28, 0.4), 0 0 14px rgba(239, 213, 127, 0.18);
       transition: all 0.25s ease;
-      position: relative;
-      overflow: hidden;
-      text-decoration: none;
     }
 
-    .dactoor-brand-card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--gold-gradient);
-      opacity: 0.9;
-    }
-
-    .dactoor-brand-card:hover {
-      transform: translateY(-2px);
+    .dactoor-standalone-brand:hover {
       border-color: var(--gold-primary);
       box-shadow: 0 6px 24px rgba(239, 213, 127, 0.35);
+      transform: translateY(-2px);
     }
 
-    .dactoor-logo-box {
-      width: 52px;
-      height: 52px;
-      border-radius: 12px;
+    .dactoor-emblem-box {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
       background: #000000;
-      padding: 1.5px;
-      border: 1.5px solid var(--gold-primary);
+      border: 2px solid var(--gold-primary);
       box-shadow: 0 0 12px rgba(239, 213, 127, 0.35);
-      flex-shrink: 0;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
     }
 
-    .dactoor-logo-box img {
+    .dactoor-emblem-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 9px;
       display: block;
-      transition: transform 0.3s ease;
     }
 
-    .dactoor-brand-card:hover .dactoor-logo-box img {
-      transform: scale(1.06);
-    }
-
-    .dactoor-meta {
+    .dactoor-brand-text {
       display: flex;
       flex-direction: column;
-      gap: 1px;
-      text-align: right;
+      justify-content: center;
     }
 
-    .dactoor-tag {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--gold-light);
-      letter-spacing: 0.2px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .dactoor-name {
-      font-size: 1.12rem;
+    .dactoor-brand-name {
+      font-size: 1.28rem;
       font-weight: 900;
       background: var(--gold-text-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      line-height: 1.25;
       font-family: 'Cairo', sans-serif;
-    }
-
-    .dactoor-slogan {
-      font-size: 0.68rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      letter-spacing: 0.2px;
+      line-height: 1.2;
+      white-space: nowrap;
     }
 
     .author-badge {
@@ -636,24 +591,13 @@
                 <p>كلية معتمدة • Al-Azhar Faculty of Medicine</p>
               </div>
             </div>
-            <div class="side-brands-group">
-              <!-- مشروع ضاكتور - مؤسس كورس الـ CVS -->
-              <div class="dactoor-brand-card">
-                <div class="dactoor-logo-box">
-                  <img src="assets/mashroua.jpeg" alt="لوجو مشروع ضاكتور">
-                </div>
-                <div class="dactoor-meta">
-                  <span class="dactoor-tag">مؤسس كورس الـ CVS 🩺</span>
-                  <div class="dactoor-name">مشروع ضاكتور</div>
-                  <span class="dactoor-slogan">«نؤصل للطب من جديد»</span>
-                </div>
+            <!-- Standalone Mashroua Dactoor Brand (Left Side) -->
+            <div class="dactoor-standalone-brand" title="مشروع ضاكتور">
+              <div class="dactoor-emblem-box">
+                <img src="assets/mashroua.jpeg" alt="شعار مشروع ضاكتور">
               </div>
-
-              <!-- بطاقة إعداد وتطوير المنصة -->
-              <div class="author-badge">
-                <span>إعداد وتطوير:</span>
-                <span class="author-name">Ahmed Wael</span>
-                <span>(طالب بطب الأزهر)</span>
+              <div class="dactoor-brand-text">
+                <span class="dactoor-brand-name">مشروع ضاكتور</span>
               </div>
             </div>
           </div>
@@ -669,6 +613,11 @@
             <span class="stat-pill total">⚡️ 808 أسئلة تفاعلية</span>
             <span class="stat-pill verified">✅ حلول وتفسيرات علمية كاملة</span>
             <span class="stat-pill">📚 6 مواد طبية أساسية</span>
+            <div class="author-badge">
+              <span>إعداد وتطوير:</span>
+              <span class="author-name">Ahmed Wael</span>
+              <span>(طالب بطب الأزهر)</span>
+            </div>
           </div>
         </div>
       </div>
