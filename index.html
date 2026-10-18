@@ -40,6 +40,11 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
     body {
       background-color: var(--bg-granite-deep);
       background-image: 
@@ -85,7 +90,7 @@
 
     .gate-banner-grid {
       display: grid;
-      grid-template-columns: 360px 1fr;
+      grid-template-columns: 280px 1fr;
       align-items: stretch;
     }
 
@@ -117,32 +122,34 @@
     }
 
     .gate-content {
-      padding: 30px 32px;
+      padding: 26px 30px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 14px;
+      gap: 12px;
     }
 
     .gate-brand-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       gap: 14px;
       border-bottom: 1px solid var(--border-tile);
-      padding-bottom: 14px;
+      padding-bottom: 12px;
+      width: 100%;
     }
 
     .logo-seal-group {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      min-width: 0;
     }
 
     .faculty-logo-circle {
-      width: 54px;
-      height: 54px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: #ffffff;
       padding: 2px;
@@ -160,43 +167,46 @@
     }
 
     .faculty-title-text h2 {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 800;
       color: #ffffff;
+      white-space: nowrap;
     }
 
     .faculty-title-text p {
-      font-size: 0.84rem;
+      font-size: 0.78rem;
       color: var(--gold-light);
       font-weight: 700;
+      white-space: nowrap;
     }
 
-    /* Standalone Mashroua Dactoor Brand (Left Side of Header) */
+    /* Standalone Mashroua Dactoor Brand (Left Side of Header - Same Line) */
     .dactoor-standalone-brand {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      padding: 6px 16px 6px 8px;
-      background: rgba(19, 33, 50, 0.7);
+      gap: 8px;
+      padding: 4px 12px 4px 6px;
+      background: rgba(19, 33, 50, 0.75);
       border: 1.5px solid var(--border-gold);
-      border-radius: var(--radius-md);
-      box-shadow: 0 4px 18px rgba(10, 18, 28, 0.4), 0 0 14px rgba(239, 213, 127, 0.18);
+      border-radius: 30px;
+      box-shadow: 0 3px 12px rgba(10, 18, 28, 0.35);
+      flex-shrink: 0;
       transition: all 0.25s ease;
     }
 
     .dactoor-standalone-brand:hover {
       border-color: var(--gold-primary);
-      box-shadow: 0 6px 24px rgba(239, 213, 127, 0.35);
+      box-shadow: 0 4px 16px rgba(239, 213, 127, 0.35);
       transform: translateY(-2px);
     }
 
     .dactoor-emblem-box {
-      width: 66px;
-      height: 66px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: #000000;
-      border: 2.5px solid var(--gold-primary);
-      box-shadow: 0 0 16px rgba(239, 213, 127, 0.45);
+      border: 2px solid var(--gold-primary);
+      box-shadow: 0 0 10px rgba(239, 213, 127, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -218,7 +228,7 @@
     }
 
     .dactoor-brand-name {
-      font-size: 1.45rem;
+      font-size: 1.15rem;
       font-weight: 900;
       background: var(--gold-text-gradient);
       -webkit-background-clip: text;
@@ -231,25 +241,24 @@
     .hero-author-strip {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 7px 20px;
-      background: rgba(229, 184, 66, 0.12);
-      border: 1.5px solid var(--gold-primary);
-      border-radius: 30px;
-      font-size: 0.95rem;
-      font-weight: 700;
+      gap: 6px;
+      padding: 3px 12px;
+      background: rgba(239, 213, 127, 0.08);
+      border: 1px solid rgba(239, 213, 127, 0.3);
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
       color: var(--gold-light);
-      margin-top: 6px;
+      margin-top: 2px;
       margin-bottom: 2px;
       width: fit-content;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(239, 213, 127, 0.15);
     }
 
     .hero-author-strip .author-name {
       color: #ffffff;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 800;
-      font-size: 1.05rem;
+      font-weight: 700;
+      font-size: 0.82rem;
     }
 
     .author-badge {
@@ -326,6 +335,7 @@
       color: #ffffff;
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       gap: 10px;
       margin-bottom: 14px;
     }
@@ -575,17 +585,84 @@
         grid-template-columns: 1fr;
       }
       .gate-photo-wrapper {
-        min-height: 220px;
-        max-height: 260px;
+        min-height: 200px;
+        max-height: 240px;
       }
       .flagships-grid {
         grid-template-columns: 1fr;
       }
+      .subjects-grid {
+        grid-template-columns: 1fr;
+      }
       .monumental-heading h1 {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
       }
       .gate-content {
-        padding: 24px 20px;
+        padding: 22px 18px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px 10px 40px;
+      }
+      .gate-content {
+        padding: 14px 10px;
+      }
+      .gate-brand-top {
+        gap: 6px;
+      }
+      .logo-seal-group {
+        flex-shrink: 1;
+        min-width: 0;
+        gap: 6px;
+      }
+      .faculty-logo-circle {
+        width: 32px;
+        height: 32px;
+      }
+      .faculty-title-text h2 {
+        font-size: 0.74rem;
+        white-space: normal;
+        line-height: 1.25;
+        max-width: 155px;
+      }
+      .faculty-title-text p {
+        display: none;
+      }
+      .dactoor-emblem-box {
+        width: 32px;
+        height: 32px;
+      }
+      .dactoor-brand-name {
+        font-size: 0.82rem;
+      }
+      .dactoor-standalone-brand {
+        padding: 2px 7px 2px 4px;
+        gap: 5px;
+        flex-shrink: 0;
+      }
+      .hero-author-strip {
+        font-size: 0.68rem;
+        padding: 2px 8px;
+        white-space: normal;
+        line-height: 1.3;
+      }
+      .monumental-heading h1 {
+        font-size: 1.35rem;
+      }
+      .monumental-heading p {
+        font-size: 0.85rem;
+      }
+      .section-title {
+        font-size: 0.95rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .section-title span {
+        max-width: 100%;
+        white-space: normal;
       }
     }
   </style>
@@ -642,11 +719,7 @@
             </p>
           </div>
 
-          <div class="gate-stats-strip">
-            <span class="stat-pill total">⚡️ 808 أسئلة تفاعلية</span>
-            <span class="stat-pill verified">✅ حلول وتفسيرات علمية كاملة</span>
-            <span class="stat-pill">📚 6 مواد طبية أساسية</span>
-          </div>
+
         </div>
       </div>
     </header>
