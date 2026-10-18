@@ -769,7 +769,6 @@
         <div class="title-area">
           <h1>CVS Histology Master Bank</h1>
           <div class="author-signature">
-            <span>إعداد وتطوير: Ahmed Wael (طالب بكلية الطب - جامعة الأزهر)</span>
             <span class="tag">Histology CVS Module 2026</span>
           </div>
         </div>
@@ -836,15 +835,15 @@
       <!-- Navigation & Controls -->
       <div class="nav-bar">
         <button class="nav-btn nav-btn-prev" id="prevBtn" disabled>
-          ➔ السابق
+          السابق →
         </button>
 
         <button class="nav-btn-map" id="openMapBtn">
           📋 خريطة أسئلة هذا القسم
         </button>
 
-        <button class="nav-btn-next" id="nextBtn">
-          التالي 🠜
+        <button class="nav-btn nav-btn-next" id="nextBtn">
+          التالي ←
         </button>
       </div>
     </main>
@@ -1677,7 +1676,7 @@
       }
 
       prevBtn.disabled = currentIndex === 0;
-      nextBtn.textContent = currentIndex === activeQuestionList.length - 1 ? 'عرض النتيجة 🏆' : 'التالي 🠜';
+      nextBtn.textContent = currentIndex === activeQuestionList.length - 1 ? 'عرض النتيجة 🏆' : 'التالي ←';
 
       updateProgressStats();
     }

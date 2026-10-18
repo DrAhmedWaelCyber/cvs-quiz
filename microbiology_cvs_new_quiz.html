@@ -769,7 +769,7 @@
     <div class="edition-banner">
       <div>📌 أنت الآن في: <strong>النسخة الحديثة (New 2026 Edition - 37 سؤالاً)</strong></div>
       <div style="display: flex; gap: 14px; align-items: center;">
-        <a href="microbiology_cvs_old_quiz.html" class="switch-link">التبديل إلى بنك القسم المعتمد (Old Archive - 38 سؤالاً) 🠜</a>
+        <a href="microbiology_cvs_old_quiz.html" class="switch-link">التبديل إلى بنك القسم المعتمد (Old Archive - 38 سؤالاً) ←</a>
         <span>•</span>
         <a href="index.html" class="switch-link">🏠 العودة للرئيسية</a>
       </div>
@@ -783,9 +783,9 @@
         <div class="title-area">
           <h1>
             <span>Microbiology CVS</span>
-            <span class="author-tag">New 2026 Edition • Ahmed Wael</span>
+            <span class="author-tag">New 2026 Edition</span>
           </h1>
-          <p>بنك أسئلة الكائنات الدقيقة لجهاز الدوران • إعداد وتطوير: Ahmed Wael (طالب بكلية الطب - جامعة الأزهر)</p>
+          <p>بنك أسئلة الكائنات الدقيقة لجهاز الدوران • CVS Module 2026</p>
         </div>
       </div>
 
@@ -851,7 +851,7 @@
       <!-- Navigation & Quick Map -->
       <div class="controls-bar">
         <button class="nav-btn nav-btn-prev" id="prevBtn" disabled>
-          🠞 السابق
+          السابق →
         </button>
 
         <button class="nav-btn-map" id="openMapBtn">
@@ -859,7 +859,7 @@
         </button>
 
         <button class="nav-btn nav-btn-next" id="nextBtn">
-          التالي 🠜
+          التالي ←
         </button>
       </div>
     </main>
@@ -2154,7 +2154,7 @@
       }
 
       prevBtn.disabled = currentIndex === 0;
-      nextBtn.textContent = currentIndex === activeQuestionList.length - 1 ? 'عرض النتيجة 🏆' : 'التالي 🠜';
+      nextBtn.textContent = currentIndex === activeQuestionList.length - 1 ? 'عرض النتيجة 🏆' : 'التالي ←';
 
       updateProgressStats();
     }
