@@ -238,27 +238,108 @@
       white-space: nowrap;
     }
 
+    .author-capsule-wrapper {
+      display: flex;
+      align-items: center;
+      margin-top: 3px;
+      margin-bottom: 2px;
+    }
+
     .hero-author-strip {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 3px 12px;
-      background: rgba(239, 213, 127, 0.08);
-      border: 1px solid rgba(239, 213, 127, 0.3);
-      border-radius: 20px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--gold-light);
-      margin-top: 2px;
-      margin-bottom: 2px;
+      gap: 9px;
+      padding: 5px 14px 5px 10px;
+      background: linear-gradient(135deg, rgba(239, 213, 127, 0.12) 0%, rgba(19, 33, 50, 0.82) 100%);
+      border: 1.5px solid rgba(239, 213, 127, 0.45);
+      border-radius: 30px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), 0 0 16px rgba(239, 213, 127, 0.15);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: authorAmbientPulse 4s infinite ease-in-out;
       width: fit-content;
+      position: relative;
+    }
+
+    @keyframes authorAmbientPulse {
+      0%, 100% {
+        border-color: rgba(239, 213, 127, 0.4);
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), 0 0 14px rgba(239, 213, 127, 0.12);
+      }
+      50% {
+        border-color: rgba(239, 213, 127, 0.8);
+        box-shadow: 0 4px 22px rgba(0, 0, 0, 0.45), 0 0 24px rgba(239, 213, 127, 0.32);
+      }
+    }
+
+    .hero-author-strip:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold-primary);
+      box-shadow: 0 6px 26px rgba(239, 213, 127, 0.42);
+    }
+
+    .author-main-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .author-pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #fbbf24;
+      display: inline-block;
+      flex-shrink: 0;
+      box-shadow: 0 0 8px #fbbf24;
+      animation: dotPulse 2s infinite ease-in-out;
+    }
+
+    @keyframes dotPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.85;
+        box-shadow: 0 0 6px #fbbf24;
+      }
+      50% {
+        transform: scale(1.35);
+        opacity: 1;
+        box-shadow: 0 0 12px #f59e0b;
+      }
+    }
+
+    .author-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: rgba(241, 245, 249, 0.92);
+      letter-spacing: -0.1px;
+      white-space: nowrap;
     }
 
     .hero-author-strip .author-name {
       color: #ffffff;
       font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 0.94rem;
+      letter-spacing: 0.4px;
+      background: linear-gradient(135deg, #ffffff 40%, #fde68a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.35));
+      white-space: nowrap;
+    }
+
+    .author-badge-pill {
+      background: rgba(239, 213, 127, 0.14);
+      border: 1px solid rgba(239, 213, 127, 0.35);
+      border-radius: 20px;
+      padding: 2px 9px;
+      font-size: 0.74rem;
       font-weight: 700;
-      font-size: 0.82rem;
+      color: var(--gold-light);
+      letter-spacing: -0.1px;
+      white-space: nowrap;
     }
 
     .author-badge {
@@ -338,6 +419,13 @@
       flex-wrap: wrap;
       gap: 10px;
       margin-bottom: 14px;
+    }
+
+    .section-heading-text {
+      min-width: 0;
+      max-width: 100%;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     .section-title span.tag {
@@ -642,11 +730,38 @@
         gap: 5px;
         flex-shrink: 0;
       }
+      .author-capsule-wrapper {
+        width: 100%;
+      }
       .hero-author-strip {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        padding: 6px 12px;
+        border-radius: 16px;
+        width: fit-content;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      .author-main-line {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .author-pulse-dot {
+        width: 6px;
+        height: 6px;
+      }
+      .author-label {
+        font-size: 0.74rem;
+      }
+      .hero-author-strip .author-name {
+        font-size: 0.88rem;
+      }
+      .author-badge-pill {
         font-size: 0.68rem;
         padding: 2px 8px;
-        white-space: normal;
-        line-height: 1.3;
       }
       .monumental-heading h1 {
         font-size: 1.35rem;
@@ -659,10 +774,22 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 6px;
+        width: 100%;
+        max-width: 100%;
       }
-      .section-title span {
+      .section-heading-text {
+        font-size: 0.95rem;
+        width: 100%;
         max-width: 100%;
         white-space: normal;
+        display: block;
+        box-sizing: border-box;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+      .section-title span.tag {
+        width: fit-content;
+        max-width: 100%;
       }
     }
   </style>
@@ -704,11 +831,14 @@
           </div>
 
           <!-- بطاقة إعداد وتطوير المنصة تحت اللوجوهات مباشرة -->
-          <div>
+          <div class="author-capsule-wrapper">
             <div class="hero-author-strip">
-              <span>إعداد وتطوير المنصة:</span>
-              <span class="author-name">Ahmed Wael</span>
-              <span>(طالب بكلية الطب - جامعة الأزهر)</span>
+              <div class="author-main-line">
+                <span class="author-pulse-dot" title="نشط"></span>
+                <span class="author-label">إعداد وتطوير المنصة:</span>
+                <span class="author-name">Ahmed Wael</span>
+              </div>
+              <span class="author-badge-pill">طالب بكلية الطب - جامعة الأزهر</span>
             </div>
           </div>
 
@@ -727,7 +857,7 @@
     <!-- Flagship Modules: Physiology, Pharmacology & Anatomy -->
     <section>
       <div class="section-title">
-        <span>⭐ المواد الأكبر والأهم في الموديول (Core Flagship Modules)</span>
+        <span class="section-heading-text">⭐ المواد الأكبر والأهم في الموديول (Core Flagship Modules)</span>
         <span class="tag">636 سؤالاً معاً (الفسيولوجي • الفارماكولوجي • الأناتومي)</span>
       </div>
 
@@ -808,7 +938,7 @@
     <!-- Foundational Preclinical Modules -->
     <section>
       <div class="section-title">
-        <span>📖 باقي مواد الموديول (Preclinical Modules)</span>
+        <span class="section-heading-text">📖 باقي مواد الموديول (Preclinical Modules)</span>
         <span class="tag">172 سؤالاً (الباثولوجي • الهستولوجي • المايكروبيولوجي)</span>
       </div>
 
