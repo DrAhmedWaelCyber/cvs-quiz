@@ -449,12 +449,12 @@
       background: var(--bg-granite-tile);
       border: 1.5px solid var(--border-tile);
       border-radius: var(--radius-lg);
-      padding: 26px;
+      padding: 22px;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
@@ -468,6 +468,7 @@
       left: 0;
       right: 0;
       height: 3px;
+      z-index: 3;
     }
 
     .flagship-card.physio::before {
@@ -487,6 +488,47 @@
       border-color: var(--gold-primary);
       transform: translateY(-4px);
       box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.7), var(--shadow-gold);
+    }
+
+    /* Flagship Card Banner */
+    .card-banner-wrapper {
+      position: relative;
+      margin: -22px -22px 6px -22px;
+      height: 155px;
+      overflow: hidden;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      background: #0d1722;
+    }
+
+    .card-banner-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .flagship-card:hover .card-banner-img {
+      transform: scale(1.05);
+    }
+
+    .card-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(19, 33, 50, 0.05) 0%, rgba(26, 44, 64, 0.45) 50%, rgba(34, 55, 78, 0.98) 100%);
+      pointer-events: none;
+    }
+
+    .card-banner-badges {
+      position: absolute;
+      bottom: 10px;
+      right: 14px;
+      left: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 2;
     }
 
     .flagship-header {
@@ -580,20 +622,77 @@
       background: var(--bg-granite-tile);
       border: 1px solid var(--border-tile);
       border-radius: var(--radius-md);
-      padding: 20px;
+      padding: 18px;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      transition: all 0.2s ease;
+      gap: 10px;
+      transition: all 0.25s ease;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
     }
 
     .subject-card:hover {
       background: var(--bg-granite-hover);
       border-color: var(--gold-primary);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.5), 0 0 14px rgba(239, 213, 127, 0.2);
+    }
+
+    /* Secondary Subject Card Banner */
+    .subject-card-banner {
+      position: relative;
+      margin: -18px -18px 4px -18px;
+      height: 125px;
+      overflow: hidden;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+      background: #0d1722;
+    }
+
+    .subject-banner-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+
+    .subject-card:hover .subject-banner-img {
+      transform: scale(1.06);
+    }
+
+    .subject-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(19, 33, 50, 0.05) 0%, rgba(26, 44, 64, 0.4) 50%, rgba(34, 55, 78, 0.98) 100%);
+      pointer-events: none;
+    }
+
+    .subject-banner-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 12px;
+      left: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 2;
+    }
+
+    .subject-icon-pill {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(19, 33, 50, 0.85);
+      border: 1px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
     }
 
     .subject-head {
@@ -668,6 +767,328 @@
       color: #ffffff;
     }
 
+    /* ================================================= */
+    /* Official Past Exams Section (Harmonious & Responsive) */
+    /* ================================================= */
+    .past-exams-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .exams-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+      gap: 18px;
+    }
+
+    .exam-card {
+      background: var(--bg-granite-tile);
+      border: 1.5px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px -8px rgba(10, 18, 28, 0.6), 0 0 16px rgba(239, 213, 127, 0.15);
+    }
+
+    .exam-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gold-gradient);
+      z-index: 3;
+    }
+
+    .exam-card:hover {
+      background: var(--bg-granite-hover);
+      border-color: var(--gold-primary);
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px -8px rgba(0, 0, 0, 0.7), var(--shadow-gold);
+    }
+
+    .exam-card-banner {
+      position: relative;
+      margin: -22px -22px 6px -22px;
+      height: 145px;
+      overflow: hidden;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      background: #0d1722;
+    }
+
+    .exam-banner-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .exam-card:hover .exam-banner-img {
+      transform: scale(1.05);
+    }
+
+    .exam-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(19, 33, 50, 0.1) 0%, rgba(26, 44, 64, 0.45) 50%, rgba(34, 55, 78, 0.98) 100%);
+      pointer-events: none;
+    }
+
+    .exam-banner-badge {
+      position: absolute;
+      bottom: 10px;
+      right: 14px;
+      left: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .exam-pill {
+      font-size: 0.76rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(19, 33, 50, 0.85);
+      border: 1px solid var(--border-gold);
+      color: var(--gold-light);
+      backdrop-filter: blur(6px);
+      white-space: nowrap;
+    }
+
+    .exam-pill.gold {
+      background: rgba(239, 213, 127, 0.18);
+      border-color: var(--gold-primary);
+      color: #fff7dc;
+    }
+
+    .exam-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .exam-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .exam-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', 'Cairo', sans-serif;
+      margin: 0;
+    }
+
+    .exam-year-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-tile);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .exam-year-tag.gold {
+      background: rgba(239, 213, 127, 0.12);
+      border-color: rgba(239, 213, 127, 0.35);
+      color: var(--gold-light);
+    }
+
+    .exam-time-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-tile);
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    .exam-time-tag.gold {
+      background: rgba(239, 213, 127, 0.12);
+      border-color: rgba(239, 213, 127, 0.35);
+      color: var(--gold-light);
+    }
+
+    /* Subtle Gold Shimmer Sweep on Card Hover */
+    .exam-card::after,
+    .flagship-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(
+        60deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(239, 213, 127, 0.08) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(25deg);
+      pointer-events: none;
+      transition: none;
+      z-index: 4;
+      opacity: 0;
+    }
+
+    .exam-card:hover::after,
+    .flagship-card:hover::after {
+      animation: goldShimmerSweep 0.85s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes goldShimmerSweep {
+      0% {
+        left: -60%;
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        left: 140%;
+        opacity: 0;
+      }
+    }
+
+    /* Floating Back to Top Button */
+    .back-to-top-btn {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(26, 44, 64, 0.94);
+      border: 1.5px solid var(--border-gold);
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 14px rgba(239, 213, 127, 0.25);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(14px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 999;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      outline: none;
+    }
+
+    .back-to-top-btn.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top-btn:hover {
+      background: var(--gold-gradient);
+      color: #0d1722;
+      transform: translateY(-3px) scale(1.06);
+      box-shadow: 0 8px 25px rgba(239, 213, 127, 0.5);
+    }
+
+    .exam-desc {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .exam-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .exam-tags-row .sub-tag.gold-tag {
+      border-color: rgba(239, 213, 127, 0.45);
+      color: var(--gold-light);
+      background: rgba(239, 213, 127, 0.1);
+      font-weight: 700;
+    }
+
+    .exam-card-cta {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-tile);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--gold-light);
+      transition: all 0.2s ease;
+    }
+
+    .exam-card-cta.gold {
+      background: var(--gold-gradient);
+      color: #0d1722;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      border-top: none;
+      box-shadow: 0 3px 12px rgba(239, 213, 127, 0.25);
+    }
+
+    .exam-card:hover .exam-card-cta.gold {
+      background: linear-gradient(135deg, #fff7dc 0%, #fce494 50%, #c59b27 100%);
+      box-shadow: 0 5px 18px rgba(239, 213, 127, 0.4);
+    }
+
+    /* ================================================= */
+    /* Scroll Reveal Animations (Progressive Enhancement)*/
+    /* ================================================= */
+    .reveal-enabled .reveal-on-scroll:not(.is-revealed) {
+      opacity: 0;
+      transform: translateY(28px);
+      pointer-events: none;
+    }
+
+    .reveal-on-scroll {
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-enabled .reveal-on-scroll:not(.is-revealed) {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .reveal-on-scroll {
+        transition: none !important;
+      }
+    }
+
+    /* Media Queries - Placed at end of stylesheet to ensure proper cascade */
     @media (max-width: 900px) {
       .gate-banner-grid {
         grid-template-columns: 1fr;
@@ -682,6 +1103,9 @@
       .subjects-grid {
         grid-template-columns: 1fr;
       }
+      .exams-grid {
+        grid-template-columns: 1fr;
+      }
       .monumental-heading h1 {
         font-size: 1.6rem;
       }
@@ -693,12 +1117,19 @@
     @media (max-width: 600px) {
       body {
         padding: 12px 10px 40px;
+        align-items: stretch;
+      }
+      .hub-container {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
       }
       .gate-content {
-        padding: 14px 10px;
+        padding: 14px 12px;
       }
       .gate-brand-top {
-        gap: 6px;
+        gap: 8px;
+        flex-wrap: wrap;
       }
       .logo-seal-group {
         flex-shrink: 1;
@@ -710,7 +1141,7 @@
         height: 32px;
       }
       .faculty-title-text h2 {
-        font-size: 0.74rem;
+        font-size: 0.76rem;
         white-space: normal;
         line-height: 1.25;
         max-width: 155px;
@@ -764,7 +1195,7 @@
         padding: 2px 8px;
       }
       .monumental-heading h1 {
-        font-size: 1.35rem;
+        font-size: 1.32rem;
       }
       .monumental-heading p {
         font-size: 0.85rem;
@@ -790,6 +1221,49 @@
       .section-title span.tag {
         width: fit-content;
         max-width: 100%;
+      }
+      .exams-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px;
+      }
+      .exam-card {
+        padding: 16px;
+      }
+      .exam-card-banner {
+        margin: -16px -16px 6px -16px;
+        height: 125px;
+      }
+      .exam-title {
+        font-size: 1.08rem;
+      }
+      .flagships-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px;
+      }
+      .flagship-card {
+        padding: 16px;
+      }
+      .card-banner-wrapper {
+        margin: -16px -16px 8px -16px;
+        height: 130px;
+      }
+      .subjects-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+      }
+      .subject-card {
+        padding: 14px;
+      }
+      .subject-card-banner {
+        margin: -14px -14px 6px -14px;
+        height: 110px;
+      }
+      .back-to-top-btn {
+        bottom: 18px;
+        left: 18px;
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
       }
     }
   </style>
@@ -845,7 +1319,7 @@
           <div class="monumental-heading">
             <h1>بنك الأسئلة التفاعلي المعتمد لموديول الـ CVS 🫀</h1>
             <p>
-              المنصة الطبية الشاملة المخصصة لطلاب كلية الطب، تجمع كافة أسئلة الموديول (798 سؤالاً تفاعلياً) مع الحلول النموذجية المعتمدة والتفسير العلمي الفوري لكل سؤال.
+              المنصة الطبية الشاملة المخصصة لطلاب كلية الطب، تجمع كافة أسئلة الموديول (<span class="stat-counter" data-target="950">950</span> سؤالاً طبياً وتفاعلياً شاملاً أرشيف امتحانات الدفعة 61 الرسمية) مع الحلول النموذجية المعتمدة والتفسير العلمي الفوري لكل سؤال.
             </p>
           </div>
 
@@ -854,9 +1328,89 @@
       </div>
     </header>
 
+    <!-- ========================================== -->
+    <!-- Official Batch 61 Past Exams Section       -->
+    <!-- ========================================== -->
+    <section class="past-exams-section">
+      <div class="section-title reveal-on-scroll">
+        <span class="section-heading-text">🏛️ أرشيف الامتحانات الرسمية السابقة (Official Past Exams)</span>
+        <span class="tag"><span class="stat-counter" data-target="152">152</span> سؤالاً معتمداً • دَفْعَة 61 الأَزْهَر</span>
+      </div>
+
+      <div class="exams-grid">
+        <!-- Card 1: End Module Exam -->
+        <a href="batch61_exams_interactive_quiz.html?exam=end_module" class="exam-card reveal-on-scroll">
+          <div class="exam-card-banner">
+            <img src="assets/exams_banner.jpg" alt="End Module Exam Batch 61" class="exam-banner-img" loading="lazy">
+            <div class="exam-banner-overlay"></div>
+            <div class="exam-banner-badge">
+              <span class="exam-pill">امتحان نهاية الموديول الرسمي 📋</span>
+              <span class="count-badge"><span class="stat-counter" data-target="80">80</span> MCQs</span>
+            </div>
+          </div>
+          <div class="exam-card-body">
+            <div class="exam-card-header">
+              <h3 class="exam-title">End Module Exam (Batch 61)</h3>
+              <div style="display: flex; gap: 6px; align-items: center;">
+                <span class="exam-year-tag">40 درجة</span>
+                <span class="exam-time-tag">⏱️ 60 دقيقة</span>
+              </div>
+            </div>
+            <p class="exam-desc">
+              الامتحان الفعلي لدفعة 61 كاملاً (80 اختيار من متعدد) مراجع أكاديمياً، مصنفاً حسب المواد مع اللؤلؤة الطبية الفورية لكل سؤال.
+            </p>
+            <div class="exam-tags-row">
+              <span class="sub-tag">⚡ فيسيو (24)</span>
+              <span class="sub-tag">💊 فارما (17)</span>
+              <span class="sub-tag">🫀 أناتومي (13)</span>
+              <span class="sub-tag">🔬 باثو وبايو ومايكرو وهستو (26)</span>
+            </div>
+          </div>
+          <div class="exam-card-cta">
+            <span>خوض امتحان End Module كاملاً</span>
+            <span>←</span>
+          </div>
+        </a>
+
+        <!-- Card 2: End Semester Exam -->
+        <a href="batch61_exams_interactive_quiz.html?exam=end_semester" class="exam-card reveal-on-scroll">
+          <div class="exam-card-banner">
+            <img src="assets/exams_banner.jpg" alt="End Semester Exam Batch 61" class="exam-banner-img" loading="lazy">
+            <div class="exam-banner-overlay"></div>
+            <div class="exam-banner-badge">
+              <span class="exam-pill gold">امتحان نهاية الفصل الدراسي (الفاينال) 🎓</span>
+              <span class="count-badge"><span class="stat-counter" data-target="64">64</span> MCQ + 8 مقالي</span>
+            </div>
+          </div>
+          <div class="exam-card-body">
+            <div class="exam-card-header">
+              <h3 class="exam-title">End Semester Exam (Batch 61)</h3>
+              <div style="display: flex; gap: 6px; align-items: center;">
+                <span class="exam-year-tag gold">50 درجة</span>
+                <span class="exam-time-tag gold">⏱️ 75 دقيقة</span>
+              </div>
+            </div>
+            <p class="exam-desc">
+              الامتحان النهائي الشامل لدفعة 61 متضمناً 64 سؤال اختيار من متعدد + 8 أسئلة مقالية قصيرة نموذجية الحل وتوزيع الدرجات المعتمد.
+            </p>
+            <div class="exam-tags-row">
+              <span class="sub-tag">⚡ فيسيو (16)</span>
+              <span class="sub-tag">🫀 أناتومي (12)</span>
+              <span class="sub-tag">🔬 باثو ومايكرو وهستو (24)</span>
+              <span class="sub-tag gold-tag">✍️ 8 أسئلة مقالية</span>
+            </div>
+          </div>
+          <div class="exam-card-cta gold">
+            <span>خوض امتحان End Semester كاملاً</span>
+            <span>←</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
     <!-- Flagship Modules: Physiology, Pharmacology & Anatomy -->
     <section>
-      <div class="section-title">
+      <div class="section-title reveal-on-scroll">
         <span class="section-heading-text">⭐ المواد الأكبر والأهم في الموديول (Core Flagship Modules)</span>
         <span class="tag">626 سؤالاً معاً (الفسيولوجي • الفارماكولوجي • الأناتومي)</span>
       </div>
@@ -864,10 +1418,14 @@
       <div class="flagships-grid">
 
         <!-- Physiology Flagship -->
-        <a href="physiology_cvs_interactive_quiz.html?v=2.2" class="flagship-card physio">
-          <div class="flagship-header">
-            <span class="flagship-pill">المادة الأولى والأضخم ⚡️</span>
-            <span class="flagship-count">254 MCQs</span>
+        <a href="physiology_cvs_interactive_quiz.html?v=2.2" class="flagship-card physio reveal-on-scroll">
+          <div class="card-banner-wrapper">
+            <img src="assets/physiology_banner.jpg" alt="Physiology CVS" class="card-banner-img" loading="lazy">
+            <div class="card-banner-overlay"></div>
+            <div class="card-banner-badges">
+              <span class="flagship-pill">المادة الأولى والأضخم ⚡️</span>
+              <span class="flagship-count"><span class="stat-counter" data-target="254">254</span> MCQs</span>
+            </div>
           </div>
           <div class="flagship-title-box">
             <h3>Physiology CVS (الفسيولوجيا)</h3>
@@ -887,10 +1445,14 @@
         </a>
 
         <!-- Pharmacology Flagship -->
-        <a href="pharmacology_cvs_interactive_quiz.html?v=2.2" class="flagship-card pharma">
-          <div class="flagship-header">
-            <span class="flagship-pill">المادة الثانية والأشمل 💊</span>
-            <span class="flagship-count">290 MCQs</span>
+        <a href="pharmacology_cvs_interactive_quiz.html?v=2.2" class="flagship-card pharma reveal-on-scroll">
+          <div class="card-banner-wrapper">
+            <img src="assets/pharmacology_banner.jpg" alt="Pharmacology CVS" class="card-banner-img" loading="lazy">
+            <div class="card-banner-overlay"></div>
+            <div class="card-banner-badges">
+              <span class="flagship-pill">المادة الثانية والأشمل 💊</span>
+              <span class="flagship-count"><span class="stat-counter" data-target="290">290</span> MCQs</span>
+            </div>
           </div>
           <div class="flagship-title-box">
             <h3>Pharmacology CVS (الفارماكولوجيا)</h3>
@@ -910,10 +1472,14 @@
         </a>
 
         <!-- Anatomy Flagship -->
-        <a href="anatomy_cvs_interactive_quiz.html?v=2.2" class="flagship-card anatomy">
-          <div class="flagship-header">
-            <span class="flagship-pill">المادة الثالثة الأساسية 🫀</span>
-            <span class="flagship-count">82 MCQs</span>
+        <a href="anatomy_cvs_interactive_quiz.html?v=2.2" class="flagship-card anatomy reveal-on-scroll">
+          <div class="card-banner-wrapper">
+            <img src="assets/anatomy_banner.jpg" alt="Anatomy CVS" class="card-banner-img" loading="lazy">
+            <div class="card-banner-overlay"></div>
+            <div class="card-banner-badges">
+              <span class="flagship-pill">المادة الثالثة الأساسية 🫀</span>
+              <span class="flagship-count"><span class="stat-counter" data-target="82">82</span> MCQs</span>
+            </div>
           </div>
           <div class="flagship-title-box">
             <h3>Anatomy CVS (التشريح الطبي)</h3>
@@ -937,7 +1503,7 @@
 
     <!-- Foundational Preclinical Modules -->
     <section>
-      <div class="section-title">
+      <div class="section-title reveal-on-scroll">
         <span class="section-heading-text">📖 باقي مواد الموديول (Preclinical Modules)</span>
         <span class="tag">172 سؤالاً (الباثولوجي • الهستولوجي • المايكروبيولوجي)</span>
       </div>
@@ -945,13 +1511,17 @@
       <div class="subjects-grid">
 
         <!-- Pathology -->
-        <a href="pathology_cvs_interactive_quiz.html?v=2.2" class="subject-card">
-          <div class="subject-head">
-            <div class="subject-icon-box">
-              <div class="icon-symbol" style="border-color: rgba(236, 72, 153, 0.4);">🩺</div>
-              <div class="subject-name">Pathology CVS</div>
+        <a href="pathology_cvs_interactive_quiz.html?v=2.2" class="subject-card reveal-on-scroll">
+          <div class="subject-card-banner">
+            <img src="assets/pathology_banner.jpg" alt="Pathology CVS" class="subject-banner-img" loading="lazy">
+            <div class="subject-banner-overlay"></div>
+            <div class="subject-banner-badge">
+              <span class="subject-icon-pill">🩺</span>
+              <span class="count-badge"><span class="stat-counter" data-target="49">49</span> MCQs</span>
             </div>
-            <span class="count-badge">49 MCQs</span>
+          </div>
+          <div class="subject-head">
+            <div class="subject-name">Pathology CVS (علم الأمراض)</div>
           </div>
           <p class="subject-desc">أمراض صمامات القلب، احتشاء عضلة القلب، الحمى الروماتيزمية، تصلب الشرايين، والتشوهات الخلقية للقلب.</p>
           <div class="subject-cta">
@@ -961,13 +1531,17 @@
         </a>
 
         <!-- Histology -->
-        <a href="histology_cvs_interactive_quiz.html?v=2.2" class="subject-card">
-          <div class="subject-head">
-            <div class="subject-icon-box">
-              <div class="icon-symbol" style="border-color: rgba(16, 185, 129, 0.4);">🔬</div>
-              <div class="subject-name">Histology CVS</div>
+        <a href="histology_cvs_interactive_quiz.html?v=2.2" class="subject-card reveal-on-scroll">
+          <div class="subject-card-banner">
+            <img src="assets/histology_banner.jpg" alt="Histology CVS" class="subject-banner-img" loading="lazy">
+            <div class="subject-banner-overlay"></div>
+            <div class="subject-banner-badge">
+              <span class="subject-icon-pill">🔬</span>
+              <span class="count-badge"><span class="stat-counter" data-target="48">48</span> MCQs</span>
             </div>
-            <span class="count-badge">48 MCQs</span>
+          </div>
+          <div class="subject-head">
+            <div class="subject-name">Histology CVS (علم الأنسجة)</div>
           </div>
           <p class="subject-desc">التركيب المجهري والأنسجة للشرايين المرنة والعضلية، الشعيرات الدموية، جدران القلب، وصمامات القلب والأوردة.</p>
           <div class="subject-cta">
@@ -977,13 +1551,17 @@
         </a>
 
         <!-- Microbiology New -->
-        <a href="microbiology_cvs_new_quiz.html?v=2.2" class="subject-card">
-          <div class="subject-head">
-            <div class="subject-icon-box">
-              <div class="icon-symbol" style="border-color: rgba(245, 158, 11, 0.4);">🧫</div>
-              <div class="subject-name">Microbiology (2026)</div>
+        <a href="microbiology_cvs_new_quiz.html?v=2.2" class="subject-card reveal-on-scroll">
+          <div class="subject-card-banner">
+            <img src="assets/microbiology_banner.jpg" alt="Microbiology New 2026" class="subject-banner-img" loading="lazy">
+            <div class="subject-banner-overlay"></div>
+            <div class="subject-banner-badge">
+              <span class="subject-icon-pill">🧫</span>
+              <span class="count-badge"><span class="stat-counter" data-target="37">37</span> MCQs</span>
             </div>
-            <span class="count-badge">37 MCQs</span>
+          </div>
+          <div class="subject-head">
+            <div class="subject-name">Microbiology 2026 (المايكرو الحديث)</div>
           </div>
           <p class="subject-desc">الميكروبيولوجي والمناعة الطبية - الإصدار الحديث 2026 (التهاب الشغاف الجرثومي، الفيروسات القلبية، والحمى الروماتيزمية).</p>
           <div class="subject-cta">
@@ -993,13 +1571,17 @@
         </a>
 
         <!-- Microbiology Old Archive -->
-        <a href="microbiology_cvs_old_quiz.html?v=2.2" class="subject-card">
-          <div class="subject-head">
-            <div class="subject-icon-box">
-              <div class="icon-symbol" style="border-color: rgba(245, 158, 11, 0.4);">📚</div>
-              <div class="subject-name">Microbiology (Archive)</div>
+        <a href="microbiology_cvs_old_quiz.html?v=2.2" class="subject-card reveal-on-scroll">
+          <div class="subject-card-banner">
+            <img src="assets/microbiology_archive_banner.jpg" alt="Microbiology Old Archive" class="subject-banner-img" loading="lazy">
+            <div class="subject-banner-overlay"></div>
+            <div class="subject-banner-badge">
+              <span class="subject-icon-pill">📚</span>
+              <span class="count-badge"><span class="stat-counter" data-target="38">38</span> MCQs</span>
             </div>
-            <span class="count-badge">38 MCQs</span>
+          </div>
+          <div class="subject-head">
+            <div class="subject-name">Microbiology Archive (أرشيف القسم)</div>
           </div>
           <p class="subject-desc">أرشيف بنك أسئلة قسم الميكروبيولوجيا الطبية مع شروحات علمية دقيقة لكل سؤال والربط الإكلينيكي المعتمد.</p>
           <div class="subject-cta">
@@ -1012,12 +1594,104 @@
     </section>
 
     <!-- Footer -->
-    <footer class="hub-footer">
+    <footer class="hub-footer reveal-on-scroll">
       <p>تم إعداد وتطوير المنصة بواسطة <strong>Ahmed Wael</strong> (طالب بطب الأزهر) • بالتعاون مع كورس <strong>«مشروع ضاكتور»</strong> 🩺</p>
       <p style="font-size: 0.8rem; margin-top: 4px; color: var(--gold-light);">موديول القلب والأوعية الدموية (CVS Module) • بنك أسئلة معتمد وشامل • «نؤصل للطب من جديد»</p>
     </footer>
 
   </div>
+
+  <!-- Floating Back to Top Button -->
+  <button id="backToTopBtn" class="back-to-top-btn" aria-label="العودة لأعلى الصفحة" title="العودة لأعلى">
+    ↑
+  </button>
+
+  <!-- Interactive Enhancements Script -->
+  <script>
+    // 1. Smooth Count-Up Animation
+    document.addEventListener('DOMContentLoaded', () => {
+      const counters = document.querySelectorAll('.stat-counter');
+      const duration = 1100; // ms
+
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        if (!target) return;
+        
+        const startTime = performance.now();
+        counter.innerText = '0';
+
+        const step = (now) => {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          const current = Math.floor(easeOut * target);
+          counter.innerText = current;
+
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            counter.innerText = target;
+          }
+        };
+
+        requestAnimationFrame(step);
+      });
+    });
+
+    // 2. Floating Back to Top Button
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    if (backToTopBtn) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 280) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    // 3. Smooth Scroll Reveal Animation (IntersectionObserver)
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    if (revealElements.length > 0 && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('reveal-enabled');
+
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            // Clean up transitionDelay after entrance finishes so hover is instant
+            setTimeout(() => {
+              entry.target.style.transitionDelay = '';
+            }, 850);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: '0px 0px -35px 0px',
+        threshold: 0.08
+      });
+
+      // Add stagger delay for adjacent cards in the same grid
+      revealElements.forEach(el => {
+        const parent = el.parentElement;
+        if (parent && (parent.classList.contains('exams-grid') || parent.classList.contains('flagships-grid') || parent.classList.contains('subjects-grid'))) {
+          const siblings = Array.from(parent.children).filter(child => child.classList.contains('reveal-on-scroll'));
+          const idx = siblings.indexOf(el);
+          if (idx > 0) {
+            el.style.transitionDelay = `${idx * 85}ms`;
+          }
+        }
+        revealObserver.observe(el);
+      });
+    }
+  </script>
 
 </body>
 </html>

@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>امتحانات الدفعة 61 الرسمية CVS | كلية الطب جامعة الأزهر - إعداد أحمد وائل</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Amiri:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #132132;
+      --surface: #1a2c40;
+      --surface-card: #22374e;
+      --surface-card-hover: #2c4460;
+      --border: #36506f;
+      --border-focus: #efd57f;
+      --border-gold: rgba(239, 213, 127, 0.45);
+      --gold: #efd57f;
+      --gold-light: #fce494;
+      --gold-dark: #c59b27;
+      --gold-gradient: linear-gradient(135deg, #fce494 0%, #efd57f 50%, #c59b27 100%);
+      --gold-glow: rgba(239, 213, 127, 0.35);
+      --azhar-green: #059669;
+      --azhar-green-light: #10b981;
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.25);
+      --danger: #ef4444;
+      --danger-glow: rgba(239, 68, 68, 0.25);
+      --text: #ffffff;
+      --text-secondary: #d5e3f0;
+      --text-muted: #97b0c8;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+      --shadow-luxury: 0 16px 36px -12px rgba(10, 18, 28, 0.6), 0 0 1px 1px rgba(255, 255, 255, 0.06);
+      --shadow-gold: 0 4px 20px rgba(239, 213, 127, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', 'Plus Jakarta Sans', -apple-system, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 50% 0%, rgba(35, 55, 78, 0.95) 0px, transparent 75%),
+        linear-gradient(180deg, #132132 0%, #1a2c40 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px 60px;
+      line-height: 1.6;
+    }
+
+    .quiz-app-container {
+      width: 100%;
+      max-width: 980px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Top Breadcrumb & Return Bar */
+    .top-nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .back-home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .back-home-btn:hover {
+      background: var(--surface-card-hover);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(239, 213, 127, 0.2);
+    }
+
+    .audio-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: all 0.25s ease;
+    }
+
+    .audio-toggle-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Hero Banner Card */
+    .exam-header-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      box-shadow: var(--shadow-luxury);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exam-header-backdrop {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+      opacity: 0.18;
+      filter: saturate(1.2) brightness(0.85);
+      pointer-events: none;
+    }
+
+    .exam-header-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(19, 33, 50, 0.94) 0%, rgba(26, 44, 64, 0.9) 100%);
+      pointer-events: none;
+    }
+
+    .exam-header-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gold-gradient);
+      z-index: 3;
+    }
+
+    .exam-header-top {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+
+    .faculty-seal-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logos-pair {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .faculty-logo-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      padding: 2px;
+      border: 2px solid var(--gold);
+      box-shadow: var(--shadow-gold);
+      flex-shrink: 0;
+    }
+
+    .faculty-logo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .dactoor-emblem-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #000000;
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 10px rgba(239, 213, 127, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .dactoor-emblem-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .header-text-block h1 {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-text-block h1 span {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-text-block p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-top: 4px;
+    }
+
+    .header-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge-pill {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-gold {
+      background: rgba(239, 213, 127, 0.15);
+      border: 1px solid var(--border-gold);
+      color: var(--gold);
+    }
+
+    .badge-green {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--azhar-green-light);
+    }
+
+    /* Exam Switcher (End Module vs End Semester) */
+    .exam-switcher-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .exam-tab-btn {
+      background: var(--surface-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      color: var(--text);
+      cursor: pointer;
+      text-align: right;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .exam-tab-btn:hover {
+      background: var(--surface-card-hover);
+      border-color: rgba(239, 213, 127, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .exam-tab-btn.active {
+      background: linear-gradient(135deg, rgba(34, 55, 78, 0.9) 0%, rgba(26, 44, 64, 0.95) 100%);
+      border-color: var(--gold);
+      box-shadow: 0 4px 20px rgba(239, 213, 127, 0.25);
+    }
+
+    .exam-tab-btn.active::after {
+      content: '✓ قيد العرض';
+      position: absolute;
+      top: -10px;
+      left: 16px;
+      background: var(--gold-gradient);
+      color: #0d1722;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 10px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .tab-info-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .tab-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .exam-tab-btn.active .tab-title {
+      color: var(--gold);
+    }
+
+    .tab-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .tab-icon {
+      font-size: 1.8rem;
+      opacity: 0.85;
+    }
+
+    /* Controls Bar: Subject Filter Pills */
+    .filter-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      box-shadow: var(--shadow-luxury);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .filter-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-label {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mode-toggles-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .mode-btn {
+      padding: 6px 14px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .mode-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .mode-btn.active {
+      background: var(--gold-gradient);
+      color: #0d1722;
+      border-color: transparent;
+      font-weight: 800;
+    }
+
+    .subject-pills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .subject-pill {
+      padding: 8px 14px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .subject-pill:hover {
+      background: var(--surface-card-hover);
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-1px);
+    }
+
+    .subject-pill.active {
+      background: rgba(239, 213, 127, 0.18);
+      border-color: var(--gold);
+      color: var(--gold-light);
+      box-shadow: 0 0 12px rgba(239, 213, 127, 0.25);
+    }
+
+    .pill-count {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    /* Progress & Score Bar */
+    .stats-dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .stat-mini-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+
+    .stat-title {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .stat-val {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .stat-val.gold { color: var(--gold); }
+    .stat-val.green { color: var(--success); }
+    .stat-val.red { color: var(--danger); }
+
+    .progress-track-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .progress-info-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .progress-bar-bg {
+      height: 8px;
+      background: var(--surface-card);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--gold-gradient);
+      border-radius: 6px;
+      width: 0%;
+      transition: width 0.35s ease;
+      box-shadow: 0 0 10px rgba(239, 213, 127, 0.5);
+    }
+
+    /* Question Interactive Card */
+    .question-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 26px 30px;
+      box-shadow: var(--shadow-luxury);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .question-meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+
+    .question-tags {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .tag-subject {
+      background: rgba(239, 213, 127, 0.15);
+      border: 1px solid var(--border-gold);
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 8px;
+    }
+
+    .tag-official-num {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 8px;
+    }
+
+    .tag-exam-label {
+      background: rgba(5, 150, 105, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: var(--azhar-green-light);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 8px;
+    }
+
+    .question-counter {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .question-text-box {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.7;
+      color: var(--text);
+      direction: ltr;
+      text-align: left;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-item {
+      background: var(--surface-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.22s ease;
+      position: relative;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .option-item:hover:not(.locked) {
+      background: var(--surface-card-hover);
+      border-color: var(--gold);
+      transform: translateX(4px);
+    }
+
+    .option-letter {
+      width: 32px;
+      height: 32px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--gold);
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .option-text {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      flex-grow: 1;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Option States */
+    .option-item.correct {
+      background: rgba(16, 185, 129, 0.16) !important;
+      border-color: var(--success) !important;
+      box-shadow: 0 0 16px var(--success-glow);
+    }
+
+    .option-item.correct .option-letter {
+      background: var(--success);
+      color: #fff;
+      border-color: var(--success);
+    }
+
+    .option-item.correct .option-text {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .option-item.wrong {
+      background: rgba(239, 68, 68, 0.16) !important;
+      border-color: var(--danger) !important;
+      animation: shake 0.35s ease;
+      box-shadow: 0 0 16px var(--danger-glow);
+    }
+
+    .option-item.wrong .option-letter {
+      background: var(--danger);
+      color: #fff;
+      border-color: var(--danger);
+    }
+
+    .option-item.wrong .option-text {
+      color: #ffc2c2;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    /* Medical Pearl Card */
+    .pearl-card {
+      background: linear-gradient(135deg, rgba(34, 55, 78, 0.95) 0%, rgba(20, 34, 50, 0.95) 100%);
+      border: 1.5px solid var(--border-gold);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      margin-top: 6px;
+      display: none;
+      animation: fadeIn 0.3s ease;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .pearl-card.show {
+      display: block;
+    }
+
+    .pearl-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 0.98rem;
+      margin-bottom: 8px;
+      border-bottom: 1px dashed rgba(239, 213, 127, 0.3);
+      padding-bottom: 6px;
+    }
+
+    .pearl-body {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      text-align: justify;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Action Buttons Navigation */
+    .card-actions-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .nav-btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .action-btn {
+      padding: 10px 20px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .action-btn:hover:not(:disabled) {
+      background: var(--surface-card-hover);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .action-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .action-btn.btn-gold {
+      background: var(--gold-gradient);
+      color: #0d1722;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(239, 213, 127, 0.35);
+    }
+
+    .action-btn.btn-gold:hover:not(:disabled) {
+      background: linear-gradient(135deg, #fff7dc 0%, #fce494 50%, #c59b27 100%);
+      box-shadow: 0 6px 20px rgba(239, 213, 127, 0.5);
+    }
+
+    /* Navigation Grid (Palette) */
+    .palette-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-luxury);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .palette-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .palette-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .palette-legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.correct { background: var(--success); }
+    .legend-dot.wrong { background: var(--danger); }
+    .legend-dot.current { background: var(--gold); border: 2px solid #fff; }
+    .legend-dot.unanswered { background: var(--surface-card); border: 1px solid var(--border); }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+      gap: 8px;
+      max-height: 240px;
+      overflow-y: auto;
+      padding-left: 4px;
+    }
+
+    .palette-num-btn {
+      height: 38px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-weight: 800;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.18s ease;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .palette-num-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .palette-num-btn.active {
+      border-color: var(--gold);
+      box-shadow: 0 0 10px rgba(239, 213, 127, 0.6);
+      transform: scale(1.08);
+      color: #fff;
+    }
+
+    .palette-num-btn.correct {
+      background: var(--success);
+      color: #fff;
+      border-color: var(--success);
+    }
+
+    .palette-num-btn.wrong {
+      background: var(--danger);
+      color: #fff;
+      border-color: var(--danger);
+    }
+
+    /* Short Essay View Section */
+    .essay-container {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .essay-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px 26px;
+      box-shadow: var(--shadow-luxury);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .essay-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    .essay-question-text {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--gold-light);
+      direction: ltr;
+      text-align: left;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .model-answer-box {
+      background: var(--surface-card);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      direction: ltr;
+      text-align: left;
+      white-space: pre-line;
+      display: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .toggle-answer-btn {
+      align-self: flex-start;
+      padding: 8px 16px;
+      background: rgba(239, 213, 127, 0.15);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-sm);
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .toggle-answer-btn:hover {
+      background: var(--gold);
+      color: #0d1722;
+    }
+
+    /* Review All Mode Container */
+    .review-list-container {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Footer */
+    .app-footer {
+      margin-top: 30px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .app-footer strong {
+      color: var(--gold);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .exam-switcher-grid {
+        grid-template-columns: 1fr;
+      }
+      .question-card {
+        padding: 20px 18px;
+      }
+      .exam-header-card {
+        padding: 18px 20px;
+      }
+      .stats-dashboard {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quiz-app-container">
+    
+    <!-- Top Navigation Bar -->
+    <div class="top-nav-bar">
+      <a href="index.html" class="back-home-btn">
+        <span>← العودة لبنك الأسئلة الرئيسي</span>
+      </a>
+      <div style="display: flex; gap: 10px;">
+        <button class="audio-toggle-btn" id="audioToggleBtn" onclick="toggleAudio()">
+          <span id="audioIcon">🔊</span>
+          <span id="audioText">الصوت: مفعل</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Exam Header Banner -->
+    <div class="exam-header-card">
+      <img src="assets/exams_banner.jpg" alt="Official Past Exams Batch 61" class="exam-header-backdrop">
+      <div class="exam-header-overlay"></div>
+      <div class="exam-header-top">
+        <div class="faculty-seal-title">
+          <div class="brand-logos-pair">
+            <div class="faculty-logo-circle" title="جامعة الأزهر - كلية الطب">
+              <img src="assets/al_azhar_logo.png" alt="شعار جامعة الأزهر">
+            </div>
+            <div class="dactoor-emblem-box" title="مشروع ضاكتور">
+              <img src="assets/mashroua.jpeg" alt="شعار مشروع ضاكتور">
+            </div>
+          </div>
+          <div class="header-text-block">
+            <h1>امتحانات الدفعة 61 الرسمية | <span>CVS Official Exams</span></h1>
+            <p>كلية الطب بنين بالقاهرة - جامعة الأزهر الشريف | إعداد وتدقيق: أحمد وائل</p>
+          </div>
+        </div>
+        <div class="header-badges">
+          <span class="badge-pill badge-gold">⭐ حلول أكاديمية معتمدة 100%</span>
+          <span class="badge-pill badge-green">✓ لؤلؤة طبية وشرح لكل سؤال</span>
+        </div>
+      </div>
+
+      <!-- Exam Switcher (End Module vs End Semester) -->
+      <div class="exam-switcher-grid">
+        <div class="exam-tab-btn active" id="tabEndModule" onclick="switchExam('end_module')">
+          <div class="tab-info-main">
+            <span class="tab-title">امتحان نهاية الموديول الرسمي</span>
+            <span class="tab-desc">End Module Exam • 80 MCQ • 40 Marks • شامل 7 مواد</span>
+          </div>
+          <div class="tab-icon">📋</div>
+        </div>
+
+        <div class="exam-tab-btn" id="tabEndSemester" onclick="switchExam('end_semester')">
+          <div class="tab-info-main">
+            <span class="tab-title">امتحان نهاية الفصل الدراسي الرسمي</span>
+            <span class="tab-desc">End Semester Exam • 64 MCQ + 8 مقالي • 50 Marks</span>
+          </div>
+          <div class="tab-icon">🎓</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls & Subject Filter Section -->
+    <div class="filter-section">
+      <div class="filter-header-row">
+        <div class="filter-label">
+          <span>🎯 تصفية الأسئلة حسب المادة:</span>
+        </div>
+        <div class="mode-toggles-group">
+          <button class="mode-btn active" id="modePracticeBtn" onclick="switchMode('practice')">وضع التمرين التفاعلي</button>
+          <button class="mode-btn" id="modeReviewBtn" onclick="switchMode('review')">المراجعة الشاملة (عرض الكل)</button>
+        </div>
+      </div>
+
+      <div class="subject-pills-wrap" id="subjectPillsContainer">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Progress & Scoreboard -->
+    <div class="stats-dashboard" id="statsDashboard">
+      <div class="stat-mini-box">
+        <span class="stat-title">إجمالي أسئلة القسم</span>
+        <span class="stat-val gold" id="statTotalQ">80</span>
+      </div>
+      <div class="stat-mini-box">
+        <span class="stat-title">تمت الإجابة</span>
+        <span class="stat-val" id="statAnsweredQ">0</span>
+      </div>
+      <div class="stat-mini-box">
+        <span class="stat-title">إجابات صحيحة</span>
+        <span class="stat-val green" id="statCorrectQ">0</span>
+      </div>
+      <div class="stat-mini-box">
+        <span class="stat-title">إجابات خاطئة</span>
+        <span class="stat-val red" id="statWrongQ">0</span>
+      </div>
+      <div class="stat-mini-box">
+        <span class="stat-title">نسبة الدقة</span>
+        <span class="stat-val gold" id="statAccuracy">0%</span>
+      </div>
+    </div>
+
+    <div class="progress-track-wrapper" id="progressWrapper">
+      <div class="progress-info-row">
+        <span>مدى تقدمك في هذا القسم</span>
+        <span id="progressText">0% مكتمل</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+      </div>
+    </div>
+
+    <!-- Practice Mode Question Card -->
+    <div class="question-card" id="practiceQuestionCard">
+      <div class="question-meta-bar">
+        <div class="question-tags">
+          <span class="tag-subject" id="qSubjectBadge">تشريح</span>
+          <span class="tag-official-num" id="qOfficialNumBadge">سؤال رسمي رقم 1</span>
+          <span class="tag-exam-label" id="qExamLabelBadge">End Module</span>
+        </div>
+        <div class="question-counter" id="qCounterText">
+          السؤال 1 من 80
+        </div>
+      </div>
+
+      <div class="question-text-box" id="qTextBox">
+        Loading question text...
+      </div>
+
+      <div class="options-list" id="qOptionsList">
+        <!-- Options rendered dynamically -->
+      </div>
+
+      <!-- Medical Pearl -->
+      <div class="pearl-card" id="qPearlCard">
+        <div class="pearl-header">
+          <span>💡 اللؤلؤة الطبية والشرح الأكاديمي النموذجي:</span>
+        </div>
+        <div class="pearl-body" id="qPearlBody">
+          Explanation text...
+        </div>
+      </div>
+
+      <!-- Actions Navigation -->
+      <div class="card-actions-bar">
+        <div class="nav-btn-group">
+          <button class="action-btn" id="prevBtn" onclick="prevQuestion()">
+            <span>→ السابق</span>
+          </button>
+          <button class="action-btn" id="nextBtn" onclick="nextQuestion()">
+            <span>التالي ←</span>
+          </button>
+        </div>
+
+        <div class="nav-btn-group">
+          <button class="action-btn" onclick="retryCurrentQuestion()">
+            <span>🔄 أعد حل هذا السؤال</span>
+          </button>
+          <button class="action-btn btn-gold" onclick="resetExamAnswers()">
+            <span>إعادة تعيين هذا القسم</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Question Palette -->
+    <div class="palette-card" id="paletteCard">
+      <div class="palette-header">
+        <div class="palette-title">
+          <span>🧭 لوحة الانتقال السريع بين الأسئلة:</span>
+        </div>
+        <div class="palette-legend">
+          <div class="legend-item"><span class="legend-dot current"></span> الحالي</div>
+          <div class="legend-item"><span class="legend-dot correct"></span> صحيحة</div>
+          <div class="legend-item"><span class="legend-dot wrong"></span> خاطئة</div>
+          <div class="legend-item"><span class="legend-dot unanswered"></span> لم يُحل</div>
+        </div>
+      </div>
+      <div class="palette-grid" id="paletteGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Review Mode Container (List of all questions with answers) -->
+    <div class="review-list-container" id="reviewListContainer">
+      <!-- Rendered dynamically -->
+    </div>
+
+    <!-- Short Essays Container (End Semester Only) -->
+    <div class="essay-container" id="essayContainer">
+      <!-- Rendered dynamically -->
+    </div>
+
+    <!-- Footer -->
+    <div class="app-footer">
+      <p>منصة بنك أسئلة موديول القلب والأوعية الدموية (CVS) | كلية الطب جامعة الأزهر</p>
+      <p>تصميم وتطوير وبرمجة: <strong>أحمد وائل (Ahmed Wael)</strong> • جميع الحقوق محفوظة لدفعة 61 و 62</p>
+    </div>
+
+  </div>
+
+  <!-- Audio Synthesis Script -->
+  <script>
+    let audioEnabled = true;
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      document.getElementById('audioIcon').textContent = audioEnabled ? '🔊' : '🔇';
+      document.getElementById('audioText').textContent = audioEnabled ? 'الصوت: مفعل' : 'الصوت: صامت';
+    }
+
+    function playSound(type) {
+      if (!audioEnabled) return;
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+
+        if (type === 'correct') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.1);
+          osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.2);
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (type === 'wrong') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.exponentialRampToValueAtTime(140, now + 0.25);
+          gain.gain.setValueAtTime(0.16, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.28);
+          osc.start(now);
+          osc.stop(now + 0.28);
+        } else if (type === 'click') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(800, now);
+          osc.frequency.exponentialRampToValueAtTime(400, now + 0.05);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.06);
+          osc.start(now);
+          osc.stop(now + 0.06);
+        }
+      } catch (e) {
+        console.warn('Audio error:', e);
+      }
+    }
+  </script>
+
+  <!-- Application Logic & Data -->
+  <script>
+    const END_MODULE_QUESTIONS = [{"id": 1, "exam": "end_module", "official_num": 1, "subject": "Anatomy", "subject_ar": "تشريح", "question": "Abdominal aorta bifurcates at which of the following vertebral levels?", "options": ["Lower border of L3", "Lower border of L4", "Lower border of L5", "Upper border of L4", "Upper border of L5"], "answer": 1, "pearl": "ينقسم الشريان الأورطي البطني (Abdominal Aorta) عند الحافة السفلية للفقرة القطنية الرابعة (Lower border of L4 vertebra)، إلى الشريانين الحرقفيين الأصليين (Right and Left Common Iliac Arteries). هذا المستوى يقع تشريحياً حوالي 2.5 سم أسفل السرة ويتطابق مع أعلى نقطة في العرف الحرقفي (Iliac crest)."}, {"id": 2, "exam": "end_module", "official_num": 2, "subject": "Anatomy", "subject_ar": "تشريح", "question": "Left coronary artery is arising from:", "options": ["Left posterior aortic sinus", "Left anterior aortic sinus", "Right posterior aortic sinus", "Right anterior aortic sinus", "Pulmonary trunk"], "answer": 0, "pearl": "ينشأ الشريان التاجي الأيسر (Left Coronary Artery) من الجيب الأورطي الخلفي الأيسر (Left Posterior Aortic Sinus). بينما ينشأ الشريان التاجي الأيمن من الجيب الأورطي الأمامي (Anterior Aortic Sinus)، ويظل الجيب الخلفي الأيمن بدون شرايين تاجية (Non-coronary sinus)."}, {"id": 3, "exam": "end_module", "official_num": 3, "subject": "Anatomy", "subject_ar": "تشريح", "question": "The portion of the hepatic artery extending between the celiac trunk and the gastroduodenal artery is known as:", "options": ["Proper hepatic artery", "Common hepatic artery", "Right hepatic artery", "Left hepatic artery", "Middle hepatic artery"], "answer": 1, "pearl": "الجزء الممتد من الجذع البطني (Celiac Trunk) حتى نقطة خروج الشريان المعدي الإثناعشري (Gastroduodenal Artery) يسمى الشريان الكبدي المشترك (Common Hepatic Artery). بعد تفرع الشريان المعدي الإثناعشري، يستمر الشريان صعوداً نحو الكبد داخل الرباط الكبدي الإثناعشري كالشريان الكبدي الخاص (Proper Hepatic Artery)."}, {"id": 4, "exam": "end_module", "official_num": 4, "subject": "Anatomy", "subject_ar": "تشريح", "question": "The common carotid artery terminates at which of the following level?", "options": ["Disc between C1 and C2", "Disc between C2 and C3", "Disc between C3 and C4", "Disc between C4 and C5", "Disc between C5 and C6"], "answer": 2, "pearl": "ينتهي الشريان السباتي المشترك (Common Carotid Artery) بتفرعه إلى الشريانين السباتيين الداخلي والخارجي عند الحافة العلوية لغضروف الغدة الدرقية (Upper border of thyroid cartilage)، وهو ما يطابق مستوى القرص الغضروفي بين الفقرتين العنقية الثالثة والرابعة (Disc between C3 and C4) أو جسم الفقرة C4."}, {"id": 5, "exam": "end_module", "official_num": 5, "subject": "Anatomy", "subject_ar": "تشريح (أجنة)", "question": "Regarding to the foramen ovale which of the following is true:", "options": ["is formed by perforation in septum II", "permits a right to left shunt of blood until the time of birth", "its floor formed by septum II", "it is patent in approximately 20% of the population", "it is dependent upon the proper formation of septum I for closure"], "answer": 1, "pearl": "الثقبة البيضوية (Foramen Ovale) تقع في الحاجز الثانوي (Septum Secundum) وتسمح بمرور الدم المؤكسج القادم من الوريد الأجوف السفلي من الأذين الأيمن مباشرة إلى الأذين الأيسر (Right-to-left shunt) طوال فترة الحياة الجنينية حتى لحظة الولادة، حيث يؤدي توسع الرئتين وانخفاض الضغط الرئوي وارتفاع ضغط الأذين الأيسر إلى غلقها وظيفياً."}, {"id": 6, "exam": "end_module", "official_num": 6, "subject": "Anatomy", "subject_ar": "تشريح (أجنة)", "question": "Regarding to the interventricular septum which of the following is true:", "options": ["is primarily membranous", "receives its membranous contribution from the right valve of the sinus venosus", "has most of its developmental defects restricted to the membranous component", "has a patency for right to left shunting of blood throughout development", "receives its major contribution from the fused endocardial cushions"], "answer": 2, "pearl": "يتكون الحاجز بين البطينين من جزأين: جزء عضلي ضخم (Muscular part) يمثل الغالبية العظمى تشريحياً، وجزء غشائي صغير (Membranous part). ومع ذلك فإن معظم العيوب التطورية والفتحات الخلقية (VSDs) تحدث في الجزء الغشائي (Membranous component) بنسبة تتجاوز 80-90%."}, {"id": 7, "exam": "end_module", "official_num": 7, "subject": "Anatomy", "subject_ar": "تشريح", "question": "Internal jugular vein begins as a continuation of which of the following dural venous sinuses?", "options": ["Cavernous", "Inferior sagittal", "Superior sagittal", "Sigmoid", "Transverse"], "answer": 3, "pearl": "يبدأ الوريد الوداجي الغائر (Internal Jugular Vein) عند الثقبة الوداجية (Jugular Foramen) كاستمرار مباشر للجيب الجافي السيني (Sigmoid Sinus)، حيث تتوسع بدايته مشكلة البصلة العلوية للوريد الوداجي (Superior bulb of IJV)."}, {"id": 8, "exam": "end_module", "official_num": 8, "subject": "Anatomy", "subject_ar": "تشريح", "question": "The hepatic veins drain into which of the following structures?", "options": ["Liver", "Inferior vena cava", "Spleen", "Portal vein", "Superior vena cava"], "answer": 1, "pearl": "تصب الأوردة الكبدية (Hepatic Veins: Right, Middle, Left) مباشرة في الوريد الأجوف السفلي (Inferior Vena Cava) أثناء مروره في التلم الخلفي للكبد، قبيل اختراقه للحجاب الحاجز مباشرة."}, {"id": 9, "exam": "end_module", "official_num": 9, "subject": "Anatomy", "subject_ar": "تشريح (أجنة)", "question": "A 2-day-old newborn is diagnosed with transposition of the great arteries. Which structure is responsible for the division of the truncus arteriosus into the great arteries?", "options": ["Septum secundum", "Septum primum", "Bulbar septum", "Aorticopulmonary septum", "Endocardial cushions"], "answer": 3, "pearl": "يقوم الحاجز الأورطي الرئوي (Aorticopulmonary / Spiral Septum) الناشئ من خلايا العرف العصبي (Neural Crest Cells) بالانقسام الحلزوني للجذع الشرياني (Truncus Arteriosus) إلى الأورطي والشريان الرئوي. فشل هذا الالتواء اللولبي يؤدي لتبادل الشرايين الكبرى (Transposition of Great Arteries - TGA)."}, {"id": 10, "exam": "end_module", "official_num": 10, "subject": "Anatomy", "subject_ar": "تشريح", "question": "An 11-year-old boy with swollen palatine tonsils is examined by an otolaryngologist. Which of the following arteries supplies most of the blood to these tonsils and must be protected when its tonsillar branch is divided?", "options": ["Ascending pharyngeal", "Facial", "Lingual", "Descending palatine", "Superior thyroid"], "answer": 1, "pearl": "الشريان اللوزي (Tonsillar Artery) هو المصدر الرئيسي المغذي للوزة الحلقية (Palatine Tonsil)، وهو فرع مباشر من الشريان الوجهي (Facial Artery). ملحوظة: اختيار 'Superior thyroid' في ورقة الطالب غير صحيح إطلاقاً."}, {"id": 11, "exam": "end_module", "official_num": 11, "subject": "Anatomy", "subject_ar": "تشريح", "question": "A 70-year-old man is admitted to the emergency department with severe diarrhea. An arteriogram reveals 90% blockage at the origin of the inferior mesenteric artery from the aorta. Which of the following arteries would most likely provide collateral supply to the descending colon?", "options": ["Left gastroepiploic artery", "Middle colic artery", "Sigmoid artery", "Splenic artery", "Superior rectal artery"], "answer": 1, "pearl": "يوفر الشريان القولوني الأوسط (Middle Colic Artery - فرع الشريان المساريقي العلوي SMA) الدم التعويضي التبادلي (Collateral Circulation) للقولون النازل عبر الشريان الحافي لدروموند وقوس ريولان (Marginal Artery of Drummond & Arc of Riolan) ليتشابك مع الشريان القولوني الأيسر المتفرع من الشريان المساريقي السفلي المسدود."}, {"id": 12, "exam": "end_module", "official_num": 12, "subject": "Anatomy", "subject_ar": "تشريح", "question": "A 49-year-old female who had suffered a myocardial infarction must undergo a bypass graft procedure using the internal thoracic artery. Which vessels will most likely continue to supply blood to the anterior part of the upper intercostal spaces?", "options": ["Musculophrenic", "Superior epigastric", "Posterior intercostal", "Lateral thoracic", "Thoracodorsal"], "answer": 2, "pearl": "عند استئصال الشريان الصدري الغائر (Internal Thoracic Artery) لعمل جراحة مجازة الشريان التاجي (CABG)، يستمر وصول الدم إلى المساحات الوربية الأمامية عبر تدفق الدم التراجعي (Retrograde Flow) من الشرايين الوربية الخلفية (Posterior Intercostal Arteries) عبر التشابكات الوعائية الغنية."}, {"id": 13, "exam": "end_module", "official_num": 13, "subject": "Anatomy", "subject_ar": "تشريح", "question": "A 29-year-old female is examined in the emergency department after falling from her balcony. Radiographic examination reveals that she has suffered a broken clavicle, with associated internal bleeding. Which of the following vessels is most likely to be injured in clavicular fractures?", "options": ["Subclavian artery", "Cephalic vein", "Lateral thoracic artery", "Subclavian vein", "Internal thoracic artery"], "answer": 3, "pearl": "الوريد تحت الترقوة (Subclavian Vein) يقع مباشرة خلف الثلث الأوسط للترقوة ويفصل بينهما فقط العضلة تحت الترقوة (Subclavius muscle)، ونظراً لموقعه الأمامي ورقّة جداره، فهو أكثر الأوعية عرضة للتمزق والنزيف الداخلي الحاد في كسور الترقوة."}, {"id": 14, "exam": "end_module", "official_num": 14, "subject": "Histology", "subject_ar": "هستولوجي", "question": "The vasa vasorum in large elastic arteries is mainly found in:", "options": ["Tunica intima", "Tunica media", "Tunica adventitia", "Endothelium", "Mesothelium"], "answer": 2, "pearl": "الأوعية المغذية للأوعية (Vasa Vasorum) توجد بشكل رئيسي في الغلالة البرانية (Tunica Adventitia) والنصف الخارجي للغلالة المتوسطة للشرايين والأوردة الكبيرة، لتقوم بتغذية خلايا الجدار الوعائي السميك التي لا يصلها الأكسجين بالانتشار من لمعة الوعاء."}, {"id": 15, "exam": "end_module", "official_num": 15, "subject": "Histology", "subject_ar": "هستولوجي", "question": "Bundle of hiss found in:", "options": ["Atrium", "Ventricle", "Valves", "Aorta", "Pulmonary"], "answer": 1, "pearl": "حزمة هس (Bundle of His / Atrioventricular bundle) تنشأ من العقدة الأذينية البطينية وتخترق الهيكل الليفي للقلب لتصل إلى الحاجز بين البطينين (Interventricular Septum) وتتفرع داخل البطينين (Ventricles) لتوزيع النبضات العصبية عبر ألياف بيركنجي."}, {"id": 16, "exam": "end_module", "official_num": 16, "subject": "Histology", "subject_ar": "هستولوجي", "question": "Moderator band contain one of the following:", "options": ["Smooth muscle fibers", "Purkinji fibers", "Epithelial tissue", "Nerve fibers", "Nerve cells"], "answer": 1, "pearl": "الشريط المعدل (Moderator Band / Septomarginal trabecula) في البطين الأيمن يحتوي على الفرع الأيمن من حزمة التوصيل التابعة لألياف بيركنجي (Purkinje fibers)، مما يسرع وصول التنبيه الكهربائي إلى العضلة الحليمية الأمامية لمنع ارتجاع الصمام ثلاثي الشرفات."}, {"id": 17, "exam": "end_module", "official_num": 17, "subject": "Histology", "subject_ar": "هستولوجي", "question": "Fenestrated capillaries are present in which of the following sites?", "options": ["Muscles and brain", "Connective tissue", "Exocrine glands", "Renal glomeruli", "Epithelial tissue"], "answer": 3, "pearl": "الشعيرات الدموية المثقبة (Fenestrated capillaries) توجد نموذجياً في كبيبات الكلى (Renal glomeruli - شعيرات مثقبة بدون غشاء diaphragm لتسهيل الترشيح فائق السرعة) وكذلك في الغدد الصماء والمخاطية المعوية."}, {"id": 18, "exam": "end_module", "official_num": 18, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "The velocity of impulse transmission is slowest in the:", "options": ["Atria", "A-V node", "Purkinje system", "S-A node", "Ventricular myocardium"], "answer": 1, "pearl": "تكون سرعة توصيل السيال القلبي أبطأ ما يمكن في العقدة الأذينية البطينية (AV node) حيث تبلغ حوالي 0.05 متر/ثانية (AV nodal delay)، وهو ما يمنح الأذينين وقتاً كافياً لإكمال الانقباض وإفراغ الدم في البطينين قبل بدء انقباض البطينين."}, {"id": 19, "exam": "end_module", "official_num": 19, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "A possible cause of sinus bradycardia is:", "options": ["complete heart block", "decreased sympathetic outflow", "atropine", "decreased vagal outflow", "all of the above"], "answer": 1, "pearl": "انخفاض النشاط العصبي السمبثاوي (Decreased sympathetic outflow) يؤدي إلى بطء الجيبي (Sinus Bradycardia). بينما الأتروبين ونقص التواتر المبهمي يسببان زيادة نبضات القلب (Tachycardia)، وحصار القلب التام يؤدي لإيقاع بطيني هروبي مستقل (AV dissociation) وليس بطء جيبي."}, {"id": 20, "exam": "end_module", "official_num": 20, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "In the normal heart, the majority of blood enters the left ventricle:", "options": ["after the aortic valve opens", "as a result of atrial contraction", "during early diastole", "during isovolumic relaxation", "with inspiration"], "answer": 2, "pearl": "يدخل معظم الدم (حوالي 70-80%) إلى البطين الأيسر خلال الثلث الأول من الانبساط في مرحلة الامتلاء السريع (Early diastole / Rapid ventricular filling phase)، بينما يساهم انقباض الأذين بـ 20-30% فقط في نهاية الانبساط."}, {"id": 21, "exam": "end_module", "official_num": 21, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "An ejection fraction of 65% suggests:", "options": ["athletic training", "heart failure", "normal ejection", "pericardial effusion", "pulmonary hypertension"], "answer": 2, "pearl": "الكسر القذفي الطبيعي للبطين الأيسر (Normal Ejection Fraction - EF) يتراوح في المعدل الصحي بين 55% و 70%. بالتالي، قيمة 65% تمثل قذفاً بطينياً طبيعياً تماماً (Normal ejection)."}, {"id": 22, "exam": "end_module", "official_num": 22, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "An irregular rapid heart rate with normal QRS complexes and no P waves suggests:", "options": ["sinus arrhythmia", "2nd degree heart block", "paroxysmal tachycardia with a ventricular pacemaker", "idioventricular rhythm", "atrial fibrillation"], "answer": 4, "pearl": "الرجفان الأذيني (Atrial Fibrillation - AF) يتميز سريرياً وتخطيطياً بنبض غير منتظم على الإطلاق (Irregularly irregular rhythm)، مع غياب تام لموجات P المستقرة، وظهور مركبات QRS ضيقة طبيعية الشكل لأن التوصيل عبر حزمة هس سليم."}, {"id": 23, "exam": "end_module", "official_num": 23, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "A heart murmur that is present during systole suggests:", "options": ["aortic insufficiency", "aortic stenosis", "mitral stenosis", "tricuspid stenosis", "mitral insufficiency"], "answer": 1, "pearl": "النفخات الانقباضية (Systolic Murmurs) تحدث إما بسبب تضيق الصمامات الهلالية مثل تضيق الصمام الأورطي (Aortic Stenosis - نفخة طردية)، أو ارتجاع الصمامات الأذينية البطينية مثل ارتجاع الصمام الميترالي (Mitral Insufficiency/Regurgitation - نفخة شاملة للانقباض). الاختياران b و e كلاهما انقباضي، و Aortic Stenosis هو النموذج التدريسي الأبرز."}, {"id": 24, "exam": "end_module", "official_num": 24, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "During the cardiac cycle:", "options": ["the aortic and mitral valves are never open at the same time", "the first heart sound is caused by the rapid ejection of blood from the ventricles", "the mitral valve is open throughout diastole", "left ventricular pressure is always less than aortic pressure", "ventricular filling occurs primarily during diastole"], "answer": 0, "pearl": "خلال الدورة القلبية الطبيعية، لا يمكن إطلاقاً أن يُفتح الصمام الأورطي والصمام الميترالي في الوقت ذاته (The aortic and mitral valves are never open at the same time). في الانقباض يفتح الأورطي ويغلق الميترالي، وفي الانبساط يفتح الميترالي ويغلق الأورطي، وخلال فترات ثبات الحجم يكون كلاهما مغلقين."}, {"id": 25, "exam": "end_module", "official_num": 25, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "The dicrotic notch on the aortic pressure curve is caused by:", "options": ["closure of the mitral valve", "closure of the tricuspid valve", "closure of the aortic valve", "closure of the pulmonary valve", "rapid filling of the left ventricle"], "answer": 2, "pearl": "الثلمة مزدوجة النبض (Dicrotic Notch / Incisura) في منحنى ضغط الأورطي تنجم مباشرة عن انغلاق الصمام الأورطي (Closure of the aortic valve) وارتداد الدم اللحظي ضد الشرفات المغلقة في بداية الانبساط البطيني."}, {"id": 26, "exam": "end_module", "official_num": 26, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Stimulation of the parasympathetic nerves to the normal heart rate can lead to complete inhibition of the SA node for several seconds. During that period:", "options": ["P waves would become larger", "there would be fewer T waves than QRS complexes", "there would be fewer P waves than T waves", "there would be fewer QRS complexes than P waves", "the shape of QRS complexes would change"], "answer": 2, "pearl": "عند تثبيط العقدة الجيبية الأذينية (SA Node) بالتحفيز الباراسمبثاوي، تختفي موجات P، وتتولى مراكز هروب بطينية أو عقدية توليد النبض (Ventricular/Nodal escape rhythm)، فتظهر مركبات QRS وموجات T بدون موجات P، مما يعني أن عدد موجات P سيكون أقل من موجات T."}, {"id": 27, "exam": "end_module", "official_num": 27, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Cardiac output of the right side of the heart is what percentage of the cardiac output of the left side of the heart?", "options": ["25%", "50%", "75%", "100%", "125%"], "answer": 3, "pearl": "النتاج القلبي للجانب الأيمن يساوي 100% تماماً من النتاج القلبي للجانب الأيسر (100%)، لأن الدورة الدموية جهاز مغلق متصل على التوالي (In series) وأي تفاوت مستمر يؤدي لتراكم دموي قاتل."}, {"id": 28, "exam": "end_module", "official_num": 28, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "During exercise, a man consumes 1.8 L of oxygen per minute. His arterial O2 content is 190 ml/L, and O2 content of his mixed venous blood is 134 ml/L. His cardiac output is approximately:", "options": ["3.2 L/min", "16 L/min", "32 L/min", "54 L/min", "160 ml/min"], "answer": 2, "pearl": "وفقاً لمبدأ فيك (Fick's Principle): النتاج القلبي = استهلاك الأكسجين ÷ الفارق الشرياني الوريدي. استهلاك الأكسجين = 1.8 لتر/د = 1800 مل/د. الفارق الشرياني الوريدي = 190 - 134 = 56 مل/لتر. النتاج القلبي = 1800 ÷ 56 ≈ 32.14 لتر/دقيقة (حوالي 32 L/min)."}, {"id": 29, "exam": "end_module", "official_num": 29, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "When a normal person suddenly changes from recumbent to standing posture:", "options": ["blood pressure falls dramatically", "renin secretion is suppressed", "blood pools in the jugular vein", "heart rate increases", "increased cerebral blood flow"], "answer": 3, "pearl": "عند الوقوف المفاجئ يتجمع الدم بفعل الجاذبية في الأوردة السفلية، فينخفض العائد الوريدي وضغط الدم اللحظي، مما يثبط مستقبلات الضغط (Baroreceptors) ويطلق منعكساً سمبثاوياً تعويضياً يؤدي إلى زيادة معدل ضربات القلب (Heart rate increases) وتضيق الأوعية للحفاظ على التروية."}, {"id": 30, "exam": "end_module", "official_num": 30, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "The following are true about potassium:", "options": ["hypokalemia decreases the time of cardiac repolarization", "hyperkalemia decreases cardiac contraction", "hyperkalemia relaxes vascular smooth muscle", "hyperkalemia is seen in decreased aldosterone secretion", "fruits such as banana are high in potassium"], "answer": 1, "pearl": "ارتفاع بوتاسيوم الدم (Hyperkalemia) يقلل من فرق الجهد الكهربائي للغشاء الخلوي، مما يعطل قنوات الصوديوم ويضعف استثارة عضلة القلب وانقباضها (Decreases cardiac contraction)، ويؤدي في الحالات الشديدة لتوقف القلب في طور الانبساط."}, {"id": 31, "exam": "end_module", "official_num": 31, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Which of the following substances causes vasoconstriction?", "options": ["Adenosine", "Angiotensin II", "Carbon dioxide", "Histamine", "Hydrogen ion"], "answer": 1, "pearl": "الأنجيوتنسين 2 (Angiotensin II) هو أحد أقوى المواد القابضة للأوعية الدموية في الجسم (Potent vasoconstrictor). بينما الأدينوسين، وثاني أكسيد الكربون، والهيستامين، وأيونات الهيدروجين (الحموضة) كلها مواد موسعة للأوعية (Vasodilators)."}, {"id": 32, "exam": "end_module", "official_num": 32, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Which one of the following would result in an increase in tissue blood flow?", "options": ["A decrease in tissue carbon dioxide concentration", "A decrease in tissue lactic acid concentration", "An increase in tissue adenosine concentration", "An increase in tissue oxygen concentration", "Injury of arteries and arterioles"], "answer": 2, "pearl": "زيادة تركيز الأدينوسين في الأنسجة (An increase in tissue adenosine concentration) ترتبط مباشرة بزيادة النشاط الاستقلابي واستهلاك الأكسجين، ويعمل الأدينوسين كوسيط موضعي قوي لتوسيع الشرايين وزيادة تدفق الدم النسيجي (Active hyperemia)."}, {"id": 33, "exam": "end_module", "official_num": 33, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "The pulmonary circulation can be characterized as a:", "options": ["high-pressure, high-flow, high-resistance system", "low-pressure, high-flow, low-resistance system", "high-pressure, high-flow, low-resistance system", "low-pressure, low-flow, high-resistance system", "low-pressure, low-flow, low-resistance system"], "answer": 1, "pearl": "تتميز الدورة الدموية الرئوية بأنها جهاز ذو ضغط منخفض (متوسط الضغط الرئوي حوالي 15 مم زئبق)، ومقاومة وعائية منخفضة جداً (Low resistance)، مع تدفق دموي مرتفع (High flow) يستقبل كامل النتاج القلبي للبطين الأيمن."}, {"id": 34, "exam": "end_module", "official_num": 34, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "The most important physiologic function of the lymphatic system is to:", "options": ["concentrate proteins in the lymph", "create negative pressure in the free interstitial fluid", "remove particulate materials from the interstitium", "transport antigenic materials to lymph nodes", "transport fluid and proteins away from the interstitium to the blood"], "answer": 4, "pearl": "الوظيفة الفسيولوجية الأكثر حيوية للجهاز اللمفاوي هي إعادة السوائل الزائدة والبروتينات الكبيرة التي ترشحت في الحيز الخلالي وإرجاعها إلى مجرى الدم (Transport fluid and proteins away from the interstitium to the blood)، وبدون ذلك يحدث وذمة مميتة خلال 24 ساعة."}, {"id": 35, "exam": "end_module", "official_num": 35, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Which type of heart failure is most likely to be associated with pulmonary edema?", "options": ["Heart failure resulting from A-V fistula", "High cardiac output heart failure", "Left heart failure without right heart failure", "Left heart failure with right heart failure", "Right heart failure without left heart failure"], "answer": 2, "pearl": "فشل البطين الأيسر المنفرد دون فشل البطين الأيمن (Left heart failure without right heart failure) يسبب احتقاناً رئوياً شديداً ووذمة رئوية حادة (Pulmonary edema)، لأن البطين الأيمن السليم يستمر في ضخ الدم بكفاءة إلى الرئتين بينما يعجز البطين الأيسر عن تصريفه فيرتفع الضغط الشعيري الرئوي بشدة."}, {"id": 36, "exam": "end_module", "official_num": 36, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Plasma renin activity is most likely to be lower than normal:", "options": ["in congestive heart failure", "in hemorrhagic shock", "in shock due to infection with gram-negative bacteria", "in essential hypertension", "during quiet standing"], "answer": 3, "pearl": "في ارتفاع ضغط الدم الأولي الأساسي (Essential hypertension)، تكون فعالية الرينين في البلازما منخفضة أو طبيعية في نسبة كبيرة من المرضى نتيجة زيادة الضغط الشرياني والتغذية الراجعة السلبية، بينما يرتفع الرينين بشدة في قصور القلب والنزيف والصدمة والوقوف المستمر."}, {"id": 37, "exam": "end_module", "official_num": 37, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "The factor common to most changes in cardiac muscle contractility is:", "options": ["amplitude of the action potential", "availability of cellular ATP", "cytoplasmic calcium concentration", "rate of neural stimulation", "muscle glycogen"], "answer": 2, "pearl": "العامل المشترك والنهائي المحدد لقوة انقباض عضلة القلب (Contractility / Inotropism) هو تركيز أيونات الكالسيوم الحرة داخل السيتوبلازم (Cytoplasmic calcium concentration)، حيث يحدد مقدار الكالسيوم المرتبط بالتروبونين C عدد الجسور المستعرضة الفعالة بين الأكتين والميوسين."}, {"id": 38, "exam": "end_module", "official_num": 38, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "A drug that raises the heart rate from 70 to 100 beats/minute could:", "options": ["be an adrenergic receptor antagonist", "Cause the opening of acetylcholine-activated K+ channels", "Be a cholinergic receptor agonist", "Be an adrenergic receptor agonist", "Cause the closing of voltage-gated Ca2+ channels"], "answer": 3, "pearl": "الدواء الذي يرفع نبض القلب من 70 إلى 100 نبضة/دقيقة يعمل كمحفز للمستقبلات الأدرينالية (Adrenergic receptor agonist - Beta-1 agonist)، حيث يزيد تدفق تيار الصوديوم التلقائي (If) والكالسيوم لزيادة انحدار جهد الخطو القلبي."}, {"id": 39, "exam": "end_module", "official_num": 39, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "In the presence of a drug that blocks all effects of norepinephrine and epinephrine on the heart, the autonomic nervous system can:", "options": ["raise the heart rate above its intrinsic rate", "lower the heart rate below its intrinsic rate", "raise and lower the heart rate above and below its intrinsic rate", "neither raise nor lower the heart rate from its intrinsic rate", "fluctuate the heart rate"], "answer": 1, "pearl": "عند إحصار التأثيرات الأدرينالية تماماً بواسطة مضادات بيتا وألفا، يبقى الجهاز العصبي الباراسمبثاوي (العصب المبهم) سليماً وفعالاً، وبالتالي يستطيع الجهاز العصبي الذاتي تقليل سرعة القلب إلى ما دون المعدل الذاتي الداخلي (Lower the heart rate below its intrinsic rate) عبر مستقبلات M2 الكولينرجية."}, {"id": 40, "exam": "end_module", "official_num": 40, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "The cold pressor response is initiated by stimulation of:", "options": ["baroreceptors", "cardiopulmonary receptors", "hypothalamic receptors", "pain receptors", "chemoreceptors"], "answer": 3, "pearl": "اختبار الضغط بالبرد (Cold pressor test) يتم بغمر اليد في ماء مثلج، ويبدأ المنعكس بتنبيه مستقبلات الألم والحرارة الجلدية (Pain / Nociceptive and thermal receptors)، مما يطلق استجابة سمبثاوية عامة ترفع ضغط الدم ومعدل ضربات القلب."}, {"id": 41, "exam": "end_module", "official_num": 41, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "A patient suffers a severe hemorrhage resulting in a lowered mean arterial pressure. Which of the following would be elevated above normal levels?", "options": ["Splanchnic blood flow", "Cardiopulmonary receptor activity", "Right ventricular end-diastolic volume", "Heart rate", "Carotid baroreceptors activity"], "answer": 3, "pearl": "في النزيف الحاد وهبوط الضغط الشرياني، يقل التنبيه في مستقبلات الضغط السباتية والأبهرية، مما يزيل التثبيط عن مركز المحرك الوعائي ويؤدي إلى إثارة سمبثاوية شديدة تسبب تسارعاً انعكاسياً في ضربات القلب (Tachycardia - Heart rate elevated)."}, {"id": 42, "exam": "end_module", "official_num": 42, "subject": "Biochemistry", "subject_ar": "كيمياء حيوية", "question": "The breakdown of triacylglycerols in adipose tissue is primarily catalyzed by:", "options": ["Lipoprotein lipase", "Hormone-sensitive lipase", "Pancreatic lipase", "Acetyl-CoA carboxylase", "Phospholipase A2"], "answer": 1, "pearl": "الإنزيم الرئيسي المسؤول عن تحلل الدهون الثلاثية داخل الخلايا الدهنية هو الليباز الحساس للهرمونات (Hormone-Sensitive Lipase - HSL) إلى جانب ATGL، ويتم تحفيزه بواسطة الإبينفرين والغلوكاغون ويثبطه الإنسولين."}, {"id": 43, "exam": "end_module", "official_num": 43, "subject": "Biochemistry", "subject_ar": "كيمياء حيوية", "question": "Which hormone stimulates triacylglycerol breakdown in adipose tissue?", "options": ["Insulin", "Cortisol", "Epinephrine", "Aldosterone", "Thyroxine"], "answer": 2, "pearl": "هرمون الإبينفرين (Epinephrine) ينشط أدينيلات سيكليز ويرفع cAMP، مما يفعّل بروتين كينيز A (PKA) الذي يقوم بفسفرة وتنشيط إنزيم HSL لتحفيز التحلل الدهني (Lipolysis). بينما الإنسولين هو الهرمون الرئيسي المضاد للتحلل الدهني."}, {"id": 44, "exam": "end_module", "official_num": 44, "subject": "Biochemistry", "subject_ar": "كيمياء حيوية", "question": "Ketone bodies are synthesized mainly in the:", "options": ["Brain", "Kidney", "Liver mitochondria", "Adipose tissue", "Skeletal muscle"], "answer": 2, "pearl": "يتم تصنيع الأجسام الكيتونية (Ketogenesis) حصرياً في ميتوكوندريا خلايا الكبد (Liver mitochondria) لوجود الإنزيم النوعي HMG-CoA lyase، لكن الكبد لا يستطيع استهلاكها كمصدر للطاقة لافتقاره لإنزيم Thiophorase."}, {"id": 45, "exam": "end_module", "official_num": 45, "subject": "Biochemistry", "subject_ar": "كيمياء حيوية", "question": "The immediate precursor for ketone body formation is:", "options": ["Pyruvate", "Oxaloacetate", "Malonyl-CoA", "Succinyl-CoA", "Acetyl-CoA"], "answer": 4, "pearl": "المركب الأساسي المباشر لبناء الأجسام الكيتونية هو أسيتيل كو-أ (Acetyl-CoA)، حيث يتكاثف جزيئان من Acetyl-CoA بواسطة إنزيم Thiolase لإنتاج Acetoacetyl-CoA كأول خطوة في مسار الكيتونات."}, {"id": 46, "exam": "end_module", "official_num": 46, "subject": "Biochemistry", "subject_ar": "كيمياء حيوية", "question": "The rate-limiting enzyme in cholesterol biosynthesis is:", "options": ["HMG-CoA reductase", "HMG-CoA synthase", "Squalene synthase", "Acetyl-CoA carboxylase", "Cholesterol esterase"], "answer": 0, "pearl": "الإنزيم المحدد للسرعة في المسار الحيوي لتصنيع الكوليسترول هو إتش إم جي كو-أ ريدكتاز (HMG-CoA Reductase)، وهو الهدف الدوائي الرئيسي لمجموعة أدوية الستاتين (Statins)."}, {"id": 47, "exam": "end_module", "official_num": 47, "subject": "Biochemistry", "subject_ar": "كيمياء حيوية", "question": "The major apolipoprotein of LDL is:", "options": ["Apo A-I", "Apo B-48", "Apo B-100", "Apo C-II", "Apo E"], "answer": 2, "pearl": "البروتين الشحمي الرئيسي في البروتين الدهني منخفض الكثافة (LDL) هو أبوليبوبروتين بي-100 (Apo B-100)، وهو الرابط الأساسي الذي تتعرف عليه مستقبلات LDL (LDL receptors) في خلايا الكبد والأنسجة المحيطية."}, {"id": 48, "exam": "end_module", "official_num": 48, "subject": "Biochemistry", "subject_ar": "كيمياء حيوية", "question": "Which enzyme is responsible for hydrolyzing triglycerides in circulating chylomicrons and VLDL?", "options": ["Lipoprotein lipase (LPL)", "Hormone-sensitive lipase", "Pancreatic lipase", "Hepatic lipase", "Lecithin-cholesterol acyltransferase (LCAT)"], "answer": 0, "pearl": "إنزيم ليباز البروتين الدهني (Lipoprotein Lipase - LPL) الموجود على السطح اللمعي للخلايا البطانية الوعائية في العضلات والأنسجة الدهنية هو المسؤول عن تفكيك وهيدرة الدهون الثلاثية في الكيلوميكرونات و VLDL الدوارة بالدم بمساعدة المعزز Apo C-II."}, {"id": 49, "exam": "end_module", "official_num": 49, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "Which of the following is the earliest event in the development of atherosclerosis?", "options": ["Endothelial injury", "Smooth muscle proliferation", "Foam cell formation", "Platelet aggregation", "Collagen deposition"], "answer": 0, "pearl": "أول حدث مجهري ومفتاح الانطلاق في التصلب العصيدي وفقاً لفرضية الاستجابة للإصابة (Response-to-injury hypothesis) هو أذية الخلايا البطانية (Endothelial injury / dysfunction)، مما يؤدي لزيادة النفاذية، والتصاق الكريات البيضاء وتراكم LDL وتأكسده."}, {"id": 50, "exam": "end_module", "official_num": 50, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "A 39-year-old man had been well until he was awakened by chest pain radiating to both arms and neck, with diaphoresis. Blood pressure 160/110. Treated with Lasix, friction rub developed, cardiac arrest after 2 days. The event MOST LIKELY associated with this patient's problem was:", "options": ["Occlusion of a coronary vein", "Occlusion of a coronary artery", "Stabbed with ice pick", "Broken heart", "Occlusion of aorta"], "answer": 1, "pearl": "الحالة الكلاسيكية لاحتشاء عضلة القلب الحاد (Acute Myocardial Infarction) الناجم عن انسداد خثاري في الشريان التاجي (Occlusion of a coronary artery)، وتطور احتكاك التأمور (Pericardial friction rub) يشير لالتهاب التأمور الخناقي بعد الاحتشاء الجداري النافذ (Fibrinous pericarditis)."}, {"id": 51, "exam": "end_module", "official_num": 51, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "A 67-year-old male had rheumatic heart disease for thirty years. Three months prior to death he began to have episodes of fever and chills accompanied by signs of worsening congestive heart failure. Splinter hemorrhages and purpuric skin rashes were noted three weeks before death. MOST cases that present with these findings are caused by:", "options": ["Chlamydiae", "Rickettsiae", "Bacteria", "Viruses", "Fungi"], "answer": 2, "pearl": "هذه المظاهر السريرية (حمى، تفاقم قصور القلب، نزوف شظوية تحت الأظافر Splinter hemorrhages، فرفرية) تمثل التهاب شغاف القلب تحت الحاد (Subacute Infective Endocarditis)، والسبب الأعم الأغلب هو البكتيريا (Bacteria)، وبخاصة العِقديات المخضرة (Viridans Streptococci) على صمام مصاب بالروماتيزم."}, {"id": 52, "exam": "end_module", "official_num": 52, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "The following lipid has highest association with atherosclerosis:", "options": ["Triglycerides", "Low-density lipoproteins", "Very-low density lipoproteins", "High density lipoproteins", "Cholesterol"], "answer": 1, "pearl": "البروتين الدهني منخفض الكثافة (Low-Density Lipoproteins - LDL) المؤكسد هو العامل الدهني الأكثر ارتباطاً ومسؤولية سببية مباشرة عن حدوث التصلب العصيدي للشرايين وتكوين اللويحة العصيدية."}, {"id": 53, "exam": "end_module", "official_num": 53, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "Microscopically; In advanced hypertensive heart disease cases, there may be:", "options": ["Hyalinosis of myocardium", "Myocardial oedema and foci of necrosis in the myocardium", "Fatty changes in myocardium", "Atrophic changes", "Hyperplastic changes"], "answer": 1, "pearl": "في الحالات المتقدمة من اعتلال القلب بارتفاع الضغط (Advanced Hypertensive Heart Disease)، يؤدي زيادة العبء القلبي ونقص التروية النسبية إلى وذمة في النسيج الخلالي وبؤر تنخر دقيقة وتليف في عضلة القلب (Myocardial oedema and foci of necrosis)."}, {"id": 54, "exam": "end_module", "official_num": 54, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "Most common congenital anomaly of the heart is:", "options": ["VSD", "ASD", "PDA", "Tetralogy of Fallot", "Trialogy of Fallot"], "answer": 0, "pearl": "عيب الحاجز بين البطينين (Ventricular Septal Defect - VSD) هو أكثر العيوب الخلقية القلبية شيوعاً على الإطلاق عند الولادة، ويمثل حوالي 25-30% من إجمالي أمراض القلب الخلقية."}, {"id": 55, "exam": "end_module", "official_num": 55, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "Most frequent underlying heart disease in causation of SABE is:", "options": ["Ventricular septal defect", "Chronic rheumatic valvular disease", "Floppy mitral valve", "Atherosclerotic valvular disease", "Atrial septal defect"], "answer": 1, "pearl": "المرض القلبي التحتي الأكثر شيوعاً تاريخياً وأكاديمياً في التسبب بالتهاب الشغاف الجرثومي تحت الحاد (SABE) هو مرض صمامات القلب الروماتيزمي المزمن (Chronic rheumatic valvular disease)، وبخاصة الصمام الميترالي المشوه."}, {"id": 56, "exam": "end_module", "official_num": 56, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "In hypertensive heart disease left ventricular hypertrophy is correlated with:", "options": ["Duration of hypertension", "Severity of hypertension", "Cause of hypertension", "Severity of coronary atherosclerosis", "Neoplastic changes"], "answer": 0, "pearl": "يتناسب تضخم البطين الأيسر (Left Ventricular Hypertrophy - LVH) طردياً وبشكل وثيق سريرياً وباثولوجياً مع مدة استمرار ارتفاع ضغط الدم (Duration of hypertension) وكذلك مع شدته."}, {"id": 57, "exam": "end_module", "official_num": 57, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "In the following heart disease, there is generally involvement of valves of right heart:", "options": ["Heart disease in SLE", "Carcinoid heart disease", "Subacute bacterial endocarditis", "RHD", "Syphilitic heart disease"], "answer": 1, "pearl": "مرض القلب السرطاوي (Carcinoid Heart Disease) يصيب بشكل خاص ومميز صمامات القلب الأيمن (Triscipid and Pulmonary valves)، لأن السيروتونين والأمينات الفعالة القادمة من أورام الكبد تؤذي البطانة الصمامية اليمنى وتتخرب بعدها في الرئتين بواسطة إنزيم MAO قبل أن تصل للقلب الأيسر."}, {"id": 58, "exam": "end_module", "official_num": 58, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "In chronic RHD, the most common valvular deformities are:", "options": ["Mitral stenosis and insufficiency", "Mitral stenosis alone", "Mitral insufficiency alone", "Mitral and aortic stenosis combined", "Aortic insufficiency"], "answer": 0, "pearl": "في مرض القلب الروماتيزمي المزمن (Chronic RHD)، يصاب الصمام الميترالي في أكثر من 95% من الحالات، وأشيع تشوه هو التشارك المشترك بين تضيق وارتجاع الصمام الميترالي (Mitral stenosis and insufficiency combined)."}, {"id": 59, "exam": "end_module", "official_num": 59, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "Chronic ischaemic heart disease is most often due to:", "options": ["Coronary atherosclerosis", "Repetitive coronary vasospasm", "Embolisation to coronary branches", "Stenosis of coronary ostia", "Aortic aneurysm"], "answer": 0, "pearl": "السبب الأكثر شيوعاً والمحدد لمرض نقص التروية القلبية المزمن (Chronic Ischaemic Heart Disease) في أكثر من 90% من الحالات هو التصلب العصيدي للشرايين التاجية (Coronary atherosclerosis)."}, {"id": 60, "exam": "end_module", "official_num": 60, "subject": "Microbiology", "subject_ar": "مايكروبيولوجي", "question": "Prosthetic valve endocarditis is commonly caused by:", "options": ["Staphylococcus epidermidis", "Streptococcus pyogenes", "Staphylococcus saprophyticus", "Enterococci", "Borrelia burgdorferi"], "answer": 0, "pearl": "المكورات العنقودية البشروية (Staphylococcus epidermidis) سالبة التجلط هي السبب الأكثر شيوعاً لالتهاب شغاف القلب على الصمامات الاصطناعية (Prosthetic Valve Endocarditis)، لقدرتها الفائقة على تكوين الغشاء الحيوي (Biofilm / Slime layer) على الأسطح البلاستيكية والمعدنية."}, {"id": 61, "exam": "end_module", "official_num": 61, "subject": "Microbiology", "subject_ar": "مايكروبيولوجي", "question": "A serious bodywide response to distributed bacterial infection plus malfunction or failure of an essential system in the body is called:", "options": ["Bacteremia", "Sepsis", "Relapsing fever", "Infectious mononucleosis", "Spirochetemia"], "answer": 1, "pearl": "الإنتان (Sepsis) يُعرف طبياً بأنه استجابة التهابية جهازية مفرطة وغير منضبطة للعدوى البكتيرية تؤدي لقصور وظيفي يهدد الحياة في جهاز حيوي أو أكثر من أجهزة الجسم (Life-threatening organ dysfunction)."}, {"id": 62, "exam": "end_module", "official_num": 62, "subject": "Microbiology", "subject_ar": "مايكروبيولوجي", "question": "Owl's eye appearance in tissue culture is a characteristic feature for diagnosis of:", "options": ["Infectious mononucleosis", "Yellow fever", "Coxsackie B myocarditis", "Congenital cytomegalovirus infection", "Rheumatic carditis"], "answer": 3, "pearl": "مظهر 'عين البومة' (Owl's eye appearance) ينجم عن وجود أجسام اشتمالية نووية ضخمة بازوفيلية محاطة بهالة فاتحة (Large basophilic intranuclear inclusion bodies)، وهي العلامة النسيجية التشخيصية الفارقة لفيروس المضخم للخلايا (Cytomegalovirus - CMV)."}, {"id": 63, "exam": "end_module", "official_num": 63, "subject": "Microbiology", "subject_ar": "مايكروبيولوجي", "question": "Corynebacterium diphtheriae to be virulent and cause myocarditis must be lysogenized by a:", "options": ["Plasmid", "Antigen", "Prophage", "Antitoxin", "Transposon"], "answer": 2, "pearl": "تكتسب بكتيريا الدفتيريا الفوعة والقدرة على إنتاج الذيفان الدفتيري المسبب لالتهاب عضلة القلب عبر التحول الليزوجيني بواسطة عاثية بكتيرية مقحمة تسمى الفاج المعتدل أو البروفاج (Beta-corynephage / Prophage) الحامل لجين tox."}, {"id": 64, "exam": "end_module", "official_num": 64, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "Which antiarrhythmic drug can cause thyroid dysfunction due to its iodine content?", "options": ["Amiodarone", "Dronedarone", "Flecainide", "Verapamil", "Quinidine"], "answer": 0, "pearl": "أميودارون (Amiodarone) يحتوي على حوالي 37% من وزنه يوداً، ويشبه بنيوياً هرمون الثايروكسين T4، مما يؤدي لاضطرابات درقية شائعة مثل قصور الغدة الدرقية أو فرط نشاطها (Amiodarone-induced thyrotoxicosis)."}, {"id": 65, "exam": "end_module", "official_num": 65, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "A 60-year-old man is prescribed oral dinitrate for chronic stable angina. Despite adherence, he reports minimal relief. Which pharmacokinetic property is most likely responsible?", "options": ["Rapid renal excretion of unchanged drug", "Extensive hepatic first-pass metabolism", "Poor gastrointestinal absorption", "Binding to plasma proteins", "Activation of renin-angiotensin system"], "answer": 1, "pearl": "النترات الفموية مثل إيزوسوربيد ثنائي النترات (Isosorbide Dinitrate) تخضع لاستقلاب كبدي أولي واسع النطاق (Extensive hepatic first-pass metabolism)، مما يجعل توافرها الحيوي الفموي منخفضاً ومتقلباً مقارنة بالإعطاء تحت اللسان."}, {"id": 66, "exam": "end_module", "official_num": 66, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "When spironolactone is used in a patient with heart failure (HF), it works through what primary mechanism?", "options": ["Positive inotropic effect", "Positive chronotropic effect", "Aldosterone antagonism", "Diuretic effect", "Angiotensin II blockade"], "answer": 2, "pearl": "السبيرونولاكتون (Spironolactone) يعمل في مرضى قصور القلب عبر حجب مستقبلات الألدوستيرون (Aldosterone antagonism)، مما يمنع التليف البطيني وإعادة التشكيل القلبي العكسي (Ventricular remodeling) ويقلل معدلات الوفاة بشكل مثبت."}, {"id": 67, "exam": "end_module", "official_num": 67, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "A 62-year-old man with stable angina and EF 30% has HR 85 bpm despite B-blockers. His BP is 100/50 mmHg. Which antianginal agent is most appropriate to further reduce myocardial oxygen demand?", "options": ["Metoprolol", "Verapamil", "Ivabradine", "Diltiazem", "Sublingual nitroglycerin"], "answer": 2, "pearl": "إيفابرادين (Ivabradine) هو الخيار المثالي لأنه يثبط قنوات If في العقدة الجيبية فيبطئ نبض القلب ويقلل استهلاك الأكسجين دون أي تأثير سلبي على قوة الانقباض ودون خفض ضغط الدم المتدني أصلاً (100/50)."}, {"id": 68, "exam": "end_module", "official_num": 68, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "Which antiarrhythmic drug is most likely to cause prolonged QT interval and torsades de pointes?", "options": ["Amiodarone", "Flecainide", "Ibutilide", "Lidocaine", "Verapamil"], "answer": 2, "pearl": "إيبوتيليد (Ibutilide - فئة III نقية) يتميز بأعلى خطر لإطالة فترة QT والتسبب في تسرع القلب البطيني من نوع تورساد دي بوانت (Torsades de pointes) بنسبة تصل لـ 4-8%، بينما أميودارون نادراً ما يسبب تورساد رغم إطالته لـ QT."}, {"id": 69, "exam": "end_module", "official_num": 69, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "A 45-year-old man with variant angina develops worsening chest pain and increased coronary spasms after starting a beta-blocker. Which beta-blocker is most likely responsible?", "options": ["Atenolol", "Carvedilol", "Metoprolol", "Propranolol", "Bisoprolol"], "answer": 3, "pearl": "بروبرانولول (Propranolol) هو حاصر بيتا غير انتقائي (Non-selective)، وحجبه لمستقبلات بيتا-2 الموسعة للشرايين التاجية يترك مستقبلات ألفا-1 المضيقة تعمل دون معارضة (Unopposed alpha-1 vasoconstriction)، مما يفاقم التشنج التاجي في ذبحة برينزميتال المتغيرة."}, {"id": 70, "exam": "end_module", "official_num": 70, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "Which of the following is the drug of choice for management of cardiac arrhythmias that occur in digitalis toxicity?", "options": ["Amiodarone", "Lidocaine", "Propranolol", "Sotalol", "Prazosin"], "answer": 1, "pearl": "ليدوكايين (Lidocaine) والفينيتوين وأجسام Digibind هي أدوية الخط الأول في علاج اللانظميات البطينية الناتجة عن تسمم الديجيتاليس (Digitalis toxicity) لأنه لا يثبط التوصيل الأذيني البطيني ولا يفاقم الحصار القلبي."}, {"id": 71, "exam": "end_module", "official_num": 71, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "A patient on atorvastatin develops muscle pain and weakness. Which laboratory test is most appropriate to evaluate for a serious statin-related complication?", "options": ["Serum bilirubin", "Serum creatine kinase (CK)", "Serum amylase", "Serum troponin", "Serum alkaline phosphatase"], "answer": 1, "pearl": "قياس كرياتين كينيز في المصل (Serum Creatine Kinase - CK) هو الفحص الأهم لتقييم سمية العضلات وانحلال الربيدات (Rhabdomyolysis / Statin-induced myopathy) في أي مريض يتناول الستاتينات ويشكو من آلام عضلية."}, {"id": 72, "exam": "end_module", "official_num": 72, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "Which of the following would least likely benefit a patient in acute pulmonary edema due to congestive heart failure?", "options": ["Intravenous morphine", "Digoxin", "Oxygen", "Rotating tourniquets", "Propranolol"], "answer": 4, "pearl": "بروبرانولول (Propranolol) مضاد استطباب مطلق في الوذمة الرئوية الحادة وقصور القلب الحاد غير المعاوض، لأن تأثيره السلبي على قوة انقباض العضلة القلبية (Negative inotrope) يفاقم الفشل القلبي الانقباضي بشكل قاتل."}, {"id": 73, "exam": "end_module", "official_num": 73, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "Postural hypotension is not a common adverse effect of:", "options": ["Na nitroprusside", "Propranolol", "Phenoxybenzamine", "Methyldopa", "Reserpine"], "answer": 1, "pearl": "هبوط الضغط الانتصابي (Postural / Orthostatic hypotension) لا يحدث عادة مع بروبرانولول (Propranolol) لأن منعكس تضيق الأوعية الوعائية المحيطية المعتمد على مستقبلات ألفا السمبثاوية يظل سليماً وغير محجوب."}, {"id": 74, "exam": "end_module", "official_num": 74, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "In the treatment of cardiac shock (acute HF), the drug of choice is:", "options": ["Dopamine", "Ramipril", "Phenoxybenzamine", "Carvedilol", "Nesiritide"], "answer": 0, "pearl": "في الصدمة قلبية المنشأ (Cardiogenic Shock)، يعتبر الدوبامين (Dopamine) أو الدوبوتامين والنورإبينفرين الدواء المنقذ المختار لرفع قوة انقباض القلب ودعم الضغط الشرياني وتروية الكليتين والأعضاء الحيوية."}, {"id": 75, "exam": "end_module", "official_num": 75, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "A patient taking lisinopril for hypertension starts ibuprofen for joint pain. BP rises and creatinine increases. What is the most likely cause?", "options": ["Decrease renal prostaglandins leading to decrease GFR", "Increased renal blood flow", "Protein binding displacement", "Increased prostaglandin synthesis", "Increased renin release"], "answer": 0, "pearl": "مضادات الالتهاب غير الستيرويدية مثل الإيبوبروفين تثبط إنزيم COX وتمنع إنتاج البروستاغلاندينات الكلوية الموسعة للشريان الوارد (Afferent arteriole)، مما يؤدي لتضيقه بالتزامن مع توسع الشريان الصادر بفعل مثبط ACE، فيهبط معدل الترشيح الكبيبي GFR ويرتفع الكرياتينين."}, {"id": 76, "exam": "end_module", "official_num": 76, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "A hypertensive patient on enalapril and furosemide develops severe hypotension after the first ACEI dose. What explains this reaction?", "options": ["Volume depletion enhances ACEI effect", "Increased bradykinin causes vasoconstriction", "Reflex sympathetic activation", "Decreased baroreceptor sensitivity", "ACEI-induced Na+ retention"], "answer": 0, "pearl": "نقص حجم السوائل الناتج عن مدر البول فيورسيميد (Volume depletion) يجعل الحفاظ على ضغط الدم معتمداً بشدة على نظام الرينين-أنجيوتنسين، مما يؤدي عند إعطاء أول جرعة من مثبط ACE إلى هبوط حاد وشديد في الضغط (First-dose hypotension)."}, {"id": 77, "exam": "end_module", "official_num": 77, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "A 70-year-old man with chronic heart failure and sinus bradycardia (HR 60/min) is being evaluated for treatment. Which drug should be avoided?", "options": ["Furosemide", "Digoxin", "Spironolactone", "Enalapril", "Hydralazine"], "answer": 1, "pearl": "الديجوكسين (Digoxin) يمتلك تأثيراً مبهمياً مقوياً للتواتر الباراسمبثاوي ويبطئ التوصيل في العقدة الجيبية والعقدة الأذينية البطينية، لذا يجب تجنبه في مرضى بطء القلب الجيبي لأنه يفاقم البطء وقد يحدث حصاراً قلبياً كاملاً."}, {"id": 78, "exam": "end_module", "official_num": 78, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "Which of the following medication has been decreased stroke mortality in patients with hypertension?", "options": ["ACE inhibitors", "Ca channel blockers", "Diuretics", "Beta blockers", "Sedative"], "answer": 2, "pearl": "أثبتت التجارب السريرية التاريخية الكبرى (مثل ALLHAT و SHEP) أن مدرات البول الثيازيدية (Diuretics) ومحصرات قنوات الكالسيوم تتفوق في خفض معدلات الوفاة الناتجة عن السكتة الدماغية (Stroke mortality) في مرضى ارتفاع الضغط."}, {"id": 79, "exam": "end_module", "official_num": 79, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "ONE of the following IS NOT routine investigations in newly diagnosed hypertensive patients:", "options": ["Fundus examination", "ECG and echo", "Serum potassium", "Renal function test", "Autoimmune markers"], "answer": 4, "pearl": "فحوصات المناعة الذاتية (Autoimmune markers) ليست من الفحوصات الروتينية الأولية لمرضى الضغط حديثي التشخيص، بل تطلب فقط عند الاشتباه السريري بوجود التهاب أوعية مناعي أو ذئبة حمراء."}, {"id": 80, "exam": "end_module", "official_num": 80, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "One of the following is not contraindicated of beta blockers:", "options": ["Elderly diabetic patients", "Bronchial asthma", "COPD", "Heart failure", "Elderly patients with hypertension"], "answer": 4, "pearl": "كبار السن المصابون بارتفاع ضغط الدم (Elderly patients with hypertension) ليس لديهم مضاد استطباب لاستخدام حاصرات بيتا (ليست contraindicated)، بينما الربو القصبي وحصار القلب الحاد تمثل موانع صريحة."}];
+    const END_SEMESTER_QUESTIONS = [{"id": 101, "exam": "end_semester", "official_num": 1, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "The T wave in lead V1 in adults may normally be...", "options": ["Positive only", "Positive or biphasic", "Positive, biphasic, or negative", "Negative only", "Flattened only"], "answer": 2, "pearl": "في تخطيط القلب الطبيعي للبالغين، تكون موجة T في الاتجاه V1 متغيرة فيزيولوجياً؛ فقد تكون موجبة، أو ثنائية الطور (Biphasic)، أو مقلوبة سالبة (Inverted/Negative) بشكل طبيعي دون أن تدل على أي نقص تروية."}, {"id": 102, "exam": "end_semester", "official_num": 2, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Inferior wall myocardial infarction is diagnosed from ST-T wave changes and/or Q waves in...", "options": ["leads II, III and aVF", "leads V1-V3", "leads I and aVL", "Leads I, II, III", "Leads V4 - V6"], "answer": 0, "pearl": "يشخص احتشاء الجدار السفلي لعضلة القلب (Inferior Wall MI) بظهور تغيرات ST-T وموجات Q المرضية في الاتجاهات السفلية: Lead II و Lead III و aVF التي تنظر مباشرة للسطح الحجابي البطيني للقلب والمغذى غالباً بالشريان التاجي الأيمن RCA."}, {"id": 103, "exam": "end_semester", "official_num": 3, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "The acute phase of myocardial infarction is diagnosed primarily by the observation of...", "options": ["Diagnostic Q waves in leads facing the infarcted area", "Marked T wave inversion in the leads facing the infarcted area", "Tall, symmetrical T waves with or without ST segment elevation", "Long QT interval", "RBBB pattern"], "answer": 2, "pearl": "الطور الحاد وفوق الحاد (Hyperacute phase) لاحتشاء القلب يبدأ خلال الدقائق والساعات الأولى بظهور موجات T متناظرة شاهقة الارتفاع (Hyperacute T waves) مترافقة مع ارتفاع قطعة ST (ST-segment elevation) في الاتجاهات المواجهة لمنطقة الاحتشاء."}, {"id": 104, "exam": "end_semester", "official_num": 4, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Cannon a wave is presented with:", "options": ["Ventricular fibrillation", "Tricuspid stenosis", "Complete heart block", "Left heart failure", "Aortic stenosis"], "answer": 2, "pearl": "موجات المدفع (Cannon 'a' waves) في النبض الوريدي الوداجي تظهر عند انقباض الأذين الأيمن ضد صمام ثلاثي شرفات مغلق تماماً، وهي علامة كلاسيكية فارقة لحصار القلب التام من الدرجة الثالثة (Complete Heart Block / AV dissociation) وتسرع القلب البطيني."}, {"id": 105, "exam": "end_semester", "official_num": 5, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "The following is required to control the rate in 65-year-old man patient with heart failure to treat coexisting atrial fibrillation:", "options": ["100% O2", "Digoxin", "Oral furosemide", "Spironolactone", "Lidocaine"], "answer": 1, "pearl": "الديجوكسين (Digoxin) هو الدواء الأنسب لضبط الاستجابة البطينية (Ventricular rate control) في مريض قصور القلب المصاب بالرجفان الأذيني المتزامن، بفضل تأثيره المقوي لانقباض القلب (Inotropic) والمبطئ للتوصيل في العقدة الأذينية البطينية (AV node) عبر تحفيز المبهم."}, {"id": 106, "exam": "end_semester", "official_num": 6, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "Which of the following is the drug of choice for management of cardiac arrhythmias that occur in digitalis toxicity?", "options": ["Amiodarone", "Lidocaine", "Propranolol", "Sotalol", "Prazosin"], "answer": 1, "pearl": "ليدوكايين (Lidocaine) هو دواء الاختيار للسيطرة على اللانظميات البطينية الخطيرة الناتجة عن تسمم الديجيتاليس (Digitalis toxicity)، لأنه يقمع الاستثارة البطينية الشاذة دون إبطاء التوصيل الأذيني البطيني."}, {"id": 107, "exam": "end_semester", "official_num": 7, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "Propranolol should not be prescribed for a patient of angina pectoris who is already receiving:", "options": ["Nifedipine", "Felodipine", "Verapamil", "Isosorbide mononitrate", "Ranolazine"], "answer": 2, "pearl": "يمنع الجمع بين بروبرانولول (حاصر بيتا) وفيراباميل (Verapamil - حاصر قنوات الكالسيوم غير ثنائي الهيدروبيريدين) لاشتراكهما في التأثير السلبي القوي على العقدة الجيبية والأذينية البطينية وانقباض القلب، مما قد يحدث بطء قلب شديد أو حصاراً قلبياً تاماً وهبوطاً حاداً في ضخ القلب."}, {"id": 108, "exam": "end_semester", "official_num": 8, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "Strong anticholinergic effects limit the antiarrhythmic use of:", "options": ["Quinidine", "Procainamide", "Tocainide", "Flecainide", "Mexiletine"], "answer": 0, "pearl": "الكينيدين (Quinidine - فئة IA) يمتلك خواصاً مضادة للمسكارين ومضادة للكولين قوية (Strong anticholinergic properties)، تسبب جفاف الفم وتشوش الرؤية واحتباس البول وقد تسرع التوصيل الأذيني البطيني بشكل غير مرغوب فيه."}, {"id": 109, "exam": "end_semester", "official_num": 9, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "Methemoglobinemia can occur with high doses of:", "options": ["Digitalis", "Nitrites", "Propranolol", "Ivabradine", "Na nitroprusside"], "answer": 1, "pearl": "النتريتات (Nitrites مثل أميل نتريت ومركبات النيتروجين) تؤكسد حديد الهيموغلوبين من الثنائي Fe2+ إلى الثلاثي Fe3+، مما ينتج ميثيموغلوبين الدم (Methemoglobinemia) العاجز عن نقل الأكسجين للأنسجة."}, {"id": 110, "exam": "end_semester", "official_num": 10, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "Which of the following drugs is of choice for pulseless ventricular tachycardia?", "options": ["Amiodarone", "Procainamide", "Sotalol", "Flecainide", "Phenytoin"], "answer": 0, "pearl": "وفقاً لبروتوكولات الإنعاش القلبي المتقدم (ACLS)، يعتبر أميودارون (Amiodarone - 300 مجم وريدياً) دواء الخط الأول المعياري في حالات تسرع القلب البطيني عديم النبض (Pulseless VT) أو الرجفان البطيني المقاوم للصدمات الكهربائية."}, {"id": 111, "exam": "end_semester", "official_num": 11, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "Which of the following medications can decrease the hypotensive effect of captopril?", "options": ["Antacids", "Indapamide", "Sotalol", "Triamterene", "Diazoxide"], "answer": 0, "pearl": "مضادات الحموضة (Antacids) تقلل الامتصاص المعوي والتوافر الحيوي لكابتوبريل بنسبة تصل إلى 30-40%، مما يقلل من فاعليته وتأثيره الخافض لضغط الدم (Decreases hypotensive effect)."}, {"id": 112, "exam": "end_semester", "official_num": 12, "subject": "Microbiology", "subject_ar": "مايكروبيولوجي", "question": "Cross Reaction of Human Tissues with S. pyogenes Components will lead to:", "options": ["Glomerulonephritis", "Infective endocarditis", "Sepsis", "Migratory polyarthritis", "Toxic shock syndrome"], "answer": 3, "pearl": "التفاعل المناعي المتصالب (Molecular Mimicry) بين بروتين M للمكورات العقدية المقيحة والأنسجة البشرية يسبب الحمى الروماتيزمية الحادة التي تتظاهر بالتهاب المفاصل المتنقل (Migratory Polyarthritis) والتهاب القلب والشري وخوريا سيدنهام. بينما التهاب كبيبات الكلى ينجم عن معقدات مناعية مترسبة وليس تفاعلاً متصالباً مباشراً."}, {"id": 113, "exam": "end_semester", "official_num": 13, "subject": "Microbiology", "subject_ar": "مايكروبيولوجي", "question": "Establishing the diagnosis of an initial episode of ARF requires:", "options": ["One major criterion", "Two minor criteria plus carditis", "One minor plus one major criteria", "Fever and high ESR", "High ASOT and S. pyogenes isolation"], "answer": 1, "pearl": "وفقاً لمعايير جونز المعدلة، يتطلب تشخيص النوبة الأولى للحمى الروماتيزمية الحادة دليلاً على عدوى عقدية سابقة بالإضافة إلى معيارين كبيرين، أو معيار كبير واحد (مثل التهاب القلب Carditis) مع معيارين صغيرين (Two minor criteria plus carditis)."}, {"id": 114, "exam": "end_semester", "official_num": 14, "subject": "Microbiology", "subject_ar": "مايكروبيولوجي", "question": "Prosthetic valve endocarditis is commonly caused by:", "options": ["Streptococcus pyogenes", "Staphylococcus saprophyticus", "Enterococci", "Staphylococcus epidermidis", "Salmonella"], "answer": 3, "pearl": "المكورات العنقودية البشروية (Staphylococcus epidermidis) هي السبب البكتيري الأكثر شيوعاً لالتهاب الشغاف على الصمامات الاصطناعية (Prosthetic valve endocarditis) وخاصة خلال العام الأول من الجراحة لقدرتها العالية على الالتصاق بالصمامات وتشكيل البيوفيلم."}, {"id": 115, "exam": "end_semester", "official_num": 15, "subject": "Microbiology", "subject_ar": "مايكروبيولوجي", "question": "A serious bodywide response to distributed bacterial infection plus malfunction or failure of an essential system in the body is called:", "options": ["Bacteremia", "Relapsing fever", "Infectious mononucleosis", "Sepsis", "Hand, foot and mouth disease"], "answer": 3, "pearl": "الإنتان (Sepsis) هو الاستجابة الجهازية الشاملة للجسم ضد العدوى الجرثومية المترافقة مع خلل وظيفي أو فشل في جهاز حيوي أساسي من أجهزة الجسم."}, {"id": 116, "exam": "end_semester", "official_num": 16, "subject": "Microbiology", "subject_ar": "مايكروبيولوجي", "question": "Owl's eye appearance in tissue culture is a characteristic feature for diagnosis of:", "options": ["Yellow fever", "Coxsackie B myocarditis", "Congenital cytomegalovirus infection", "Infectious mononucleosis", "Infective carditis"], "answer": 2, "pearl": "مظهر 'عين البومة' (Owl's eye appearance) مظهر باثولوجي نسيجي مميز لفيروس الـ CMV (Congenital Cytomegalovirus infection) نتيجة وجود الأجسام الاشتمالية النووية المحاطة بهالة رقيقة شفافة."}, {"id": 117, "exam": "end_semester", "official_num": 17, "subject": "Microbiology", "subject_ar": "مايكروبيولوجي", "question": "Corynebacterium diphtheriae to be virulent and cause myocarditis must be lysogenized by a:", "options": ["Prophage", "Plasmid", "Antigen", "Phagosome", "Antitoxin"], "answer": 0, "pearl": "تكتسب بكتيريا الدفتيريا قدرتها السمية الإمراضية (Virulence) المسببة لالتهاب العضلة القلبية عبر إقحام جين التوكسين بواسطة بروفاج عاثوي بكتيري مدمج (Lysogenic Prophage)."}, {"id": 118, "exam": "end_semester", "official_num": 18, "subject": "Microbiology", "subject_ar": "مايكروبيولوجي", "question": "The probable cause for the relapsing nature of relapsing fever caused by Borrelia recurrentis is:", "options": ["The appearance of new antibiotic resistant variants", "Successive appearance of antigenic variants", "Defects in cell mediated immunity", "Multiplication of the organisms in the blood", "Defect in humoral mediated immunity"], "answer": 1, "pearl": "الطبيعة الراجعة المتكررة للحمى الراجعة التي تسببها بوريليا ريكرنتيس (Borrelia recurrentis) تعود إلى قدرتها على التبديل المستمر في مستضداتها السطحية والظهور المتعاقب للمتغيرات المستضدية (Successive appearance of antigenic variants) للهروب من الأجسام المضادة."}, {"id": 119, "exam": "end_semester", "official_num": 19, "subject": "Microbiology", "subject_ar": "مايكروبيولوجي", "question": "Toxic shock syndrome is produced by a:", "options": ["Lipid A", "Teichoic acid", "Endotoxin", "Somatic O antigen", "Superantigen"], "answer": 4, "pearl": "متلازمة الصدمة السامة (TSS) تنجم عن إفراز مستضد فائق (Superantigen مثل TSST-1 للمكورات العنقودية أو الذيفان المولد للحمى للمكورات العقدية) يربط جزيء MHC-II بمستقبل T-cell دون معالجة، مما يحفز ملايين الخلايا التائية دفعة واحدة ويحدث عاصفة سيتوكينات حادة."}, {"id": 120, "exam": "end_semester", "official_num": 20, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "Atherosclerosis is predominantly a disease of:", "options": ["Intima", "Media", "Adventitia", "Entire vessel wall", "RBCs"], "answer": 0, "pearl": "التصلب العصيدي (Atherosclerosis) يصيب بشكل أساسي الغلالة الباطنة (Tunica Intima) للشرايين المرنة والعضلية الكبيرة والمتوسطة، حيث تتشكل اللويحة الليفية الدهنية تحت الخلايا البطانية."}, {"id": 121, "exam": "end_semester", "official_num": 21, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "Infarcts are least common in:", "options": ["Left ventricle", "Right ventricle", "Left atrium", "Right atrium", "All heart chambers"], "answer": 3, "pearl": "احتشاء عضلة القلب نادر الحدوث للغاية في الأذينين وخاصة الأذين الأيمن (Right atrium)، نظراً لرقة جداره، وانخفاض احتياجه الأيضي للأكسجين، وتلقيه الأكسجين بالانتشار المباشر من الدم المتدفق في تجويفه."}, {"id": 122, "exam": "end_semester", "official_num": 22, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "A 39-year-old man had been well until he was awakened by chest pain that radiated to both arms and neck and was associated with diaphoresis. His blood pressure was 160/110. Treated with Lasix, friction rub developed, cardiac arrest after 2 days. The event MOST LIKELY associated with this patient's problem was:", "options": ["Occlusion of a coronary vein", "Occlusion of a coronary artery", "Stabbed with ice pick", "Broken heart", "Occlusion of aorta"], "answer": 1, "pearl": "ألم صدري حاد مشع للذراعين والرقبة مع تعرق، متبوع باحتكاك تأموري وتوقف قلب، تشخيص باثولوجي كلاسيكي لاحتشاء حاد ناجم عن انسداد الشريان التاجي الخثاري (Occlusion of a coronary artery)."}, {"id": 123, "exam": "end_semester", "official_num": 23, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "Microscopically; In advanced hypertensive heart disease cases, there may be:", "options": ["Hyalinosis of myocardium", "Myocardial oedema and foci of necrosis in the myocardium", "Fatty changes in myocardium", "Atrophic changes", "Hyperplastic changes"], "answer": 1, "pearl": "في اعتلال القلب الناتج عن فرط الضغط المتقدم، يؤدي إجهاد القلب ونقص التروية النسبي إلى ظهور وذمة بين الألياف العضلية وبؤر تنخر دقيقة وتليف في النسيج العضلي (Myocardial oedema and foci of necrosis)."}, {"id": 124, "exam": "end_semester", "official_num": 24, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "Most common congenital anomaly of the heart is:", "options": ["VSD", "ASD", "PDA", "Tetralogy of Fallot", "Trialogy of Fallot"], "answer": 0, "pearl": "عيب الحاجز بين البطينين (Ventricular Septal Defect - VSD) هو أكثر العيوب القلبية الخلقية شيوعاً، ويمثل 25-30% من إجمالي الحالات."}, {"id": 125, "exam": "end_semester", "official_num": 25, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "Most frequent underlying heart disease in causation of SABE is:", "options": ["Ventricular septal defect", "Chronic rheumatic valvular disease", "Floppy mitral valve", "Atherosclerotic valvular disease", "Atrial septal defect"], "answer": 1, "pearl": "المرض البنيوي الأساسي الأكثر شيوعاً في إحداث التهاب الشغاف الجرثومي تحت الحاد (SABE) هو مرض الصمامات الروماتيزمي المزمن (Chronic rheumatic valvular disease)."}, {"id": 126, "exam": "end_semester", "official_num": 26, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "In hypertensive heart disease left ventricular hypertrophy is correlated with:", "options": ["Duration of hypertension", "Severity of hypertension", "Cause of hypertension", "Severity of coronary atherosclerosis", "Neoplastic changes"], "answer": 0, "pearl": "يرتبط تضخم البطين الأيسر طردياً مع مدة استمرار ارتفاع ضغط الدم (Duration of hypertension) وكذلك مع شدته ومقاومته للعلاج."}, {"id": 127, "exam": "end_semester", "official_num": 27, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "Cytoplasmic anti-neutrophil cytoplasmic antibodies (C-ANCA) is seen in:", "options": ["Polyarteritis nodosa", "Wegener's granulomatosis", "Leucocytoclastic vasculitis", "Giant cell arteritis", "Lymphoma"], "answer": 1, "pearl": "الأجسام المضادة السيتوبلازمية للعدلات (c-ANCA الموجهة ضد Proteinase 3) ترتبط تشخيصياً بقوة وبنسبة تفوق 90% مع ورم فيغنر الحبيبي (Wegener's Granulomatosis / Granulomatosis with Polyangiitis)."}, {"id": 128, "exam": "end_semester", "official_num": 28, "subject": "Biochemistry", "subject_ar": "كيمياء حيوية", "question": "The main role of HDL in lipid metabolism?", "options": ["Transport triglycerides from the liver to peripheral tissues", "Remove cholesterol from peripheral tissues to the liver", "Hydrolyze triglycerides in VLDL", "Convert LDL to VLDL", "Facilitate lipid digestion"], "answer": 1, "pearl": "الدور الأهم لـ HDL في أيض الدهون هو النقل العكسي للكوليسترول (Reverse cholesterol transport)، حيث يلتقط الكوليسترول الزائد من الأنسجة المحيطية وجدران الشرايين وينقله للكبد للإفراز في الصفراء."}, {"id": 129, "exam": "end_semester", "official_num": 29, "subject": "Biochemistry", "subject_ar": "كيمياء حيوية", "question": "Apolipoprotein activates lipoprotein lipase?", "options": ["ApoB-100", "ApoC-II", "ApoE", "ApoA-I", "ApoB-48"], "answer": 1, "pearl": "أبوليبوبروتين سي-2 (ApoC-II) هو العامل المساعد الأساسي والمنشط الإلزامي لإنزيم ليباز البروتين الدهني (Lipoprotein Lipase - LPL)."}, {"id": 130, "exam": "end_semester", "official_num": 30, "subject": "Biochemistry", "subject_ar": "كيمياء حيوية", "question": "Familial hypercholesterolemia is caused by mutations in which gene?", "options": ["ApoB-100", "LDL receptor", "HMG-CoA reductase", "ABCA1 transporter", "ApoA-I"], "answer": 1, "pearl": "فرط كوليسترول الدم العائلي (Familial Hypercholesterolemia - Type IIa) ينجم في الغالبية العظمى عن طفرات وراثية سائدة في جين مستقبلات الـ LDL (LDL receptor gene)، مما يعطل التقاط LDL من الدم ويرفع مستواه بشكل حاد."}, {"id": 131, "exam": "end_semester", "official_num": 31, "subject": "Biochemistry", "subject_ar": "كيمياء حيوية", "question": "The primary function of cholesterol in the human body?", "options": ["Energy storage", "Hormone precursor", "Enzyme production", "Oxygen transport", "Heme synthesis"], "answer": 1, "pearl": "الكوليسترول لا يُستخدم لإنتاج أو تخزين الطاقة، بل وظيفته الحيوية الأساسية هي العمل كسلف ومقدمة لبناء الهرمونات الستيرويدية (Hormone precursor مثل الكورتيزول والإستروجين والتستوستيرون)، والأحماض الصفراوية، وفيتامين د، وتثبيت غشاء الخلايا."}, {"id": 132, "exam": "end_semester", "official_num": 32, "subject": "Biochemistry", "subject_ar": "كيمياء حيوية", "question": "Which lipoprotein primarily transports triglycerides from the liver to peripheral tissues?", "options": ["LDL", "VLDL", "HDL", "Chylomicrons", "IDL"], "answer": 1, "pearl": "البروتين الدهني وضيع الكثافة جداً (VLDL) يصنعه الكبد خصيصاً لنقل الدهون الثلاثية المصنعة داخلياً (Endogenous triglycerides) من خلايا الكبد إلى الأنسجة الدهنية والعضلية المحيطية."}, {"id": 133, "exam": "end_semester", "official_num": 33, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Which of the following is true?", "options": ["Pacemaker cells in the SA node are affected by sympathetic but not parasympathetic innervation", "Norepinephrine increases the slope of the pacemaker potential by opening K+ channels and closing Ca2+ channels", "At the end of diastole, the cells of the SA node normally reach threshold before other tissues in the heart", "Acetyl choline causes tachycardia by stimulating the SA node cells to reach threshold faster", "The long refractory period of cardiac muscle enables tetanus to occur when necessary for optimal myocardial function"], "answer": 2, "pearl": "تصل خلايا العقدة الجيبية الأذينية (SA node) إلى عتبة إطلاق جهد الفعل (Threshold) قبل أي نسيج قلبي آخر في نهاية الانبساط، بسبب انحدار جهد الخطو التلقائي الأسرع لديها، مما يجعلها الناظمة الطبيعية لضربات القلب."}, {"id": 134, "exam": "end_semester", "official_num": 34, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "The velocity of impulse transmission is slowest in the:", "options": ["atria", "A-V node", "Purkinje system", "S-A node", "ventricular myocardium"], "answer": 1, "pearl": "سرعة توصيل النبضة القلبية هي الأبطأ في العقدة الأذينية البطينية (AV node) بمعدل 0.05 م/ث، لمنح الأذينين وقتاً لإنهاء الانقباض وملء البطينين قبل تنبيه البطينين."}, {"id": 135, "exam": "end_semester", "official_num": 35, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "A possible cause of sinus bradycardia is:", "options": ["complete heart block", "decreased sympathetic outflow", "atropine", "decreased vagal outflow", "all of the above"], "answer": 1, "pearl": "انخفاض التنبيه السمبثاوي (Decreased sympathetic outflow) يبطئ من إطلاق العقدة الجيبية، مسبباً بطء القلب الجيبي (Sinus Bradycardia)."}, {"id": 136, "exam": "end_semester", "official_num": 36, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "A 72-year-old man with an atrial rate of 80 beats/min develops third-degree (complete) AV block. A pacemaker site located in the AV node below the region of the block triggers ventricular activity, but at a rate of only 40 beats/min. What would be observed?", "options": ["One P wave for each QRS complex", "An inverted T wave", "A shortened PR interval", "A normal QRS complex", "U wave"], "answer": 3, "pearl": "نظراً لأن مركز الخطو الهروبي يقع في الوصلة الأذينية البطينية / حزمة هس أعلى تفرع الحزمتين، فإن الإشارة تنتشر في البطينين عبر شبكة هس-بيركنجي الطبيعية، فيكون شكل مركب QRS طبيعياً وضيقاً (A normal QRS complex)، مع انفصال تام بين موجات P ومركبات QRS."}, {"id": 137, "exam": "end_semester", "official_num": 37, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "During the cardiac cycle:", "options": ["the aortic and mitral valves are never open at the same time", "the first heart sound is caused by the rapid ejection of blood from the ventricles", "the mitral valve is open throughout diastole", "left ventricular pressure is always less than aortic pressure", "ventricular filling occurs primarily during systole"], "answer": 0, "pearl": "الصمام الأورطي والصمام الميترالي لا ينفتحان معاً أبداً في الوقت نفسه في أي مرحلة من مراحل الدورة القلبية الطبيعية (The aortic and mitral valves are never open at the same time)."}, {"id": 138, "exam": "end_semester", "official_num": 38, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "The first step for lymphatic vessels to remove excess fluid from interstitial tissue space is by:", "options": ["generating a lower intravascular than tissue hydrostatic pressure", "contracting and forcing lymph into larger lymphatics", "opening and closing one-way valve in the lymph vessels", "lowering the colloid osmotic pressure inside the lymph vessels", "closing the opening between adjacent lymphatic endothelial cells"], "answer": 0, "pearl": "الخطوة الأولى لدخول السائل الخلالي إلى الشعيرات اللمفاوية الأولية هي وجود ضغط هيدروستاتيكي في السائل الخلالي أعلى من الضغط داخل لمعة الأوعية اللمفاوية الأولية (Lower intravascular than tissue hydrostatic pressure)، مما يباعد الحواف البطانية ويدفع السائل إلى الداخل."}, {"id": 139, "exam": "end_semester", "official_num": 39, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Carotid baroreceptors:", "options": ["are important in the rapid short-term regulation of arterial blood pressure", "do not fire until a pressure of approximately 100 mm Hg is reached", "adapt over 1 to 2 weeks to the prevailing mean arterial pressure", "stretch reflexly decreases cerebral blood flow", "reflexly decrease coronary blood flow when blood pressure falls"], "answer": 0, "pearl": "مستقبلات الضغط في الجيب السباتي (Carotid baroreceptors) هي خط الدفاع الأول الحيوي لضبط ضغط الدم السريع قصير المدى نبضة بنبضة (Rapid short-term regulation of arterial blood pressure)."}, {"id": 140, "exam": "end_semester", "official_num": 40, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Parasympathetic stimulation of the heart accompanied by a withdrawal of sympathetic tone to most of the blood vessels of the body is characteristic of:", "options": ["the fight-or-flight response", "vasovagal syncope", "exercise", "the diving response", "the cold pressor response"], "answer": 1, "pearl": "الغشي المبهمي الوعائي (Vasovagal Syncope - الإغماء العصبي القلبي) يتسم بتنشيط باراسمبثاوي شديد يبطئ ضربات القلب بالتزامن مع انسحاب مفاجئ للنشاط السمبثاوي مسبباً توسعاً وعائياً واسعاً وهبوطاً حاداً في ضغط الدم وتروية الدماغ."}, {"id": 141, "exam": "end_semester", "official_num": 41, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "A patient suffers a severe hemorrhage resulting in a lowered mean arterial pressure. Which of the following would be elevated above normal levels?", "options": ["Splanchnic blood flow", "Cardiopulmonary receptor activity", "Right ventricular end-diastolic volume", "Heart rate", "Carotid baroreceptors activity"], "answer": 3, "pearl": "في النزيف الحاد وهبوط الضغط، يرتفع معدل ضربات القلب (Heart rate) كرد فعل انعكاسي سمبثاوي فوري لحماية الضغط الشرياني."}, {"id": 142, "exam": "end_semester", "official_num": 42, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Lymph flow from the foot is:", "options": ["Increased when an individual rises from the supine to the standing position", "Increased by massaging the foot", "Increased when capillary permeability is decreased", "Decreased when the valves of the leg veins are incompetent", "Decreased by exercise"], "answer": 1, "pearl": "يزداد تدفق اللمف من القدم بوضوح عند تدليك القدم (Increased by massaging the foot) والحركة والتمارين، حيث تضغط القوى الخارجية الميكانيكية على الشعيرات اللمفاوية وتدفع اللمف للأعلى عبر الصمامات أحادية الاتجاه."}, {"id": 143, "exam": "end_semester", "official_num": 43, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Which of the following substances causes vasoconstriction?", "options": ["Adenosine", "Angiotensin II", "Carbon dioxide", "Histamine", "Hydrogen ion"], "answer": 1, "pearl": "أنجيوتنسين 2 (Angiotensin II) مادة قابضة قوية للأوعية، في حين أن الأدينوسين وثاني أكسيد الكربون والهيستامين موسعات وعائية."}, {"id": 144, "exam": "end_semester", "official_num": 44, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "When a normal person suddenly changes from recumbent to standing posture:", "options": ["blood pressure falls dramatically", "renin secretion is suppressed", "blood pools in the jugular vein", "heart rate increases", "increased cerebral blood flow"], "answer": 3, "pearl": "عند الانتقال الفجائي من الاستلقاء إلى الوقوف، يزداد معدل ضربات القلب (Heart rate increases) كاستجابة انعكاسية لتجمع الدم في الأطراف السفلية."}, {"id": 145, "exam": "end_semester", "official_num": 45, "subject": "Histology", "subject_ar": "هستولوجي", "question": "Which structure contains pores?", "options": ["Continuous capillaries", "Fenestrated capillaries", "Sinusoidal capillaries", "AV anastomoses", "Venous sinus"], "answer": 1, "pearl": "الشعيرات الدموية المثقبة (Fenestrated capillaries) تتميز بوجود ثقوب أو مسام دائرية دقيقة (Fenestrae / Pores) في سيتوبلازم الخلايا البطانية تسمح بالتبادل السريع للسوائل والجزيئات الصغيرة."}, {"id": 146, "exam": "end_semester", "official_num": 46, "subject": "Histology", "subject_ar": "هستولوجي", "question": "One of the following vessels contains the largest amount of elastic fibers in its media:", "options": ["Aorta", "Inferior vena cava", "pulmonary artery", "coronary artery", "Muscular artery"], "answer": 0, "pearl": "الشريان الأورطي (Aorta) هو النموذج الرئيسي للشرايين المرنة الكبيرة (Large elastic conducting arteries)، وتحتوي طبقته المتوسطة (Tunica media) على أكبر كمية وألواح متحدة المركز من الألياف والصفائح المرنة (Elastic laminae)."}, {"id": 147, "exam": "end_semester", "official_num": 47, "subject": "Histology", "subject_ar": "هستولوجي", "question": "One of the following is a pluripotential cell around post capillary venules:", "options": ["Fibroblast", "Endothelial cell", "Pericyte", "Histiocyte", "Macrophage"], "answer": 2, "pearl": "الخلية الحوطية (Pericyte / Rouget cell) تقع خارج الغشاء القاعدي للشعيرات والوريدات بعد الشعيرية، وهي خلية متعددة القدرات (Pluripotential mesenchymal cell) تمتلك خصائص انقباضية وتستطيع التمايز إلى خلايا عضلية ملساء أو أرومات ليفية لترميم الأوعية."}, {"id": 148, "exam": "end_semester", "official_num": 48, "subject": "Histology", "subject_ar": "هستولوجي", "question": "Which of the following contain longitudinal muscle in its tunica adventitia:", "options": ["Medium sized vein", "Medium sized artery", "Aorta", "Inferior vena cava", "coronary artery"], "answer": 3, "pearl": "الوريد الأجوف السفلي (Inferior Vena Cava) هو المثال النسيجي الأبرز للأوردة الكبيرة التي تحتوي غلالتها البرانية (Tunica adventitia) على حزم سميكة بارزة من العضلات الملساء المرتبة طولياً (Longitudinal smooth muscle bundles) للمساعدة في دفع الدم ضد الجاذبية."}, {"id": 149, "exam": "end_semester", "official_num": 49, "subject": "Histology", "subject_ar": "هستولوجي", "question": "The vasa vasorum is:", "options": ["Vasoactive material", "Valve", "Vasopressin secreting cell", "Nerve", "Blood vessels"], "answer": 4, "pearl": "الأوعية المغذية للأوعية (Vasa Vasorum) هي أوعية دموية مجهرية صغيرة (Blood vessels) تنتشر في جدران الأوعية الدموية الكبيرة لتغذية طبقاتها الخارجية وتزويدها بالأكسجين والمغذيات."}, {"id": 150, "exam": "end_semester", "official_num": 50, "subject": "Histology", "subject_ar": "هستولوجي", "question": "Fenestrated endothelial cells with diaphragm present in:", "options": ["Endocrine gland", "Excretory gland", "Bone marrow", "Muscle tissue", "Brain"], "answer": 0, "pearl": "الشعيرات الدموية ذات الثقوب المزودة بحجاب أو غشاء رقيق (Fenestrated capillaries with diaphragm) توجد نموذجياً في الغدد الصماء (Endocrine glands)، والغشاء المخاطي للأمعاء، والشعيرات المحيطة بالنبيبات الكلوية."}, {"id": 151, "exam": "end_semester", "official_num": 51, "subject": "Histology", "subject_ar": "هستولوجي", "question": "The wall of the Coronary artery Contain:", "options": ["1 elastic lamina", "2 elastic lamina", "3 Elastic lamina", "4 elastic lamina", "5 elastic lamina"], "answer": 1, "pearl": "الشريان التاجي هو شريان عضلي متوسط الحجم (Muscular artery)، ويحتوي جداره نسيجياً على صفيحتين مرنتين محددتين: صفيحة مرنة داخلية (Internal elastic lamina) تفصل الباطنة عن المتوسطة، وصفيحة مرنة خارجية (External elastic lamina) تفصل المتوسطة عن البرانية (2 elastic laminae)."}, {"id": 152, "exam": "end_semester", "official_num": 52, "subject": "Histology", "subject_ar": "هستولوجي", "question": "Concerning basilar artery one statement is True:", "options": ["it has a thick wall", "the tunica media is thick", "It has well developed internal elastic lamina", "It has a narrow lumen", "Contain smooth muscle"], "answer": 2, "pearl": "الشرايين الدماغية والشريان القاعدي (Basilar artery) تتميز نسيجياً بجدار رقيق جداً وطبقة برانية ضامرة، ولكنها تمتلك صفيحة مرنة داخلية متطورة وبارزة للغاية ومتموجة (Well-developed internal elastic lamina) لتحمل النبض الشرياني الدماغي."}, {"id": 153, "exam": "end_semester", "official_num": 53, "subject": "Anatomy", "subject_ar": "تشريح", "question": "Horizontal gap between arterial and venous ends of the heart is called:", "options": ["Dorsal mesocardium", "Oblique sinus of pericardium", "Transverse sinus of pericardium", "Serous pericardium", "Fibrous pericardium"], "answer": 2, "pearl": "الممر الأفقي الواقع بين الأطراف الشريانية (الأورطي والجذع الرئوي أمامه) والأطراف الوريدية (SVC والأذينين خلفه) يسمى الجيب المستعرض للتأمور (Transverse Sinus of Pericardium)، وله أهمية جراحية كبرى لربط الشرايين أثناء جراحة القلب المفتوح."}, {"id": 154, "exam": "end_semester", "official_num": 54, "subject": "Anatomy", "subject_ar": "تشريح", "question": "Which of the following is not true about base of the heart?", "options": ["Directed backwards, upwards and to the right", "Separated from diaphragmatic surface by coronary sulcus", "Related to posterior mediastinum", "Formed by the two atria, mainly the right one", "Forms anterior wall of oblique sinus of pericardium"], "answer": 3, "pearl": "قاعدة القلب (Base of the heart) تتكون من كلا الأذينين ولكن بشكل رئيسي وأساسي من الأذين الأيسر (Left Atrium) الذي يشكل ثلثي القاعدة، وليس الأذين الأيمن! لذلك العبارة d غير صحيحة (Not true)."}, {"id": 155, "exam": "end_semester", "official_num": 55, "subject": "Anatomy", "subject_ar": "تشريح", "question": "As regards interior of the heart, which of the following is not true?", "options": ["Musculi pectinate is the cause of roughness of atrial walls", "Trabeculae carnae is the cause of roughness of ventricular walls", "Smooth part of left ventricle is called vestibule of the aorta", "Smooth part of right ventricle is called infundibulum of pulmonary trunk", "Left ventricle contains three papillary muscles"], "answer": 4, "pearl": "البطين الأيسر يحتوي على عضلتين حليميتين فقط: العضلة الحليمية الأمامية والخلفية (Anterior and Posterior papillary muscles). بينما البطين الأيمن هو الذي يحتوي على 3 عضلات حليمية (Anterior, Posterior, Septal). لذا العبارة e غير صحيحة (Not true)."}, {"id": 156, "exam": "end_semester", "official_num": 56, "subject": "Anatomy", "subject_ar": "تشريح (أجنة)", "question": "Ligamentum arteriosum is an embryonic remnant of:", "options": ["Ductus venosus", "Ductus arteriosus", "Fourth aortic arch", "Third aortic arch", "Distal bulbar septum"], "answer": 1, "pearl": "الرباط الشرياني (Ligamentum Arteriosum) هو البقايا الليفية الضامرة للقناة الشريانية الجنينية (Ductus Arteriosus) التي كانت تربط الشريان الرئوي الأيسر بالأبهر في الجنين والمشتقة من القوس الأبهرية السادسة."}, {"id": 157, "exam": "end_semester", "official_num": 57, "subject": "Anatomy", "subject_ar": "تشريح", "question": "Fossa ovalis is a characteristic feature of:", "options": ["Rough inflowing walls of right ventricle", "Interatrial septum", "Interventricular septum", "Atrioventricular septum", "Auricle of left atrium"], "answer": 1, "pearl": "الحفرة البيضوية (Fossa Ovalis) تقع في الحاجز بين الأذينين (Interatrial Septum) على السطح الداخلي للأذين الأيمن، وتطابق موقع الثقبة البيضوية الجنينية."}, {"id": 158, "exam": "end_semester", "official_num": 58, "subject": "Anatomy", "subject_ar": "تشريح (أجنة)", "question": "The most common congenital cardiac malformation occurring as an isolated condition is:", "options": ["Ventricular septal defect", "Tetralogy of Fallot", "Persistent truncus arteriosus", "Transposition of great vessels", "Atrial septal defect"], "answer": 0, "pearl": "عيب الحاجز بين البطينين (Ventricular Septal Defect - VSD) هو العيب القلبي الخلقي الأكثر شيوعاً كحالة معزولة (Isolated condition)، ويمثل حوالي 30% من إجمالي التشوهات القلبية الولادية."}, {"id": 159, "exam": "end_semester", "official_num": 59, "subject": "Anatomy", "subject_ar": "تشريح", "question": "Internal carotid artery is distributed to which of the following structures?", "options": ["Posterior one third of the brain and upper one third of the spinal cord", "All neck except musculoskeletal compartment", "Posterior one third of the scalp", "Anterior two thirds of the brain and eye", "Tubular and glandular components of the neck"], "answer": 3, "pearl": "الشريان السباتي الباطن (Internal Carotid Artery) يغذي الثلثين الأماميين من نصف الكرة المخية والعين والحجاج (Anterior two thirds of the brain and eye) عبر شرايينه المخية الأمامية والوسطى وفرعه العيني (Ophthalmic artery). بينما الجهاز الفقري القاعدي يغذي الثلث الخلفي."}, {"id": 160, "exam": "end_semester", "official_num": 60, "subject": "Anatomy", "subject_ar": "تشريح", "question": "Bifurcation of abdominal aorta occurs at which of the following vertebral levels?", "options": ["Lower border of T12", "Upper border of L1", "Lower border of L1", "Lower border of L3", "Lower border of L4"], "answer": 4, "pearl": "ينقسم الأورطي البطني إلى الشريانين الحرقفيين الأصليين عند مستوى الحافة السفلية للفقرة القطنية الرابعة (Lower border of L4)."}, {"id": 161, "exam": "end_semester", "official_num": 61, "subject": "Anatomy", "subject_ar": "تشريح (أجنة)", "question": "Which one of the following arteries is a derivative of the first aortic arch?", "options": ["Stapedial", "Maxillary", "External carotid", "Common carotid", "Internal carotid"], "answer": 1, "pearl": "مشتق القوس الأبهرية الأولى هو الشريان الفكي العلوي (Maxillary Artery - '1st arch is Maximal'). أما القوس الثانية فتعطي الشريان الركابي (Stapedial/Hyoid)، والقوس الثالثة تعطي الشريان السباتي (Carotid)، والقوس الرابعة تعطي قوس الأورطي وتحت الترقوة."}, {"id": 162, "exam": "end_semester", "official_num": 62, "subject": "Anatomy", "subject_ar": "تشريح (أجنة)", "question": "Which one of the following is an immediate postnatal change of foetal circulation?", "options": ["Degeneration of Eustachian valve", "closure of umbilical arteries", "Closure of foramen ovale", "Closure of ductus venosus", "Closure of left umblical vein"], "answer": 1, "pearl": "الانغلاق الوظيفي الفوري لشرايين الحبل السري (Closure of umbilical arteries) يحدث خلال ثوانٍ ودقائق معدودة بعد الولادة مباشرة نتيجة التقلص العضلي الشديد لجدار الشريان بفعل المحفزات الميكانيكية والحرارية وارتفاع الأكسجين، لمنع نزيف المولود."}, {"id": 163, "exam": "end_semester", "official_num": 63, "subject": "Anatomy", "subject_ar": "تشريح", "question": "Which one of the following veins is not a tributary of coronary sinus?", "options": ["Anterior cardiac veins", "Great cardiac vein", "Middle cardiac vein", "Posterior vein of left ventricle", "Oblique vein of left atrium"], "answer": 0, "pearl": "الأوردة القلبية الأمامية (Anterior Cardiac Veins) تصب مباشرة في جدار الأذين الأيمن (Right Atrium) بشكل مستقل، ولا تصب في الجيب التاجي (Not a tributary of coronary sinus). أما الوريد القلبي الكبير والأوسط والصغير وخلفي البطين ومائل الأذين فكلها تصب في الجيب التاجي."}, {"id": 164, "exam": "end_semester", "official_num": 64, "subject": "Anatomy", "subject_ar": "تشريح (أجنة)", "question": "Smooth posterior wall of right atrium is developed from:", "options": ["Right horn of sinus venosus", "Right half of common atrium", "Left horn and body of sinus venosus", "Left sinoatrial valve", "Right sinoatrial valve"], "answer": 0, "pearl": "الجدار الخلفي الأملس للأذين الأيمن (Sinus Venarum) ينشأ جنينياً من امتصاص القرن الأيمن للجيب الوريدي (Right horn of sinus venosus). أما الجزء الأمامي الخشن المحتوي على العضلات المشطية فينشأ من الأذين البدائي الأصلي."}];
+    const SHORT_ESSAYS = [{"id": 201, "num": 1, "subject": "Anatomy", "subject_ar": "تشريح", "question": "Mention branches of the right coronary artery?", "model_answer": "Branches of the Right Coronary Artery (RCA):\n1. Sinuatrial Nodal Artery (SA nodal branch): Supplies SA node (~60% of individuals).\n2. Conus Artery (Infundibular branch): Supplies the pulmonary conus/infundibulum.\n3. Anterior Atrial and Ventricular branches: Supply the anterior wall of the right atrium and right ventricle.\n4. Right Marginal Artery: Runs along the acute inferior border toward the apex.\n5. Posterior Interventricular Artery (PDA - Posterior Descending Artery): Runs in posterior IV groove, supplies posterior 1/3 of IV septum and adjacent walls (~85-90% right dominant).\n6. Atrioventricular Nodal Artery (AV nodal branch): Arises near the crux to supply the AV node.\n7. Postero-inferior ventricular branches: To diaphragmatic surface of right and left ventricles."}, {"id": 202, "num": 2, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Explain: Marked increase in heart rate (above 180 beats/min) reduces the cardiac output.", "model_answer": "Physiological Explanation:\n1. Extreme tachycardia (>160-180 bpm) drastically shortens the duration of cardiac diastole (filling time) far more than systole.\n2. In normal physiology, ~75-80% of ventricular filling occurs during early rapid diastole. When diastole is severely curtailed, the ventricles have inadequate time to fill with blood.\n3. As a result, End-Diastolic Volume (EDV) drops precipitously.\n4. According to Frank-Starling Law of the heart, decreased myocardial stretch (low EDV) sharply reduces Stroke Volume (SV).\n5. Since Cardiac Output = Heart Rate × Stroke Volume (CO = HR × SV), the massive reduction in SV outstrips the increase in HR, causing net Cardiac Output and coronary perfusion to decline markedly."}, {"id": 203, "num": 3, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Give an account on the factors that affect the capillary permeability?", "model_answer": "Factors Affecting Capillary Permeability:\n1. Anatomical Capillary Type: Continuous (least permeable, brain BBB), Fenestrated (intermediate, glomeruli/glands), Discontinuous/Sinusoidal (most permeable, liver/spleen/bone marrow).\n2. Endothelial Pore Size and Glycocalyx Integrity: Dimensions of intercellular clefts and fenestrae determine molecular sieving.\n3. Chemical & Inflammatory Mediators: Histamine, Bradykinin, Leukotrienes (LTC4, LTD4), Substance P, Serotonin, and Platelet Activating Factor (PAF) cause endothelial cell contraction and widen gaps.\n4. Local Tissue Hypoxia & Ischemia: Lack of oxygen damages vascular endothelial cells, increasing microvascular leakage.\n5. Temperature & Acidosis: Local heat and low pH increase microvascular permeability.\n6. Intraluminal Hydrostatic & Osmotic Gradients (Starling Forces)."}, {"id": 204, "num": 4, "subject": "Physiology", "subject_ar": "فيسيولوجي", "question": "Give an account on the immediate (short term) compensatory reaction in acute hemorrhage?", "model_answer": "Immediate Compensatory Mechanisms in Acute Hemorrhage:\n1. Arterial Baroreceptor Reflex:\n   - Acute blood loss → decreased MAP → reduced firing of carotid sinus & aortic arch baroreceptors.\n   - Disinhibition of Medullary Vasomotor Center (VMC) and cardiac sympathetic center, with vagal withdrawal.\n2. Sympathetic Cardiovascular Activation:\n   - Tachycardia (↑ HR) and positive inotropy (↑ contractility) via Beta-1 receptors.\n   - Arteriolar Vasoconstriction via Alpha-1 receptors in non-vital vascular beds (skin, splanchnic, renal) to preserve Total Peripheral Resistance (TPR) and shunt flow to heart and brain.\n   - Venoconstriction: Mobilizes blood from venous capacitance vessels (internal transfusion) to restore Venous Return (VR) and EDV.\n3. Capillary Fluid Shift:\n   - Arteriolar constriction lowers capillary hydrostatic pressure below plasma oncotic pressure, shifting interstitial fluid into capillaries to restore blood volume.\n4. Hormonal Response:\n   - Rapid surge of Epinephrine and Norepinephrine from adrenal medulla.\n   - Secretion of Vasopressin (ADH) and activation of RAAS (Angiotensin II) causing potent vasoconstriction."}, {"id": 205, "num": 5, "subject": "Biochemistry", "subject_ar": "كيمياء حيوية", "question": "Mention three causes of hypercholesterolemia?", "model_answer": "Three Causes of Hypercholesterolemia:\n1. Familial Hypercholesterolemia (FH / Type IIa Dyslipidemia): Autosomal dominant mutation in the LDL Receptor gene (or ApoB-100 or PCSK9 gain-of-function), impairing cellular clearance of LDL.\n2. Endocrine / Metabolic Disorders:\n   - Hypothyroidism: Decreased thyroid hormone reduces hepatic LDL receptor transcription, raising plasma cholesterol.\n   - Diabetes Mellitus / Cushing's Syndrome: Dysregulated lipid metabolism and insulin resistance.\n3. Nephrotic Syndrome: Severe proteinuria stimulates compensatory hepatic synthesis of albumin and lipoproteins (LDL/VLDL).\n(Alternative: Obstructive Jaundice / Cholestasis: Impaired biliary excretion of cholesterol)."}, {"id": 206, "num": 6, "subject": "Pathology", "subject_ar": "باثولوجي", "question": "Give an account on pathogenesis & complication of rheumatic fever.", "model_answer": "Pathogenesis & Complications of Rheumatic Fever:\n\nA. Pathogenesis:\n- Follows pharyngeal infection by Group A Beta-Hemolytic Streptococcus (Streptococcus pyogenes) after 2-3 weeks.\n- Mediated by Molecular Mimicry (Type II Hypersensitivity): Bacterial M-protein antigens share homologous epitopes with human host cardiac proteins (myosin, laminin, valve glycoproteins).\n- Antibodies and cross-reactive CD4+ T-cells attack heart tissue causing Pancarditis.\n- Pathognomonic microscopic lesion: Aschoff Bodies (perivascular collagen necrosis surrounded by lymphocytes, plasma cells, and Anitschkow 'caterpillar' cells).\n\nB. Complications:\n1. Acute: Fulminant acute pancarditis, acute cardiac failure, severe pericarditis with effusion.\n2. Chronic Rheumatic Heart Disease (CRHD): Chronic valvular deformities (most commonly 'fish-mouth' / 'button-hole' Mitral Stenosis and regurgitation).\n3. Left Atrial Dilation & Atrial Fibrillation leading to mural thrombi and Systemic Thromboembolism (stroke, renal/limb infarcts).\n4. Predisposition to Subacute Bacterial Endocarditis (SABE)."}, {"id": 207, "num": 7, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "Explain:\nA- ACEIs are used in diabetic nephropathy even in normotensive patient.\nB- Ivabradine is used instead of BB in ischemic heart disease with hypotension.", "model_answer": "Pharmacological Explanations:\n\nA. ACEIs in Diabetic Nephropathy in Normotensive Patients:\n- Diabetic nephropathy is driven by glomerular hyperfiltration and intraglomerular capillary hypertension.\n- Angiotensin II preferentially constricts the efferent arteriole of the renal glomerulus.\n- ACE inhibitors block Angiotensin II, producing selective dilation of the efferent arteriole.\n- This sharply reduces intraglomerular hydrostatic pressure, halts microalbuminuria/proteinuria, and retards glomerulosclerosis and renal decline completely independent of systemic blood pressure.\n\nB. Ivabradine instead of Beta-Blockers in IHD with Hypotension:\n- Beta-blockers reduce heart rate but also possess negative inotropic effects and decrease peripheral vascular tone, which can precipitate dangerous circulatory collapse in hypotensive patients.\n- Ivabradine selectively blocks hyperpolarization-activated cyclic nucleotide-gated (HCN) 'funny' (If) channels in SA nodal cells.\n- It achieves heart rate reduction (reducing myocardial O2 demand and prolonging coronary perfusion time) WITHOUT ANY negative inotropic effect and WITHOUT lowering systemic arterial blood pressure."}, {"id": 208, "num": 8, "subject": "Pharmacology", "subject_ar": "فارماكولوجي", "question": "Describe:\na- The role of spironolactone in heart failure therapy?\nb- The mechanism of action of ramipril?", "model_answer": "Descriptions:\n\na. Role of Spironolactone in Heart Failure Therapy:\n- Spironolactone is a competitive Mineralocorticoid Receptor Antagonist (MRA / Aldosterone Antagonist).\n- In heart failure, chronic hyperaldosteronism drives sodium retention, myocardial hypertrophy, interstitial collagen deposition, and progressive adverse ventricular remodeling.\n- Spironolactone blocks these detrimental cardiac and vascular aldosterone effects, preventing myocardial fibrosis and ventricular dilation.\n- Proven to significantly reduce all-cause mortality and hospitalizations in HFrEF (RALES trial), while offering potassium-sparing mild diuretic action.\n\nb. Mechanism of Action of Ramipril:\n- Ramipril is an orally active prodrug rapidly converted by hepatic cleavage into its active diacid form, Ramiprilat.\n- Ramiprilat is a potent competitive inhibitor of Angiotensin-Converting Enzyme (ACE / Kininase II).\n- Therapeutic Dual Action:\n  1. Inhibits conversion of Angiotensin I to Angiotensin II: Reduces vasoconstriction (decreases Total Peripheral Resistance/Afterload), decreases Aldosterone release (reduces Na+/water retention and Preload), and blunts sympathetic tone.\n  2. Inhibits breakdown of Bradykinin: Elevated local bradykinin stimulates endothelial release of Nitric Oxide (NO) and Prostacyclin (PGI2), augmenting vasodilation and cardioprotective remodeling."}];
+
+    let currentExam = 'end_module'; // 'end_module' | 'end_semester'
+    let currentSubject = 'all';     // 'all' | subject name | 'essay'
+    let currentMode = 'practice';    // 'practice' | 'review'
+    let currentQuestionIndex = 0;
+
+    let userAnswers = {};
+
+    let activeQuestions = [];
+
+    function initializeApp() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const examParam = urlParams.get('exam');
+      if (examParam === 'end_module' || examParam === 'end_semester') {
+        currentExam = examParam;
+      }
+      const subParam = urlParams.get('subject');
+      if (subParam) {
+        currentSubject = subParam;
+      }
+
+      document.getElementById('tabEndModule').classList.toggle('active', currentExam === 'end_module');
+      document.getElementById('tabEndSemester').classList.toggle('active', currentExam === 'end_semester');
+
+      if (currentSubject === 'essay') {
+        renderSubjectPills();
+        showEssayMode();
+      } else {
+        updateActiveQuestions();
+        renderSubjectPills();
+        renderCurrentQuestion();
+        renderPalette();
+        updateStats();
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (currentMode !== 'practice') return;
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+          nextQuestion();
+        } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+          prevQuestion();
+        } else if (['1', '2', '3', '4', '5'].includes(e.key)) {
+          const optIdx = parseInt(e.key) - 1;
+          selectOption(optIdx);
+        }
+      });
+    }
+
+    function switchExam(examType) {
+      if (currentExam === examType) return;
+      currentExam = examType;
+      currentSubject = 'all';
+      currentQuestionIndex = 0;
+      playSound('click');
+
+      document.getElementById('tabEndModule').classList.toggle('active', examType === 'end_module');
+      document.getElementById('tabEndSemester').classList.toggle('active', examType === 'end_semester');
+
+      hideEssayMode();
+      updateActiveQuestions();
+      renderSubjectPills();
+      renderCurrentQuestion();
+      renderPalette();
+      updateStats();
+      if (currentMode === 'review') renderReviewMode();
+    }
+
+    function switchSubject(subject) {
+      currentSubject = subject;
+      currentQuestionIndex = 0;
+      playSound('click');
+
+      renderSubjectPills();
+
+      if (subject === 'essay') {
+        showEssayMode();
+      } else {
+        hideEssayMode();
+        updateActiveQuestions();
+        renderCurrentQuestion();
+        renderPalette();
+        updateStats();
+        if (currentMode === 'review') renderReviewMode();
+      }
+    }
+
+    function switchMode(mode) {
+      currentMode = mode;
+      playSound('click');
+
+      document.getElementById('modePracticeBtn').classList.toggle('active', mode === 'practice');
+      document.getElementById('modeReviewBtn').classList.toggle('active', mode === 'review');
+
+      const practiceCard = document.getElementById('practiceQuestionCard');
+      const paletteCard = document.getElementById('paletteCard');
+      const reviewContainer = document.getElementById('reviewListContainer');
+      const essayContainer = document.getElementById('essayContainer');
+
+      if (currentSubject === 'essay') {
+        showEssayMode();
+        return;
+      }
+
+      if (mode === 'practice') {
+        practiceCard.style.display = 'flex';
+        paletteCard.style.display = 'flex';
+        reviewContainer.style.display = 'none';
+        essayContainer.style.display = 'none';
+        renderCurrentQuestion();
+        renderPalette();
+      } else {
+        practiceCard.style.display = 'none';
+        paletteCard.style.display = 'none';
+        essayContainer.style.display = 'none';
+        reviewContainer.style.display = 'flex';
+        renderReviewMode();
+      }
+    }
+
+    function updateActiveQuestions() {
+      const baseList = currentExam === 'end_module' ? END_MODULE_QUESTIONS : END_SEMESTER_QUESTIONS;
+      if (currentSubject === 'all') {
+        activeQuestions = [...baseList];
+      } else {
+        activeQuestions = baseList.filter(q => q.subject.toLowerCase() === currentSubject.toLowerCase());
+      }
+    }
+
+    function renderSubjectPills() {
+      const container = document.getElementById('subjectPillsContainer');
+      const baseList = currentExam === 'end_module' ? END_MODULE_QUESTIONS : END_SEMESTER_QUESTIONS;
+
+      const subjectCounts = {};
+      baseList.forEach(q => {
+        subjectCounts[q.subject] = (subjectCounts[q.subject] || 0) + 1;
+      });
+
+      const subjectsOrder = [
+        { key: 'all', en: 'All Subjects', ar: 'الامتحان كاملاً', icon: '🌟', count: baseList.length },
+        { key: 'Anatomy', en: 'Anatomy', ar: 'تشريح', icon: '🫀', count: subjectCounts['Anatomy'] || 0 },
+        { key: 'Physiology', en: 'Physiology', ar: 'فيسيولوجي', icon: '⚡', count: subjectCounts['Physiology'] || 0 },
+        { key: 'Pharmacology', en: 'Pharmacology', ar: 'فارماكولوجي', icon: '💊', count: subjectCounts['Pharmacology'] || 0 },
+        { key: 'Pathology', en: 'Pathology', ar: 'باثولوجي', icon: '🔬', count: subjectCounts['Pathology'] || 0 },
+        { key: 'Histology', en: 'Histology', ar: 'هستولوجي', icon: '🧬', count: subjectCounts['Histology'] || 0 },
+        { key: 'Microbiology', en: 'Microbiology', ar: 'مايكروبيولوجي', icon: '🧫', count: subjectCounts['Microbiology'] || 0 },
+        { key: 'Biochemistry', en: 'Biochemistry', ar: 'كيمياء حيوية', icon: '🧪', count: subjectCounts['Biochemistry'] || 0 },
+      ];
+
+      if (currentExam === 'end_semester') {
+        subjectsOrder.push({
+          key: 'essay',
+          en: 'Short Essay',
+          ar: 'الأسئلة المقالية النموذجية',
+          icon: '✍️',
+          count: SHORT_ESSAYS.length
+        });
+      }
+
+      let html = '';
+      subjectsOrder.forEach(sub => {
+        if (sub.count === 0 && sub.key !== 'all') return;
+        const isActive = currentSubject.toLowerCase() === sub.key.toLowerCase();
+        html += `
+          <button class="subject-pill ${isActive ? 'active' : ''}" onclick="switchSubject('${sub.key}')">
+            <span>${sub.icon} ${sub.ar}</span>
+            <span class="pill-count">${sub.count}</span>
+          </button>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderCurrentQuestion() {
+      if (activeQuestions.length === 0) return;
+      if (currentQuestionIndex >= activeQuestions.length) currentQuestionIndex = activeQuestions.length - 1;
+      if (currentQuestionIndex < 0) currentQuestionIndex = 0;
+
+      const q = activeQuestions[currentQuestionIndex];
+      const examNameStr = currentExam === 'end_module' ? 'End Module Exam 61' : 'End Semester Exam 61';
+
+      document.getElementById('qSubjectBadge').textContent = `${q.subject_ar} (${q.subject})`;
+      document.getElementById('qOfficialNumBadge').textContent = `سؤال رسمي رقم ${q.official_num} في ورقة الامتحان`;
+      document.getElementById('qExamLabelBadge').textContent = examNameStr;
+      document.getElementById('qCounterText').textContent = `السؤال ${currentQuestionIndex + 1} من ${activeQuestions.length}`;
+      document.getElementById('qTextBox').textContent = q.question;
+
+      const optionsContainer = document.getElementById('qOptionsList');
+      const letters = ['A', 'B', 'C', 'D', 'E'];
+      const currentAns = userAnswers[q.id];
+
+      let optsHtml = '';
+      q.options.forEach((opt, idx) => {
+        const letter = letters[idx] || (idx + 1);
+        let itemClass = 'option-item';
+        if (currentAns !== undefined) {
+          itemClass += ' locked';
+          if (idx === q.answer) {
+            itemClass += ' correct';
+          } else if (idx === currentAns.selectedOption && !currentAns.isCorrect) {
+            itemClass += ' wrong';
+          }
+        }
+
+        optsHtml += `
+          <div class="${itemClass}" onclick="selectOption(${idx})">
+            <div class="option-letter">${letter}</div>
+            <div class="option-text">${opt}</div>
+          </div>
+        `;
+      });
+
+      optionsContainer.innerHTML = optsHtml;
+
+      const pearlCard = document.getElementById('qPearlCard');
+      const pearlBody = document.getElementById('qPearlBody');
+      if (currentAns !== undefined) {
+        pearlBody.textContent = q.pearl;
+        pearlCard.classList.add('show');
+      } else {
+        pearlCard.classList.remove('show');
+      }
+
+      document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+      document.getElementById('nextBtn').disabled = currentQuestionIndex === activeQuestions.length - 1;
+    }
+
+    function selectOption(selectedIdx) {
+      const q = activeQuestions[currentQuestionIndex];
+      if (userAnswers[q.id] !== undefined) return;
+
+      const isCorrect = selectedIdx === q.answer;
+      userAnswers[q.id] = {
+        selectedOption: selectedIdx,
+        isCorrect: isCorrect
+      };
+
+      if (isCorrect) {
+        playSound('correct');
+      } else {
+        playSound('wrong');
+      }
+
+      renderCurrentQuestion();
+      renderPalette();
+      updateStats();
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIndex < activeQuestions.length - 1) {
+        currentQuestionIndex++;
+        playSound('click');
+        renderCurrentQuestion();
+        renderPalette();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        playSound('click');
+        renderCurrentQuestion();
+        renderPalette();
+      }
+    }
+
+    function jumpToQuestion(index) {
+      currentQuestionIndex = index;
+      playSound('click');
+      renderCurrentQuestion();
+      renderPalette();
+      window.scrollTo({ top: document.getElementById('practiceQuestionCard').offsetTop - 30, behavior: 'smooth' });
+    }
+
+    function retryCurrentQuestion() {
+      const q = activeQuestions[currentQuestionIndex];
+      if (userAnswers[q.id] !== undefined) {
+        delete userAnswers[q.id];
+        playSound('click');
+        renderCurrentQuestion();
+        renderPalette();
+        updateStats();
+      }
+    }
+
+    function resetExamAnswers() {
+      if (confirm('هل أنت متأكد من رغبتك في إعادة تعيين إجابات جميع أسئلة هذا القسم؟')) {
+        activeQuestions.forEach(q => {
+          delete userAnswers[q.id];
+        });
+        currentQuestionIndex = 0;
+        playSound('click');
+        renderCurrentQuestion();
+        renderPalette();
+        updateStats();
+      }
+    }
+
+    function renderPalette() {
+      const grid = document.getElementById('paletteGrid');
+      let html = '';
+
+      activeQuestions.forEach((q, idx) => {
+        const ans = userAnswers[q.id];
+        let btnClass = 'palette-num-btn';
+        if (idx === currentQuestionIndex) btnClass += ' active';
+        if (ans !== undefined) {
+          btnClass += ans.isCorrect ? ' correct' : ' wrong';
+        }
+
+        html += `
+          <button class="${btnClass}" onclick="jumpToQuestion(${idx})" title="السؤال رقم ${idx + 1}">
+            ${idx + 1}
+          </button>
+        `;
+      });
+
+      grid.innerHTML = html;
+    }
+
+    function updateStats() {
+      const total = activeQuestions.length;
+      let answered = 0;
+      let correct = 0;
+      let wrong = 0;
+
+      activeQuestions.forEach(q => {
+        const ans = userAnswers[q.id];
+        if (ans !== undefined) {
+          answered++;
+          if (ans.isCorrect) correct++;
+          else wrong++;
+        }
+      });
+
+      const pct = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+      const progressPct = total > 0 ? Math.round((answered / total) * 100) : 0;
+
+      document.getElementById('statTotalQ').textContent = total;
+      document.getElementById('statAnsweredQ').textContent = answered;
+      document.getElementById('statCorrectQ').textContent = correct;
+      document.getElementById('statWrongQ').textContent = wrong;
+      document.getElementById('statAccuracy').textContent = `${pct}%`;
+
+      document.getElementById('progressBarFill').style.width = `${progressPct}%`;
+      document.getElementById('progressText').textContent = `${answered} من ${total} سؤال (${progressPct}%)`;
+    }
+
+    function renderReviewMode() {
+      const container = document.getElementById('reviewListContainer');
+      const letters = ['A', 'B', 'C', 'D', 'E'];
+      let html = '';
+
+      activeQuestions.forEach((q, qIdx) => {
+        html += `
+          <div class="question-card" style="margin-bottom: 10px;">
+            <div class="question-meta-bar">
+              <div class="question-tags">
+                <span class="tag-subject">${q.subject_ar} (${q.subject})</span>
+                <span class="tag-official-num">سؤال رسمي رقم ${q.official_num}</span>
+              </div>
+              <div class="question-counter">#${qIdx + 1}</div>
+            </div>
+
+            <div class="question-text-box">${q.question}</div>
+
+            <div class="options-list">
+              ${q.options.map((opt, oIdx) => {
+                const isCorrect = oIdx === q.answer;
+                const itemClass = isCorrect ? 'option-item correct' : 'option-item';
+                return `
+                  <div class="${itemClass}">
+                    <div class="option-letter">${letters[oIdx]}</div>
+                    <div class="option-text">${opt} ${isCorrect ? ' ✓ (الإجابة المعتمدة)' : ''}</div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <div class="pearl-card show" style="margin-top: 10px;">
+              <div class="pearl-header">
+                <span>💡 اللؤلؤة الطبية والشرح الأكاديمي:</span>
+              </div>
+              <div class="pearl-body">${q.pearl}</div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function showEssayMode() {
+      document.getElementById('practiceQuestionCard').style.display = 'none';
+      document.getElementById('paletteCard').style.display = 'none';
+      document.getElementById('reviewListContainer').style.display = 'none';
+      document.getElementById('statsDashboard').style.display = 'none';
+      document.getElementById('progressWrapper').style.display = 'none';
+
+      const essayContainer = document.getElementById('essayContainer');
+      essayContainer.style.display = 'flex';
+
+      let html = `
+        <div class="exam-header-card" style="border-color: var(--border-gold); background: var(--surface);">
+          <h2 style="font-size: 1.25rem; color: var(--gold); margin-bottom: 6px;">
+            ✍️ الأسئلة المقالية القصيرة لامتحان End Semester (دفعة 61)
+          </h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            تتضمن ورقة الامتحان 8 أسئلة مقالية (Short Essay Questions) مخصصة بـ 6 درجات لكل سؤال، مع نموذج الإجابة الأكاديمي الكامل والشرح المفصل.
+          </p>
+        </div>
+      `;
+
+      SHORT_ESSAYS.forEach(essay => {
+        html += `
+          <div class="essay-card">
+            <div class="essay-top-row">
+              <span class="tag-subject">${essay.subject_ar} (${essay.subject})</span>
+              <span class="tag-official-num">سؤال مقالي رقم ${essay.num} • (6 درجات)</span>
+            </div>
+            <div class="essay-question-text">${essay.question}</div>
+            <button class="toggle-answer-btn" onclick="toggleEssayAnswer(${essay.id})">
+              👁️ عرض / إخفاء الإجابة النموذجية المعتمدة
+            </button>
+            <div class="model-answer-box" id="essayAns_${essay.id}">
+              ${essay.model_answer}
+            </div>
+          </div>
+        `;
+      });
+
+      essayContainer.innerHTML = html;
+    }
+
+    function hideEssayMode() {
+      document.getElementById('essayContainer').style.display = 'none';
+      document.getElementById('statsDashboard').style.display = 'grid';
+      document.getElementById('progressWrapper').style.display = 'flex';
+      switchMode(currentMode);
+    }
+
+    function toggleEssayAnswer(essayId) {
+      const el = document.getElementById(`essayAns_${essayId}`);
+      if (el) {
+        el.style.display = el.style.display === 'block' ? 'none' : 'block';
+        playSound('click');
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', initializeApp);
+  </script>
+</body>
+</html>
