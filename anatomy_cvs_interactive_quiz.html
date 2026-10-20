@@ -788,15 +788,15 @@
           📚 اختـر المـوضـوع للـمـذاكـرة:
         </div>
         <select class="topic-select" id="topicSelect">
-          <option value="all">🌟 جميع الموضوعات (92 سؤال بالكامل)</option>
+          <option value="all">🌟 جميع الموضوعات (82 سؤالاً بالكامل)</option>
           <option value="1">1. Pericardium (7 أسئلة)</option>
           <option value="2">2. External features of the heart (9 أسئلة)</option>
           <option value="3">3. Internal features of the heart (8 أسئلة)</option>
           <option value="4">4. Blood and nerve supply of the heart (9 أسئلة)</option>
           <option value="5">5. Development of the heart (7 أسئلة)</option>
-          <option value="6">6. Blood vessels of the thorax (18 سؤال)</option>
-          <option value="7">7. Blood vessels of the head and neck (10 أسئلة)</option>
-          <option value="8">8. Blood vessels of the abdomen & limbs (15 سؤال)</option>
+          <option value="6">6. Blood vessels of the thorax (13 سؤالاً)</option>
+          <option value="7">7. Blood vessels of the head and neck (8 أسئلة)</option>
+          <option value="8">8. Blood vessels of the abdomen & limbs (12 سؤالاً)</option>
           <option value="9">9. Vascular development (6 أسئلة)</option>
           <option value="10">10. Foetal circulation (3 أسئلة)</option>
         </select>
@@ -806,7 +806,7 @@
     <!-- Progress Card -->
     <section class="progress-card">
       <div class="progress-meta">
-        <span id="topicProgressLabel">التقدم: 1 من 92</span>
+        <span id="topicProgressLabel">التقدم: 1 من 82</span>
         <div class="score-indicators">
           <span class="badge-stat correct" id="badgeCorrectCount">✅ 0 صح</span>
           <span class="badge-stat wrong" id="badgeWrongCount">❌ 0 خطأ</span>
@@ -874,7 +874,7 @@
           <div class="label">إجابات خاطئة</div>
         </div>
         <div class="score-box">
-          <div class="num" style="color: #38bdf8;" id="summaryTotal">0 / 92</div>
+          <div class="num" style="color: #38bdf8;" id="summaryTotal">0 / 82</div>
           <div class="label">مجموع الأسئلة</div>
         </div>
       </div>
@@ -945,7 +945,7 @@
       }
     }
 
-    // 92 Questions Categorized Across the 10 Topics
+    // 82 Questions Categorized Across the 10 Topics
     const fullQuestions = [
       {
         id: 1, topicId: "1", topicName: "Pericardium",
@@ -1131,8 +1131,8 @@
         pearl: "📌 <strong>Cardiac Impression:</strong> الرئة اليمنى بتعمل انطباع مباشر على الأذين الأيمن (Right atrium)، بينما قوس الأبهر والبطين الأيسر مرتبطين بالرئة الشمال."
       },
       {
-        id: 19, topicId: "2", topicName: "External features of the heart",
-        question: "19. The coronary sulcus is a line joining these points:",
+        id: 15, topicId: "2", topicName: "External features of the heart",
+        question: "15. The coronary sulcus is a line joining these points:",
         options: [
           { key: "a", text: "3rd left right 5th costal cartilages" },
           { key: "b", text: "2nd left to right 6th costal cartilages" },
@@ -1144,8 +1144,8 @@
         pearl: "📌 <strong>Coronary Sulcus Line:</strong> خط مائل بيمتد من الغضروف الضلعي الثالث الأيسر حتى الغضروف الضلعي السادس الأيمن."
       },
       {
-        id: 47, topicId: "2", topicName: "External features of the heart",
-        question: "47. Base of the heart is not related to which of the following structures?",
+        id: 16, topicId: "2", topicName: "External features of the heart",
+        question: "16. Base of the heart is not related to which of the following structures?",
         options: [
           { key: "a", text: "Left vagus" },
           { key: "b", text: "Oblique sinus" },
@@ -1157,8 +1157,8 @@
         pearl: "📌 <strong>Relations:</strong> الشعبة الهوائية اليمنى (Right bronchus) تقع أعلى وإلى اليمين وبعيدة تماماً عن قاعدة القلب الخلفية."
       },
       {
-        id: 22, topicId: "3", topicName: "Internal features of the heart",
-        question: "22. The septomarginal trabecula carries:",
+        id: 17, topicId: "3", topicName: "Internal features of the heart",
+        question: "17. The septomarginal trabecula carries:",
         options: [
           { key: "a", text: "Right branch of atrioventricular bundle" },
           { key: "b", text: "Left branch of atrioventricular bundle" },
@@ -1170,8 +1170,8 @@
         pearl: "📌 <strong>Moderator Band:</strong> الحزمة الحاجزية الهامشية في البطين الأيمن بتنقل الـ Right bundle branch للعضلة الحليمية الأمامية عشان يوصل النبض بسرعة متزامنة."
       },
       {
-        id: 32, topicId: "3", topicName: "Internal features of the heart",
-        question: "32. Regarding to the right atrium which of the following is wrong:",
+        id: 18, topicId: "3", topicName: "Internal features of the heart",
+        question: "18. Regarding to the right atrium which of the following is wrong:",
         options: [
           { key: "a", text: "Extends from 3rd to 6th right costal cartilages" },
           { key: "b", text: "It receives oblique vein" },
@@ -1183,8 +1183,8 @@
         pearl: "📌 <strong>Venous Drainage:</strong> الوريد المائل للأذين الأيسر (Oblique vein of Marshall) بيصب في الـ Coronary sinus ومش في الأذين الأيمن مباشرة."
       },
       {
-        id: 33, topicId: "3", topicName: "Internal features of the heart",
-        question: "33. Regarding to the Left ventricle which of the following is wrong:",
+        id: 19, topicId: "3", topicName: "Internal features of the heart",
+        question: "19. Regarding to the Left ventricle which of the following is wrong:",
         options: [
           { key: "a", text: "Form the apex of the heart" },
           { key: "b", text: "It has a thick wall" },
@@ -1196,8 +1196,8 @@
         pearl: "📌 <strong>Base of Heart:</strong> قاعدة القلب بتتكون أساساً من الأذين الأيسر، والبطين الأيسر ملوش أي علاقة بتكوين القاعدة."
       },
       {
-        id: 37, topicId: "3", topicName: "Internal features of the heart",
-        question: "37. A blood clot (embolus) found in the left pulmonary artery probably came from which of the following?",
+        id: 20, topicId: "3", topicName: "Internal features of the heart",
+        question: "20. A blood clot (embolus) found in the left pulmonary artery probably came from which of the following?",
         options: [
           { key: "a", text: "Pulmonary veins" },
           { key: "b", text: "left atrium" },
@@ -1209,8 +1209,8 @@
         pearl: "📌 <strong>Hemodynamics:</strong> الشريان الرئوي واخد الدم مباشرة من البطين الأيمن (Right ventricle)، فأي جلطة بتوصل للشريان الرئوي لازم تعدي من خلاله."
       },
       {
-        id: 38, topicId: "3", topicName: "Internal features of the heart",
-        question: "38. Which group of structures empties directly into the right atrium?",
+        id: 21, topicId: "3", topicName: "Internal features of the heart",
+        question: "21. Which group of structures empties directly into the right atrium?",
         options: [
           { key: "a", text: "Superior vena cava, coronary sinus and hemiazygos vein" },
           { key: "b", text: "Coronary sinus and pulmonary vein" },
@@ -1222,8 +1222,8 @@
         pearl: "📌 <strong>RA Openings:</strong> المصبات الرئيسية المباشرة في الأذين الأيمن هي: SVC, IVC, and Coronary sinus."
       },
       {
-        id: 51, topicId: "3", topicName: "Internal features of the heart",
-        question: "51. The bicuspid valve is one of the following?",
+        id: 22, topicId: "3", topicName: "Internal features of the heart",
+        question: "22. The bicuspid valve is one of the following?",
         options: [
           { key: "a", text: "Tricuspid valve" },
           { key: "b", text: "Pulmonary valve" },
@@ -1235,8 +1235,8 @@
         pearl: "📌 <strong>Definition:</strong> الصمام ثنائي الشرفات (Bicuspid valve) هو الصمام الميترالي (Mitral valve)."
       },
       {
-        id: 52, topicId: "3", topicName: "Internal features of the heart",
-        question: "52. Which of the following statements correctly applies to the tricuspid valve?",
+        id: 23, topicId: "3", topicName: "Internal features of the heart",
+        question: "23. Which of the following statements correctly applies to the tricuspid valve?",
         options: [
           { key: "A", text: "It guards the left atrioventricular orifice." },
           { key: "B", text: "It guards the conus arteriosus." },
@@ -1248,8 +1248,8 @@
         pearl: "📌 <strong>Tricuspid Anatomy:</strong> الحبال الوترية (Chordae tendineae) بتمسك في الحواف الحرة والأسطح البطينية لشرفات الصمام عشان تمنع ارتجاعه."
       },
       {
-        id: 53, topicId: "3", topicName: "Internal features of the heart",
-        question: "53. Regard to the opening of left atrium which of the following is correct:",
+        id: 24, topicId: "3", topicName: "Internal features of the heart",
+        question: "24. Regard to the opening of left atrium which of the following is correct:",
         options: [
           { key: "a", text: "Four pulmonary veins" },
           { key: "b", text: "Left pulmonary artery" },
@@ -1261,8 +1261,8 @@
         pearl: "📌 <strong>LA Openings:</strong> الأذين الأيسر بيستقبل الأوردة الرئوية الأربعة (Four pulmonary veins)."
       },
       {
-        id: 15, topicId: "4", topicName: "Blood and nerve supply of the heart",
-        question: "15. Which of the following vessels not found in the coronary sinus:",
+        id: 25, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "25. Which of the following vessels not found in the coronary sinus:",
         options: [
           { key: "A", text: "Great cardiac vein" },
           { key: "B", text: "Small cardiac vein" },
@@ -1274,8 +1274,8 @@
         pearl: "📌 <strong>Coronary Sinus Tributaries:</strong> الوريد الفرد (Azygos vein) بيصب في الوريد الأجوف العلوي في الصدر ومش في الجيب التاجي للقلب."
       },
       {
-        id: 16, topicId: "4", topicName: "Blood and nerve supply of the heart",
-        question: "16. Regarding to the coronary arteries which of the following is wrong:",
+        id: 26, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "26. Regarding to the coronary arteries which of the following is wrong:",
         options: [
           { key: "a", text: "The coronary arteries have poorly anastomosis" },
           { key: "b", text: "Coronary sulcus contains both coronary arteries" },
@@ -1287,8 +1287,8 @@
         pearl: "📌 <strong>Coronary Origins:</strong> الشريان التاجي الأيمن (RCA) بيطلع من الـ Anterior (Right) aortic sinus، بينما الأيسر بيطلع من الـ Posterior (Left) aortic sinus."
       },
       {
-        id: 20, topicId: "4", topicName: "Blood and nerve supply of the heart",
-        question: "20. The posterior third of interventricular septum is supplied by:",
+        id: 27, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "27. The posterior third of interventricular septum is supplied by:",
         options: [
           { key: "a", text: "Anterior interventricular branch" },
           { key: "b", text: "Circumflex branch" },
@@ -1300,8 +1300,8 @@
         pearl: "📌 <strong>Septal Supply:</strong> الثلث الخلفي للحاجز بين البطينين بيتغذى بالـ Posterior interventricular branch (PDA)، بينما الثلثين الأماميين بالـ LAD."
       },
       {
-        id: 24, topicId: "4", topicName: "Blood and nerve supply of the heart",
-        question: "24. The anterior 2/3 of interventricular septum is supplied by:",
+        id: 28, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "28. The anterior 2/3 of interventricular septum is supplied by:",
         options: [
           { key: "a", text: "Marginal artery" },
           { key: "b", text: "Posterior interventricular branch" },
@@ -1313,8 +1313,8 @@
         pearl: "📌 <strong>Anterior 2/3:</strong> الثلثان الأماميان للحاجز بين البطينين بيتغذوا بالـ Anterior interventricular branch (LAD) المتفرع من الشريان التاجي الأيسر."
       },
       {
-        id: 34, topicId: "4", topicName: "Blood and nerve supply of the heart",
-        question: "34. Deep cardiac plexus is formed of:",
+        id: 29, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "29. Deep cardiac plexus is formed of:",
         options: [
           { key: "a", text: "Both vagi" },
           { key: "b", text: "Both sympathetic trunk" },
@@ -1326,8 +1326,8 @@
         pearl: "📌 <strong>Cardiac Plexus:</strong> الضفيرة القلبية العميقة بتتكون من ألياف كلا العصبين المبهمين والجذعين السمبثاويين والأعصاب الحنجرية الراجعة (All of the above)."
       },
       {
-        id: 45, topicId: "4", topicName: "Blood and nerve supply of the heart",
-        question: "45. Anastomosis between right coronary and circumflex arteries occurs at:",
+        id: 30, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "30. Anastomosis between right coronary and circumflex arteries occurs at:",
         options: [
           { key: "a", text: "Acute margin" },
           { key: "b", text: "Anterior interventricular sulcus" },
@@ -1339,8 +1339,8 @@
         pearl: "📌 <strong>Crux Cordis:</strong> التفاغر بين الشريان التاجي الأيمن والشريان المنعطف بيحصل عند ملتقى الأخاديد الخلفي (Cardiac crux)."
       },
       {
-        id: 46, topicId: "4", topicName: "Blood and nerve supply of the heart",
-        question: "46. Left coronary artery is arising from:",
+        id: 31, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "31. Left coronary artery is arising from:",
         options: [
           { key: "a", text: "Transvers sinus" },
           { key: "b", text: "Anterior aortic sinus" },
@@ -1352,8 +1352,8 @@
         pearl: "📌 <strong>LCA Origin:</strong> الشريان التاجي الأيسر ينشأ من الجيب الأبهري الخلفي (Left posterior aortic sinus)."
       },
       {
-        id: 48, topicId: "4", topicName: "Blood and nerve supply of the heart",
-        question: "48. Posterior interventricular artery supplies:",
+        id: 32, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "32. Posterior interventricular artery supplies:",
         options: [
           { key: "a", text: "Anterior wall of right ventricle" },
           { key: "b", text: "Anterior wall of right atrium" },
@@ -1365,8 +1365,8 @@
         pearl: "📌 <strong>PDA Distribution:</strong> يغذي الشريان بين البطينين الخلفي الثلث الخلفي للحاجز بين البطينين والسطح الحجابي للبطينين."
       },
       {
-        id: 49, topicId: "4", topicName: "Blood and nerve supply of the heart",
-        question: "49. Which one of the following arteries accompany the middle cardiac vein?",
+        id: 33, topicId: "4", topicName: "Blood and nerve supply of the heart",
+        question: "33. Which one of the following arteries accompany the middle cardiac vein?",
         options: [
           { key: "a", text: "Anterior interventricular" },
           { key: "b", text: "Posterior interventricular" },
@@ -1378,8 +1378,8 @@
         pearl: "📌 <strong>Vein-Artery Pair:</strong> الوريد القلبي الأوسط (Middle cardiac vein) ماشي جنب الـ Posterior interventricular artery في التلم الخلفي بين البطينين."
       },
       {
-        id: 77, topicId: "5", topicName: "Development of the heart",
-        question: "77. The most critical period of heart development is:",
+        id: 34, topicId: "5", topicName: "Development of the heart",
+        question: "34. The most critical period of heart development is:",
         options: [
           { key: "A", text: "weeks 1-3" },
           { key: "B", text: "weeks 3-6" },
@@ -1391,8 +1391,8 @@
         pearl: "📌 <strong>Embryology Period:</strong> أدق وأخطر فترة في تكوين القلب وانقسامه لغرف وحواجز هي بين الأسبوع 3 و 6 جنينياً (Weeks 3-6)."
       },
       {
-        id: 78, topicId: "5", topicName: "Development of the heart",
-        question: "78. Which statement concerning the sinus venosus is in correct:",
+        id: 35, topicId: "5", topicName: "Development of the heart",
+        question: "35. Which statement concerning the sinus venosus is in correct:",
         options: [
           { key: "A", text: "the sinus venosus lies caudal to the primitive atrium" },
           { key: "B", text: "the left horn form left horn of the coronary sinus" },
@@ -1404,8 +1404,8 @@
         pearl: "📌 <strong>Sinus Venosus:</strong> القرن الأيسر مش بيندمج في الأذين الأيسر خالص؛ بل بيتحول للـ Coronary sinus والوريد المائل، بينما الأذين الأيسر الأملس جاي من اندماج الأوردة الرئوية."
       },
       {
-        id: 80, topicId: "5", topicName: "Development of the heart",
-        question: "80. Regarding to the foramen ovale which of the following is true:",
+        id: 36, topicId: "5", topicName: "Development of the heart",
+        question: "36. Regarding to the foramen ovale which of the following is true:",
         options: [
           { key: "A", text: "is formed by perforation in septum II" },
           { key: "B", text: "permits a right to left shunt of blood until the time of birth" },
@@ -1417,8 +1417,8 @@
         pearl: "📌 <strong>Foramen Ovale Shunt:</strong> الثقبة البيضوية وظيفتها تحويل الدم المؤكسج من الأذين الأيمن للأذين الأيسر (Right-to-left shunt) قبل الولادة لتجاوز الرئتين."
       },
       {
-        id: 81, topicId: "5", topicName: "Development of the heart",
-        question: "81. Regarding to the interventricular septum which of the following is true:",
+        id: 37, topicId: "5", topicName: "Development of the heart",
+        question: "37. Regarding to the interventricular septum which of the following is true:",
         options: [
           { key: "A", text: "is primarily membranous" },
           { key: "B", text: "receives its membranous contribution from the right valve of the sinus venosus" },
@@ -1430,8 +1430,8 @@
         pearl: "📌 <strong>VSD Defects:</strong> معظم عيوب الحاجز بين البطينين (VSD) بتحصل في الجزء الغشائي (Membranous part) بنسبة 70-80% تقريباً."
       },
       {
-        id: 86, topicId: "5", topicName: "Development of the heart",
-        question: "86. Which of the following is the most common type of congenital heart malformation:",
+        id: 38, topicId: "5", topicName: "Development of the heart",
+        question: "38. Which of the following is the most common type of congenital heart malformation:",
         options: [
           { key: "A", text: "dextrocardia" },
           { key: "B", text: "atrial septal defect" },
@@ -1443,8 +1443,8 @@
         pearl: "📌 <strong>Most Common CHD:</strong> الـ Ventricular Septal Defect (VSD) هو أشهر عيب خلقي في القلب إجمالاً."
       },
       {
-        id: 87, topicId: "5", topicName: "Development of the heart",
-        question: "87. The adult left atrium is derived embryologically from the:",
+        id: 39, topicId: "5", topicName: "Development of the heart",
+        question: "39. The adult left atrium is derived embryologically from the:",
         options: [
           { key: "A", text: "right horn of the sinus venosus" },
           { key: "B", text: "primitive pulmonary vein" },
@@ -1456,8 +1456,8 @@
         pearl: "📌 <strong>Smooth LA Origin:</strong> الجزء الأملس الكبير من الأذين الأيسر مشتق من استيعاب واندماج الوريد الرئوي البدائي (Primitive pulmonary vein)."
       },
       {
-        id: 88, topicId: "5", topicName: "Development of the heart",
-        question: "88. In tetralogy of Fallot, abnormalities include:",
+        id: 40, topicId: "5", topicName: "Development of the heart",
+        question: "40. In tetralogy of Fallot, abnormalities include:",
         options: [
           { key: "A", text: "ventricular septal defect" },
           { key: "B", text: "overriding aorta" },
@@ -1469,8 +1469,8 @@
         pearl: "📌 <strong>Tetralogy of Fallot:</strong> رباعية فالو بتشمل الأربع عيوب معاً: تضيق الصمام الرئوي، VSD، ركوب الأبهر، وتضخم البطين الأيمن."
       },
       {
-        id: 17, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "17. The tributaries of vena azygos are, except:",
+        id: 41, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "41. The tributaries of vena azygos are, except:",
         options: [
           { key: "a", text: "Hemiazygos vein" },
           { key: "b", text: "Accessory hemiazygos vein" },
@@ -1482,8 +1482,8 @@
         pearl: "📌 <strong>Azygos Tributaries:</strong> الوريد الوربي الخلفي الأول بيصب مباشرة في الـ Brachiocephalic، والـ 2-4 بيعملوا Superior intercostal، فمش كل الـ Right posterior intercostals بتصب فيه مباشرة."
       },
       {
-        id: 18, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "18. The arch of azygos vein lies in:",
+        id: 42, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "42. The arch of azygos vein lies in:",
         options: [
           { key: "a", text: "Anterior mediastinum" },
           { key: "b", text: "Middle mediastinum" },
@@ -1495,8 +1495,8 @@
         pearl: "📌 <strong>Arch of Azygos:</strong> بيلتف للأمام فوق جذر الرئة اليمنى عند مستوى T4 في المنصف العلوي (Superior mediastinum) ليصب في الـ SVC."
       },
       {
-        id: 21, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "21. Which of the following structures is not related to the inferior surface of arch of aorta:",
+        id: 43, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "43. Which of the following structures is not related to the inferior surface of arch of aorta:",
         options: [
           { key: "a", text: "Bifurcation of pulmonary trunk" },
           { key: "b", text: "Right bronchus" },
@@ -1508,8 +1508,8 @@
         pearl: "📌 <strong>Aortic Arch Relations:</strong> الشعبة الهوائية اليمنى (Right bronchus) تقع بعيداً في الجانب الأيمن ومش ملاصقة لقوس الأبهر."
       },
       {
-        id: 23, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "23. The tributaries of brachiocephalic vein are:",
+        id: 44, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "44. The tributaries of brachiocephalic vein are:",
         options: [
           { key: "a", text: "Inferior thyroid vein" },
           { key: "b", text: "Internal thoracic vein" },
@@ -1521,8 +1521,8 @@
         pearl: "📌 <strong>All of the Above:</strong> الوريد العضدي الرأسي بيستقبل الوريد الدرقي السفلي والصدري الداخلي والفقري والوربي العلوي."
       },
       {
-        id: 25, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "25. The ligamentum arteriosus connect the arch of aorta with:",
+        id: 45, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "45. The ligamentum arteriosus connect the arch of aorta with:",
         options: [
           { key: "a", text: "Right pulmonary artery" },
           { key: "b", text: "Left pulmonary artery" },
@@ -1534,8 +1534,8 @@
         pearl: "📌 <strong>Ligamentum Arteriosum:</strong> بيوصل بين تقعر قوس الأبهر وبداية الشريان الرئوي الأيسر (Left pulmonary artery)."
       },
       {
-        id: 26, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "26. The arch of aorta lies in:",
+        id: 46, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "46. The arch of aorta lies in:",
         options: [
           { key: "a", text: "Superior mediastinum" },
           { key: "b", text: "Anterior mediastinum" },
@@ -1547,8 +1547,8 @@
         pearl: "📌 <strong>Mediastinum:</strong> قوس الأبهر يقع بالكامل داخل المنصف العلوي (Superior mediastinum)."
       },
       {
-        id: 27, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "27. The left recurrent laryngeal nerve hook around aortic arch:",
+        id: 47, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "47. The left recurrent laryngeal nerve hook around aortic arch:",
         options: [
           { key: "a", text: "Posterior to ligamentum arteriosus" },
           { key: "b", text: "Anterior to ligamentum arteriosus" },
@@ -1560,8 +1560,8 @@
         pearl: "📌 <strong>Recurrent Nerve:</strong> بيلف حول أسفل قوس الأبهر خلف الرباط الشرياني (Posterior to ligamentum arteriosus)."
       },
       {
-        id: 28, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "28. The left vagus nerve lies on the left side of:",
+        id: 48, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "48. The left vagus nerve lies on the left side of:",
         options: [
           { key: "a", text: "esophagus" },
           { key: "b", text: "trachea" },
@@ -1573,8 +1573,8 @@
         pearl: "📌 <strong>Left Vagus Course:</strong> في المنصف العلوي، بيعبر العصب المبهم الأيسر على الجانب الأيسر لقوس الأبهر."
       },
       {
-        id: 29, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "29. The following are the branches of descending thoracic aorta, except:",
+        id: 49, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "49. The following are the branches of descending thoracic aorta, except:",
         options: [
           { key: "a", text: "Left bronchial arteries" },
           { key: "b", text: "Esophageal arteries" },
@@ -1586,8 +1586,8 @@
         pearl: "📌 <strong>Aorta Branches:</strong> الأبهر الصدري النازل بيدي الشرايين الوربية الخلفية من 3 لـ 11 فقط، بينما الأول والثاني جايين من الـ Superior intercostal artery."
       },
       {
-        id: 30, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "30. The descending thoracic aorta begins at the level of:",
+        id: 50, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "50. The descending thoracic aorta begins at the level of:",
         options: [
           { key: "a", text: "2nd thoracic vertebra" },
           { key: "b", text: "3rd thoracic vertebra" },
@@ -1599,8 +1599,8 @@
         pearl: "📌 <strong>Vertebral Level:</strong> يبدأ الأبهر النازل عند الحافة السفلية للفقرة T4 (مستوى الزاوية القصية Sternal angle)."
       },
       {
-        id: 31, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "31. Regarded to posterior relation of descending aorta which of the following is wrong:",
+        id: 51, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "51. Regarded to posterior relation of descending aorta which of the following is wrong:",
         options: [
           { key: "a", text: "Vertebral column" },
           { key: "b", text: "Hemiazygos vein" },
@@ -1612,8 +1612,8 @@
         pearl: "📌 <strong>Esophagus Relation:</strong> المريء (Esophagus) بيقع أمام الأبهر النازل مش وراه (Anterior relation)."
       },
       {
-        id: 35, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "35. The brachiocephalic artery divides into two arteries:",
+        id: 52, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "52. The brachiocephalic artery divides into two arteries:",
         options: [
           { key: "a", text: "Right and left common carotid artery" },
           { key: "b", text: "Right common carotid and right subclavian artery" },
@@ -1625,8 +1625,8 @@
         pearl: "📌 <strong>Bifurcation:</strong> الشريان العضدي الرأسي بينقسم للسباتي الأصلي الأيمن وتحت الترقوة الأيمن خلف المفصل القصي الترقوي الأيمن."
       },
       {
-        id: 36, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "36. The immediate posterior relation of the upper half of manubrium sterni is:",
+        id: 53, topicId: "6", topicName: "Blood vessels of the thorax",
+        question: "53. The immediate posterior relation of the upper half of manubrium sterni is:",
         options: [
           { key: "a", text: "Brachiocephalic artery" },
           { key: "b", text: "Left common carotid artery" },
@@ -1638,73 +1638,8 @@
         pearl: "📌 <strong>Manubrium:</strong> خلف النصف العلوي لقبضة القص يوجد الوريد العضدي الرأسي الأيسر (Left brachiocephalic vein) وغدة الثيموس."
       },
       {
-        id: 57, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "57. Which of the following is a branch of the axillary artery?",
-        options: [
-          { key: "A", text: "subscapular artery" },
-          { key: "B", text: "inter costal artery" },
-          { key: "C", text: "ulnar artery" },
-          { key: "D", text: "radial artery" },
-          { key: "E", text: "internal thoracic artery" }
-        ],
-        answer: "A",
-        pearl: "📌 <strong>Axillary Branches:</strong> الشريان تحت الكتفي (Subscapular artery) هو أكبر فروع الشريان الإبطي (من الجزء الثالث)."
-      },
-      {
-        id: 58, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "58. Which of the following is a branch of the brachial artery?",
-        options: [
-          { key: "A", text: "subscapular artery" },
-          { key: "B", text: "inter costal artery" },
-          { key: "C", text: "lateral thoracic artery" },
-          { key: "D", text: "radial artery" },
-          { key: "E", text: "internal thoracic artery" }
-        ],
-        answer: "D",
-        pearl: "📌 <strong>Terminal Branches:</strong> الشريان العضدي ينقسم للشريان الكعبري (Radial) والشريان الزندي (Ulnar)."
-      },
-      {
-        id: 59, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "59. The subscapular artery arises from:",
-        options: [
-          { key: "A", text: "The third part of the axillary artery" },
-          { key: "B", text: "The second part of the axillary artery" },
-          { key: "C", text: "The first part of the axillary artery" },
-          { key: "D", text: "The thoracoacromial artery" },
-          { key: "E", text: "The lateral thoracic artery" }
-        ],
-        answer: "A",
-        pearl: "📌 <strong>3rd Part of Axillary:</strong> ينشأ الشريان تحت الكتفي من الجزء الثالث للشريان الإبطي."
-      },
-      {
-        id: 60, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "60. The tributaries of the first part of the axillary vein is:",
-        options: [
-          { key: "a", text: "thoracoacrosial vein" },
-          { key: "b", text: "lateral thoracic vein" },
-          { key: "c", text: "subscapular vein" },
-          { key: "d", text: "anterior circumflex humeral vein" },
-          { key: "e", text: "cephalic vein" }
-        ],
-        answer: "e",
-        pearl: "📌 <strong>Cephalic Vein:</strong> الوريد الرأسي بيخترق الـ Clavipectoral fascia ويصب في الجزء الأول للوريد الإبطي."
-      },
-      {
-        id: 61, topicId: "6", topicName: "Blood vessels of the thorax",
-        question: "61. Which of the following arteries is not share in the Anastomosis around scapula?",
-        options: [
-          { key: "a", text: "Thyrocervical" },
-          { key: "b", text: "Suprascapular" },
-          { key: "c", text: "Subscapular" },
-          { key: "d", text: "Lateral thoracic" },
-          { key: "e", text: "Thoracodorsal" }
-        ],
-        answer: "d",
-        pearl: "📌 <strong>Scapular Anastomosis:</strong> الشريان الصدري الوحشي (Lateral thoracic) ماشي على جدار الصدر وملوش علاقة بشبكة التفاغر حول لوح الكتف."
-      },
-      {
-        id: 39, topicId: "7", topicName: "Blood vessels of the head and neck",
-        question: "39. The only tributary of subclavian vein is:",
+        id: 54, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "54. The only tributary of subclavian vein is:",
         options: [
           { key: "a", text: "Anterior jugular vein" },
           { key: "b", text: "External jugular vein" },
@@ -1716,8 +1651,8 @@
         pearl: "📌 <strong>Subclavian Tributary:</strong> الرافد الوحيد الثابت للوريد تحت الترقوة هو الوريد الوداجي الخارجي (External jugular vein)."
       },
       {
-        id: 40, topicId: "7", topicName: "Blood vessels of the head and neck",
-        question: "40. The following branch arises from medial aspect of external carotid artery:",
+        id: 55, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "55. The following branch arises from medial aspect of external carotid artery:",
         options: [
           { key: "a", text: "Ascending pharyngeal" },
           { key: "b", text: "Facial" },
@@ -1729,8 +1664,8 @@
         pearl: "📌 <strong>ECA Medial Branch:</strong> الشريان البلعومي الصاعد (Ascending pharyngeal) هو الفرع الوحيد اللي بيطلع من السطح الإنسي الداخلي للسباتي الظاهر."
       },
       {
-        id: 41, topicId: "7", topicName: "Blood vessels of the head and neck",
-        question: "41. Internal carotid artery supplies:",
+        id: 56, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "56. Internal carotid artery supplies:",
         options: [
           { key: "a", text: "Anterior two-thirds of the brain and eye." },
           { key: "b", text: "Glands of the neck." },
@@ -1742,8 +1677,8 @@
         pearl: "📌 <strong>ICA Supply:</strong> لا يعطي فروعاً في الرقبة، وبيغذي الثلثين الأماميين للمخ والعين عبر الشريان العيني."
       },
       {
-        id: 42, topicId: "7", topicName: "Blood vessels of the head and neck",
-        question: "42. Internal jugular vein begins as a continuation of which of the following dural venous sinuses?",
+        id: 57, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "57. Internal jugular vein begins as a continuation of which of the following dural venous sinuses?",
         options: [
           { key: "a", text: "Cavernous." },
           { key: "b", text: "Inferior sagittal." },
@@ -1755,34 +1690,8 @@
         pearl: "📌 <strong>IJV Origin:</strong> يبدأ الوريد الوداجي الباطن عند الثقبة الوداجية كامتداد مباشر للجيب السيني (Sigmoid sinus)."
       },
       {
-        id: 55, topicId: "7", topicName: "Blood vessels of the head and neck",
-        question: "55. Which of the following is derived from the radial artery?",
-        options: [
-          { key: "A", text: "dorsal and palmar carpal arteries" },
-          { key: "B", text: "common interosseous artery" },
-          { key: "C", text: "anterior interosseous artery" },
-          { key: "D", text: "posterior interosseous artery" },
-          { key: "E", text: "ulnar recurrent artery" }
-        ],
-        answer: "A",
-        pearl: "📌 <strong>Radial Artery Branches:</strong> يعطي فروعاً رسغية ظهرية وراحية (Dorsal and palmar carpal arteries)، بينما فروع الـ Interosseous طالعة من الشريان الزندي."
-      },
-      {
-        id: 56, topicId: "7", topicName: "Blood vessels of the head and neck",
-        question: "56. The radial artery lies just lateral to the tendon of which muscle?",
-        options: [
-          { key: "A", text: "pronator teres" },
-          { key: "B", text: "flexor carpi radialis" },
-          { key: "C", text: "palmaris longus" },
-          { key: "D", text: "flexor carpi ulnaris" },
-          { key: "E", text: "flexor digitorum superficialis" }
-        ],
-        answer: "B",
-        pearl: "📌 <strong>Radial Pulse Landmark:</strong> عند الرسغ، يقع الشريان الكعبري وحشياً لوتر عضلة الـ Flexor carpi radialis (FCR)."
-      },
-      {
-        id: 73, topicId: "7", topicName: "Blood vessels of the head and neck",
-        question: "73. The right common carotid artery arises from:",
+        id: 58, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "58. The right common carotid artery arises from:",
         options: [
           { key: "a", text: "innominate artery" },
           { key: "b", text: "aortic arch" },
@@ -1794,8 +1703,8 @@
         pearl: "📌 <strong>Right Common Carotid:</strong> ينشأ من الشريان العضدي الرأسي / الشريان اللا مسمى (Innominate artery)."
       },
       {
-        id: 74, topicId: "7", topicName: "Blood vessels of the head and neck",
-        question: "74. The common carotid artery terminates at which of the following level?",
+        id: 59, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "59. The common carotid artery terminates at which of the following level?",
         options: [
           { key: "a", text: "Disc between C1 and C2" },
           { key: "b", text: "Disc between C2 and C3" },
@@ -1807,8 +1716,8 @@
         pearl: "📌 <strong>Carotid Bifurcation:</strong> ينقسم السباتي الأصلي عند الحافة العلوية لغضروف الدرقية، بمستوى القرص بين الفقرتين C3 و C4."
       },
       {
-        id: 75, topicId: "7", topicName: "Blood vessels of the head and neck",
-        question: "75. Which of the following arteries is branch of the 1st part subclavian artery?",
+        id: 60, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "60. Which of the following arteries is branch of the 1st part subclavian artery?",
         options: [
           { key: "a", text: "Vertebral artery." },
           { key: "b", text: "Inferior thyroid artery." },
@@ -1820,8 +1729,8 @@
         pearl: "📌 <strong>1st Part Subclavian:</strong> يعطي مباشرة الشريان الفقري (Vertebral artery)، بينما باقي الخيارات تخرج من الجذع الدرقي الرقبي."
       },
       {
-        id: 76, topicId: "7", topicName: "Blood vessels of the head and neck",
-        question: "76. Which of the following arteries is branch of the external carotid artery?",
+        id: 61, topicId: "7", topicName: "Blood vessels of the head and neck",
+        question: "61. Which of the following arteries is branch of the external carotid artery?",
         options: [
           { key: "a", text: "Vertebral artery." },
           { key: "b", text: "Inferior thyroid artery." },
@@ -1833,8 +1742,8 @@
         pearl: "📌 <strong>ECA Branch:</strong> الشريان الدرقي العلوي (Superior thyroid artery) هو أول فرع أمامي ينشأ من السباتي الظاهر."
       },
       {
-        id: 43, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "43. Abdominal aorta bifurcates at which of the following vertebral levels?",
+        id: 62, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "62. Abdominal aorta bifurcates at which of the following vertebral levels?",
         options: [
           { key: "a", text: "Lower border of L3." },
           { key: "b", text: "Lower border of L4." },
@@ -1846,8 +1755,8 @@
         pearl: "📌 <strong>Aorta Bifurcation:</strong> يتفرع الأبهر البطني لشريانين حرقفيين أصليين عند الحافة السفلية للفقرة L4."
       },
       {
-        id: 44, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "44. Inferior mesenteric artery arises from the abdominal aorta at which of the following vertebral levels?",
+        id: 63, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "63. Inferior mesenteric artery arises from the abdominal aorta at which of the following vertebral levels?",
         options: [
           { key: "a", text: "L4." },
           { key: "b", text: "L5." },
@@ -1859,8 +1768,8 @@
         pearl: "📌 <strong>IMA Level:</strong> ينشأ الشريان المساريقي السفلي عند مستوى الفقرة القطنية الثالثة (L3)، حوالي 3-4 سم فوق تفرع الأبهر."
       },
       {
-        id: 50, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "50. Inferior vena cava begins at which of the following vertebral levels?",
+        id: 64, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "64. Inferior vena cava begins at which of the following vertebral levels?",
         options: [
           { key: "a", text: "L2." },
           { key: "b", text: "L3." },
@@ -1872,8 +1781,8 @@
         pearl: "📌 <strong>IVC Origin:</strong> يبدأ الوريد الأجوف السفلي عند مستوى الفقرة L5 باتحاد الوريدين الحرقفيين الأصليين."
       },
       {
-        id: 54, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "54. The portal veins drain the following Except?",
+        id: 65, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "65. The portal veins drain the following Except?",
         options: [
           { key: "a", text: "Intestine" },
           { key: "b", text: "Stomach" },
@@ -1885,8 +1794,8 @@
         pearl: "📌 <strong>Portal System:</strong> الكلى (Kidney) تصرف دمها مباشرة عبر الوريدين الكلويين في الـ IVC ولا تمر بالوريد البابي."
       },
       {
-        id: 62, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "62. The superior mesenteric and splenic veins unite to form the portal vein posterior to which of the following structures?",
+        id: 66, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "66. The superior mesenteric and splenic veins unite to form the portal vein posterior to which of the following structures?",
         options: [
           { key: "a", text: "right kidney" },
           { key: "b", text: "neck of the pancreas" },
@@ -1898,8 +1807,8 @@
         pearl: "📌 <strong>Portal Vein Formation:</strong> يتحد الوريد المساريقي العلوي مع الوريد الطحالي خلف عنق البنكرياس (Neck of the pancreas)."
       },
       {
-        id: 63, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "63. The splenic artery arises from which of the following arteries?",
+        id: 67, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "67. The splenic artery arises from which of the following arteries?",
         options: [
           { key: "a", text: "celiac trunk" },
           { key: "b", text: "right gastric" },
@@ -1911,8 +1820,8 @@
         pearl: "📌 <strong>Splenic Artery:</strong> الشريان الطحالي هو أكبر الفروع الثلاثة للجذع الزلاقي (Celiac trunk)."
       },
       {
-        id: 64, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "64. Which of the following arteries arises from celiac trunk?",
+        id: 68, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "68. Which of the following arteries arises from celiac trunk?",
         options: [
           { key: "A", text: "cystic" },
           { key: "B", text: "gastoduodenal" },
@@ -1924,8 +1833,8 @@
         pearl: "📌 <strong>Celiac Trunk Branches:</strong> الفروع الثلاثة المباشرة: Left gastric, Splenic, and Common hepatic arteries."
       },
       {
-        id: 65, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "65. Which of the following structures crosses over the third part of the duodenum?",
+        id: 69, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "69. Which of the following structures crosses over the third part of the duodenum?",
         options: [
           { key: "a", text: "celiac trunk" },
           { key: "b", text: "hepatic artery" },
@@ -1937,8 +1846,8 @@
         pearl: "📌 <strong>Duodenum Cross:</strong> الشريان والوريد المساريقي العلوي (SMA & SMV) بيعبروا مباشرة أمام الجزء الثالث من الاثني عشر."
       },
       {
-        id: 66, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "66. The head of the pancreas rests posteriorly on which of the following structures?",
+        id: 70, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "70. The head of the pancreas rests posteriorly on which of the following structures?",
         options: [
           { key: "A", text: "left renal vein" },
           { key: "B", text: "superior vena cava" },
@@ -1950,8 +1859,8 @@
         pearl: "📌 <strong>Pancreatic Bed:</strong> يستند رأس البنكرياس في الخلف على الـ IVC ومصب الوريد الكلوي الأيسر (Left renal vein)."
       },
       {
-        id: 67, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "67. The portion of the hepatic artery extending between the celiac trunk and the gastroduodenal artery is known as:",
+        id: 71, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "71. The portion of the hepatic artery extending between the celiac trunk and the gastroduodenal artery is known as:",
         options: [
           { key: "A", text: "proper hepatic" },
           { key: "B", text: "common hepatic" },
@@ -1963,8 +1872,8 @@
         pearl: "📌 <strong>Hepatic Artery Division:</strong> يسمى هذا الجزء Common hepatic artery، وبعد ما يدي الشريان المعدي الاثني عشري بيكمل باسم Proper hepatic."
       },
       {
-        id: 68, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "68. The hepatic veins drain into which of the following structures?",
+        id: 72, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "72. The hepatic veins drain into which of the following structures?",
         options: [
           { key: "A", text: "liver" },
           { key: "B", text: "inferior vena cava" },
@@ -1976,8 +1885,8 @@
         pearl: "📌 <strong>Hepatic Veins:</strong> تصب الأوردة الكبدية مباشرة في الوريد الأجوف السفلي (IVC)."
       },
       {
-        id: 69, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "69. Which of the following arteries is considered to be the artery of the pelvis?",
+        id: 73, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
+        question: "73. Which of the following arteries is considered to be the artery of the pelvis?",
         options: [
           { key: "A", text: "obturator" },
           { key: "B", text: "pudendal" },
@@ -1989,47 +1898,8 @@
         pearl: "📌 <strong>Pelvic Main Artery:</strong> الشريان الحرقفي الباطن (Internal iliac / Hypogastric artery) هو شريان الحوض الرئيسي."
       },
       {
-        id: 70, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "70. Which of the following structures passes through the saphenous opening?",
-        options: [
-          { key: "A", text: "femoral artery" },
-          { key: "B", text: "femoral vein" },
-          { key: "C", text: "femoral nerve" },
-          { key: "D", text: "short saphenous vein" },
-          { key: "E", text: "great saphenous vein" }
-        ],
-        answer: "E",
-        pearl: "📌 <strong>Saphenous Opening:</strong> الوريد الصافن الكبير (Great saphenous vein) يخترق فتحة الصافن في الفخذ ليصب في الوريد الفخذي."
-      },
-      {
-        id: 71, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "71. Which of the following statements concerning the deep artery of the thigh is correct?",
-        options: [
-          { key: "A", text: "It is the largest branch of the femoral artery." },
-          { key: "B", text: "It passes through the adductor canal." },
-          { key: "C", text: "It gives rise to the deep circumflex iliac branch." },
-          { key: "D", text: "It exits the adductor canal through the adductor hiatus." },
-          { key: "E", text: "It passes through the obturator foramen." }
-        ],
-        answer: "A",
-        pearl: "📌 <strong>Profunda Femoris:</strong> الشريان الفخذي العميق هو أكبر فروع الشريان الفخذي ويغذي عضلات الفخذ."
-      },
-      {
-        id: 72, topicId: "8", topicName: "Blood vessels of the abdomen & limbs",
-        question: "72. Which of the following arteries is usually evaluated during a physical examination of the peripheral vascular system?",
-        options: [
-          { key: "A", text: "lateral plantar" },
-          { key: "B", text: "dorsalis pedis" },
-          { key: "C", text: "popliteal" },
-          { key: "D", text: "fibular" },
-          { key: "E", text: "posterior tibial" }
-        ],
-        answer: "B",
-        pearl: "📌 <strong>Peripheral Pulse:</strong> شريان ظهر القدم (Dorsalis pedis artery) هو الشريان الكلاسيكي المعتمد لتقييم التروية الطرفية للقدم إكلينيكياً."
-      },
-      {
-        id: 79, topicId: "9", topicName: "Vascular development",
-        question: "79. The subcardinal - supracardinal venous anastomosis:",
+        id: 74, topicId: "9", topicName: "Vascular development",
+        question: "74. The subcardinal - supracardinal venous anastomosis:",
         options: [
           { key: "A", text: "is a patent vessel in the adult" },
           { key: "B", text: "is a ligamentous cord in the adult" },
@@ -2041,8 +1911,8 @@
         pearl: "📌 <strong>Renal Segment of IVC:</strong> التفاغر ده بيشارك في تكوين القطعة الكلوية للوريد الأجوف السفلي، وهو وعاء دموي سالك وفعال في الشخص البالغ (Patent vessel)."
       },
       {
-        id: 82, topicId: "9", topicName: "Vascular development",
-        question: "82. Which of the following vessels in the adult is derived from the subcardinal veins:",
+        id: 75, topicId: "9", topicName: "Vascular development",
+        question: "75. Which of the following vessels in the adult is derived from the subcardinal veins:",
         options: [
           { key: "A", text: "the azygos veins" },
           { key: "B", text: "the gonadal veins" },
@@ -2054,8 +1924,8 @@
         pearl: "📌 <strong>Subcardinal Derivative:</strong> التفاغر بين الوريدين تحت الأساسيين (Intersubcardinal anastomosis) بيشكل جذع الوريد الكلوي الأيسر (Stem of left renal vein)."
       },
       {
-        id: 89, topicId: "9", topicName: "Vascular development",
-        question: "89. Internal jugular veins are derived from the:",
+        id: 76, topicId: "9", topicName: "Vascular development",
+        question: "76. Internal jugular veins are derived from the:",
         options: [
           { key: "A", text: "anterior cardinal veins" },
           { key: "B", text: "posterior cardinal veins" },
@@ -2067,8 +1937,8 @@
         pearl: "📌 <strong>IJV Embryology:</strong> الأوردة الوداجية الباطنة مشتقة جنينياً من الأوردة الأساسية الأمامية (Anterior cardinal veins)."
       },
       {
-        id: 90, topicId: "9", topicName: "Vascular development",
-        question: "90. Azygos vein is derived from the:",
+        id: 77, topicId: "9", topicName: "Vascular development",
+        question: "77. Azygos vein is derived from the:",
         options: [
           { key: "A", text: "right vitelline vein" },
           { key: "B", text: "right subcardinal vein" },
@@ -2080,8 +1950,8 @@
         pearl: "📌 <strong>Azygos Origin:</strong> يشتق الوريد الفرد أساساً من الوريد فوق الأساسي الأيمن (Right supracardinal vein)."
       },
       {
-        id: 91, topicId: "9", topicName: "Vascular development",
-        question: "91. Superior vena cava is derived from the:",
+        id: 78, topicId: "9", topicName: "Vascular development",
+        question: "78. Superior vena cava is derived from the:",
         options: [
           { key: "A", text: "right vitelline vein" },
           { key: "B", text: "right subcardinal vein" },
@@ -2093,8 +1963,8 @@
         pearl: "📌 <strong>SVC Origin:</strong> مشتق من الوريد الأساسي الأمامي الأيمن (Right anterior cardinal vein) والوريد الأساسي المشترك الأيمن."
       },
       {
-        id: 92, topicId: "9", topicName: "Vascular development",
-        question: "92. Portal vein is derived from the:",
+        id: 79, topicId: "9", topicName: "Vascular development",
+        question: "79. Portal vein is derived from the:",
         options: [
           { key: "A", text: "right vitelline vein" },
           { key: "B", text: "right subcardinal vein" },
@@ -2106,8 +1976,8 @@
         pearl: "📌 <strong>Portal Vein Origin:</strong> مشتق من شبكة التفاغر حول الاثني عشر المتكونة من الأوردة المحية (Right vitelline vein)."
       },
       {
-        id: 83, topicId: "10", topicName: "Foetal circulation",
-        question: "83. Regarding to the ligamentum arteriosum Which of the following is true:",
+        id: 80, topicId: "10", topicName: "Foetal circulation",
+        question: "80. Regarding to the ligamentum arteriosum Which of the following is true:",
         options: [
           { key: "A", text: "is the fibrous remnant of the ductus arteriosus" },
           { key: "B", text: "is the fibrous remnant of the ductus venosus" },
@@ -2119,8 +1989,8 @@
         pearl: "📌 <strong>Ductus Remnant:</strong> الرباط الشرياني هو البقايا الليفية للقناة الشريانية الجنينية (Ductus arteriosus)."
       },
       {
-        id: 84, topicId: "10", topicName: "Foetal circulation",
-        question: "84. The two medial umbilical folds represent remnants of which of the following structures?",
+        id: 81, topicId: "10", topicName: "Foetal circulation",
+        question: "81. The two medial umbilical folds represent remnants of which of the following structures?",
         options: [
           { key: "A", text: "urachus" },
           { key: "B", text: "umbilical arteries" },
@@ -2132,8 +2002,8 @@
         pearl: "📌 <strong>Medial Folds:</strong> الثنيتان السريتان الإنسيتان تمثلان بقايا الشرايين السرية المسدودة (Obliterated umbilical arteries)، بينما الـ Median fold تمثل بقايا الـ Urachus."
       },
       {
-        id: 85, topicId: "10", topicName: "Foetal circulation",
-        question: "85. The round ligament of the liver is the fibrous remnant of which of the following structures?",
+        id: 82, topicId: "10", topicName: "Foetal circulation",
+        question: "82. The round ligament of the liver is the fibrous remnant of which of the following structures?",
         options: [
           { key: "A", text: "umbilical vein" },
           { key: "B", text: "ductus venosus" },
