@@ -1033,7 +1033,7 @@
             </div>
           </div>
           <div class="header-text-block">
-            <h1>امتحانات الدفعة 61 الرسمية | <span>CVS Official Exams</span></h1>
+            <h1>امتحانات الدفعة 60 و 61 الرسمية | <span>CVS Official Exams</span></h1>
             <p>كلية الطب بنين بالقاهرة - جامعة الأزهر الشريف | إعداد وتدقيق: أحمد وائل</p>
           </div>
         </div>
@@ -1047,16 +1047,16 @@
       <div class="exam-switcher-grid">
         <div class="exam-tab-btn active" id="tabEndModule" onclick="switchExam('end_module')">
           <div class="tab-info-main">
-            <span class="tab-title">امتحان نهاية الموديول الرسمي</span>
-            <span class="tab-desc">End Module Exam • 80 MCQ • 40 Marks • شامل 7 مواد</span>
+            <span class="tab-title">امتحان نهاية الموديول الرسمي (دفعة 61)</span>
+            <span class="tab-desc">End Module (Batch 61) • 80 MCQ • 40 Marks • شامل 7 مواد</span>
           </div>
           <div class="tab-icon">📋</div>
         </div>
 
         <div class="exam-tab-btn" id="tabEndSemester" onclick="switchExam('end_semester')">
           <div class="tab-info-main">
-            <span class="tab-title">امتحان نهاية الفصل الدراسي الرسمي</span>
-            <span class="tab-desc">End Semester Exam • 64 MCQ + 8 مقالي • 50 Marks</span>
+            <span class="tab-title">امتحان نهاية الفصل الدراسي الرسمي (دفعة 60)</span>
+            <span class="tab-desc">End Semester (Batch 60) • 64 MCQ + 8 مقالي • 50 Marks</span>
           </div>
           <div class="tab-icon">🎓</div>
         </div>
@@ -1450,7 +1450,7 @@
       if (currentQuestionIndex < 0) currentQuestionIndex = 0;
 
       const q = activeQuestions[currentQuestionIndex];
-      const examNameStr = currentExam === 'end_module' ? 'End Module Exam 61' : 'End Semester Exam 61';
+      const examNameStr = currentExam === 'end_module' ? 'End Module Exam 61' : 'End Semester Exam 60';
 
       document.getElementById('qSubjectBadge').textContent = `${q.subject_ar} (${q.subject})`;
       document.getElementById('qOfficialNumBadge').textContent = `سؤال رسمي رقم ${q.official_num} في ورقة الامتحان`;
@@ -1676,7 +1676,7 @@
       let html = `
         <div class="exam-header-card" style="border-color: var(--border-gold); background: var(--surface);">
           <h2 style="font-size: 1.25rem; color: var(--gold); margin-bottom: 6px;">
-            ✍️ الأسئلة المقالية القصيرة لامتحان End Semester (دفعة 61)
+            ✍️ الأسئلة المقالية القصيرة لامتحان End Semester (دفعة 60)
           </h2>
           <p style="color: var(--text-muted); font-size: 0.9rem;">
             تتضمن ورقة الامتحان 8 أسئلة مقالية (Short Essay Questions) مخصصة بـ 6 درجات لكل سؤال، مع نموذج الإجابة الأكاديمي الكامل والشرح المفصل.
